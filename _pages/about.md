@@ -1,7 +1,7 @@
 ---
 title: "About"
 permalink: /about/
-mathjax: true
+mathjax: "true"
 header:
     image: "/imgs/scene.jpg"
 ---
