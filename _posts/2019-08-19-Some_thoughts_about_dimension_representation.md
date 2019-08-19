@@ -1,10 +1,11 @@
 ---
-layout: posts
-permalink: /Some_thoughts_about_dimension_representation/
 title: "Some thoughts about dimension representation"
 author_profile: true
+date: 2019-08-19
+tags: [dimension, data science]
 header:
-    image: /imgs/thoughts.jpg
+    image: "/imgs/thoughts.jpg"
+excerpt: "dimension, insights"
 ---
 
 It is common to use dimension representation in many fields, especially in Data Science to which I am devoted now. For example, we usually treat a dictionary as a vector of thousands of dimensions. Suppose there is a dictionary $D$ consisting of two words, e.g. 'hot' and 'dog'. Following the sequence, 'hot' can be denoted as $[1,0]$ while 'dog' represented as $[0,1]$. This is called **one-hot representation** of words. I will dig into memory efficiency of word representation in this blog.
