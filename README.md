@@ -6,4 +6,4 @@ My Email: myh821746176@outlook.com
 Feel free to contact me if you have any questions or interests.
 
 My blogs:
-[Some thoughts about dimension representation](./_posts/Some_thoughts_about_dimension_representation.md)
+[Some thoughts about dimension representation](Some_thoughts_about_dimension_representation.md)
