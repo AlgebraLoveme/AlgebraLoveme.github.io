@@ -1,6 +1,7 @@
 ---
 title: "Some thoughts about dimension representation"
 author_profile: true
+permalink: /insights_1/
 date: 2019-08-19
 tags: [dimension, data science]
 header:
