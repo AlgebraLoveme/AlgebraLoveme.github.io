@@ -12,5 +12,3 @@ My favorite formula: $$e^{\pi i}=-1$$
 My Email: myh821746176@outlook.com
 Feel free to contact me if you have any questions or interests.
 
-My blogs:
-[Some thoughts about dimension representation](/insights_1/)
