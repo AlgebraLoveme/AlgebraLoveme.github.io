@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "Yuhao Mao"
   avatar           : "/imgs/avatar.jpg"
-  bio              : "CKC, ZJU"
+  bio              : "CKC Honors College, ZJU"
   location         : "Hangzhou, China"
   email            : "myh821746176@outlook.com"
   links:
@@ -121,7 +121,7 @@ author:
       # url: "https://your-website.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
+      url: "https://twitter.com/MarkeyTool"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
