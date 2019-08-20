@@ -4,6 +4,7 @@ author_profile: true
 permalink: /2019-08-19-Some_thoughts_about_dimension_representation/
 date: 2019-08-19
 tags: [dimension, data science]
+mathjax: "true"
 header:
     image: "/imgs/thoughts.jpg"
 excerpt: "dimension, insights"

@@ -4,6 +4,7 @@ author_profile: true
 permalink: /2019-08-20-Some_thoughts_about_Yes_and_No/
 date: 2019-08-20
 tags: [group theory, language, logic]
+mathjax: "true"
 header:
     image: "/imgs/thoughts2.jpg"
 excerpt: "group theory, logic, insights"
