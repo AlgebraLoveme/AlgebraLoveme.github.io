@@ -10,7 +10,7 @@ header:
 excerpt: "group theory, logic, insights"
 ---
 
-Everybody knows **Yes** and **No**. Here are how it works.
+Everybody knows **Yes** and **No**. Here are how it works:
 
 A *No* with *Yes* equals *No*; A *Yes* with *No* equals *No*.
 
