@@ -9,7 +9,7 @@ header:
 excerpt: "group theory, logic, insights"
 ---
 
-<h4>Everybody knows **Yes** and **No**. </h4>Here are how it works.
+Everybody knows **Yes** and **No**. Here are how it works.
 
 A *No* with *Yes* equals *No*; A *Yes* with *No* equals *No*.
 
@@ -17,7 +17,7 @@ A *No* with *No* equals *Yes*; A *Yes* with *Yes* is still *Yes*.
 
 Furthermore, we can arrange any number of *Yes* and *No* in a **sentence** though we don't do this in reality.
 
-<h4>What do you see?</h4>
+What do you see?
 
 To simplify the notation, I will use 'Y' to represent 'Yes' and 'N' to represent 'No'. Also, let's say $$a$$ and 'Y' are the same and so do $$b$$ and 'N'. Asterisk $$*$$ stands for how Yes and No are arranged. Now we can rewrite the mechanism of Yes and No.
 
