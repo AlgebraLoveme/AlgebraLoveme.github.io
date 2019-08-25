@@ -7,7 +7,7 @@ tags: [group theory, language, logic]
 mathjax: "true"
 header:
     image: "/imgs/thoughts2.jpg"
-excerpt: "group theory, logic, insights"
+excerpt: "MY_INSIGHTS, group theory, logic"
 ---
 
 Everybody knows **Yes** and **No**. Here are how it works:
