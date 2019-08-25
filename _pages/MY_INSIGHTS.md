@@ -1,13 +1,13 @@
 ---
 layout: archive
-permalink: /MY-INSIGHTS/
+permalink: /MY_INSIGHTS/
 title: "Those are some simple but innovative insights of my own"
 author_profile: true
 # header:
 #     image: "/imgs/fractal.jpeg"
 ---
 
-{% include base_path %}
+<!-- {% include base_path %} -->
 {% include group-by-array collection=site.posts field="tags" %}
 
 {% for tag in group_names %}

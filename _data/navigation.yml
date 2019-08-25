@@ -3,7 +3,7 @@ main:
   - title: "About"
     url: /about/
   - title: "MY_INSIGHTS"
-    url: /MY-INSIGHTS/
+    url: /MY_INSIGHTS/
   # - title: "learning notes"
   #   url: /learning_notes/
   # - title: "About"
