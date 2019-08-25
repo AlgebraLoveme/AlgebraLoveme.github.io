@@ -4,16 +4,8 @@ permalink: /MY_INSIGHTS/
 title: "Those are some simple but innovative insights of my own"
 author_profile: true
 header:
-    image: "/imgs/fractal.jpeg"
+    image: "/imgs/fractal.jpg"
 ---
 
-
+{% include posts_category.html %}
 {% include group-by-array collection=site.posts field="tags" %}
-
-{% for tag in group_names %}
-  {% assign posts = group_items[forloop.index0] %}
-  <h2 id="{{ tag | slugify }}" class="archive__subtitle">{{ tag }}</h2>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% endfor %}
