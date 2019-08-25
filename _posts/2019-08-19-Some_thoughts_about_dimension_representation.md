@@ -1,7 +1,7 @@
 ---
 title: "Some thoughts about dimension representation"
 author_profile: true
-permalink: /2019-08-19-Some_thoughts_about_dimension_representation/
+permalink: /MY_INSIGHTS/2019-08-19-Some_thoughts_about_dimension_representation/
 date: 2019-08-19
 tags: [dimension, data science]
 mathjax: "true"

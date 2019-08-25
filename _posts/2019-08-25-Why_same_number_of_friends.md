@@ -1,7 +1,7 @@
 ---
 title: "Why there must exist 2 people that have the same number of friends in a group"
 author_profile: true
-permalink: /2019-08-25-Why_same_number_of_friends/
+permalink: /learning_notes/2019-08-25-Why_same_number_of_friends/
 date: 2019-08-25
 tags: [learning notes, Graph_Theory_Bondy_Murty]
 mathjax: "true"
