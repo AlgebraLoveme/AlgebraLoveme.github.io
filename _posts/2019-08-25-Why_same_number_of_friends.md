@@ -23,7 +23,7 @@ We prove it by induction.
 Suppose $$|G|=2$$, then either there is a edge connecting the two vertexes or is not.
  In each case, our claim is verified.
 
-Now suppose for some $$|G|=k \in N^+$$, our claim is true. Then in the case $$|G|=k+1$$,
+Now suppose $$|G|=k$$ for some $$k \in N^+$$, our claim is true. Then in the case $$|G|=k+1$$,
  I will complete the proof by contradiction. If each vertex has different degree and none has degree of zero,
   then those degrees must be $$\{1,2,...,k+1\}$$. Then sum of degrees $$\epsilon=\frac{1}{2}(k+2)(k+1)$$.
-  However, $$\epsilon_{max}=\binom{k+1}{2}=\frac{1}{2}(k+1)k$$ which is in a complete graph, i.e. there is an edge between each pair of vertexes. A contradiction. If one of vertexes has degree of zero, then we can delete this vertex and the case becomes such that $$|G|=k$$ and none has degree of zero, which is certified by induction assumption.
+  However, $$\epsilon_{max}=\binom{k+1}{2}=\frac{1}{2}(k+1)k$$ which is a complete graph, i.e. there is an edge between each pair of vertexes. A contradiction. If one of vertexes has degree of zero, then we can delete this vertex and the case becomes such that $$|G|=k$$ and none has degree of zero, which is certified by induction assumption.
