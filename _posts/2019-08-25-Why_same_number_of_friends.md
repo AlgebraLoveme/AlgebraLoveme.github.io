@@ -10,7 +10,7 @@ header:
 excerpt: "learning notes, Graph_Theory_Bondy_Murty"
 ---
 
-Here is a interesting phenomenon. In any group of two or more people, there are always
+Here is an interesting phenomenon. In any group of two or more people, there are always
 at least two with exactly the same number of friends. What's going on?
 
 First, let's rewrite this problem. We want to represent each individual with a node(or vertex) respectively
