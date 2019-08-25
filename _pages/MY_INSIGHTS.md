@@ -7,5 +7,3 @@ header:
     image: "/imgs/fractal.jpg"
 ---
 
-{% include posts_category.html %}
-{% include group-by-array collection=site.posts field="tags" %}
