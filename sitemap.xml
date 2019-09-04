@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://algebraloveme.github.io/</loc>
+  <lastmod>2019-09-03T07:01:37+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://algebraloveme.github.io/about/</loc>
+  <lastmod>2019-09-03T07:01:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://algebraloveme.github.io/learning_notes/2019-08-25-Why_same_number_of_friends/</loc>
+  <lastmod>2019-09-03T07:01:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://algebraloveme.github.io/MY_INSIGHTS/2019-08-20-Some_thoughts_about_Yes_and_No/</loc>
+  <lastmod>2019-09-03T07:01:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://algebraloveme.github.io/MY_INSIGHTS/2019-08-19-Some_thoughts_about_dimension_representation/</loc>
+  <lastmod>2019-09-03T07:01:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
