@@ -2,7 +2,7 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Entertainment"
+  - title: "Entertainment Zone"
     url: /entertainment/
   # - title: "learning notes"
   #   url: /learning_notes/
