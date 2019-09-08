@@ -2,6 +2,8 @@
 main:
   - title: "About"
     url: /about/
+  - title: "Entertainment"
+    url: /entertainment/
   # - title: "learning notes"
   #   url: /learning_notes/
   # - title: "About"
