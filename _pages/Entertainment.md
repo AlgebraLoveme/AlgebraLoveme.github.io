@@ -1,6 +1,6 @@
 ---
-title: "Entertainment Zone"
-permalink: /entertainment/
+title: "Talking Zone"
+permalink: /talking/
 mathjax: "true"
 header:
     image: "/imgs/surfboard.jpg"
