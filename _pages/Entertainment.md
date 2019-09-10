@@ -17,3 +17,5 @@ header:
 18:16, 2019-09-10: Totally heartbroken to finally figure out that I have 2 over-600-page textbook, 1 over-400-page textbook, and 1 over-1400-page textbook(*art of assembly language*) to read this term already! Anyway, happy Teachers' day!
 
 18:22, 2019-09-10: Really amazed! It seems everybody is taking Assembly Language class! What's wrong with all the students? The whole classroom which has capacity of 200 people is overcrowded!
+
+20:58, 2019-09-10: Had my first Assembly Language class. It is so fascinating! Professor taught us how to crack a simple password verification exe file. Totally impressed by him!:grin:
