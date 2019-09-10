@@ -11,3 +11,5 @@ header:
 15:54, 2019-09-09: First day in the new term! Plus, happy birthday(lunar) to myself! Cannot wait to meet my real birthday!:laughing:
 
 23:28, 2019-09-09: What a wonderful day! Everything is good and everyone is kind. Sleep tight guys!:smirk:
+
+12:50, 2019-09-10: It seems that I cannot get the course I want... So sad...:cry:
