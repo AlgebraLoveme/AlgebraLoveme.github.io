@@ -19,3 +19,5 @@ header:
 18:22, 2019-09-10: Really amazed! It seems everybody is taking Assembly Language class! What's wrong with all the students? The whole classroom which has capacity of 200 people is overcrowded!
 
 20:58, 2019-09-10: Had my first Assembly Language class. It is so fascinating! Professor taught us how to crack a simple password verification exe file. Totally impressed by him!:grin:
+
+19:25, 2019-09-11: I had three wonderful classes today. Professor of **Fixed Income Assets** is handsome and has really good pronunciation(so does my **Intermediate microeconomics** teacher). Professor of **Economic Law** is a famous lawyer himself and shared a lot of cases he went though. Professor of **Game Theory** has a very kind and interesting nature. So lucky I am!:satisfied:
