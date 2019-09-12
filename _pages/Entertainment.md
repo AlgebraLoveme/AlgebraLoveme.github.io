@@ -21,3 +21,5 @@ header:
 20:58, 2019-09-10: Had my first Assembly Language class. It is so fascinating! Professor taught us how to crack a simple password verification exe file. Totally impressed by him!:grin:
 
 19:25, 2019-09-11: I had three wonderful classes today. Professor of **Fixed Income Assets** is handsome and has really good pronunciation(so does my **Intermediate microeconomics** teacher). Professor of **Economic Law** is a famous lawyer himself and shared a lot of cases he went though. Professor of **Game Theory** has a very kind and interesting nature. So lucky I am!:satisfied:
+
+09:45, 2019-09-12: I got four analysis book today, namely *Real Analysis*, *functional Analysis*, *Applied Multivariate Analysis* and *Applied Time Series Analysis*. It seems people beside me were impressed.:kissing_heart:
