@@ -24,4 +24,6 @@ header:
 
 09:45, 2019-09-12: I got four analysis book today, namely *Real Analysis*, *functional Analysis*, *Applied Multivariate Analysis* and *Applied Time Series Analysis*. It seems people beside me were impressed.:kissing_heart:
 
-22:10,2019-09-15: Extremely excited! My friends and I just finished CUMCM competition. Although we three spent all the mid-autumn day in a small room trying to figure out how to solve a problem, it is good to be with friends!:laughing:
+22:10, 2019-09-15: Extremely excited! My friends and I just finished CUMCM competition. Although we three spent all the mid-autumn day in a small room trying to figure out how to solve a problem, it is good to be with friends!:laughing:
+
+21:02, 2019-09-16: I made a decision today. I am starting to learn Julia and sign up for an online course on Coursera. No idea whether it is sensible to spend time on it although Julia is claimed to be efficient for scientific computing and data science.:confused:
