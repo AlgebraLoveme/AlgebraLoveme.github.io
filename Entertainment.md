@@ -33,3 +33,5 @@ header:
 12:49, 2019-09-17: Math is hard, so is life.:cry:
 
 ![life is hard](/imgs/life_is_hard.jpg)
+
+16:14, 2019-09-17: After one year using Python, it is too uneasy for me to have to use C language. C is not convenient at all.:weary:
