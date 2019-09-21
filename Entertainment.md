@@ -35,3 +35,7 @@ header:
 ![life is hard](/imgs/life_is_hard.jpg)
 
 16:14, 2019-09-17: After one year using Python, it is too uneasy for me to have to use C language. C is not convenient at all.:weary:
+
+00:30, 2019-09-21: I had a wonderful birthday today(or maybe yesterday since it is past 12 now). So fascinating! I met all my high school classmates admitted to my university and spent a whole night playing board games with them.:laughing:
+
+22:46, 2019-09-21: Google claimed to realize the first quantum computer which overtakes super computers! I can't believe it! What about RSA and my bank account!:astonished:
