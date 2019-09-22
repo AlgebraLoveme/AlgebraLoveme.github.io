@@ -6,7 +6,7 @@ header:
     image: "/imgs/scene.jpg"
 ---
 
-*Hello, my name is Yuhao Mao. I am an math-and-finance-majored undergraduate from CKC Honors College, Zhejiang University, China. Luckily, I was not restricted to my major and explored my interest in Computer Science. Currently I am instructed by Professor S.J. at NESA lab(see <https://person.zju.edu.cn/en/sji>), Professor K.L. at Department of Mathematics(see <https://person.zju.edu.cn/en/0093199>) and Associate Professor G.Z. at Department of Economics(see <https://flzhou.weebly.com/>).*
+*Hello, my name is Yuhao Mao. I am a math-and-finance-major undergraduate at CKC Honors College, Zhejiang University. Luckily, I was not restricted to my major and explored my interest in Computer Science. Currently I am instructed by Professor S.J. at NESA lab(see <https://person.zju.edu.cn/en/sji>), Professor K.L. at Department of Mathematics(see <https://person.zju.edu.cn/en/0093199>) and Associate Professor G.Z. at Department of Economics(see <https://flzhou.weebly.com/>).*
 
 My favorite formula includes: 
 
