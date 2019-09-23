@@ -22,3 +22,10 @@ The explanation involves encoding. First, we number bottles from 0 to 15. For al
 Now that we can use four mice to find the poison, how to know we cannot use just three of them to get the right answer? The simplest proof is to see this encoding is isomorphic. Since three mice can only have $$2^3$$ different $$S$$, $$S$$ must be the same for some cases although poison is in different bottles.
 
 The proof can be done similarly if there are $$N$$ bottles.
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
+  Total readers: <span id="busuanzi_value_page_pv"></span>
+</h3>
