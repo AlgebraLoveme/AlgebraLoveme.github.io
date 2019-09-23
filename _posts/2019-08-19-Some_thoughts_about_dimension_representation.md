@@ -32,3 +32,7 @@ Now let's consider a more interesting and tricky problem: **Is there any other w
 Last but not least, I want to point out that not every word has the same probability of occurrence. Usually, *adverbs* contain far less information than *nouns*, e.g. *'dog'* specifies the information more than *'the'*.
 
 This is the first article of **MY_INSIGHTS**. Thank you for reading.
+
+<span id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
+  Total readers: <span id="busuanzi_value_page_pv"></span>
+</span>
