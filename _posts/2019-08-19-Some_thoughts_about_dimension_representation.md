@@ -37,6 +37,6 @@ This is the first article of **MY_INSIGHTS**. Thank you for reading.
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 
-<span id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
+<h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
   Total readers: <span id="busuanzi_value_page_pv"></span>
-</span>
+</h3>
