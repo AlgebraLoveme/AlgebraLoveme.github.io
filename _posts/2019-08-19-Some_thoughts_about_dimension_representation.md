@@ -36,6 +36,7 @@ This is the first article of **MY_INSIGHTS**. Thank you for reading.
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <div id="gitalk-container"></div>
+<script type="text/javascript">
 const gitalk = new Gitalk({
   clientID: 'GitHub Application Client ID',
   clientSecret: 'GitHub Application Client Secret',
@@ -47,6 +48,7 @@ const gitalk = new Gitalk({
 })
 
 gitalk.render('gitalk-container')
+</script>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
