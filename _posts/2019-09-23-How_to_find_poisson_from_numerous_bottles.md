@@ -1,7 +1,7 @@
 ---
 title: "How to find poisson from some bottles using minimal lab mice"
 author_profile: true
-permalink: /learning_notes/2019-09-23-How_to_find_poisson_from_numerous_bottles/
+permalink: /2019-09-23-How_to_find_poisson_from_numerous_bottles/
 date: 2019-09-23
 tags: [binary, encoding, dimension, FUN math]
 mathjax: "true"
