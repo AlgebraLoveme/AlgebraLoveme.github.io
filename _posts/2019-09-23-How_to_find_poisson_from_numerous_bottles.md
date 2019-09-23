@@ -1,7 +1,7 @@
 ---
 title: "How to find poisson from some bottles using minimal lab mice"
 author_profile: true
-permalink: /2019-09-23-How_to_find_poisson_from_numerous_bottles/
+permalink: /learning_notes/2019-09-23-How_to_find_poisson_from_numerous_bottles/
 date: 2019-09-23
 tags: [binary, encoding, dimension, FUN math]
 mathjax: "true"
@@ -17,4 +17,4 @@ It is not simple to most of people, if you don't have the insight. Let me state 
 But why?
 
 The explanation involves encoding. First, we number bottles from 0 to 15. For all those bottles, we can using binary encoding to name them. For example, the bottle numbered 0 should be encoded as $$0000$$ and bottle numbered 14 should be encoded $$1110$$. We let mouse number one drank bottles whose first digit is encoded as 1 and mouse number two drank bottles whose second digit is encoded as 1 and so on. Suppose after 24 hours, dead mice set is $$S$$. Say $$S={1,3}$$. Then the poisonous bottle is encoded as $$1010$$ which is bottle number 10.
-![illustration](../imgs/mice_plot1.png)
+![illustration](.../imgs/mice_plot1.png)
