@@ -42,3 +42,5 @@ header:
 
 22:01, 2019-10-01: Have lunch with my best "girl friend"! Delicous, steaming, milky white fish!
 ![me watching fish soup](../imgs/selfie3.jpg)
+
+10:05, 2019-10-08: Hand write source code in C to implement list reverse today:sweat_smile:. Though simple, it is really thrilling:joy:!
