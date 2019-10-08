@@ -1,6 +1,6 @@
 ---
-title: "Talking Zone"
-permalink: /talking/
+title: "Moments"
+permalink: /Moments/
 mathjax: "true"
 header:
     image: "/imgs/surfboard.jpg"
@@ -28,11 +28,11 @@ header:
 
 21:02, 2019-09-16: I made a decision today. I am starting to learn Julia and sign up for an online course on Coursera. No idea whether it is sensible to spend time on it although Julia is claimed to be efficient for scientific computing and data science.:confused:
 
-![julia hello world](/imgs/julia_hello_world.png)
+![julia hello world](../imgs/julia_hello_world.png)
 
 12:49, 2019-09-17: Math is hard, so is life.:cry:
 
-![life is hard](/imgs/life_is_hard.jpg)
+![life is hard](../imgs/life_is_hard.jpg)
 
 16:14, 2019-09-17: After one year using Python, it is too uneasy for me to have to use C language. C is not convenient at all.:weary:
 

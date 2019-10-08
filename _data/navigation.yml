@@ -2,8 +2,8 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Talking Zone"
-    url: /talking/
+  - title: "Moments"
+    url: /Moments/
   # - title: "learning notes"
   #   url: /learning_notes/
   # - title: "About"
