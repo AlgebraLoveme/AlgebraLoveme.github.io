@@ -44,3 +44,6 @@ header:
 ![me watching fish soup](../imgs/selfie3.jpg)
 
 10:05, 2019-10-08: Hand write source code in C to implement list reverse in ten minutes for *Fundamental of data structure* test today:sweat_smile:. Though simple, it is really thrilling:joy:!
+
+11:18, 2019-11-02: Good morning guys! Another Problem solved!:grin:
+![submission accepted](../imgs/good_morning.png)
