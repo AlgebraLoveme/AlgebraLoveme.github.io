@@ -25,22 +25,3 @@ I know this work is rather immature, so leave comments and suggestions to me. Fe
 <h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
   Total readers: <span id="busuanzi_value_page_pv"></span>
 </h3>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<div id="gitalk-container"></div>
-
-<script type="text/javascript">
-const gitalk = new Gitalk({
-  clientID: 'Iv1.95a99a189cd1d142',
-  clientSecret: '0e6969a2a1f59b9b6f9637395d70df110a15b541',
-  repo: 'AlgebraLoveme.github.io',
-  owner: 'AlgebraLoveme',
-  admin: ['AlgebraLoveme'],
-  id: location.pathname,      // Ensure uniqueness and length less than 50
-  distractionFreeMode: false,  // Facebook-like distraction free mode
-  language: 'en'
-})
-
-gitalk.render('gitalk-container')
-</script>
