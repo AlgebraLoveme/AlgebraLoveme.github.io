@@ -30,7 +30,6 @@ The first equation exactly stands for the commutative law! Suppose $$S = \{a,b\}
 
 In addition, 'positive' and 'negative'(-1 and 1) can also be regarded in this way by multiplication, i.e. $$(-1)\times 1=1 \times (-1)=-1$$ and $$(-1)\times (-1)=1\times 1=1$$. Apart from multiplication, addition of $$\{0,1\}$$ are able to behave in the same way.
 
-This is the second article of **MY_INSIGHTS**. Thank you for reading.
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
