@@ -32,8 +32,8 @@ I know this work is rather immature, so leave comments and suggestions to me. Fe
 
 <script type="text/javascript">
 const gitalk = new Gitalk({
-  clientID: 'c9688e0c65375364a06a',
-  clientSecret: '8df2e39f843080e28444928ecad0529446543bc1',
+  clientID: 'Iv1.95a99a189cd1d142',
+  clientSecret: '0e6969a2a1f59b9b6f9637395d70df110a15b541',
   repo: 'AlgebraLoveme.github.io',
   owner: 'AlgebraLoveme',
   admin: ['AlgebraLoveme'],
