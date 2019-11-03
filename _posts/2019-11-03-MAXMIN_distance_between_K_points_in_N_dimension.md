@@ -44,10 +44,3 @@ const gitalk = new Gitalk({
 
 gitalk.render('gitalk-container')
 </script>
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<h3 id="busuanzi_container_site_pv" style="align-content: center; color:brown; font: 200">Total visits: <span id="busuanzi_value_site_pv"></span></h3>
-<br>
-<h3 id="busuanzi_container_site_uv" style="align-content: center; color:brown; font: 200">
-  Total visitors: <span id="busuanzi_value_site_uv"></span>
-</h3>
