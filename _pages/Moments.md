@@ -47,3 +47,14 @@ header:
 
 11:18, 2019-11-02: Good morning guys! Another Problem solved!:grin:
 ![submission accepted](../imgs/good_morning.png)
+
+20:09, 2019-11-16:
+Recent schedule:
+    Yesterday morning&afternoon, read relevant paper on *Security & Privacy 2019*.
+    18:00-21:00, last night, group meeting.
+    22:00-23:30, successfully debugged my *Fundamental of data structure* code task.
+    This morning, wrote an Ipython notebook in order to finish my *Investment* homework
+    This afternoon, completed my *Multivariate statistics analysis* written work(with a R file to do the computation)
+    18:00-20:00, this night, finished my *Assembly* code task.
+    Now I am going to code my *Multivariate statistics analysis* work.
+    :star2:
