@@ -67,3 +67,7 @@ Recent schedule:
     Now I am going to code my *Multivariate statistics analysis* work.
 
 :star2:
+
+19:51, 2019-11-19:
+Coding time between valley to trough. :stuck_out_tongue_closed_eyes:
+![valley to trough](../imgs/valley_to_trough.png)
