@@ -29,3 +29,5 @@ Unfortunately, this blog proves that our problem is NP-hard. There are some prel
 3. For the variant of set division, it is equivalent to get the sum of one subset to be as near as possible to the half total sum since it would make the difference smallest.
 
 Our proof follows to construct a subproblem of the bike problem to be equivalent to the variant of set division problem. Let $W = \frac{1}{2}sum(S)$, where $S = \{a_i \text{ for some }i\}$ is an arbitrary set of positive numbers. Take $w_0 = -W$ to be the weight of the start point and $w_i = a_i$ to be other points and those points are all directly connected to each other. Now suppose we have a path given by our solver to the bike problem, then if we take one subset of the whole to be vertexes covered by this solution and traverse all those vertexes by setting them to destination point(only increases time complexity by $N$ times) and get the best one, it solves the variant of set division by *preliminary 3*. And by preliminary 2, it cannot be done if the solver takes polynomial time unless $NP=P$. Thus it completes the proof.
+
+The main idea of the proof comes from my treasured roommate, Runze Wang.
