@@ -16,14 +16,16 @@ First let me state the fine-looking problem. Given a graph with no constraint on
 
 $$
 \min_{P} |\sum_{w_i \in P} w_i|\\
-\text{s.t. $P$ is a path of graph $G$}
+\text{s.t. $P$ is a path of graph $G$ starting from a specific vertex $w_0$}
 $$
 
 Here is the background of this problem. Recently in China and many other parts of the world, shared bikes become more and more popular. However, to maintain bicycle amount each station keeps, public bike monitoring center has to remove or add some bikes to each station. Every day they get a graph of station states(number of bikes they keep now) and a problem station(full or empty) and decide a route to send/remove bikes to/from it. In the meantime, all the station they passed would be adjusted so that extra bikes would be taken and insufficient stations would get enough bikes. It is natural and practical that they neither want to take many bikes from the monitoring center nor collect many bikes. Our problem is how to decide such a route.
 
 Unfortunately, this blog proves that our problem is NP-hard. There are some preliminaries you have to know about this proof.
 
-1. The set division problem. This problem requires to divide a set of positive numbers into two groups so that the sum of each group is exactly hale of the total sum. This problem is proven to be NP-hard.
-2. The variant of set division. This problem requires the same but wants the difference of those sums to be as small as possible. Since if we have a polynomial time algorithm to solve this problem, then we would know whether the set division problem is solvable and get a solution if so, this variant is also NP-hard.
+1. The set division problem. This problem requires to divide a set of positive numbers into two subsets so that the sum of each subset is exactly half of the total. This problem is proven to be NP-hard.
+2. The variant of set division. This problem requires the same but wants the difference of sums of two subsets to be as small as possible. Since if we have a polynomial time algorithm to solve this problem, then we would know whether the set division problem is solvable and get a solution if so, this variant is also NP-hard.
+3. For the variant of set division, it is equivalent to get the sum of one subset to be as near as possible to the half total sum since it would make the difference smallest.
 
-Our proof follows to construct a subproblem of the bike problem to be equivalent to the variant of set division problem. Let $W = \frac{1}{2}sum(S)$, where $S = \{a_i \text{ for some }i\}$ is an arbitrary set of positive numbers. Take $w_0 = -W$ to be the weight of the start point and $w_i = a_i$
+Our proof follows to construct a subproblem of the bike problem to be equivalent to the variant of set division problem. Let $W = \frac{1}{2}sum(S)$, where $S = \{a_i \text{ for some }i\}$ is an arbitrary set of positive numbers. Take $w_0 = -W$ to be the weight of the start point and $w_i = a_i$ to be other points and those points are all directly connected to each other. Now suppose we have a path given by our solver to the bike problem, then if we take one subset of the whole as vertexes covered by this solution, it solves the variant of set division by *preliminary 3*. And by preliminary 2, it cannot be done if the solver takes polynomial time unless $NP=P$.
+It completes the proof.
