@@ -10,7 +10,7 @@ header:
 excerpt: "MY_INSIGHTS, dimension"
 ---
 
-It is common to use dimension representation in many fields, especially in Data Science to which I am devoted now. For example, we usually treat a dictionary as a vector of thousands of dimensions. Suppose there is a dictionary $$D$$ consisting of two words, e.g. 'hot' and 'dog'. Following the sequence, 'hot' can be denoted as $$[1,0]$$ while 'dog' represented as $$[0,1]$$. This is called **one-hot representation** of words. I will dig into memory efficiency of word representation in this blog.
+It is common to use dimension representation in many fields, especially in Data Science to which I am devoted now. For example, we usually treat a dictionary as a vector of thousands of dimensions. Suppose there is a dictionary $$D$$ consisting of two words, e.g. 'hot' and 'dog'. Following the sequence, 'hot' can be denoted as $$[1,0]$$ while 'dog' represented as $[0,1]$. This is called **one-hot representation** of words. I will dig into memory efficiency of word representation in this blog.
 
 One simple numerical example. Suppose we have a  picture with size $$4\times 4 $$ in terms of pixels. Each pixel takes $$N = 2$$ possible values, e.g. $$\{0,1\}$$. Keep in mind that we can *expand* $$4 \times 4$$ pixel matrix to $$1 \times 16$$ vector. In this example, we can easily figure out an *efficient* way to represent this vector, i.e. a binary sequence of length $$L=16$$(something only consists of 0 and 1). This is exactly what computers do to store this vector. 16 bits will be occupied to store it.
 
