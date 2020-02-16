@@ -11,11 +11,11 @@ excerpt: "paper summary: part 1"
 <font size='+2'><i>Solution to the PGD optimization:</i></font>
 
 $$
-\max_{\eta} \|w^T \eta\|_\infty \text{ subject to}\\
-\|\eta\|_\infty<\epsilon
+\max_{\eta} \|w^T \eta\|_\infty \\
+\text{ subject to }\|\eta\|_\infty<\epsilon
 $$
 
-**Solution**:
+*Solution*:
 
 $$\|w^T \eta\|_\infty 
 = \max_{i}\{|w_i^T \eta|\} \\

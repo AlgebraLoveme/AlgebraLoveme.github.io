@@ -32,16 +32,16 @@ However, this smoothness assumption, as discuss by experiment, does not hold in 
 They formalize the attacker problem as:
 
 $$
-\min \|r\|_{2}\text{ subject to:}\\
-f(x+r)=l\\
+\min \|r\|_{2}\\
+\text{ subject to }f(x+r)=l\\
 x+r \in[0,1]^{m}
 $$
 
 As it has highly non-linear constraints, they use a approximation known as **L-BFGS**:
 
 $$
-\min c|r|+\operatorname{loss}_{f}(x+r, l)\text{ subject to:}\\
-x+r \in[0,1]^{m}
+\min c|r|+\operatorname{loss}_{f}(x+r, l)\\
+\text{ subject to }x+r \in[0,1]^{m}
 $$
 
 They find that the perturbation generated has no human-aware features yet are able to create a new image which is undistinguishable but is misclassified by DNNs. The generated images are called *adversarial examples*. They also find that adversarial examples have intriguing *transferable* property which means adversarial examples generated for a certain DNN can cause misclassification by DNNs with different architectures. They show that a white noise, Gaussian in the paper, can not effectively generate adversarial examples.
@@ -69,8 +69,8 @@ $$\boldsymbol{w}^{\top} \tilde{\boldsymbol{x}}=\boldsymbol{w}^{\top} \boldsymbol
 and our aim is to maximize the change in the output vector. Therefore, our problem is:
 
 $$
-\max_{\eta} w^T \eta\text{ subject to}\\
-\|\eta\|_\infty<\epsilon
+\max_{\eta} w^T \eta\\
+\text{ subject to }\|\eta\|_\infty<\epsilon
 $$
 
 The solution(refer to [appendix](https://algebraloveme.github.io/2020-02-16-appendix-for-paper-summary1/)) is $\eta = sign(w_i^T)$,  where $i=\max_{i}\{\|w_i^T\|_1\}$.
