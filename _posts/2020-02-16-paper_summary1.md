@@ -70,5 +70,7 @@ and our aim is to maximize the change in the output vector. Therefore, our probl
 
 $$
 \max_{\eta} w^T \eta\text{ subject to}\\
-\|\eta\|<\epsilon
+\|\eta\|_\infty<\epsilon
 $$
+
+The solution(refer to [appendix](https://algebraloveme.github.io/2020-02-16-appendix-for-paper-summary1/)) is $\eta = sign(w_i^T)$,  where $i=\max_{i}\{\|w_i^T\|_1\}$.
