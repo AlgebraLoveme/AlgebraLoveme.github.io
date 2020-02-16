@@ -21,9 +21,7 @@ Deep neural networks(DNNs): a kind of neural network which is deeper than NNs in
 
 This paper literally is the first to report the existence of adversarial examples. 
 
-It argues that DNNs may not work as expected to encode a non-local generalization of input space. 
-
-In other words, as people won't notice a small perturbation in the picture, for a small enough $\epsilon$, any samples in the rigion of input space should have the same label, i.e. 
+It argues that DNNs may not work as expected to encode a non-local generalization of input space. In other words, as people won't notice a small perturbation in the picture, for a small enough $\epsilon$, any samples in the rigion of input space should have the same label, i.e. 
 
 $$DNN(\{x+\epsilon|x\in t\}) = t$$ 
 
@@ -85,13 +83,13 @@ As pointed out in the paper, NNs are not supposed to be vulnerable to adversaria
 
 They realized the intuition by modifying loss function. Specifically, they change the loss to:
 
-$$\bar{J}(\boldsymbol{\theta}, \boldsymbol{x}, y)=\alpha J(\boldsymbol{\theta}, \boldsymbol{x}, y)+(1-\alpha) J\left(\boldsymbol{\theta}, \boldsymbol{x}+\operatorname{esign}\left(\nabla_{\boldsymbol{x}} J(\boldsymbol{\theta}, \boldsymbol{x}, y)\right)\right.$$
+$$\bar{J}(\boldsymbol{\theta}, \boldsymbol{x}, y)=\alpha J(\boldsymbol{\theta}, \boldsymbol{x}, y)+(1-\alpha) J\left(\boldsymbol{\theta}, \boldsymbol{x}+\operatorname{\epsilon sign}\left(\nabla_{\boldsymbol{x}} J(\boldsymbol{\theta}, \boldsymbol{x}, y)\right)\right.$$
 
 which is a combination of original part and adversarial part. This methods can be viewed as constantly supply up-to-date adversarial examples to the training dataset. In this way, they even get higher precision in original test set. I should remind readers that it is not guaranteed that AT would increase precision. Actually, as discussed in later works, there is a contradiction between them and we need to trade off. Technically, the precision increasing here might be the contribution of enlarged training data.
 
 AT shows great defense ability. Adversarial rate drops dramatically and AT-trained models are more resistant to transferable adversarial examples. As already shown in last paper, although theoretically adding all data points in the neighborhood should do the same, it is not efficient to train robust models by adding randomly sampled noises. Therefore, AT is pretty useful. Actually, many works focus on AT after that.
 
-TBC...
+
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
