@@ -60,6 +60,6 @@ $$\|\phi(x)-\phi(x+r)\| \leq L\|r\|$$
 
 where $L=\prod_{k=1}^{K} L_{k}$. In this way, the change in output is bounded by $L \|r\|$ and we are able to know in what range of $\|r\|$ adversarial examples cannot exist. Unfortunately, they show this lower bound of $\|r\|$ is rather small.
 
-<p style="text-align: center;"><font size='+4'><i>Explaining and Harnessing Adversarial Examples by Goodfellow et al, 2015</i></font></p>
+<p style="text-align: center;"><font size='+4'><i>Explaining and Harnessing Adversarial Examples<br> by Goodfellow et al, 2015</i></font></p>
 
 
