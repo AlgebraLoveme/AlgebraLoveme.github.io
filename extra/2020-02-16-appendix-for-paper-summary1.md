@@ -8,7 +8,7 @@ mathjax: "true"
 excerpt: "paper summary: part 1"
 ---
 
-<font size='+2'><i>Solution to the PGD optimization:</i></font>
+<font size='+2'><i>Solution to the FGSM optimization:</i></font>
 
 $$
 \max_{\eta} \|w^T \eta\|_\infty \\
