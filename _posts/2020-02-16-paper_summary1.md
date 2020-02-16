@@ -62,4 +62,13 @@ where $L=\prod_{k=1}^{K} L_{k}$. In this way, the change in output is bounded by
 
 <p style="text-align: center;"><font size='+4'><i>Explaining and Harnessing Adversarial Examples<br> by Goodfellow et al, 2015</i></font></p>
 
+First they consider a special case: linear classifier, i.e. the classifier get output vector by:
 
+$$\boldsymbol{w}^{\top} \tilde{\boldsymbol{x}}=\boldsymbol{w}^{\top} \boldsymbol{x}+\boldsymbol{w}^{\top} \boldsymbol{\eta}$$
+
+and our aim is to maximize the change in the output vector. Therefore, our problem is:
+
+$$
+\max_{\eta} w^T \eta\text{ subject to}\\
+\|\eta\|<\epsilon
+$$
