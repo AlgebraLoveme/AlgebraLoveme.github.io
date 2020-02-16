@@ -16,7 +16,7 @@ Neural networks(NNs): a kind of approximation of functions. Its universal approx
 
 Deep neural networks(DNNs): a kind of neural network which is deeper than NNs in early stages. Actually it has no official definition. Be aware that DNNs are only realizable, or precisely, trainable in recent years thanks to the development of computation resources. DNNs have achieved large success in numerous fields which are traditionally seen as privilege of humans, such as image recognition and text understanding.
 
-<p style="text-align: center;"><i>Intriguing properties of neural networks by Szegedy et al, 2014</i></p>
+<p style="text-align: center;"><i>Intriguing properties of neural networks<br> by Szegedy et al, 2014</i></p>
 
 
 This paper literally is the first to report the existence of adversarial examples. 
