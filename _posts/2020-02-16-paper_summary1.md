@@ -23,9 +23,9 @@ This paper literally is the first to report the existence of adversarial example
 
 It argues that DNNs may not work as expected to encode a non-local generalization of input space. 
 
-In other words, as people won't notice a small perturbation in the picture, for a small enough $epsilon$,
+In other words, as people won't notice a small perturbation in the picture, for a small enough $\epsilon$, any samples in the rigion of input space should have the same label, i.e. 
 
- any samples in the rigion of input space should have the same label, i.e. $DNN(\{x+epsilon|x\in t\}) = t$. 
+$$DNN(\{x+epsilon|x\in t\}) = t$$ 
 
 However, this smoothness assumption, as discuss by experiment, does not hold in general.
 
