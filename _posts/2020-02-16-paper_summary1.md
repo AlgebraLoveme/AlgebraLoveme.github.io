@@ -14,7 +14,7 @@ Time flies and over a half year has gone by since I read the first adversarial e
 
 Neural networks(NNs): a kind of approximation of functions. Its universal approximation property is given in  *Multilayer feedforward networks are universal approximators* by Hornik et al.
 
-Deep neural networks(DNNs): a kind of neural network which is deeper than NNs in early stages. Actually it has no official definition. Be aware that DNNs are only realizable, or precisely, trainable in recent years thanks to the development of computation resources. DNNs have achieved large success in numerous fields which are traditionally seen as privilege of humans, such as image recognition and text understanding.
+Deep neural networks(DNNs): neural networks which are deeper than old-fashion NNs which typically have one or two layers. Actually it has no official definition. Be aware that DNNs are only realizable, or precisely, trainable in recent years thanks to the development of computation resources. DNNs have achieved large success in numerous fields which are traditionally seen as privilege of humans, such as image recognition and text understanding.
 
 <p style="text-align: center;"><font size='+3'><i>Intriguing properties of neural networks<br> by Szegedy et al, 2014</i></font></p>
 
