@@ -14,7 +14,7 @@ $$e^{\pi i}=-1$$
 
 $$\hat{f}(\xi) = \int_{-\infty}^{\infty}f(x)e^{2\pi i x\xi}dx$$
 
-My Email: myh821746176@outlook.com
+Find my CV [here](algebraloveme.github.io/cv_Yuhao_Mao.pdf).
 
 Feel free to contact me if you have any questions or interests.
 
