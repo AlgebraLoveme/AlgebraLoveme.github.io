@@ -18,3 +18,5 @@ Find my CV [here](https://algebraloveme.github.io/CV.pdf).
 
 Feel free to contact me if you have any questions or interests.
 
+NEWS:
+- My paper **Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings** has been accepted to IEEE Security & Privacy 2022!
