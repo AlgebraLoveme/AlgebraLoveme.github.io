@@ -19,4 +19,5 @@ Find my CV [here](https://algebraloveme.github.io/CV.pdf).
 Feel free to contact me if you have any questions or interests.
 
 NEWS:
-- My paper [**Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings**](https://arxiv.org/abs/2204.04063) has been accepted by [IEEE Symposium on Security & Privacy 2022](https://www.ieee-security.org/TC/SP2022/program-papers.html)! 
+- My first-author paper [**Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings**](https://arxiv.org/abs/2204.04063) has been accepted by [IEEE Symposium on Security & Privacy 2022](https://www.ieee-security.org/TC/SP2022/program-papers.html)! 
+- My co-first author paper **``Is your explanation stable?'': A Robustness Evaluation Framework for Feature Attribution** has been accepted by [ACM CCS 2022](https://www.sigsac.org/ccs/CCS2022/call-for-papers.html)! Many thanks to my co-author and good friend *Yuyou Gan*.
