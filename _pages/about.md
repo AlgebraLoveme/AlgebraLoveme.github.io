@@ -6,7 +6,7 @@ header:
     image: "/imgs/scene.jpg"
 ---
 
-*Hello, my name is Yuhao Mao. I am a computer science MSc majoring in machine intelligence at ETH Zurich. Previously, I was a math-and-finance double-major undergraduate at CKC Honors College, Zhejiang University. I had been instructed by Prof. K. Liu at School of Mathematical Sciences, ZJU (see <https://person.zju.edu.cn/en/0093199>), Associate Prof. G. Zhou at School of Economics, ZJU  (see <https://flzhou.weebly.com>), Prof. S. Ji at NESA lab, ZJU (see <https://nesa.zju.edu.cn/webpage/people.html>) and Dr. Y. Zhang at CISPA Helmholtz Center for Information Security (see <https://yangzhangalmo.github.io/students>).*
+*Hello, my name is Yuhao Mao. I am a computer science MSc majoring in machine intelligence at ETH Zurich. Previously, I was a math-and-finance double-major undergraduate at CKC Honors College, Zhejiang University. I had been instructed by [Dr. G. Zhou](https://flzhou.weebly.com), [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html), [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), and [Dr. Y. Zhang](https://yangzhangalmo.github.io/students) (listed by instruction date).*
 
 My favorite formula includes: 
 
