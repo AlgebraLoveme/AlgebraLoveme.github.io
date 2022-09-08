@@ -18,7 +18,7 @@ Find my CV [here](https://algebraloveme.github.io/CV.pdf).
 
 Feel free to contact me if you have any questions or interests.
 
-#### Publications
+## Publications
 
 - **Yuhao Mao**, Chong Fu, Saizhuo Wang, Shouling Ji, Xuhong Zhang,
 Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings](https://arxiv.org/abs/2204.04063), [IEEE Symposium on Security & Privacy 2022 (SP'22)](https://www.ieee-security.org/TC/SP2022/program-papers.html).
