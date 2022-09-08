@@ -20,8 +20,8 @@ Feel free to contact me if you have any questions or interests.
 
 ## Publications
 
-- Yuhao Mao, Chong Fu, Saizhuo Wang, Shouling Ji, Xuhong Zhang,
+- **Yuhao Mao**, Chong Fu, Saizhuo Wang, Shouling Ji, Xuhong Zhang,
 Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings](https://arxiv.org/abs/2204.04063), [IEEE Symposium on Security & Privacy 2022 (SP'22)](https://www.ieee-security.org/TC/SP2022/program-papers.html).
-- Yuyou Gan\*, Yuhao Mao\*, Xuhong Zhang, Shouling Ji, Yuwen Pu, Meng Han, Jianwei Yin, Ting Wang, [``Is your explanation stable?'': A Robustness Evaluation Framework for Feature Attribution](https://arxiv.org/abs/2209.01782), [ACM SIGSAC Conference on Computer and Communications Security 2022 (CCS'22)](https://www.sigsac.org/ccs/CCS2022/call-for-papers.html).
+- Yuyou Gan\*, **Yuhao Mao**\*, Xuhong Zhang, Shouling Ji, Yuwen Pu, Meng Han, Jianwei Yin, Ting Wang, [``Is your explanation stable?'': A Robustness Evaluation Framework for Feature Attribution](https://arxiv.org/abs/2209.01782), [ACM SIGSAC Conference on Computer and Communications Security 2022 (CCS'22)](https://www.sigsac.org/ccs/CCS2022/call-for-papers.html).
 
 
