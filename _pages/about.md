@@ -6,7 +6,7 @@ header:
     image: "/imgs/scene.jpg"
 ---
 
-*Hello, my name is Yuhao Mao. Starting September 2023, I join SRI lab at ETH Zurich as a PhD student. I got my master's degree in Computer Science at ETH Zurich and my Bachelor's degree in math and finance at CKC Honors College, Zhejiang University. I worked (or am still working) with [Dr. G. Zhou](https://flzhou.weebly.com), [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html) (Bachelor thesis advisor), [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), [Dr. Y. Zhang](https://yangzhangalmo.github.io/students) and [Dr. M. Vechev](https://www.sri.inf.ethz.ch/people/martin) (PhD advisor) (listed according to date).*
+*Hello, my name is Yuhao Mao. Starting September 2023, I join SRI lab at ETH Zurich as a PhD student. I got my master's degree in Computer Science at ETH Zurich and my Bachelor's degree in math and finance at CKC Honors College, Zhejiang University. I worked (or am still working) with [Dr. G. Zhou](https://flzhou.weebly.com), [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html) (Bachelor thesis advisor), [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), [Dr. Y. Zhang](https://yangzhangalmo.github.io/students) and [Dr. M. Vechev](https://www.sri.inf.ethz.ch/people/martin) (PhD advisor), list sorted by time.*
 
 My favorite formula includes: 
 
