@@ -19,6 +19,7 @@ Find my CV [here](https://algebraloveme.github.io/CV.pdf).
 Feel free to contact me if you have any questions or interests.
 
 **Working Ethics**
+
 I solemnly swear that I put 120% effort into making the proofs in all my publications, including those I am not the (co-)first author, *correct*, *rigorous* and *readable*.
 
 ## Publications
