@@ -6,7 +6,7 @@ date: 2023-11-07
 tags: [Chinese, Tool, Language checker]
 mathjax: "true"
 header:
-    image: "/imgs/high_dimension.jfif"
+    image: "/imgs/chinese_dedede.png"
 excerpt: "Chinese, Tool, Language checker"
 ---
 
