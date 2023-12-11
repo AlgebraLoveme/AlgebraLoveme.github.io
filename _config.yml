@@ -111,11 +111,11 @@ author:
   avatar           : "/imgs/avatar.jpg"
   bio              : "D-INFK, ETH Zurich"
   location         : "Zurich, Switzerland"
-  email            : "myh821746176@outlook.com"
+  email            : "yuhao.mao@inf.ethz.ch"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: yuhao.mao@inf.ethz.ch
+    # - label: "Email"
+    #   icon: "fas fa-fw fa-envelope-square"
+    #   url: yuhao.mao@inf.ethz.ch
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/AlgebraLoveme"
