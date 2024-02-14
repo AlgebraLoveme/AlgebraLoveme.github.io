@@ -14,7 +14,7 @@ $$e^{\pi i}=-1$$
 
 $$\hat{f}(\xi) = \int_{-\infty}^{\infty}f(x)e^{2\pi i x\xi}dx$$
 
-Find my CV [here](../extra/CV_en.pdf).
+Find my CV [here](../CV_en.pdf).
 
 Feel free to contact me if you have any questions or interests.
 
@@ -41,7 +41,7 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 
 ## Talk
 
-- Training Certifiably Robust Neural Networks. January 2024 at Zhejiang University, China. [[Slide]](../extra/230122_ZJU.pdf)
+- Training Certifiably Robust Neural Networks. January 2024 at Zhejiang University, China. [[Slide]](../230122_ZJU.pdf)
 
 ## Teaching
 
