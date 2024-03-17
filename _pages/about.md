@@ -49,4 +49,4 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 - [Rigorous Software Engineering](https://www.sri.inf.ethz.ch/teaching/rse2024) (Bachelor), Spring 2024, ETH Zürich, Teaching Assistant.
 - [Reliable and Trustworthy Artificial Intelligence](https://www.sri.inf.ethz.ch/teaching/rtai23) (Master), Fall 2023, ETH Zürich, Teaching Assistant.
 - [Computational Intelligence Lab](https://da.inf.ethz.ch/teaching/2023/CIL/) (Master), Spring 2023, ETH Zürich, Teaching Assistant.
-- [Introduction to Machine Learning](https://las.inf.ethz.ch/teaching/introml-s23) (Master), Spring 2023, ETH Zürich, Teaching Assistant.
+- [Introduction to Machine Learning](https://las.inf.ethz.ch/teaching/introml-s23) (Bachelor), Spring 2023, ETH Zürich, Teaching Assistant.
