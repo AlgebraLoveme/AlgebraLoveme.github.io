@@ -6,7 +6,7 @@ header:
     image: "/imgs/scene.jpg"
 ---
 
-Hello, Yuhao Mao here! Starting September 2023, I join SRI lab at ETH Zürich as a PhD student. I got my Master of Science in Computer Science majoring Machine Intelligence and minoring Theoretical Computer Science at ETH Zürich, and my Bachelor of Science in Applied Mathematics with a dual degree in Finance at CKC Honors College, Zhejiang University. I am lucky to receive supervision and advice from:
+Hello, Yuhao here! Starting September 2023, I join SRI lab at ETH Zürich as a PhD student. I got my Master of Science in Computer Science majoring Machine Intelligence and minoring Theoretical Computer Science at ETH Zürich, and my Bachelor of Science in Applied Mathematics with a dual degree in Finance at CKC Honors College, Zhejiang University. I am lucky to receive supervision and advice from:
 - [Dr. G. Zhou](https://flzhou.weebly.com), who leads me to the fantastic world of macroeconomics and encouraged me during my early stage of research, which benefits me deeply even when I left the field;
 - [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html) and [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), who showed me the excitement and challenges of trustworthy artificial intelligence and offered valuable guidance and suggestions for years;
 - [Dr. Y. Zhang](https://yangzhangalmo.github.io/students), who has always been kind and helpful, especially when I feel lost;
