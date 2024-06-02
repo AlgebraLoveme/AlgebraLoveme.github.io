@@ -6,7 +6,12 @@ header:
     image: "/imgs/scene.jpg"
 ---
 
-*Hello, my name is Yuhao Mao. Starting September 2023, I join SRI lab at ETH Zürich as a PhD student. I got my master's degree in Computer Science at ETH Zürich and my Bachelor's degree in math and finance at CKC Honors College, Zhejiang University. I worked (or am still working) with [Dr. G. Zhou](https://flzhou.weebly.com), [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html) (Bachelor thesis advisor), [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), [Dr. Y. Zhang](https://yangzhangalmo.github.io/students) and [Dr. M. Vechev](https://www.sri.inf.ethz.ch/people/martin) (PhD advisor), list sorted by time.*
+*Hello, Yuhao Mao here! Starting September 2023, I join SRI lab at ETH Zürich as a PhD student. I got my Master of Science in Computer Science majoring Machine Intelligence and minoring Theoretical Computer Science at ETH Zürich, and my Bachelor of Science in Applied Mathematics with a dual degree in Finance at CKC Honors College, Zhejiang University. I am lucky to receive supervision and advice from:
+- [Dr. G. Zhou](https://flzhou.weebly.com), who leads me to the fantastic world of macroeconomics and encouraged me during my early stage of research, which benefits me deeply even when I left the field;
+- [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html) and [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), who showed me the excitement and challenges of trustworthy artificial intelligence and offered valuable guidance and suggestions for years;
+- [Dr. Y. Zhang](https://yangzhangalmo.github.io/students), who has always been kind and helpful, especially when I feel lost;
+- [Dr. F. Yang](https://sml.inf.ethz.ch/group/fannyy/), who welcomed me since my first semester in a foreign country and continues to help;
+- [Dr. M. Vechev](https://www.sri.inf.ethz.ch/people/martin), who shares numerous good days and continues to be a good friend.
 
 My favorite formula includes: 
 
