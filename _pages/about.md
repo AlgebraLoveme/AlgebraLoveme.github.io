@@ -43,7 +43,7 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 
 ### Artificial Intelligence for Science
 
-- Chenhao Chu, **Yuhao Mao**, Hua Wang, Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network, [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24).
+- Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://ieeexplore.ieee.org/document/10600344), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24).
 
 ## Talk
 
