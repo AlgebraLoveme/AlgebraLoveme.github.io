@@ -119,9 +119,9 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/AlgebraLoveme"
-    - label: "LinkedIn"
+    # - label: "LinkedIn"
       # icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/yuhao-mao-a686a6200/"
+      # url: "https://www.linkedin.com/in/yuhao-mao-a686a6200/"
 
 # Site Footer
 # footer:
