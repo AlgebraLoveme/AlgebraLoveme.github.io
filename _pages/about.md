@@ -3,7 +3,7 @@ title: "About"
 permalink: /about/
 mathjax: "true"
 header:
-    image: "/imgs/main_photo_cc_self.png"
+    image: "/imgs/main_photo_cc_self.jpg"
 ---
 
 Hello, Yuhao here! Starting September 2023, I join [SRI lab](https://www.sri.inf.ethz.ch) at ETH Zürich as a PhD student. I got my MSc degree in Computer Science majoring Machine Intelligence and minoring Theoretical Computer Science at ETH Zürich, and my BSc degree in Mathematics and Applied Mathematics with a dual degree in Finance at [CKC Honors College](http://ckc.zju.edu.cn/ckcen/_t1906/main.psp), Zhejiang University. I am lucky to receive supervision and/or advice from:
