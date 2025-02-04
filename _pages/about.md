@@ -33,8 +33,8 @@ All publications are peer-reviewed in top-tier conferences/journals. Equal contr
 
 ### Trustworthy Artificial Intelligence
 
-- **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [Multi-Neuron Unleashes Expressivity of ReLU Networks Under Convex Relaxation](http://arxiv.org/abs/2410.06816
-), preprint. <span style="color:red">We have identified problems in the proof of Lemma 3 and are working on a more rigorous proof.</span>
+- **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816
+), preprint.
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), preprint.
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), preprint.
 - Stefan Balauca, Mark Niklas Müller, **Yuhao Mao**, Maximilian Baader, Marc Fischer, Martin Vechev, [Gaussian Loss Smoothing Enables Certified Training with Tight Convex Relaxations](https://arxiv.org/abs/2403.07095), preprint.
