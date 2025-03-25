@@ -6,7 +6,7 @@ header:
     image: "/imgs/main_photo_cc_self.jpg"
 ---
 
-Hello, Yuhao here! Starting September 2023, I join [SRI lab](https://www.sri.inf.ethz.ch) at ETH Zürich as a PhD student. I got my MSc in Computer Science majoring Machine Intelligence and minoring Theoretical Computer Science at ETH Zürich, and my BSc in Mathematics and Applied Mathematics with a dual degree in Finance at [CKC Honors College](http://ckc.zju.edu.cn/ckcen/_t1906/main.psp), Zhejiang University. I am lucky to receive supervision and/or advice from:
+Hello, Yuhao here! Starting September 2023, I join [SRI lab](https://www.sri.inf.ethz.ch) at ETH Zürich as a PhD student. I got my MSc in Computer Science majoring Machine Intelligence and minoring Theoretical Computer Science at ETH Zürich, and my BSc in Mathematics and Applied Mathematics with a dual degree in Finance at [CKC Honors College](http://ckc.zju.edu.cn/ckcen/_t1906/main.psp), Zhejiang University. I am lucky to work with:
 - [Dr. G. Zhou](https://flzhou.weebly.com), who leads me to the fantastic world of macroeconomics and encouraged me during my early stage of research, which benefits me deeply even after I left the field;
 - [Dr. S. Ji](https://nesa.zju.edu.cn/webpage/people.html) and [Dr. X. Zhang](https://person.zju.edu.cn/zhangxuhong), who showed me the excitement and challenges of trustworthy artificial intelligence and offered valuable guidance and suggestions for years;
 - [Dr. Y. Zhang](https://yangzhangalmo.github.io), who has always been kind and helpful, especially when I feel lost;
