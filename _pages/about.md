@@ -27,14 +27,18 @@ Feel free to contact me if you have any questions or interests.
 
 I solemnly swear that I put 120% effort into making the proofs in all my publications, including those I am not the (co-)first author, *correct*, *rigorous* and *readable*.
 
+**Research Interests**
+
+I am interested in making AI generally safe and trustworthy. Meanwhile, I am trying to use the current "unsafe" AI to do good things, e.g., advancing various science domains.
+
 ## Publication
 
 All publications are peer-reviewed in top-tier conferences/journals. Equal contributions are marked by *.
 
 ### Trustworthy Artificial Intelligence
 
-- **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816
-), preprint.
+- **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), preprint.
+- Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 - Stefan Balauca, Mark Niklas Müller, **Yuhao Mao**, Maximilian Baader, Marc Fischer, Martin Vechev, [Gaussian Loss Smoothing Enables Certified Training with Tight Convex Relaxations](https://arxiv.org/abs/2403.07095), [Transactions on Machine Learning Research 07/2025](https://jmlr.org/tmlr/) (TMLR'25).
