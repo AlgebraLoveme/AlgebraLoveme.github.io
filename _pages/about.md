@@ -40,12 +40,12 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), preprint.
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
-<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+<span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/acr-weakness">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em; vertical-align:-0.2em;"/>
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
   </a>
   <a href="../assets/files/ACR_ICML_poster.pdf">
-    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em; vertical-align:-0.2em;"/>
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
