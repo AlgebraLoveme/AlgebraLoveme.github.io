@@ -109,7 +109,12 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 
 ## Talk
 
-- Training Certifiably Robust Neural Networks. January 2024 at Zhejiang University, China. [[Slide]](../230122_ZJU.pdf)
+- Training Certifiably Robust Neural Networks. January 2024 at Zhejiang University, China.
+ <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
+  <a href="../230122_ZJU.pdf">
+    <img src="../assets/keynote-icon.png" alt="Slide" style="height:1em;"/>
+  </a>
+</span>
 
 ## Teaching
 
