@@ -42,10 +42,10 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; gap:4px; vertical-align:middle;">
   <a href="https://github.com/eth-sri/acr-weakness">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em; vertical-align:-0.2em;"/>
   </a>
   <a href="../assets/files/ACR_ICML_poster.pdf">
-    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em; vertical-align:-0.2em;"/>
   </a>
 </span>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
