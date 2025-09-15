@@ -49,19 +49,52 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
   </a>
 </span>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
-  <a href="https://github.com/eth-sri/ctbench" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>  <a href="../assets/files/CTBench_ICML_poster.pdf" style="height:1em; vertical-align:middle;"> <img src="../assets/poster-icon.png" alt="poster" /> </a>
+<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+  <a href="https://github.com/eth-sri/ctbench">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+  <a href="../assets/files/CTBench_ICML_poster.pdf">
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+  </a>
+</span>
 - Stefan Balauca, Mark Niklas Müller, **Yuhao Mao**, Maximilian Baader, Marc Fischer, Martin Vechev, [Gaussian Loss Smoothing Enables Certified Training with Tight Convex Relaxations](https://arxiv.org/abs/2403.07095), [Transactions on Machine Learning Research 07/2025](https://jmlr.org/tmlr/) (TMLR'25).
-  <a href="https://github.com/stefanrzv2000/GLS-Cert-Training" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>
+<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+  <a href="https://github.com/stefanrzv2000/GLS-Cert-Training">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+</span>
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Understanding Certified Training with Interval Bound Propagation](https://arxiv.org/abs/2306.10426), [The Twelfth International Conference on Learning Representations](https://iclr.cc/Conferences/2024) (ICLR'24).
-  <a href="https://github.com/eth-sri/ibp-propagation-tightness" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>  <a href="../assets/files/PI_ICLR_poster.pdf" style="height:1em; vertical-align:middle;"> <img src="../assets/poster-icon.png" alt="poster" /> </a>
+<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+  <a href="https://github.com/eth-sri/ibp-propagation-tightness">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+  <a href="../assets/files/PI_ICLR_poster.pdf">
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+  </a>
+</span>
 - Maximilian Baader\*, Mark Niklas Müller\*, **Yuhao Mao**, Martin Vechev, [Expressivity of ReLU-Networks under Convex Relaxations](https://arxiv.org/abs/2311.04015), [The Twelfth International Conference on Learning Representations](https://iclr.cc/Conferences/2024) (ICLR'24).
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Connecting Certified and Adversarial Training](https://arxiv.org/abs/2305.04574), [The Thirty-seventh Conference on Neural Information Processing Systems](https://nips.cc/Conferences/2023) (NeurIPS'23).
-  <a href="https://github.com/eth-sri/taps" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>  <a href="../assets/files/TAPS_NIPS_poster.pdf" style="height:1em; vertical-align:middle;"> <img src="../assets/poster-icon.png" alt="poster" /> </a>
+<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+  <a href="https://github.com/eth-sri/taps">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+  <a href="../assets/files/TAPS_NIPS_poster.pdf">
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+  </a>
+</span>
 - Yuyou Gan\*, **Yuhao Mao**\*, Xuhong Zhang, Shouling Ji, Yuwen Pu, Meng Han, Jianwei Yin, Ting Wang, [``Is your explanation stable?'': A Robustness Evaluation Framework for Feature Attribution](https://arxiv.org/abs/2209.01782), [ACM SIGSAC Conference on Computer and Communications Security 2022](https://www.sigsac.org/ccs/CCS2022/) (CCS'22).
-    <a href="https://github.com/sweet-shark/MeTFA-A-Robustness-Evaluation-Framework-for-Feature-Attribution" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a> 
+<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+  <a href="https://github.com/sweet-shark/MeTFA-A-Robustness-Evaluation-Framework-for-Feature-Attribution">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+</span>
 - **Yuhao Mao**, Chong Fu, Saizhuo Wang, Shouling Ji, Xuhong Zhang,
 Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings](https://arxiv.org/abs/2204.04063), [IEEE Symposium on Security & Privacy 2022](https://www.ieee-security.org/TC/SP2022/program-papers.html) (SP'22).
-    <a href="https://github.com/AlgebraLoveme/Transfer-Attacks-Revisited-A-Large-Scale-Empirical-Study-in-Real-Computer-Vision-Settings" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a> 
+<span style="display:inline-flex; gap:4px; vertical-align:middle;">
+  <a href="https://github.com/AlgebraLoveme/Transfer-Attacks-Revisited-A-Large-Scale-Empirical-Study-in-Real-Computer-Vision-Settings">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+</span>
 
 ### Artificial Intelligence for Science
 
