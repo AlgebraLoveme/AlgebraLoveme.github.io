@@ -99,7 +99,11 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 ### Artificial Intelligence for Science
 
 - Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://arxiv.org/abs/2502.18636), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24). 
-<a href="https://github.com/ChenhaoChu/RFIC-TL" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>
+<span style="display:inline-flex; gap:4px; vertical-align:top;">
+  <a href="https://github.com/ChenhaoChu/RFIC-TL">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em; vertical-align:top;"/>
+  </a>
+</span>
 
 ## Talk
 
