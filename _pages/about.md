@@ -40,7 +40,13 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), preprint.
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
- <a href="https://github.com/eth-sri/acr-weakness" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>  <a href="../assets/files/ACR_ICML_poster.pdf" style="height:1em; vertical-align:middle;"> <img src="../assets/poster-icon.png" alt="poster" /> </a>
+<a href="https://github.com/eth-sri/acr-weakness">
+  <img src="../assets/github-mark.png" alt="GitHub" style="height:1em; vertical-align:middle;"/>
+</a>
+&nbsp;
+<a href="../assets/files/ACR_ICML_poster.pdf">
+  <img src="../assets/poster-icon.png" alt="Poster" style="height:1em; vertical-align:middle;"/>
+</a>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
   <a href="https://github.com/eth-sri/ctbench" style="height:1em; vertical-align:middle;"> <img src="../assets/github-mark.png" alt="GitHub" /> </a>  <a href="../assets/files/CTBench_ICML_poster.pdf" style="height:1em; vertical-align:middle;"> <img src="../assets/poster-icon.png" alt="poster" /> </a>
 - Stefan Balauca, Mark Niklas Müller, **Yuhao Mao**, Maximilian Baader, Marc Fischer, Martin Vechev, [Gaussian Loss Smoothing Enables Certified Training with Tight Convex Relaxations](https://arxiv.org/abs/2403.07095), [Transactions on Machine Learning Research 07/2025](https://jmlr.org/tmlr/) (TMLR'25).
