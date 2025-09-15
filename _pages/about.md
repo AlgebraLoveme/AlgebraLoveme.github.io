@@ -59,10 +59,10 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 
 ## Teaching
 
-- [Rigorous Software Engineering](https://www.sri.inf.ethz.ch/teaching/rse2025) (Bachelor), Spring 2024/2025, ETH Zürich, Teaching Assistant on exercises&lectures.
-- [Reliable and Trustworthy Artificial Intelligence](https://www.sri.inf.ethz.ch/teaching/rtai24) (Master), Fall 2023/2024, ETH Zürich, Teaching Assistant on projects.
-- [Computational Intelligence Lab](https://da.inf.ethz.ch/teaching/2023/CIL/) (Master), Spring 2023, ETH Zürich, Teaching Assistant on exercises.
-- [Introduction to Machine Learning](https://las.inf.ethz.ch/teaching/introml-s23) (Bachelor), Spring 2023, ETH Zürich, Teaching Assistant on exercises.
+- [Rigorous Software Engineering](https://www.sri.inf.ethz.ch/teaching/rse2025) (Bachelor's), Spring 2024/2025, ETH Zürich, TA on exercises and lectures.
+- [Reliable and Trustworthy Artificial Intelligence](https://www.sri.inf.ethz.ch/teaching/rtai24) (Master's), Fall 2023-2025, ETH Zürich, TA on exercises and projects.
+- [Computational Intelligence Lab](https://da.inf.ethz.ch/teaching/2023/CIL/) (Master's), Spring 2023, ETH Zürich, TA on exercises.
+- [Introduction to Machine Learning](https://las.inf.ethz.ch/teaching/introml-s23) (Bachelor's), Spring 2023, ETH Zürich, TA on exercises.
 
 ## Community Contribution
-Review for NeurIPS'24 ([top reviewer award](https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers)), ICLR'25, TMLR, ICML'25, NeurIPS'25.
+Review for NeurIPS (since 2024, acknowledged as [Top Reviewers 2024](https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers)), ICLR (since 2025), TMLR (since 2025), ICML (since 2025).
