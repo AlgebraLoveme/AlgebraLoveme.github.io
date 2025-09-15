@@ -33,7 +33,7 @@ I am interested in making AI generally safe and trustworthy. Meanwhile, I am try
 
 ## Publication
 
-All publications are peer-reviewed in top-tier conferences/journals. Equal contributions are marked by *.
+All publications are peer-reviewed in top-tier conferences/journals. Equal contributions are marked by *. All published works are open-sourced (if applicable) on GitHub and the manuscripts are publicly accessible on Arxiv.
 
 ### Trustworthy Artificial Intelligence
 
@@ -51,7 +51,7 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
 
 ### Artificial Intelligence for Science
 
-- Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://arxiv.org/abs/2502.18636), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24).
+- Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://arxiv.org/abs/2502.18636), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24). [![GitHub](assets/github-mark.png)](https://github.com/ChenhaoChu/RFIC-TL)
 
 ## Talk
 
