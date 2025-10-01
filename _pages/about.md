@@ -73,6 +73,11 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
   </a>
 </span>
 - Maximilian Baader\*, Mark Niklas Müller\*, **Yuhao Mao**, Martin Vechev, [Expressivity of ReLU-Networks under Convex Relaxations](https://arxiv.org/abs/2311.04015), [The Twelfth International Conference on Learning Representations](https://iclr.cc/Conferences/2024) (ICLR'24).
+<span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
+  <a href="../assets/files/Expressivity_ICLR_poster.pdf">
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+  </a>
+</span>
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Connecting Certified and Adversarial Training](https://arxiv.org/abs/2305.04574), [The Thirty-seventh Conference on Neural Information Processing Systems](https://nips.cc/Conferences/2023) (NeurIPS'23).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/taps">
