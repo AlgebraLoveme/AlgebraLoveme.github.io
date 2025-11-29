@@ -137,6 +137,7 @@ I made public some of my cheatsheets, based on standard textbooks and courses pr
 
 - [Advanced Machine Learning](https://github.com/AlgebraLoveme/AML-cheatsheet/blob/main/main.pdf)
 - [Advanced Graph Algorithm and Optimization](https://github.com/AlgebraLoveme/AGAO-cheatsheet/blob/master/main.pdf)
+- [Guarantee for Machine Learning](https://github.com/AlgebraLoveme/GML-cheatsheet/blob/master/main.pdf)
 - [Information Theory](https://github.com/AlgebraLoveme/InfoTheory-cheatsheet/blob/master/main.pdf)
 - [Network Modeling](https://github.com/AlgebraLoveme/NetModel-cheatsheet/blob/master/main.pdf)
 - [Natural Language Processing](https://github.com/AlgebraLoveme/NLP-cheatsheet/blob/main/main.pdf)
