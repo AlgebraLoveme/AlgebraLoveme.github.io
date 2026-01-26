@@ -37,8 +37,9 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 
 ### Trustworthy Artificial Intelligence
 
-- **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), preprint.
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
+- **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
+- Chenhao Sun, **Yuhao Mao**, Martin Vechev, [Dual Randomized Smoothing: Beyond Global Noise Variance](https://arxiv.org/abs/2512.01782), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/acr-weakness">
