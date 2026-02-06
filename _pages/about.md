@@ -50,12 +50,16 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
-<details style="margin-top:0.4em;">
-  <summary><em>Details</em></summary>
-  <div style="margin-top:0.4em;">
-    This paper shows that ACR is a misleading robustness metric for randomized smoothing.
-  </div>
-</details>
+  <details style="margin-left:1.6em; margin-top:0.3em; font-size:0.9em;">
+    <summary style="cursor:pointer; font-style:italic;">
+      Details
+    </summary>
+    <div style="margin-top:0.3em; color:#555;">
+      This paper shows that average certified radius (ACR) is a
+      misleading robustness metric for randomized smoothing. We demonstrate that
+      ACR can be arbitrarily inflated without improving robustness guarantees.
+    </div>
+  </details>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/ctbench">
