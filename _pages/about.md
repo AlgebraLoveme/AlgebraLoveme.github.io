@@ -47,6 +47,12 @@ We examine fundamental limits of a popular family of techniques (''convex relaxa
   </div>
 </details>
 - Chenhao Sun, **Yuhao Mao**, Martin Vechev, [Dual Randomized Smoothing: Beyond Global Noise Variance](https://arxiv.org/abs/2512.01782), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We improve a popular way to give provable robustness guarantees for neural networks that works by adding random noise to an input and checking whether the prediction stays the same. The standard approach uses noise from one fixed Gaussian distribution for every input, but a single fixed choice cannot work well across all situations: some cases need little noise to keep predictions accurate, while others benefit from more noise to obtain stronger guarantees. The key idea is to let another model choose the Gaussian noise level for each input, while still keeping the guarantee valid by requiring that this chosen noise level does not change within the neighborhood where the guarantee is claimed. Based on this, we build a two-step system: one component selects the noise level, and the other makes the final prediction and robustness certificate using that noise. We also show how the same idea can be used as a routing mechanism—selecting among several existing robust models—to better balance accuracy and robustness.
+  </div>
+</details>
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/acr-weakness">
