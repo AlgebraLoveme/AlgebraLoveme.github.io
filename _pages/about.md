@@ -50,9 +50,9 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
-<details style="margin:0.1em 0 0.1em 1.6em;font-size:0.88em;">
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
-  <div style="margin:0.1em 0 0;color:#555;padding:0;">
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
     The commonly used metric to evaluate model robustness can be easily manipulated without improving the robustness. This effect has been introduced into the community. Simple manipulation beats the state-of-the-art on this metric. Better metrics are suggested.
   </div>
 </details>
