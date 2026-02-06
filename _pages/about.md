@@ -53,7 +53,7 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
   <div style="margin:0.08em 0 0;padding:0;color:#555;">
-    The commonly used metric to evaluate model robustness can be easily manipulated without improving the robustness. This effect has been introduced into the community. Simple manipulation beats the state-of-the-art on this metric. Better metrics are suggested.
+We argue that a widely used headline number for comparing certifiably robust neural networks—average certified radius (ACR)—is a poor indicator of real progress. We show that ACR can be made arbitrarily large in theory, even for a trivial classifier given sufficient evaluation budget, and that in realistic settings it disproportionately rewards improvements on easy cases while underweighting hard ones. Empirically, we find that several state-of-the-art training methods increase ACR while consistently reducing robustness on harder inputs, and that simple strategies can achieve state-of-the-art ACR without improving robustness across the full data distribution. We therefore conclude that ACR should be discontinued for evaluation and recommend reporting more informative alternatives.
   </div>
 </details>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
