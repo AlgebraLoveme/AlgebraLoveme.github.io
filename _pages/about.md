@@ -55,9 +55,7 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
       Details
     </summary>
     <div style="margin-top:0.3em; color:#555;">
-      This paper shows that average certified radius (ACR) is a
-      misleading robustness metric for randomized smoothing. We demonstrate that
-      ACR can be arbitrarily inflated without improving robustness guarantees.
+      We show the commonly used metric to evaluate model robustness can be arbitrarily manipulated without improving the robustness. This effect has been introduced in the community. We design an manipulation algorithm, beating the state-of-the-art on this metric without targeting robustness.
     </div>
   </details>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
