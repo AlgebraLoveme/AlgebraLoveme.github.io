@@ -37,6 +37,7 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 
 ### Trustworthy Artificial Intelligence
 
+- Shengpu Wang, **Yuhao Mao**, Yani Zhang, Martin Vechev, [Learning Compact Boolean Networks](https://arxiv.org/abs/2602.05830), preprint
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 - Chenhao Sun, **Yuhao Mao**, Martin Vechev, [Dual Randomized Smoothing: Beyond Global Noise Variance](https://arxiv.org/abs/2512.01782), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
@@ -101,6 +102,7 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
     <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
   </a>
 </span>
+
 
 
 ### Artificial Intelligence for Science
