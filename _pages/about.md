@@ -104,6 +104,12 @@ We address a puzzling issue in methods that aim to train neural networks with pr
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+Interval Bound Propagation (IBP) checks robustness by keeping track of simple minimum and maximum values that each part of a neural network can produce when the input is slightly changed. Although this simplification seems too crude to be reliable, the paper shows that training with IBP gradually reshapes the network so that these rough bounds become much more accurate. The analysis explains that making such bounds perfectly accurate requires very strong constraints on the model, which helps clarify why improving provable robustness often comes at the cost of standard accuracy.
+  </div>
+</details>
 - Maximilian Baader\*, Mark Niklas Müller\*, **Yuhao Mao**, Martin Vechev, [Expressivity of ReLU-Networks under Convex Relaxations](https://arxiv.org/abs/2311.04015), [The Twelfth International Conference on Learning Representations](https://iclr.cc/Conferences/2024) (ICLR'24).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="../assets/files/Expressivity_ICLR_poster.pdf">
