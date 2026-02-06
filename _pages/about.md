@@ -131,6 +131,12 @@ Proving that a neural network is safe or robust often relies on convex relaxatio
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We propose a training method that improves provable robustness by combining two complementary ways of approximating worst-case behavior: fast but overly conservative bound propagation, and targeted adversarial search, which is typically optimistic. The method splits the network into an early feature extractor and a later classifier. It first applies bound propagation to determine the minimum and maximum values that features can take, and then performs adversarial search within these feature-space bounds to identify inputs that are most damaging to the classifier. This produces a substantially tighter estimate of the worst-case loss than either end-to-end bound propagation or end-to-end adversarial search alone. As a result, models trained in this way can be certified using standard verification tools and achieve markedly improved trade-offs between standard accuracy and certifiable robustness.
+  </div>
+</details>
 - Yuyou Gan\*, **Yuhao Mao**\*, Xuhong Zhang, Shouling Ji, Yuwen Pu, Meng Han, Jianwei Yin, Ting Wang, [``Is your explanation stable?'': A Robustness Evaluation Framework for Feature Attribution](https://arxiv.org/abs/2209.01782), [ACM SIGSAC Conference on Computer and Communications Security 2022](https://www.sigsac.org/ccs/CCS2022/) (CCS'22).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/sweet-shark/MeTFA-A-Robustness-Evaluation-Framework-for-Feature-Attribution">
