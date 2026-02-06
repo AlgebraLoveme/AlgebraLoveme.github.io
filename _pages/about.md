@@ -156,7 +156,12 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
     <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
   </a>
 </span>
-
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We examine transfer attacks against real cloud vision services, where an attacker crafts a slightly modified image using a locally available model and hopes the same modification will also fool a different, remote model accessed through an API. A key challenge in studying this in the real world is that cloud services often return multiple labels with confidence scores, and their label sets do not match the labels available to the attacker's local model, so standard academic success measures do not apply; we therefore introduce practical evaluation metrics that handle these mismatches. Using a large systematic study across many attack settings and multiple major platforms, we find that several common lab takeaways do not carry over: choosing a simpler local model does not reliably help, no single local model architecture consistently transfers best, and stronger iterative attack algorithms do not necessarily transfer better than simpler single-step ones. We also identify factors that matter more in practice, such as the choice of attack algorithm and the target platform, the usefulness of larger L2-bounded changes for transfer compared with L-infinity-bounded ones, and the importance of testing on images that are intrinsically hard to classify. Overall, while transfer attacks may look weak on average, the study shows they can be systematically configured to achieve stable success against real deployed services.
+  </div>
+</details>
 
 
 ### Artificial Intelligence for Science
@@ -167,7 +172,12 @@ Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack 
     <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
   </a>
 </span>
-
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We propose a way to reuse a learned design model to speed up circuit redesign when the same millimeter-wave circuit must be adapted to different chip manufacturing processes, such as changes in fabrication technology, metal stack options, or operating frequency. These changes normally require building a new predictive model from scratch, because the underlying design parameters and simulation grids shift across manufacturing settings. Our approach transfers a neural network trained in one manufacturing setting to a new one and adapts it using only a small amount of new simulation data. Experiments show that this transfer greatly accelerates training and improves prediction quality: using only a small fraction of new data with transfer learning can outperform training from scratch with up to 4x more data. This demonstrates that knowledge learned in one chip manufacturing setting can be effectively reused to reduce simulation cost and speed up design iteration in others.
+  </div>
+</details>
 
 ## Talk
 
