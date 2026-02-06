@@ -116,6 +116,12 @@ Interval Bound Propagation (IBP) checks robustness by keeping track of simple mi
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+Proving that a neural network is safe or robust often relies on convex relaxations, which replace the network's nonlinear behavior with a simplified convex approximation that is easier to analyze. This work studies a basic question: even if a network can represent a desired function, can it be represented in a way that these convex approximations can analyze precisely? The results show a sharp split: for one-dimensional functions, more advanced relaxations remove limitations seen in simpler ones and can even admit exponentially more network representations for the same function; however, for multi-dimensional functions, even the strongest commonly used neuron-by-neuron relaxations provably fail to precisely capture some very simple convex and monotone functions. The takeaway is that some accuracy gaps in certified training and verification are not just due to optimization or tuning, but can reflect fundamental limits of widely used convex-approximation tools, motivating richer analyses that reason about multiple neurons jointly.
+  </div>
+</details>
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Connecting Certified and Adversarial Training](https://arxiv.org/abs/2305.04574), [The Thirty-seventh Conference on Neural Information Processing Systems](https://nips.cc/Conferences/2023) (NeurIPS'23).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/taps">
