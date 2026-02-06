@@ -40,6 +40,12 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 - Shengpu Wang, **Yuhao Mao**, Yani Zhang, Martin Vechev, [Learning Compact Boolean Networks](https://arxiv.org/abs/2602.05830), preprint
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We examine fundamental limits of a popular family of techniques (''convex relaxations'') used to prove that neural networks behave reliably under small input changes. These techniques rely on simplifying a complex, nonlinear model into a convex approximation that is easier to analyze. We show that even very powerful versions of these approximations—those that reason about many neurons together—can still fail to prove certain cases, no matter how much computational effort is invested. We then identify two principled ways to overcome this limitation: either by restructuring the network in a mathematically equivalent way, or by breaking the input space into smaller regions that can be analyzed more precisely. Our results clarify both the strengths and the inherent limitations of these verification methods, and point to more reliable directions for future robustness analysis.
+  </div>
+</details>
 - Chenhao Sun, **Yuhao Mao**, Martin Vechev, [Dual Randomized Smoothing: Beyond Global Noise Variance](https://arxiv.org/abs/2512.01782), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
