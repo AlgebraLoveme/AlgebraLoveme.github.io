@@ -77,6 +77,12 @@ We argue that a widely used headline number for comparing certifiably robust neu
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
 </span>
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We build CTBench, a unified open-source library and benchmark for training neural networks that come with provable robustness guarantees against small input perturbations. A major problem in this area is that methods are often reported under incompatible training schedules, verification procedures, and under-tuned hyperparameters, so headline numbers can reflect evaluation choices rather than real algorithmic progress. CTBench enforces fair, apples-to-apples comparisons by standardizing the training and certification setup and systematically tuning hyperparameters across methods; under these fair settings, most methods substantially outperform their originally reported results, and the apparent advantage of several recent methods shrinks once strong baselines are properly implemented and tuned. Using the resulting trained models, we also analyze what certified training changes about model behavior, finding patterns such as smoother optimization landscapes, shared error modes across different robust models, sparser activations, the importance of carefully reducing regularization when targeting stronger guarantees, and evidence that certified training can improve generalization under certain distribution shifts.
+  </div>
+</details>
 - Stefan Balauca, Mark Niklas Müller, **Yuhao Mao**, Maximilian Baader, Marc Fischer, Martin Vechev, [Gaussian Loss Smoothing Enables Certified Training with Tight Convex Relaxations](https://arxiv.org/abs/2403.07095), [Transactions on Machine Learning Research 07/2025](https://jmlr.org/tmlr/) (TMLR'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/stefanrzv2000/GLS-Cert-Training">
