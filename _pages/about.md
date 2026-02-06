@@ -143,6 +143,12 @@ We propose a training method that improves provable robustness by combining two 
     <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
   </a>
 </span>
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+Explanations for neural network predictions often look convincing but can be unreliable: they may change substantially even when the input is very similar and the prediction remains unchanged, or they may be deliberately manipulated. We propose a framework that makes such explanations more stable and explicitly measures how uncertain an explanation is. The approach works by generating many explanations for slightly perturbed inputs and using a robust, median-based statistical test to identify features that are consistently important. This produces clearer explanations that emphasize only well-supported features and provides a principled way to quantify uncertainty. Experiments show that the method improves stability while preserving the connection between explanations and model behavior, with further successful applications to context-bias detection and defenses against attacks that target explanations.
+  </div>
+</details>
 - **Yuhao Mao**, Chong Fu, Saizhuo Wang, Shouling Ji, Xuhong Zhang,
 Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings](https://arxiv.org/abs/2204.04063), [IEEE Symposium on Security & Privacy 2022](https://www.ieee-security.org/TC/SP2022/program-papers.html) (SP'22).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
