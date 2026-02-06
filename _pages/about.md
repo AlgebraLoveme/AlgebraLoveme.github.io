@@ -89,6 +89,12 @@ We build CTBench, a unified open-source library and benchmark for training neura
     <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
   </a>
 </span>
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+We address a puzzling issue in methods that aim to train neural networks with provable guarantees against small input changes: using a more accurate (tighter) mathematical approximation should help, but in practice it often makes training worse than using a cruder approximation. The core reason is that tighter approximations can make the training objective behave erratically, with abrupt jumps and extreme sensitivity, which breaks standard gradient-based optimization. A simple fix is introduced: smooth the training objective by averaging it over small random perturbations, which makes the optimization landscape continuous and well-behaved while still targeting strong guarantees. This idea is instantiated in two practical training approaches: one that does not require backpropagating through the approximation (so it can handle non-differentiable procedures), and a more efficient gradient-based variant when gradients are available. Across a wide range of settings, combining this loss-smoothing strategy with tight approximations yields stronger provable robustness than prior methods trained on the same model families.
+  </div>
+</details>
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Understanding Certified Training with Interval Bound Propagation](https://arxiv.org/abs/2306.10426), [The Twelfth International Conference on Learning Representations](https://iclr.cc/Conferences/2024) (ICLR'24).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/ibp-propagation-tightness">
