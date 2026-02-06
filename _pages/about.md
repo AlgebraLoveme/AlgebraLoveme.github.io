@@ -49,6 +49,10 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
   <a href="../assets/files/ACR_ICML_poster.pdf">
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
+    <details>
+    <summary><em>Details</em></summary>
+    This paper shows that ACR is a misleading robustness metric for randomized smoothing.
+  </details>
 </span>
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
