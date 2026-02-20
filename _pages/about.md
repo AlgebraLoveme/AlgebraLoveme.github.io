@@ -35,10 +35,13 @@ I am interested in making AI generally safe and trustworthy. Meanwhile, I am try
 
 Equal contributions are marked by *. All published works are open-sourced (if applicable) on GitHub and the manuscripts are publicly accessible on Arxiv.
 
-### Trustworthy Artificial Intelligence
+### Preprints
 
-- Shengpu Wang, **Yuhao Mao**, Yani Zhang, Martin Vechev, [Learning Compact Boolean Networks](https://arxiv.org/abs/2602.05830), preprint
+- Shengpu Wang, **Yuhao Mao**, Yani Zhang, Martin Vechev, [Learning Compact Boolean Networks](https://arxiv.org/abs/2602.05830), preprint.
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
+
+### Reliable AI
+
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
@@ -164,7 +167,7 @@ We examine transfer attacks against real cloud vision services, where an attacke
 </details>
 
 
-### Artificial Intelligence for Science
+### AI for Science
 
 - Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://arxiv.org/abs/2502.18636), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24). 
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
