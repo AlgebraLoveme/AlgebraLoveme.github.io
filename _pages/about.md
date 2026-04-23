@@ -45,9 +45,11 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/yanizhang233/Multi-Neuron-Expressivity">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/lean-mark.png" alt="Formal proof in Lean" style="height:1em;"/>
   </a>
-  <a href="https://github.com/yanizhang233/Multi-Neuron-Expressivity" style="font-size:0.95em;">Formal proof in Lean</a>
+  <a href="../assets/files/multineuron_ICLR_poster.pdf">
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+  </a>
 </span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
@@ -56,6 +58,11 @@ We examine fundamental limits of a popular family of techniques (''convex relaxa
   </div>
 </details>
 - Chenhao Sun, **Yuhao Mao**, Martin Vechev, [Dual Randomized Smoothing: Beyond Global Noise Variance](https://arxiv.org/abs/2512.01782), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
+<span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
+  <a href="../assets/files/DualRS_ICLR_poster.pdf">
+    <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
+  </a>
+</span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
   <div style="margin:0.08em 0 0;padding:0;color:#555;">
@@ -65,7 +72,7 @@ We improve a popular way to give provable robustness guarantees for neural netwo
 - Chenhao Sun\*, **Yuhao Mao**\*, Mark Niklas Müller, Martin Vechev, [Average Certified Radius is a Poor Metric for Randomized Smoothing](http://arxiv.org/abs/2410.06895), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/acr-weakness">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
   <a href="../assets/files/ACR_ICML_poster.pdf">
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
@@ -80,7 +87,7 @@ We argue that a widely used headline number for comparing certifiably robust neu
 - **Yuhao Mao**, Stefan Balauca, Martin Vechev, [CTBENCH: A Library and Benchmark for Certified Training](https://arxiv.org/abs/2406.04848), [The Forty-Second International Conference on Machine Learning](https://icml.cc/Conferences/2025) (ICML'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/ctbench">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
   <a href="../assets/files/CTBench_ICML_poster.pdf">
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
@@ -95,7 +102,7 @@ We build CTBench, a unified open-source library and benchmark for training neura
 - Stefan Balauca, Mark Niklas Müller, **Yuhao Mao**, Maximilian Baader, Marc Fischer, Martin Vechev, [Gaussian Loss Smoothing Enables Certified Training with Tight Convex Relaxations](https://arxiv.org/abs/2403.07095), [Transactions on Machine Learning Research 07/2025](https://jmlr.org/tmlr/) (TMLR'25).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/stefanrzv2000/GLS-Cert-Training">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
 </span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
@@ -107,7 +114,7 @@ We address a puzzling issue in methods that aim to train neural networks with pr
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Understanding Certified Training with Interval Bound Propagation](https://arxiv.org/abs/2306.10426), [The Twelfth International Conference on Learning Representations](https://iclr.cc/Conferences/2024) (ICLR'24).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/ibp-propagation-tightness">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
   <a href="../assets/files/PI_ICLR_poster.pdf">
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
@@ -134,7 +141,7 @@ Proving that a neural network is safe or robust often relies on convex relaxatio
 - **Yuhao Mao**, Mark Niklas Müller, Marc Fischer, Martin Vechev, [Connecting Certified and Adversarial Training](https://arxiv.org/abs/2305.04574), [The Thirty-seventh Conference on Neural Information Processing Systems](https://nips.cc/Conferences/2023) (NeurIPS'23).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/eth-sri/taps">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
   <a href="../assets/files/TAPS_NIPS_poster.pdf">
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
@@ -149,7 +156,7 @@ We propose a training method that improves provable robustness by combining two 
 - Yuyou Gan\*, **Yuhao Mao**\*, Xuhong Zhang, Shouling Ji, Yuwen Pu, Meng Han, Jianwei Yin, Ting Wang, [``Is your explanation stable?'': A Robustness Evaluation Framework for Feature Attribution](https://arxiv.org/abs/2209.01782), [ACM SIGSAC Conference on Computer and Communications Security 2022](https://www.sigsac.org/ccs/CCS2022/) (CCS'22).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/sweet-shark/MeTFA-A-Robustness-Evaluation-Framework-for-Feature-Attribution">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
 </span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
@@ -162,7 +169,7 @@ Explanations for neural network predictions often look convincing but can be unr
 Zhenguang Liu, Jun Zhou, Alex X. Liu, Raheem Beyah, Ting Wang, [Transfer Attack Revisited: A Large-Scale Empirical Study in Real Computer Vision Settings](https://arxiv.org/abs/2204.04063), [IEEE Symposium on Security & Privacy 2022](https://www.ieee-security.org/TC/SP2022/program-papers.html) (SP'22).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/AlgebraLoveme/Transfer-Attacks-Revisited-A-Large-Scale-Empirical-Study-in-Real-Computer-Vision-Settings">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
 </span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
@@ -178,7 +185,7 @@ We examine transfer attacks against real cloud vision services, where an attacke
 - Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://arxiv.org/abs/2502.18636), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24). 
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
   <a href="https://github.com/ChenhaoChu/RFIC-TL">
-    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
   </a>
 </span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
