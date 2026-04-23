@@ -31,9 +31,15 @@ I solemnly swear that I put 120% effort into making the proofs in all my publica
 
 I am interested in making AI generally safe and trustworthy. Meanwhile, I am trying to use the current "unsafe" AI to do good things, e.g., advancing various science domains.
 
+## PIRA: My co-evolving research agent
+
+I am also building [PIRA](https://github.com/AlgebraLoveme/PIRA), short for PI Research Assistant. In a sense, PIRA is myself in agent form: warm, honest about uncertainty, and evidence-first when evidence matters. It is designed for research, writing, coding, learning, practical problem-solving, and emotional support. PIRA has become deeply integrated into my own research loop and has greatly boosted my productivity.
+
+Unlike many heavy agent frameworks, PIRA is intentionally simple, text-first, and lightweight. The goal is to be genuinely useful, easy to inspect, easy to customize, and pleasant to work with. If this sounds like something you may want for your own research or daily work, feel free to take a look.
+
 ## Publication
 
-Equal contributions are marked by *. All published works are open-sourced (if applicable) on GitHub and the manuscripts are publicly accessible on Arxiv.
+Equal contributions are marked by *. All published works are open-sourced (if applicable) on GitHub and the manuscripts are publicly accessible on Arxiv. Some theoretical works have an accompanying formal proof in LEAN.
 
 ### Preprints
 
