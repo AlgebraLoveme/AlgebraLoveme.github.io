@@ -43,6 +43,12 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 ### Reliable AI
 
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
+<span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
+  <a href="https://github.com/yanizhang233/Multi-Neuron-Expressivity">
+    <img src="../assets/github-mark.png" alt="GitHub" style="height:1em;"/>
+  </a>
+  <a href="https://github.com/yanizhang233/Multi-Neuron-Expressivity" style="font-size:0.95em;">Formal proof in Lean</a>
+</span>
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
   <div style="margin:0.08em 0 0;padding:0;color:#555;">
