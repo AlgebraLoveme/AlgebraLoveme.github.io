@@ -65,6 +65,9 @@ We examine fundamental limits of a popular family of techniques (''convex relaxa
 </details>
 - Chenhao Sun, **Yuhao Mao**, Martin Vechev, [Dual Randomized Smoothing: Beyond Global Noise Variance](https://arxiv.org/abs/2512.01782), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
+  <a href="https://github.com/eth-sri/Dual-Randomized-Smoothing">
+    <img src="../assets/github-mark.png" alt="Code" style="height:1em;"/>
+  </a>
   <a href="../assets/files/DualRS_ICLR_poster.pdf">
     <img src="../assets/poster-icon.png" alt="Poster" style="height:1em;"/>
   </a>
