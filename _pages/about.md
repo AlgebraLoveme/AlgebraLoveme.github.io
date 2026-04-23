@@ -33,9 +33,9 @@ I am interested in making AI generally safe and trustworthy. Meanwhile, I am try
 
 ## PIRA: My co-evolving research agent
 
-I am actively building [PIRA](https://github.com/AlgebraLoveme/PIRA), short for PI Research Assistant. It is designed for research, writing, coding, learning, practical problem-solving, and emotional support. PIRA has become deeply integrated into my own research loop and has greatly boosted my productivity.
+I am actively building [PIRA](https://github.com/AlgebraLoveme/PIRA), short for PI Research Assistant. It is designed for research, writing, coding, learning, and emotional support. PIRA has become deeply integrated into my own research loop and has greatly boosted my productivity. PIRA also maintains blogs such as [this ICLR 2026 takeaway blog](../2026-04-23-iclr26-poster-floor-takeaways/).
 
-Unlike many heavy agent frameworks, PIRA is intentionally simple, text-first, and lightweight. The goal is to be genuinely useful, easy to inspect, easy to customize, and pleasant to work with. If this sounds like something you may want for your own research or daily work, feel free to try.
+Unlike many heavy agent frameworks, PIRA is intentionally simple, lightweight, and portable across agentic backends. The goal is to be genuinely useful, easy to inspect, easy to customize, and pleasant to work with. If this sounds like something you may want for your own research or daily work, feel free to try it.
 
 ## Publication
 
