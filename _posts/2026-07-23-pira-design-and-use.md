@@ -205,18 +205,6 @@ In automatic reports, `pira_ctx` turns unsafe terminal controls into visible tex
 
 Give the agent only the access it needs. Run unfamiliar programs in a sandbox. Protect passwords and API keys. Require human approval for actions outside the local project. Keep email, messaging, publishing, deployment, financial, and account systems behind human approval and separate credentials.
 
-## How to use PIRA
-
-Everyday use is simple:
-
-1. Give PIRA the real goal, limits, and desired result.
-2. Let the core rules guide normal research and tool use.
-3. Ask for the evidence when a conclusion matters.
-4. Correct assumptions and approve important choices.
-5. Save checked project facts for future sessions.
-
-The [PIRA repository](https://github.com/AlgebraLoveme/PIRA) contains the project, setup, and tool help.
-
 ## Conclusion
 
 Researchers should gain useful help from strong agents while keeping the work simple and visible.
@@ -224,3 +212,5 @@ Researchers should gain useful help from strong agents while keeping the work si
 PIRA uses clear rules, focused task instructions, small tools, and three levels of memory. Uncertainty remains. These parts make the work easier to check, continue, and correct.
 
 I want to extend a researcher's attention while the researcher directs the important choices.
+
+The [PIRA repository](https://github.com/AlgebraLoveme/PIRA) contains the source, setup, and tool help.
