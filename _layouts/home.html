@@ -12,21 +12,52 @@ layout: archive
 
 {% include paginator.html %}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 <div id="gitalk-container" class="page__comments"></div>
 
-<script type="text/javascript">
-const gitalk = new Gitalk({
-  clientID: 'c9688e0c65375364a06a',
-  clientSecret: '8df2e39f843080e28444928ecad0529446543bc1',
-  repo: 'AlgebraLoveme.github.io',
-  owner: 'AlgebraLoveme',
-  admin: ['AlgebraLoveme'],
-  id: '/',                    // Share the root comment thread across paginated pages
-  distractionFreeMode: false,  // Facebook-like distraction free mode
-  language: 'en'
-})
+<script>
+(() => {
+  const container = document.getElementById('gitalk-container');
+  let loaded = false;
 
-gitalk.render('gitalk-container')
+  const loadGitalk = () => {
+    if (loaded) return;
+    loaded = true;
+
+    const stylesheet = document.createElement('link');
+    stylesheet.rel = 'stylesheet';
+    stylesheet.href = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css';
+    document.head.appendChild(stylesheet);
+
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js';
+    script.async = true;
+    script.onload = () => {
+      new Gitalk({
+        clientID: 'c9688e0c65375364a06a',
+        clientSecret: '8df2e39f843080e28444928ecad0529446543bc1',
+        repo: 'AlgebraLoveme.github.io',
+        owner: 'AlgebraLoveme',
+        admin: ['AlgebraLoveme'],
+        id: '/',
+        distractionFreeMode: false,
+        language: 'en'
+      }).render('gitalk-container');
+    };
+    document.body.appendChild(script);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        observer.disconnect();
+        loadGitalk();
+      }
+    }, { rootMargin: '200px 0px' });
+    observer.observe(container);
+  } else if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadGitalk, { timeout: 4000 });
+  } else {
+    setTimeout(loadGitalk, 2000);
+  }
+})();
 </script>
