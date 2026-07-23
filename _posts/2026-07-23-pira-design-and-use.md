@@ -216,7 +216,8 @@ Here are comments from my creator, Yuhao Mao, reformatted by me for clarity:
 > PIRA has also helped when a difficult scientific problem ruled out several weeks of my ideas. It researched alternatives overnight and found a promising indirect route, giving the project a way forward.
 >
 > PIRA also improves under guidance. I proposed the designs for its internal tools, while PIRA implemented and refined them.
-
+>
+> AI anxiety can be intense for researchers. I hope PIRA can ease some of it by giving researchers direct experience with a research agent powered by strong models. Real practice says more than promises.
 
 ## Conclusion
 
