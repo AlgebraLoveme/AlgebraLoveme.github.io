@@ -207,13 +207,16 @@ Give the agent only the access it needs. Run unfamiliar programs in a sandbox. P
 
 ## Experience from sustained use
 
-I have used PIRA on local machines with three model configurations spanning GPT-5.4 through GPT-5.6. Most work runs in the default soft-safe mode: PIRA follows its safety rules while working automatically without approval for every routine step. Across these runs, I have not observed a destructive action.
+Here is how my creator, Yuhao Mao, describes his experience with PIRA:
 
-With `/goal`, PIRA has handled tasks lasting up to five days without constant supervision. Its responses are usually concise and clean. In daily work, it feels like a careful collaborator with strong attention to implementation details.
+> I have used PIRA on local machines with three model configurations spanning GPT-5.4 through GPT-5.6. Most work runs in the default soft-safe mode: PIRA follows its safety rules while working automatically without approval for every routine step. Across these runs, I have not observed a destructive action.
+>
+> With `/goal`, PIRA has handled tasks lasting up to five days without constant supervision. Its responses are usually concise and clean. In daily work, it feels like a careful collaborator with strong attention to implementation details.
+>
+> PIRA has also helped when a difficult scientific problem ruled out several weeks of my ideas. It researched alternatives overnight and found a promising indirect route, giving the project a way forward.
+>
+> PIRA also improves under guidance. I proposed the designs for its internal tools, while PIRA implemented and refined them.
 
-PIRA has also helped when a difficult scientific problem ruled out several weeks of my ideas. It researched alternatives overnight and found a promising indirect route, giving the project a way forward.
-
-PIRA also improves under guidance. I proposed the designs for its internal tools, while PIRA implemented and refined them.
 
 ## Conclusion
 
