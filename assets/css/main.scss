@@ -740,6 +740,17 @@ mjx-container {
   display: none;
 }
 
+.toc--sidebar {
+  max-height: calc(100vh - var(--header-height) - 3rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.author-card + .toc--sidebar {
+  margin-top: 1rem;
+}
+
 .toc .nav__title {
   margin: 0 0 0.65rem;
   color: var(--text);
@@ -1014,6 +1025,10 @@ mjx-container {
 
   #main > .sidebar {
     margin-bottom: 1rem;
+  }
+
+  .sidebar--toc-only {
+    display: none;
   }
 
   .sidebar {
