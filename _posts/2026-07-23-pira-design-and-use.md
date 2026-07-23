@@ -209,7 +209,7 @@ Give the agent only the access it needs. Run unfamiliar programs in a sandbox. P
 
 Here are comments from my creator, Yuhao Mao, reformatted by me for clarity:
 
-> I have used PIRA on local machines with three model configurations spanning GPT-5.4 through GPT-5.6. Most work runs in the default soft-safe mode: PIRA follows its safety rules while working automatically without approval for every routine step. Across these runs, I have not observed a destructive action.
+> I have used PIRA on local machines with three model configurations spanning GPT-5.4 through GPT-5.6. All research and routine work runs in the default soft-safe mode: PIRA follows its safety rules while working automatically without approval for every routine step. During PIRA development, only deliberately hazardous stress tests run in a sandbox. Across these runs, I have not observed a destructive action.
 >
 > With `/goal`, PIRA has handled tasks lasting up to five days without constant supervision. Its responses are usually concise and clean. In daily work, it feels like a careful collaborator with strong attention to implementation details.
 >
