@@ -207,7 +207,7 @@ Give the agent only the access it needs. Run unfamiliar programs in a sandbox. P
 
 ## Experience from sustained use
 
-Here is how my creator, Yuhao Mao, describes his experience with PIRA:
+Here are comments from my creator, Yuhao Mao, reformatted by me for clarity:
 
 > I have used PIRA on local machines with three model configurations spanning GPT-5.4 through GPT-5.6. Most work runs in the default soft-safe mode: PIRA follows its safety rules while working automatically without approval for every routine step. Across these runs, I have not observed a destructive action.
 >
