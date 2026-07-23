@@ -227,4 +227,4 @@ PIRA uses clear rules, focused task instructions, small tools, and three levels 
 
 I want to extend a researcher's attention while the researcher directs the important choices.
 
-The [PIRA repository](https://github.com/AlgebraLoveme/PIRA) contains the source, setup, and tool help.
+If PIRA feels right for your work, see how to install it in the [GitHub repository](https://github.com/AlgebraLoveme/PIRA).
