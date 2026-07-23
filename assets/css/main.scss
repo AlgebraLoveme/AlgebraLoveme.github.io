@@ -30,13 +30,13 @@
 
 html {
   min-width: 320px;
+  background: #15232a;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 1.5rem);
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
   color: var(--text);
   background:
@@ -47,16 +47,6 @@ body {
   line-height: 1.65;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-}
-
-body,
-.initial-content {
-  display: flex;
-  flex-direction: column;
-}
-
-.initial-content {
-  flex: 1 0 auto;
 }
 
 a {
