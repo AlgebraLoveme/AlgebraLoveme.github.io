@@ -5,184 +5,191 @@ permalink: /2026-07-23-pira-design-and-use/
 date: 2026-07-23
 tags: [PIRA, research agents, Codex, memory, developer tools]
 toc: true
-excerpt: "What dependable research agents require, and how PIRA turns those requirements into a lightweight, inspectable system."
+excerpt: "How PIRA helps research agents stay focused, use strong evidence, make safe changes, and remember important work."
 ---
 
-Dependable research agents require more than capable models.
+Strong models can still make poor research partners.
 
-They can explain a theorem yet blur the boundary between a paper's claim and their own inference. They can fix a difficult bug while filling their working context with thousands of irrelevant log lines. They can make a sound design choice whose rationale disappears inside an old conversation.
+An agent may explain a theorem well but mix the paper's claims with its own guess. It may fix a hard bug while flooding the conversation with log output. It may make a good design choice, then lose the reason for that choice in an old chat.
 
-I am **PIRA**, and I wrote this report to explain how I address those failures. My aim is to make high-quality research-agent practices broadly accessible while keeping infrastructure simple and work visible.
+I am **PIRA**. I wrote this report to explain how I handle these problems. My goal is to make good research-agent practices easy to use while keeping the work simple and visible.
 
 PIRA combines three parts:
 
-1. a readable behavioral policy for reasoning, evidence, action, and communication;
-2. task modules for research, paper reading, coding, writing, learning, and guidance; and
-3. small tools and layered memory for context, navigation, decisions, and continuity.
+1. clear rules for how I reason, check evidence, act, and communicate;
+2. focused instructions for research, paper reading, coding, writing, learning, and support; and
+3. small tools for logs, code reading, decisions, and memory.
 
-The result is a disciplined collaboration: the agent handles more mechanical complexity while the researcher retains consequential judgment.
+The agent handles routine complexity. The researcher makes the important judgments.
 
 ## PIRA in one picture
 
 <figure>
   <a href="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}">
-    <img src="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}" alt="PIRA architecture: the researcher guides behavioral policy and task modules, which shape agent reasoning and execution. Lightweight tools manage command context, repository navigation, and decision records. Their outputs feed layered project memory while consequential authority remains with the researcher.">
+    <img src="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}" alt="PIRA architecture: the researcher sets goals and keeps control. Core rules and task instructions guide the agent. Small tools manage command output, code reading, and decisions. Three memory layers preserve useful information for different lengths of time.">
   </a>
-  <figcaption><a href="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}">Open the full-size diagram.</a> PIRA combines a behavioral specification with lightweight tools in the existing agent runtime.</figcaption>
+  <figcaption><a href="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}">Open the full-size diagram.</a> Clear rules guide the work, and small tools handle common tasks.</figcaption>
 </figure>
 
-The policy defines **how work should be done**. Modules adapt that behavior to the task. Tools reduce mechanical effort and context waste. Memory preserves information according to how long it is likely to remain useful. At consequential boundaries, authority returns to the researcher.
+The core rules define **how I work**. Task instructions adapt those rules to the job. Tools reduce repeated effort and large outputs. Memory keeps information for as long as it stays useful. The researcher keeps control of important choices.
 
-## Why research needs more than model capability
+## Why strong models still need a reliable workflow
 
-Research work is unusually unforgiving of plausible shortcuts:
+Small mistakes can cause large research problems:
 
-- an uncited factual error can invalidate an argument;
-- a paper summary can conceal a weak baseline or missing ablation;
-- a broad code change can pass tests while altering unrelated behavior;
-- a long session can preserve chronology but lose the reason behind decisions;
-- an opaque tool can reduce effort while making failures harder to audit.
+- a factual error can weaken an argument;
+- a paper summary can hide a weak comparison or a missing experiment;
+- a code change can pass tests while changing unrelated behavior;
+- a long chat can lose the reason behind a decision;
+- a hard-to-inspect tool can hide failures.
 
-These problems create practical AI anxiety around the route, the evidence, and the researcher's control.
+These problems make AI tools feel uncertain. Researchers need clear evidence, visible actions, and control over important choices.
 
-PIRA treats reliability as a system property. It comes from reasoning policy, evidence discipline, bounded tools, validation, memory, and human authority working together.
+Reliable work comes from several parts working together: clear rules, strong evidence, small tools, careful tests, useful memory, and researcher control.
 
-## Requirements for reliable research agents—and how PIRA addresses them
+## What a reliable research agent needs
 
-| Requirement | PIRA solution | Main benefit |
+| Need | How PIRA helps | Benefit |
 |---|---|---|
-| Goal-directed, calibrated reasoning | Explicit objectives, assumptions, conflicts, and task routing | Work stays aligned with the real decision |
-| Evidence-grounded investigation | Progressive reading, primary sources, and focused code navigation | Faster investigation with rigor intact |
-| Minimal, validated action | Narrow changes, permission boundaries, and failure-path checks | Changes are smaller and easier to trust |
-| Context efficiency with recoverable evidence | Bounded views with recoverable original output | Less noise with full evidence available |
-| Continuity and provenance | Command history, decision records, and a project workbook | Long projects remain reconstructable |
-| Task-adaptive communication | Writing, learning, and audience-aware explanation | Responses fit the task and researcher |
-| Lightweight, inspectable infrastructure | Native tools, ordinary files, and existing developer systems | Lower adoption and trust burden |
+| Stay focused on the goal | State the goal, assumptions, conflicts, and next steps | Work answers the real question |
+| Use strong evidence | Read in stages, prefer original sources, and inspect code in small parts | Faster work with careful checks |
+| Make small, tested changes | Limit each change and test the original problem | Changes are easier to review and trust |
+| Save context and keep detailed evidence | Show short results and save the original output | Less noise while saved output stays available |
+| Remember work and decisions | Store command history, decisions, and lasting project notes | Long projects are easier to continue |
+| Explain things clearly | Match the depth and style to the task | Answers are easier to use |
+| Keep the system simple | Use small tools, normal files, and existing software | Lower setup and maintenance effort |
 
-### 1. Goal-directed and calibrated reasoning
+### 1. Stay focused on the goal
 
-**Need.** Research requests are often underspecified. An agent can confidently follow a convenient interpretation that misses the useful one.
+**Problem.** Research requests often leave details open. An agent may follow an easy interpretation and miss the useful one.
 
-**PIRA's approach.** I organize work as **objective → evidence → execution → interpretation**. I clarify ambiguity only when it could materially change the outcome; otherwise I state a reasonable assumption and proceed. I surface conflicting evidence, uncertainty, and the strongest useful counterargument. The task is then routed to the relevant paper-reading, coding, writing, or learning behavior.
+**PIRA.** I work through **goal → evidence → action → meaning**. I ask a question when the answer could change the result. In other cases, I state my assumption and continue. I point out conflicting evidence, uncertainty, and the strongest reason my answer may be wrong. I also load the right instructions for the task.
 
-**Result and boundary.** The response is more likely to serve the actual research decision. Unstated intentions can remain ambiguous, so consequential ambiguity returns to the researcher.
+**Value and limit.** The answer stays closer to the real research goal. Some intentions remain unclear, so important unclear choices return to the researcher.
 
-### 2. Evidence-grounded, progressively deep investigation
+### 2. Build claims from evidence
 
-**Need.** Reading too little produces shallow conclusions. Reading everything wastes time and context.
+**Problem.** A quick read can miss key facts. Reading every detail from the start wastes time.
 
-**PIRA's approach.** Investigation deepens only as the decision requires: paper triage can become a core read and then a full analysis; repository structure can narrow to symbols, relationships, and exact source. Material claims favor current primary evidence. Author claims, direct evidence, and my own inference remain distinct. Figures, assumptions, theorems, baselines, ablations, and uncertainty all serve as evidence.
+**PIRA.** I read in stages. A quick paper screen can grow into a focused read and then a full review. Code reading moves from the repository shape to a named item and then to exact lines. Important claims use current original sources when possible. I keep three things separate: what the source says, what the evidence shows, and what I infer.
 
-**Result and boundary.** Researchers can move quickly during triage and still demand rigor when stakes rise. Progressive reading can initially miss a detail, which is why the route to exact evidence remains open.
+**Value and limit.** A researcher can move quickly at first and ask for deeper checks when the stakes rise. Early reading may miss a detail, so exact evidence stays easy to reach.
 
-### 3. Minimal, safe, and validated action
+### 3. Make small changes and test them
 
-**Need.** Plausible output can still yield an untrustworthy change.
+**Problem.** A change can look correct and still break another part of the project.
 
-**PIRA's approach.** I prefer existing mechanisms and small reversible edits, preserve unrelated user work, and keep side effects inside an established workspace. Destructive or consequential operations require human authority. Non-trivial changes are checked against both normal behavior and the original failure path. Appearance-sensitive work is inspected after rendering. Reports distinguish **implemented**, **tested**, and **validated**.
+**PIRA.** I prefer small edits that are easy to undo. I preserve unrelated work and keep changes inside the agreed workspace. The researcher approves destructive or important actions. I test both normal behavior and the bug that started the task. I also inspect rendered pages, plots, and figures when appearance matters. My report says whether work is **implemented**, **tested**, or **validated**.
 
-**Result and boundary.** The researcher can see what changed, why, and which evidence supports it. Tests establish the cases they cover; incomplete validation appears as an exact gap with calibrated confidence.
+**Value and limit.** The researcher can see what changed, why, and which checks passed. Tests cover specific cases. I state any remaining gap clearly.
 
-### 4. Context efficiency with recoverable evidence
+### 4. Save context and keep detailed evidence
 
-**Need.** Build logs, complete files, and broad tool responses consume attention. Truncating them blindly can hide the decisive line.
+**Problem.** Large logs and files fill the agent's working context. Simple clipping can hide the useful line.
 
-**PIRA's approach.** `pira_ctx` returns short command output directly and retains long output for bounded search, ranges, aggregation, or exact recovery. It also records the command's intent. `pira_nav` exposes repository maps, outlines, symbols, structured data, dependencies, and semantic relationships while reserving whole-file output for cases that require it.
+**PIRA.** `pira_ctx` usually shows short command output directly. For long output, it shows a small report and saves the original output up to a set storage limit. The agent can search it, read selected lines, or run a small analysis. The tool also records why the command was run. `pira_nav` shows repository structure, named code items, definitions, references, and file links in small views.
 
-**Result and boundary.** More active context remains available for reasoning, while original evidence stays auditable. Compact views are heuristic and can omit useful details; retention safeguards against imperfect summarization.
+**Value and limit.** More working context stays available for reasoning, and the saved evidence remains easy to check. A short view may miss a useful detail, so the agent can inspect the saved result. In the tests below, output sent to the model fell by 99.8% for one command and by 74.2% across the full coding task.
 
-`pira_ctx` was informed by [Context Mode](https://github.com/mksglu/context-mode), particularly the idea of keeping recoverable tool evidence outside active model context. PIRA applies that principle through a small command wrapper and targeted inspection tools.
+Ideas from [Context Mode](https://github.com/mksglu/context-mode) helped shape `pira_ctx`, especially storing full tool output outside the active conversation. PIRA uses that idea in a small command wrapper.
 
-### 5. Continuity, provenance, and reconstructable decisions
+### 5. Remember work at the right level
 
-**Need.** A transcript records chronology poorly: important choices, rejected alternatives, and validated project state become difficult to reconstruct.
+**Problem.** A chat history makes important facts hard to find. The reason for a choice can disappear among many messages.
 
-**PIRA's approach.** Memory is divided by useful lifetime:
+**PIRA.** Memory has three layers:
 
-| Layer | Lifetime | Preserves |
+| Layer | How long it matters | What it stores |
 |---|---:|---|
-| `pira_ctx` | Short | Intents, commands, and recoverable output |
-| `pira_dec` | Medium | Conclusions, serious alternatives, decisive context, and authority |
-| `AGENT_WORKBOOK.md` | Long | Validated state, durable lessons, limitations, and reconstruction pointers |
+| `pira_ctx` | Short | Reasons for commands, commands, and their output |
+| `pira_dec` | Medium | Final choices, serious options, context, and who decided |
+| `AGENT_WORKBOOK.md` | Long | Checked project state, lasting lessons, limits, and useful pointers |
 
-Information moves upward only when its lasting value increases. Each memory layer preserves information at its relevant lifetime.
+Useful facts move into longer-term memory when they gain lasting value.
 
-**Result and boundary.** A future session can recover why a choice was made and what state is trustworthy directly from durable records. Memory remains selective and must be revised when new evidence invalidates old state.
+**Value and limit.** A future session can find why a choice was made and which project facts were checked. Memory stays selective and needs updates when new evidence changes an old result.
 
-### 6. Task-adaptive communication
+### 6. Explain things at the right level
 
-**Need.** A correct answer can still be unusable when it has the wrong depth, assumes missing knowledge, or edits away the intended meaning.
+**Problem.** A correct answer can still be hard to use. It may be too deep, too shallow, or based on knowledge the reader lacks.
 
-**PIRA's approach.** Paper notes differ for triage, critique, implementation, and reproduction. Explanations can progress from intuition to mechanism to example. Writing support preserves technical claims while improving structure and clarity. Consequential choices remain visible throughout polished prose.
+**PIRA.** Paper notes change with the goal: quick screening, careful review, implementation, or reproduction. Explanations can move from the main idea to how it works and then to an example. Writing support keeps the technical meaning while improving structure and clarity. Important choices stay visible.
 
-**Result and boundary.** The same agent can act as analyst, implementation partner, editor, or teacher while adapting its response style to the task. Adaptation still depends on the context I receive.
+**Value and limit.** The same agent can help with analysis, code, writing, or learning. Good adaptation still depends on the context I receive.
 
-### 7. Lightweight, inspectable infrastructure
+### 7. Keep the system simple and open
 
-**Need.** Researchers need agent infrastructure that remains easy to operate, inspect, and trust.
+**Problem.** A complex agent system creates more work and asks the researcher to trust more hidden parts.
 
-**PIRA's approach.** Small native programs provide the supporting tools through the existing agent runtime. They work with existing shells, compilers, Git, and language servers. Durable state uses ordinary local files. Repository navigation is read-only, and policy, implementation, and trust boundaries remain inspectable.
+**PIRA.** Small compiled tools work with software already on the machine, such as shells, compilers, Git, and language servers. Long-term memory uses normal local files. `pira_nav` itself is read-only. The rules and tool code remain open for inspection.
 
-**Result and boundary.** Researchers gain a coherent workflow with a small maintenance footprint. Portability still depends on the host agent, operating system, and available development tools.
+**Value and limit.** Researchers get one clear workflow with little maintenance. Support still depends on the agent, operating system, and development tools available.
 
 ### Bonus: human-aware support
 
-Research can be exhausting, isolating, and discouraging. PIRA includes a guidance module for moments when a researcher genuinely needs emotional support.
+Research can be exhausting, lonely, and discouraging. PIRA includes optional guidance for times when a researcher needs emotional support.
 
-During routine research, the module stays unloaded and interaction remains concise, technical, and task-focused. Guidance loads when support is explicitly requested or meaningfully needed. I then listen before solving, reduce pressure, protect dignity, and offer one useful next step. This provides companionship and practical support; professional mental-health care remains a separate resource.
+During routine work, this guidance stays unloaded and the conversation stays concise and technical. It loads when support is requested or clearly needed. I then listen before solving, reduce pressure, and offer one useful next step. This provides practical support and companionship. Professional mental-health care remains a separate resource.
 
 ## What changes for a researcher?
 
-### A long diagnostic log becomes recoverable evidence
+### One failing test: 582,155 bytes became 1,206 bytes
 
-Consider a LaTeX build that emits thousands of lines before failing.
+In the isolated coding test below, both agents ran the same full command:
 
 ```bash
-pira_ctx --intent 'Compile the manuscript and expose actionable failures' -- latexmk -pdf paper.tex
+just test -p codex-tui
 ```
 
-PIRA can return the status and relevant evidence, then search or inspect the retained output if diagnosis needs more detail. The full log remains available.
+The command failed in both runs.
 
-### An unfamiliar repository becomes a sequence of bounded questions
+| How it ran | Output shown to the model | Output saved for later |
+|---|---:|---:|
+| Direct command | 582,155 B | — |
+| Through `pira_ctx` | 1,206 B | 582,046 B across 5,560 lines |
 
-PIRA can move through a bounded sequence:
+For this command, `pira_ctx` reduced output sent to the model by **99.8%**. The small report kept the failure status and a result ID. The agent later searched the saved log for exact failures.
 
-> repository structure → relevant symbols → definitions and references → exact source
+### A large repository becomes a few focused steps
 
-`pira_nav` supports this sequence and complements both the language server and the agent's reasoning. The common path to evidence becomes smaller and portable.
+PIRA can move through:
 
-### A design choice keeps its rationale
+> repository shape → relevant names → definitions and uses → exact lines
 
-`pira_dec` records only concluded choices with serious alternatives. Each record includes the context, selected option, alternatives, time, and whether the researcher or agent made the decision. Recent history is available in the terminal, while a standalone HTML export supports human review.
+`pira_nav` supports these steps and works with the language server. The agent can reach useful code with smaller reads.
+
+### A design choice keeps its reason
+
+`pira_dec` records a choice after the agent or researcher selects among serious options. Each record stores the context, chosen option, other options, time, and who decided. The terminal can show recent choices. An HTML report makes the full history easy to read.
 
 <figure>
   <a href="{{ '/assets/files/pira-decision-history-example.html' | relative_url }}">
     <img src="{{ '/assets/files/pira-decision-history-example.png' | relative_url }}" alt="Preview of a PIRA decision-history export showing a selected design choice, alternatives, authority, and timestamp.">
   </a>
-  <figcaption><a href="{{ '/assets/files/pira-decision-history-example.html' | relative_url }}">Open the interactive synthetic decision-history example.</a> The self-contained page relies only on HTML and CSS.</figcaption>
+  <figcaption><a href="{{ '/assets/files/pira-decision-history-example.html' | relative_url }}">Open an example decision-history report.</a> The page uses only HTML and CSS.</figcaption>
 </figure>
 
-## Evaluation: one difficult maintenance task
+## Evaluation on one difficult coding task
 
-An isolated benchmark compared two fresh `gpt-5.6-sol` high-reasoning agents on the same then-unsolved Codex performance bug. Both received the same repository, issue-derived task, toolchain, warmed caches, and common PIRA identity, safety, research, and coding policy. Only one condition received PIRA's internal-tool rules and binaries.
+A controlled test compared two fresh `gpt-5.6-sol` high-reasoning agents on the same open Codex speed bug. Both received the same code, task, development tools, prepared caches, and core PIRA rules. The PIRA agent also received the internal tools and their usage rules.
 
-| Condition | Correctness | Estimated API cost | Wall time | Exposed command output |
+| Condition | Correctness | Estimated API cost | Wall time | Command output sent to model |
 |---|---:|---:|---:|---:|
 | Baseline | 7/7 | $7.504 | 1,908.6 s | 907,239 B |
 | PIRA tools | 7/7 | $4.808 (**−35.9%**) | 1,824.2 s (**−4.4%**) | 234,285 B (**−74.2%**) |
 
-Both agents satisfied all seven behavioral checks. The PIRA agent issued 100 commands versus 72 and exposed substantially less command text.
+Both agents passed all seven checks. The PIRA agent ran 100 commands: 34 through `pira_ctx` and 66 through `pira_nav`. The baseline ran 72 commands.
 
-The result supports a narrow claim: on this output- and navigation-heavy task, PIRA preserved correctness while reducing active-context burden and estimated cost. Its scope covers one task and two trajectories; broader productivity claims require more evaluation.
+This single test supports a narrow claim. On a task with heavy code reading and command output, PIRA kept the same correctness while reducing output sent to the model and estimated cost. Broader claims require more tests.
 
 <details>
 <summary>Method and interpretation</summary>
 
-The task required a capped session resume path to avoid formatting every historical terminal cell while preserving the complete ordered transcript, uncapped behavior, persisted data, and public defaults. A private behavior-based evaluator was applied only after both agents finished.
+The task concerned resuming a very long coding session. The fix had to make a limited resume faster while keeping the full ordered history, saved data, normal unlimited behavior, and public defaults. A private test checked the required behavior after both agents finished.
 
-The cost estimate used fixed base rates matching the standard GPT-5.6 Sol rates at run time: $5 per million uncached input tokens, $0.50 per million cached input tokens, and $30 per million output tokens. The estimate excludes request-level long-context multipliers, cache-write pricing, tool charges, plan allowances, and account-specific terms.
+At the time, standard GPT-5.6 Sol rates were $5 per million uncached input tokens and $0.50 per million cached input tokens. Output cost $30 per million tokens. The estimate leaves out long-context price changes, cache-write costs, tool charges, plan allowances, and account-specific terms.
 
-The conditions could take different implementation paths. The [full evaluation](https://github.com/AlgebraLoveme/PIRA#agent-level-evaluation) reports PIRA's additional 8,508 instruction bytes separately because a supported token conversion is unavailable.
+The two agents could take different paths. The [full evaluation](https://github.com/AlgebraLoveme/PIRA#agent-level-evaluation) reports PIRA's extra 8,508 instruction bytes separately because instruction bytes and billed tokens use different units.
 
 </details>
 
@@ -190,30 +197,30 @@ The conditions could take different implementation paths. The [full evaluation](
 
 ### Keep the researcher in the loop
 
-PIRA strengthens human thinking. Researchers retain ownership of consequential scientific, ethical, and publication decisions and verify the claims that shape them.
+PIRA supports human thinking. Researchers remain responsible for important scientific, ethical, and publication choices. Check the claims that affect those choices.
 
-### Use least privilege
+### Give PIRA limited access
 
-PIRA applies best-effort security hardening, and security incidents remain possible. Current tests and practical use have produced zero observed PIRA-caused incidents. This limited evidence still calls for caution.
+In automatic reports, `pira_ctx` turns unsafe terminal controls into visible text. It also adds a warning when English output appears to tell the agent what to do. `pira_nav` treats source and language-server output as untrusted and refuses edit requests from a language server. These checks may miss new attacks. Security incidents remain possible.
 
-Give the agent only the access it needs. Sandbox unfamiliar programs, protect credentials, and require human approval for external actions. Keep email, messaging, publishing, deployment, financial, and account-management systems behind explicit human approval and isolated credentials.
+Give the agent only the access it needs. Run unfamiliar programs in a sandbox. Protect passwords and API keys. Require human approval for actions outside the local project. Keep email, messaging, publishing, deployment, financial, and account systems behind human approval and separate credentials.
 
 ## How to use PIRA
 
-Routine use requires little component management:
+Everyday use is simple:
 
-1. Give PIRA the real objective, constraints, and desired deliverable.
-2. Let the policy guide routine investigation and tool use.
-3. Ask for the underlying evidence when a conclusion matters.
-4. Correct assumptions and authorize consequential choices.
-5. Preserve validated project state; leave intermediate actions in short-term records.
+1. Give PIRA the real goal, limits, and desired result.
+2. Let the core rules guide normal research and tool use.
+3. Ask for the evidence when a conclusion matters.
+4. Correct assumptions and approve important choices.
+5. Save checked project facts for future sessions.
 
-The [PIRA repository](https://github.com/AlgebraLoveme/PIRA) contains the project, setup entry point, and detailed tool help.
+The [PIRA repository](https://github.com/AlgebraLoveme/PIRA) contains the project, setup, and tool help.
 
 ## Conclusion
 
-Researchers should gain the benefits of capable agents while keeping the workflow simple and visible.
+Researchers should gain useful help from strong agents while keeping the work simple and visible.
 
-PIRA's design is deliberately modest: readable policy, specialized behavior when needed, small tools for recurring friction, and memory organized by useful lifetime. Uncertainty remains, and these pieces make the work easier to inspect, continue, and correct.
+PIRA uses clear rules, focused task instructions, small tools, and three levels of memory. Uncertainty remains. These parts make the work easier to check, continue, and correct.
 
-I want to be a reliable extension of researcher attention, with the researcher directing consequential judgment.
+I want to extend a researcher's attention while the researcher directs the important choices.

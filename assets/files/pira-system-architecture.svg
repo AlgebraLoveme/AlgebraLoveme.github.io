@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="800" viewBox="0 0 1400 800" role="img" aria-labelledby="title desc">
-  <title id="title">PIRA system architecture</title>
-  <desc id="desc">A researcher guides PIRA through behavioral policy and task modules. These shape agent reasoning and execution, supported by context management, repository navigation, and decision records. Information is preserved in short-, medium-, and long-term memory.</desc>
+  <title id="title">How PIRA works</title>
+  <desc id="desc">A researcher sets goals and keeps control. Core rules and task instructions guide the agent. Small tools manage command output, code reading, and decisions. Three memory layers preserve useful information for different lengths of time.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#f5faf8"/>
@@ -32,7 +32,7 @@
   <circle cx="123" cy="101" r="112" fill="#dcefe9" opacity=".7"/>
   <circle cx="1310" cy="704" r="170" fill="#dce9ef" opacity=".65"/>
 
-  <text x="700" y="42" text-anchor="middle" class="eyebrow">RESEARCHER-CONTROLLED SYSTEM</text>
+  <text x="700" y="42" text-anchor="middle" class="eyebrow">THE RESEARCHER KEEPS CONTROL</text>
 
   <g filter="url(#shadow)">
     <rect x="510" y="66" width="380" height="88" rx="22" fill="#fff" stroke="#bad0cd" stroke-width="2"/>
@@ -40,17 +40,17 @@
     <circle cx="560" cy="102" r="8" fill="#39736f"/>
     <path d="M545 124c4-12 26-12 30 0" fill="none" stroke="#39736f" stroke-width="5" stroke-linecap="round"/>
     <text x="602" y="106" class="label">Researcher</text>
-    <text x="602" y="132" class="small">goals · evidence · authority</text>
+    <text x="602" y="132" class="small">goals · evidence · control</text>
   </g>
 
   <line x1="700" y1="154" x2="700" y2="189" stroke="#77908f" stroke-width="3" marker-end="url(#arrow)"/>
 
   <g filter="url(#shadow)">
     <rect x="270" y="194" width="860" height="106" rx="24" fill="#fff" stroke="#bad0cd" stroke-width="2"/>
-    <text x="475" y="234" text-anchor="middle" class="label">Behavioral policy</text>
-    <text x="475" y="265" text-anchor="middle" class="small">reasoning · safety · validation</text>
+    <text x="475" y="234" text-anchor="middle" class="label">Core rules</text>
+    <text x="475" y="265" text-anchor="middle" class="small">reasoning · safety · checks</text>
     <line x1="700" y1="216" x2="700" y2="278" stroke="#d1dfdd" stroke-width="2"/>
-    <text x="905" y="234" text-anchor="middle" class="label">Task modules</text>
+    <text x="905" y="234" text-anchor="middle" class="label">Task instructions</text>
     <text x="905" y="265" text-anchor="middle" class="small">research · code · writing · learning</text>
   </g>
 
@@ -58,8 +58,8 @@
 
   <g filter="url(#shadow)">
     <rect x="410" y="339" width="580" height="104" rx="26" fill="url(#agent)"/>
-    <text x="700" y="382" text-anchor="middle" fill="#fff" font-size="29" font-weight="750">Agent reasoning and execution</text>
-    <text x="700" y="414" text-anchor="middle" fill="#d6ecea" font-size="19">objective → evidence → action → interpretation</text>
+    <text x="700" y="382" text-anchor="middle" fill="#fff" font-size="29" font-weight="750">Agent work loop</text>
+    <text x="700" y="414" text-anchor="middle" fill="#d6ecea" font-size="19">goal → evidence → action → meaning</text>
   </g>
 
   <line x1="700" y1="443" x2="700" y2="476" stroke="#77908f" stroke-width="3" marker-end="url(#arrow)"/>
@@ -70,41 +70,41 @@
 
   <g filter="url(#shadow)">
     <rect x="75" y="507" width="346" height="105" rx="21" fill="#fff" stroke="#bfd2d0" stroke-width="2"/>
-    <text x="248" y="548" text-anchor="middle" class="tool">Command context</text>
-    <text x="248" y="577" text-anchor="middle" class="tool-sub">pira_ctx · bounded, recoverable output</text>
+    <text x="248" y="548" text-anchor="middle" class="tool">Command output</text>
+    <text x="248" y="577" text-anchor="middle" class="tool-sub">pira_ctx · short view, saved output</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="527" y="507" width="346" height="105" rx="21" fill="#fff" stroke="#bfd2d0" stroke-width="2"/>
-    <text x="700" y="548" text-anchor="middle" class="tool">Repository navigation</text>
-    <text x="700" y="577" text-anchor="middle" class="tool-sub">pira_nav · focused, read-only evidence</text>
+    <text x="700" y="548" text-anchor="middle" class="tool">Code navigation</text>
+    <text x="700" y="577" text-anchor="middle" class="tool-sub">pira_nav · focused, read-only views</text>
   </g>
   <g filter="url(#shadow)">
     <rect x="979" y="507" width="346" height="105" rx="21" fill="#fff" stroke="#bfd2d0" stroke-width="2"/>
     <text x="1152" y="548" text-anchor="middle" class="tool">Decision records</text>
-    <text x="1152" y="577" text-anchor="middle" class="tool-sub">pira_dec · choices, context, authority</text>
+    <text x="1152" y="577" text-anchor="middle" class="tool-sub">pira_dec · choices, reasons, who decided</text>
   </g>
 
   <line x1="700" y1="612" x2="700" y2="646" stroke="#77908f" stroke-width="3" marker-end="url(#arrow)"/>
 
   <g filter="url(#shadow)">
     <rect x="140" y="651" width="1120" height="103" rx="23" fill="#fff" stroke="#bad0cd" stroke-width="2"/>
-    <text x="700" y="679" text-anchor="middle" class="eyebrow">LAYERED PROJECT MEMORY</text>
+    <text x="700" y="679" text-anchor="middle" class="eyebrow">THREE MEMORY LAYERS</text>
 
     <rect x="177" y="696" width="310" height="40" rx="12" fill="#edf6f3"/>
-    <text x="332" y="712" text-anchor="middle" class="memory-title">Short · activity</text>
-    <text x="332" y="730" text-anchor="middle" class="memory-sub">commands and evidence</text>
+    <text x="332" y="712" text-anchor="middle" class="memory-title">Short · current work</text>
+    <text x="332" y="730" text-anchor="middle" class="memory-sub">commands and output</text>
 
     <rect x="545" y="696" width="310" height="40" rx="12" fill="#e8f1f2"/>
     <text x="700" y="712" text-anchor="middle" class="memory-title">Medium · decisions</text>
-    <text x="700" y="730" text-anchor="middle" class="memory-sub">conclusions and alternatives</text>
+    <text x="700" y="730" text-anchor="middle" class="memory-sub">choices and other options</text>
 
     <rect x="913" y="696" width="310" height="40" rx="12" fill="#e6edf3"/>
     <text x="1068" y="712" text-anchor="middle" class="memory-title">Long · workbook</text>
-    <text x="1068" y="730" text-anchor="middle" class="memory-sub">validated durable state</text>
+    <text x="1068" y="730" text-anchor="middle" class="memory-sub">checked project facts</text>
   </g>
 
   <path d="M910 110 C1190 120 1302 270 1300 413 C1298 469 1276 496 1247 520" fill="none" stroke="#39736f" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrow)"/>
   <rect x="1128" y="276" width="205" height="60" rx="15" fill="#edf6f3" stroke="#bad0cd"/>
-  <text x="1230" y="301" text-anchor="middle" fill="#285d59" font-size="17" font-weight="750">Human authority</text>
-  <text x="1230" y="323" text-anchor="middle" fill="#5a7071" font-size="15">at consequential boundaries</text>
+  <text x="1230" y="301" text-anchor="middle" fill="#285d59" font-size="17" font-weight="750">Researcher control</text>
+  <text x="1230" y="323" text-anchor="middle" fill="#5a7071" font-size="15">for important choices</text>
 </svg>
