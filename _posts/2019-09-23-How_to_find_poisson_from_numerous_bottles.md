@@ -20,7 +20,7 @@ The answer is **four mice**. The key is to treat each mouse as one bit of inform
 
 Number the bottles from $0$ to $15$ and write each number as a four-bit binary string. For example, bottle $0$ is $0000$, bottle $10$ is $1010$, and bottle $15$ is $1111$.
 
-Assign one mouse to each bit position, read from left to right. Mouse $i$ drinks a sample from every bottle whose $i$th bit is $1$. Therefore, bottle $10$, encoded as $1010$, is sampled by mice $1$ and $3$ but not by mice $2$ and $4$.
+Assign one mouse to each bit position, read from left to right. Mouse $i$ drinks a sample from every bottle whose bit in position $i$ is $1$. Therefore, bottle $10$, encoded as $1010$, is sampled by mice $1$ and $3$ but not by mice $2$ and $4$.
 
 After 24 hours, record $1$ for each mouse that dies and $0$ for each mouse that survives. If the outcome is $1010$, then mice $1$ and $3$ died, so bottle $10$ must be poisoned. The outcome $0000$ identifies bottle $0$: no mouse sampled it, and the assumption that exactly one bottle is poisoned rules out every other bottle.
 
