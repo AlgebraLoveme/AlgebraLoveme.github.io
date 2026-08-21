@@ -24,7 +24,7 @@ Reuse the exact two-input April classifier, weights, x_0, perturbation region,
 and margin defined in Part 2. Do not introduce a second toy network.
 -->
 
-## How can we follow every allowed version of April at once?
+## How can we follow every allowed input at once?
 
 <!--
 Open with the Part 2 property and its hand proof. The obstacle is scale: tracing

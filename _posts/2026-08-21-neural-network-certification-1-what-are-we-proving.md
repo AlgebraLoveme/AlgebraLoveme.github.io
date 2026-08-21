@@ -38,8 +38,8 @@ similar data.
 The accuracy number does not tell us whether the prediction for April is stable.
 The same scene can reach the model through different cameras, lighting
 conditions, compression settings, and preprocessing pipelines. To us, the image
-still shows April. To the classifier, each version is a different array of
-numbers.
+still shows April. To the classifier, each captured or processed image is a
+different array of numbers.
 
 A **robust** model preserves the required behavior under the changes we care
 about. That definition contains two choices:
@@ -101,19 +101,19 @@ $$
 Here, $d$ counts all pixels and color channels. The value of $p$ determines how
 their changes are combined. When $p=\infty$, the norm measures the largest
 absolute pixel change, so every pixel may change by at most $\epsilon$. Every
-point in $S_p(x_0,\epsilon)$ is one numerical version of April's photo permitted
-by our threat model.
+point in $S_p(x_0,\epsilon)$ is an image represented by a particular pixel array
+permitted by our threat model.
 
 This set gives **allowed** a precise meaning for one robustness question. A
 question about rotation, camera motion, or lighting would use a set designed for
 those changes instead. In every case, certification begins by stating exactly
-which versions of the input belong to the claim.
+which inputs belong to the claim.
 
-## An attack searches for a version that fails
+## An attack searches for an allowed input that fails
 
 Let $f_j(x)$ be the score that the classifier assigns to class $j$ for image $x$.
 The predicted class is the one with the highest score. An attack starts from
-$x_0$ and searches inside $S_p(x_0,\epsilon)$ for a version on which some other
+$x_0$ and searches inside $S_p(x_0,\epsilon)$ for an input on which some other
 class outranks **cat**.
 
 A gradient-based attack, for example, uses information about how the model's
@@ -123,7 +123,7 @@ than a random collection of image changes.
 
 Two outcomes are possible:
 
-- **The attack finds a failure.** We now have a modified version of April's photo
+- **The attack finds a failure.** We now have a perturbed image of April
   that the model does not label cat. This one image disproves the robustness
   claim.
 - **The attack finds no failure.** The images visited by this search did not
@@ -140,8 +140,8 @@ the number of possible images is still far too large for ordinary enumeration.
 
 An attack navigates this space intelligently, but it still examines only part of
 it unless its search comes with a completeness guarantee. A stronger attack may
-find a version of April's photo that an earlier attack missed. More attacks give
-us better empirical evidence, but they do not automatically cover every allowed
+find an adversarial input that an earlier attack missed. More attacks give us
+better empirical evidence, but they do not automatically cover every allowed
 image.
 
 The logical distinction is:
@@ -152,11 +152,11 @@ The logical distinction is:
 This is the gap between **not finding a failure** and **proving that no failure
 exists**.
 
-## Certification asks about every allowed version
+## Certification covers every allowed input
 
 Neural network certification addresses this gap with a universal claim. Let
-$y$ denote the class **cat**. Instead of checking selected versions of April's
-photo, we want to prove
+$y$ denote the class **cat**. Instead of checking selected points in the allowed
+set, we want to prove
 
 $$
 \text{for every }x\in S_p(x_0,\epsilon),\qquad
@@ -164,7 +164,7 @@ f_y(x)>f_j(x)\quad\text{for every }j\neq y.
 $$
 
 In words, cat must have a strictly higher score than every other class for every
-allowed version of the photo. If we prove this statement, we have certified
+image in the allowed set. If we prove this statement, we have certified
 **local adversarial robustness** around $x_0$ at radius $\epsilon$.
 
 Certification does not run the network separately on every image. It establishes
@@ -193,7 +193,7 @@ the results table:
 
 ## Takeaway
 
-An attack may find one allowed version of April's photo that fools the
-classifier. If it does, the robustness claim is false. If it does not, other
-versions remain untested. Certification makes the stronger claim: **every image
-in the defined set** keeps the required prediction.
+An attack may find one allowed input that fools the classifier. If it does, the
+robustness claim is false. If it does not, other allowed inputs remain untested.
+Certification makes the stronger claim: **every image in the defined set** keeps
+the required prediction.
