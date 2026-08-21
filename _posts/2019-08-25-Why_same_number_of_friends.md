@@ -1,36 +1,47 @@
 ---
-title: "Why there must exist 2 people that have the same number of friends in a group"
+title: "Why Two People Must Have the Same Number of Friends"
 author_profile: true
 permalink: /learning_notes/2019-08-25-Why_same_number_of_friends/
 date: 2019-08-25
+last_modified_at: 2026-08-21
+last_modified_by: PIRA
 tags: [learning notes, Graph_Theory_Bondy_Murty]
 mathjax: "true"
 header:
     image: "/imgs/friends.jpeg"
-excerpt: "learning notes, Graph_Theory_Bondy_Murty"
+excerpt: "A short graph-theoretic proof using the pigeonhole principle."
 ---
 
-Here is an interesting phenomenon. In any group of two or more people, there are always
-at least two with exactly the same number of friends. What's going on?
+In every group of at least two people, two people must have exactly the same number of friends within the group. Graph theory makes the reason precise.
 
-First, let's rewrite this problem. We want to represent each individual with a node(or vertex) respectively
- and friendship between two people is denoted by a line(or edge) connecting these vertexes. It is worth
- mentioning that this graph(say $$G$$) is simple, i.e. no loop in the graph. Now the problem
-  is: why there always exist 2 nodes that have the same degree in a simple graph.
+## Modeling friendship as a graph
 
-We prove it by induction. 
+Represent each person by a **vertex**, and join two vertices with an **edge** when the corresponding people are friends. We assume that friendship is mutual, so the graph is undirected: an edge between Alice and Bob has no direction.
 
-Suppose $$|G|=2$$, then either there is a edge connecting the two vertexes or is not.
- In each case, our claim is verified.
+The graph is also **simple**:
 
-Now suppose $$|G|=k$$ for some $$k \in N^+$$, our claim is true. Then in the case $$|G|=k+1$$,
- I will complete the proof by contradiction. If each vertex has different degree and none has degree of zero,
-  then those degrees must be $$\{1,2,...,k+1\}$$. Then sum of degrees $$\epsilon=\frac{1}{2}(k+2)(k+1)$$.
-  However, $$\epsilon_{max}=\binom{k+1}{2}=\frac{1}{2}(k+1)k$$ which is a complete graph, i.e. there is an edge between each pair of vertexes. A contradiction. If one of vertexes has degree of zero, then we can delete this vertex and the case becomes such that $$|G|=k$$ and none has degree of zero, which is certified by induction assumption.
+- It has no loops because a person is not counted as their own friend.
+- It has no parallel edges because friendship between the same pair of people is counted only once.
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+The **degree** of a vertex is the number of edges that meet it. In this model, a person's degree is exactly their number of friends within the group. The original claim therefore becomes:
 
-<h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
-  Total readers: <span id="busuanzi_value_page_pv"></span>
-</h3>
+> Why must a simple graph with at least two vertices contain two vertices of the same degree?
+
+## The key observation
+
+Suppose the group contains $n$ people. Each person can have between $0$ and $n-1$ friends, so the possible degrees initially appear to be $0,1,2,\ldots,n-1$.
+
+This list contains $n$ values for $n$ people, so counting alone does not yet force two people to have the same degree. The key is that the two extreme values, $0$ and $n-1$, cannot occur together.
+
+If someone has degree $n-1$, they are friends with every other person, so nobody has degree $0$. Conversely, if someone has degree $0$, nobody can have degree $n-1$.
+
+<figure>
+  <a href="{{ '/assets/files/friends-degree-pigeonhole-v2.png' | relative_url }}">
+    <img src="{{ '/assets/files/friends-degree-pigeonhole-v2.png' | relative_url }}" alt="An infographic with two five-vertex graphs. The first has an isolated vertex, which rules out degree four. The second has a vertex connected to all four others, which rules out degree zero. Five vertex symbols then point to four degree-value slots.">
+  </a>
+  <figcaption>For five people, degree $0$ rules out degree $4$, while degree $4$ rules out degree $0$. Either way, only four degree values remain.</figcaption>
+</figure>
+
+At least one extreme must therefore be absent. If degree $n-1$ is absent, every degree lies in $\{0,1,\ldots,n-2\}$. If degree $0$ is absent, every degree lies in $\{1,2,\ldots,n-1\}$. Either way, the $n$ people have only $n-1$ possible degree values.
+
+The **pigeonhole principle** says that if more objects are assigned than there are available categories, at least two objects must share a category. Here the people are the objects and their degree values are the categories. Therefore, at least two people must have the same number of friends.
