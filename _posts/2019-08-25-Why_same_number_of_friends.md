@@ -8,7 +8,7 @@ last_modified_by: PIRA
 tags: [learning notes, Graph_Theory_Bondy_Murty]
 mathjax: "true"
 header:
-    image: "/imgs/friends.jpeg"
+    image: "/imgs/friends-hero-v2.jpg"
 excerpt: "A short graph-theoretic proof using the pigeonhole principle."
 ---
 
