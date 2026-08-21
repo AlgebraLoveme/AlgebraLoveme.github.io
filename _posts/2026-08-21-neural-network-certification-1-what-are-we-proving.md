@@ -90,17 +90,19 @@ change and by how much. It may also specify what the attacker knows and what
 counts as success. Different threat models describe different questions.
 
 Let $x_0$ represent April's photo. Assume that its pixel values lie between 0 and
-1. For a simple threat model, allow every pixel to change by at most
-$\epsilon$. The allowed images form the set
+1. Choose an $\ell_p$ norm, with $1\leq p\leq\infty$, to measure the size of a
+change and a radius $\epsilon$ to limit it. The allowed images form the set
 
 $$
-S(x_0,\epsilon)
-=\left\{x\in[0,1]^d:\left|x_i-(x_0)_i\right|\leq\epsilon
-\text{ for every pixel }i\right\}.
+S_p(x_0,\epsilon)
+=\left\{x\in[0,1]^d:\lVert x-x_0\rVert_p\leq\epsilon\right\}.
 $$
 
-Here, $d$ counts all pixels and color channels. Every point in this set is one
-numerical version of April's photo permitted by our threat model.
+Here, $d$ counts all pixels and color channels. The value of $p$ determines how
+their changes are combined. When $p=\infty$, the norm measures the largest
+absolute pixel change, so every pixel may change by at most $\epsilon$. Every
+point in $S_p(x_0,\epsilon)$ is one numerical version of April's photo permitted
+by our threat model.
 
 This threat model is mathematically convenient, but it is not a perfect model of
 visual similarity. Its pixel-wise limits do not directly describe rotation,
@@ -111,7 +113,7 @@ in the next post.
 
 Let $f_j(x)$ be the score that the classifier assigns to class $j$ for image $x$.
 The predicted class is the one with the highest score. An attack starts from
-$x_0$ and searches inside $S(x_0,\epsilon)$ for a version on which some other
+$x_0$ and searches inside $S_p(x_0,\epsilon)$ for a version on which some other
 class outranks **cat**.
 
 A gradient-based attack, for example, uses information about how the model's
@@ -132,7 +134,7 @@ The first conclusion is decisive. The second is not.
 ## Why attack-based testing is incomplete
 
 Why is a failed attack inconclusive? The allowed set changes every pixel, and
-all those choices combine. In the real-valued model, $S(x_0,\epsilon)$ contains
+all those choices combine. In the real-valued model, $S_p(x_0,\epsilon)$ contains
 infinitely many numerical images. A digital system uses finite precision, but
 the number of possible images is still far too large for ordinary enumeration.
 
@@ -157,7 +159,7 @@ $y$ denote the class **cat**. Instead of checking selected versions of April's
 photo, we want to prove
 
 $$
-\text{for every }x\in S(x_0,\epsilon),\qquad
+\text{for every }x\in S_p(x_0,\epsilon),\qquad
 f_y(x)>f_j(x)\quad\text{for every }j\neq y.
 $$
 
@@ -183,7 +185,7 @@ $$
 \text{for every }x,\qquad P(x)\Longrightarrow Q(f(x)).
 $$
 
-For April's photo, the precondition is $x\in S(x_0,\epsilon)$. The postcondition
+For April's photo, the precondition is $x\in S_p(x_0,\epsilon)$. The postcondition
 requires cat to outrank every competing class.
 
 The property holds exactly when no allowed input violates the postcondition.
