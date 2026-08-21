@@ -81,14 +81,9 @@ adds a fine noise pattern while preserving the scene that we recognize as April.
     <a href="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}">
       <img src="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}" alt="Conceptual AI-generated variation of April's photograph with fine multicolored pixel noise; it is not a verified adversarial example.">
     </a>
-    <figcaption><strong>Conceptual perturbation.</strong> A visible noise pattern illustrates a modified input.</figcaption>
+    <figcaption><strong>Conceptual perturbation.</strong> Visible noise illustrates a modified input; no classifier attack was run.</figcaption>
   </figure>
 </div>
-
-This is an **illustration, not a real adversarial example**. The right image was
-generated to communicate the idea. It was not optimized against a classifier,
-has no verified perturbation bound, and is not known to change any prediction.
-A real attack must satisfy its threat model and make a specific model fail.
 
 The word *allowed* is essential. We need a **threat model** that states what may
 change and by how much. It may also specify what the attacker knows and what
@@ -201,7 +196,7 @@ certified lower bounds on the perturbation needed to change a ReLU network's
 decision.
 
 In this series, a **certificate** means that a sound mathematical procedure has
-established the scoped claim. It is not a general badge of safety or correctness.
+established the scoped claim.
 
 ## Three possible outcomes
 
@@ -224,25 +219,6 @@ methods return unknown whenever their approximation is inconclusive.
 Unknown is not the same as unsafe. The property may be false, or it may be true
 but difficult for this method to prove. Later posts will show how tighter bounds
 and search can resolve some unknown cases.
-
-## What have we actually proved about April?
-
-A successful certificate sounds strong: every image in
-$S(x_0,\epsilon)$ remains classified as cat. Its limits are just as important:
-
-- It covers changes inside $S(x_0,\epsilon)$, not rotations, camera effects, or
-  larger changes unless the threat model includes them.
-- It protects this photo of April, not every photo of April and not every cat.
-- It proves the class required by the specification. If we instead certified
-  whatever class the model originally predicted, that class could be wrong. A
-  model can be robustly wrong.
-- It applies to the verified model and operations. Preprocessing, surrounding
-  software, and deployment conditions need separate coverage if they matter.
-- It relies on the mathematical and numerical assumptions of the verifier.
-
-Certification is therefore evidence for a precise part of a larger reliability
-or safety argument. It is not a synonym for safety. When reading a certification
-claim, always ask which model, threat model, property, and assumptions it covers.
 
 ## Where the series goes next
 
