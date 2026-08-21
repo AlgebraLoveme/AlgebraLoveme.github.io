@@ -57,8 +57,8 @@ There is no useful claim that a model is simply “robust to everything.”
 Ordinary noise follows some process, such as random sensor error. **Adversarial
 robustness** asks a worst-case question instead:
 
-> Can someone deliberately choose an allowed change to April's photo that makes
-> the classifier stop predicting cat?
+> Can someone deliberately choose an **allowed** change to April's photo that
+> makes the classifier stop predicting cat?
 
 If such a modified image exists, it is an **adversarial example**. The change is
 chosen for its effect on the model rather than sampled at random. Research on
