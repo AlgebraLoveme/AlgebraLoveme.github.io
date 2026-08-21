@@ -168,8 +168,9 @@ the results table:
   through the same classifier.
 - **Part 4 — Why do simple bounds lose information?** We will preserve useful
   relationships with linear bounds.
-- **Part 5 — How do we turn unknown into an answer?** We will split the input
-  region and search its pieces.
+- **Part 5 — What should we do if the bound is inconclusive?** We will repeatedly
+  split and bound the input region until every piece is certified or a
+  counterexample is found.
 - **Part 6 — Can we train a network to be certifiable?** We will put a certified
   bound into the learning objective.
 - **Part 7 — How should we read certification results?** We will reconstruct the
