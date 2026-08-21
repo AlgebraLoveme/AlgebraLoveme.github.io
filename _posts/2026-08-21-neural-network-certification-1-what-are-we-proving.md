@@ -8,67 +8,62 @@ written_at: 2026-08-21
 tags: [neural networks, certification, formal verification, robustness]
 mathjax: true
 toc: true
-excerpt: "April the Siberian cat helps us follow one image from ordinary robustness to adversarial attacks, incomplete testing, and neural network certification."
+excerpt: "April the Siberian cat helps us see why an attack can disprove robustness, while only a certificate can prove it."
 ---
 
-Meet April. He is a Siberian cat.
+Meet April, my Siberian cat.
 
 <figure style="text-align: center;">
   <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
     <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="520" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
   </a>
-  <figcaption>April, a Siberian cat, will be our running example. We will follow this one photo from ordinary testing to a mathematical guarantee.</figcaption>
+  <figcaption>We will use this photograph of April to move from one correct prediction to a mathematical guarantee.</figcaption>
 </figure>
 
-Imagine that we give this photo to an image classifier and it predicts **cat**.
-That answer is correct, but one correct prediction tells us very little about
-what happens next. Would the model still recognize a darker photo of April? What
-about camera noise, image compression, or a few carefully chosen pixel changes?
-
-These questions lead from accuracy to robustness, from robustness to adversarial
-attacks, and finally from testing to certification.
+Imagine that an image classifier receives this photo and predicts **cat**. It is
+right on this input. Now darken the photo, compress it, add camera noise, or
+change a few pixels. Will the prediction remain cat?
 
 ## Why models need to be robust
 
-Suppose our classifier labels 9,800 of 10,000 test images correctly. Its test
-accuracy is 98%. This is useful evidence about performance on that sample. Under
-appropriate sampling assumptions, it may also help us estimate performance on
-similar data.
+Suppose our classifier labels 9,800 of 10,000 test images correctly, giving 98%
+test accuracy. This aggregate does not tell us whether one correct prediction
+will survive nearby changes.
 
-The accuracy number does not tell us whether the prediction for April is stable.
 The same scene can reach the model through different cameras, lighting
-conditions, compression settings, and preprocessing pipelines. To us, the image
-still shows April. To the classifier, each captured or processed image is a
-different array of numbers.
+conditions, compression settings, and preprocessing pipelines. We still see
+April, but the classifier receives a different array of numbers each time.
 
-A **robust** model preserves the required behavior under the changes we care
-about. That definition contains two choices:
+A **robust** model preserves the required behavior when the input changes in
+ways we have decided to allow. This raises two concrete questions:
 
 1. Which input changes should we consider?
 2. Which model behavior should remain unchanged?
 
 For April's photo, we may require the predicted class to remain **cat** under a
-specified amount of image noise. A different application may care about
-rotation, brightness, camera position, or an entirely different output property.
-There is no useful claim that a model is simply “robust to everything.”
+specified amount of image noise. Another task might allow small rotations rather
+than pixel noise, or require a numerical output to remain within a safe range
+rather than preserving a class label. The word *robust* is incomplete until we
+answer both questions.
 
 ## From robustness to adversarial robustness
 
-Ordinary noise follows some process, such as random sensor error. **Adversarial
-robustness** asks a worst-case question instead:
+Random sensor noise is not chosen with the classifier in mind. An adversarial
+perturbation is chosen specifically to make the classifier fail. **Adversarial
+robustness** therefore asks a worst-case question:
 
 > Can someone deliberately choose an **allowed** change to April's photo that
 > makes the classifier stop predicting cat?
 
-If such a modified image exists, it is an **adversarial example**. The change is
-chosen for its effect on the model rather than sampled at random. Research on
-[adversarial examples](https://arxiv.org/abs/1312.6199) showed that carefully
-chosen small perturbations could change neural network predictions. The
-[robust optimization viewpoint](https://arxiv.org/abs/1706.06083) asks us
-to evaluate the worst allowed perturbation rather than an average one.
+An allowed image that changes the prediction is an **adversarial example**.
+Research on [adversarial examples](https://arxiv.org/abs/1312.6199) showed that
+small, carefully chosen perturbations could change neural network predictions.
+The [robust optimization viewpoint](https://arxiv.org/abs/1706.06083) frames
+robustness as performance under the worst allowed perturbation rather than under
+average noise.
 
-The comparison below makes the idea of a perturbation visible. The right image
-adds a fine noise pattern while preserving the scene that we recognize as April.
+The right panel below is a conceptual illustration with visible noise, making a
+pixel perturbation easy to see while April remains recognizable.
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-start;">
   <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
@@ -79,35 +74,34 @@ adds a fine noise pattern while preserving the scene that we recognize as April.
   </figure>
   <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
     <a href="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}">
-      <img src="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}" alt="Conceptual AI-generated variation of April's photograph with fine multicolored pixel noise; it is not a verified adversarial example.">
+      <img src="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}" alt="Conceptual illustration of April's photograph with fine multicolored pixel noise.">
     </a>
-    <figcaption><strong>Conceptual perturbation.</strong> Visible noise illustrates a modified input; no classifier attack was run.</figcaption>
+    <figcaption><strong>Conceptual perturbation.</strong> Visible noise illustrates a modified input rather than the output of a classifier attack.</figcaption>
   </figure>
 </div>
 
-The word *allowed* is essential. We need a **threat model** that states what may
-change and by how much. It may also specify what the attacker knows and what
-counts as success. Different threat models describe different questions.
+Restricting which changes are **allowed** prevents a trivial attack. Replacing
+April's photo with a photo of a dog might change the prediction, but it tells us
+nothing about whether the classifier is stable near the original photo. A
+**threat model** draws the boundary: it states what may change, by how much, and
+what counts as a successful attack.
 
-Let $x_0$ represent April's photo, with pixel values normalized to $[0,1]$.
-Choose an $\ell_p$ norm, with $1\leq p\leq\infty$, to measure the size of a
-change, and use a radius $\epsilon$ to limit it. The allowed images form the set
+Let $x_0$ represent April's photo, with pixel values normalized to $[0,1]$. We
+measure a pixel perturbation with an $\ell_p$ norm, where
+$1\leq p\leq\infty$, and limit its size with a radius $\epsilon$. The allowed
+images form the set
 
 $$
 S_p(x_0,\epsilon)
 =\left\{x\in[0,1]^d:\lVert x-x_0\rVert_p\leq\epsilon\right\}.
 $$
 
-Here, $d$ counts all pixels and color channels. The value of $p$ determines how
-their changes are combined. When $p=\infty$, the norm measures the largest
-absolute pixel change, so every pixel may change by at most $\epsilon$. Every
-point in $S_p(x_0,\epsilon)$ is an image represented by a particular pixel array
-permitted by our threat model.
-
-This set gives **allowed** a precise meaning for one robustness question. A
-question about rotation, camera motion, or lighting would use a set designed for
-those changes instead. In every case, certification begins by stating exactly
-which inputs belong to the claim.
+Here, $d$ counts all pixel values across all color channels, and $p$ determines
+how their changes are combined. When $p=\infty$, the norm measures the largest
+absolute change to any pixel value. Thus, $x\in S_p(x_0,\epsilon)$ means that $x$
+is a valid pixel array and its distance from April's original photo is at most
+$\epsilon$. The norm and radius are part of the robustness claim: changing either
+one changes the set of inputs that a certificate must cover.
 
 ## An attack searches for an allowed input that fails
 
@@ -117,64 +111,54 @@ $x_0$ and searches inside $S_p(x_0,\epsilon)$ for an input on which some other
 class outranks **cat**.
 
 A gradient-based attack, for example, uses information about how the model's
-loss changes with the pixels. It adjusts them in directions that appear more
-likely to cause a mistake. The result is a targeted test of the model rather
-than a random collection of image changes.
+loss changes with the pixels. At each step, it uses this information to change
+the pixels in a direction expected to cause a mistake.
 
 Two outcomes are possible:
 
-- **The attack finds a failure.** We now have a perturbed image of April
-  that the model does not label cat. That counterexample disproves the
-  robustness claim.
-- **The attack finds no failure.** The images visited by this search did not
-  break the model.
-
-The first conclusion is decisive. The second is not.
+- **The attack finds a failure.** An allowed input makes another class outrank
+  cat. That counterexample disproves the robustness claim.
+- **The attack finds no failure.** None of the candidate inputs evaluated by this
+  particular search changed the prediction.
 
 ## Why attack-based testing is incomplete
 
-Why is a failed attack inconclusive? The allowed set changes every pixel, and
-all those choices combine. In the real-valued model, $S_p(x_0,\epsilon)$ contains
-infinitely many numerical images. A digital system uses finite precision, but
-the number of possible images is still far too large for ordinary enumeration.
+Why can the second outcome not prove robustness? Within $S_p(x_0,\epsilon)$,
+each of the $d$ pixel values may vary, and those choices combine. For example, a
+$224\times224$ RGB input has $d=150{,}528$ pixel values. In the real-valued
+model, the set contains infinitely many points. A digital system has only
+finitely many pixel values, but still far too many arrays to enumerate.
 
-An attack navigates this space intelligently, but it still examines only part of
-it unless its search comes with a completeness guarantee. A stronger attack may
-find an adversarial input that an earlier attack missed. More attacks give us
-better empirical evidence, but they do not automatically cover every allowed
-image.
-
-The logical distinction is:
-
-- **No attack found a failure.** This is a report about the searches we ran.
-- **No allowed failure exists.** This is a statement about the entire set.
-
-This is the gap between **not finding a failure** and **proving that no failure
-exists**.
+A stronger attack may find an adversarial input that an earlier attack missed.
+If an attack finds no counterexample, none of the inputs it examined violated
+the property, but every unexamined input in $S_p(x_0,\epsilon)$ remains
+unresolved. Running more attacks may examine more inputs and strengthen the
+empirical evidence. It does not establish the desired claim that no input in
+$S_p(x_0,\epsilon)$ violates the property. The difference is coverage:
+**examined inputs** versus **all allowed inputs**.
 
 ## Certification covers every allowed input
 
-Neural network certification addresses this gap with a universal claim. Let
-$y$ denote the class **cat**. Instead of checking selected points in the allowed
-set, we want to prove
+A certificate must cover the inputs that attacks never visit. Let $y$ denote the
+class **cat**. We want to prove
 
 $$
 \text{for every }x\in S_p(x_0,\epsilon),\qquad
 f_y(x)>f_j(x)\quad\text{for every }j\neq y.
 $$
 
-In words, cat must have a strictly higher score than every other class for every
-image in the allowed set. If we prove this statement, we have certified
+The inequality says that cat has a strictly higher score than every other class
+for every allowed input. Proving it certifies
 **local adversarial robustness** around $x_0$ at radius $\epsilon$.
 
-Certification does not run the network separately on every image. It establishes
-the statement for the whole set at once. In this series, a **certificate** is a
-sound mathematical argument that proves this whole-set statement.
+Because enumeration is impossible, a certificate must reason about the network
+and the input set without checking every point separately. In this series, a
+**certificate** is a valid mathematical argument that proves the required
+inequalities for every input in $S_p(x_0,\epsilon)$.
 
 ## Where the series goes next
 
-April's photo has taken us from one correct prediction to robustness,
-adversarial attacks, incomplete testing, and the need for certification. The
+Our target is now precise: prove the score inequality over the allowed set. The
 rest of the series follows one small April classifier from its first proof to
 the results table:
 
@@ -193,7 +177,7 @@ the results table:
 
 ## Takeaway
 
-An attack may find one allowed input that fools the classifier. If it does, the
-robustness claim is false. If it does not, other allowed inputs remain untested.
-Certification makes the stronger claim: **every image in the defined set** keeps
-the required prediction.
+An attack asks, “Can I find an allowed input that changes the prediction?” One
+counterexample disproves robustness. If the attack finds none, the question
+remains open. Certification closes it by proving that **every input in the
+allowed set** keeps the required prediction.
