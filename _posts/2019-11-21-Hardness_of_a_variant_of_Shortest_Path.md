@@ -20,7 +20,7 @@ That loss of a reliable “best prefix” is not merely inconvenient. The result
 
 Let $G=(V,E)$ be a directed graph with designated vertices $s$ and $t$. Every edge $e$ has an integer weight $w(e)$, which may be positive, zero, or negative. For a simple $s\text{-}t$ path $P$, define its cost as $c(P)=\left\lvert\sum_{e\in P}w(e)\right\rvert$. The goal is to find a path of minimum cost.
 
-Using integers is deliberate. Complexity theory requires inputs with finite encodings; integer weights written in binary supply one. Rational weights can be handled by clearing denominators, whereas arbitrary real numbers require a separate computational model.
+Using integers is deliberate. Standard complexity analysis assumes that an algorithm receives a finite sequence of bits. Binary notation gives every integer a finite representation, and the number of bits becomes part of the input size. Rational weights can be converted to integers by multiplying every weight by a common denominator. This scales every path total by the same positive factor, so the optimal path does not change. Arbitrary real numbers, however, may not have finite representations and require a different computational model.
 
 It is helpful to state the associated decision problem:
 
