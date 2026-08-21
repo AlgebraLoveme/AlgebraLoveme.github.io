@@ -64,7 +64,7 @@ If such a modified image exists, it is an **adversarial example**. The change is
 chosen for its effect on the model rather than sampled at random. Research on
 [adversarial examples](https://arxiv.org/abs/1312.6199) showed that carefully
 chosen small perturbations could change neural network predictions. The
-[robust optimization viewpoint](https://openreview.net/pdf?id=rJzIBfZAb) asks us
+[robust optimization viewpoint](https://arxiv.org/abs/1706.06083) asks us
 to evaluate the worst allowed perturbation rather than an average one.
 
 The comparison below makes the idea of a perturbation visible. The right image
@@ -196,7 +196,7 @@ Solver-based methods such as
 [Reluplex](https://arxiv.org/abs/1702.01135) use this perspective to prove
 supported properties or produce counterexamples. Bound-based methods enclose
 all possible outputs and prove that none violate the requirement. For example,
-[Fast-Lin and Fast-Lip](https://proceedings.mlr.press/v80/weng18a.html) compute
+[Fast-Lin and Fast-Lip](https://arxiv.org/abs/1804.09699) compute
 certified lower bounds on the perturbation needed to change a ReLU network's
 decision.
 
