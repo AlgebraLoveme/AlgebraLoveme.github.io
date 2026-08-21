@@ -1,99 +1,62 @@
 ---
-title: "Adversarial examples paper summary: part 1"
+title: "Two Foundational Papers on Adversarial Examples"
 author_profile: true
 permalink: /2020-02-16-paper_summary1/
 date: 2020-02-16
-tags: [paper summary]
-mathjax: "true"
-excerpt: "paper summary: part 1"
+last_modified_at: 2026-08-21
+last_modified_by: PIRA
+tags: [adversarial examples, robustness, deep learning]
+mathjax: true
+toc: true
+header:
+    image: "/imgs/adversarial-papers-hero.jpg"
+excerpt: "How early adversarial-example research moved from discovery to a fast attack and adversarial training."
 ---
 
-Time flies and over a half year has gone by since I read the first adversarial example paper. Recently, I happen to have to look back at these papers I read and find that only a vague impression remains in my memory. Therefore, I want to record my notes in the blog series. Be noticed that what I write only represents my opinions and everything needs not to be true.
+Adversarial examples are inputs changed by a small, deliberately chosen perturbation that causes a model to make a wrong prediction. Two early papers established much of the modern vocabulary: Szegedy et al. showed that these examples exist and transfer between models, while Goodfellow et al. proposed a linear explanation, the fast gradient sign method, and practical adversarial training.
 
-<p style="text-align: center;"><font size='+3'><i>Preliminary</i></font></p>
+This post focuses on what each paper actually established and where its conclusions stop.
 
-Neural networks(NNs): a kind of approximation of functions. Its universal approximation property is given in  *Multilayer feedforward networks are universal approximators* by Hornik et al.
+## Szegedy et al.: discovering transferable adversarial examples
 
-Deep neural networks(DNNs): neural networks which are deeper than old-fashion NNs which typically have one or two layers. Actually it has no official definition. Be aware that DNNs are only realizable, or precisely, trainable in recent years thanks to the development of computation resources. DNNs have achieved large success in numerous fields which are traditionally seen as privilege of humans, such as image recognition and text understanding.
+[Intriguing Properties of Neural Networks](https://arxiv.org/abs/1312.6199) studies how small an input change can be while forcing a trained classifier toward a chosen target label.
 
-<p style="text-align: center;"><font size='+3'><i>Intriguing properties of neural networks<br> by Szegedy et al, 2014</i></font></p>
+For an input $x$, target label $\ell$, and perturbation $r$, the ideal attack seeks the smallest $\lVert r\rVert_2$ such that $f(x+r)=\ell$ and $x+r\in[0,1]^m$. Because the neural-network constraint is nonconvex, the authors approximate this problem with L-BFGS, a numerical optimization method, while constraining every pixel to the valid range. They minimize a weighted combination of perturbation size and classification loss, then search for a weight that produces the target label.
 
+Their experiments support three important observations:
 
-This paper literally is the first to report the existence of adversarial examples. 
+1. They found visually hard-to-distinguish adversarial examples for every tested sample across their studied MNIST, QuocNet, and AlexNet models.
+2. Many examples transferred to networks trained with different architectures or hyperparameters.
+3. Many also transferred to networks trained on disjoint training data.
 
-It argues that DNNs may not work as expected to encode a non-local generalization of input space. In other words, as people won't notice a small perturbation in the picture, for a small enough $\epsilon$, any samples in the rigion of input space should have the same label, i.e. 
+The transfer results argue against a purely model-specific accident. The paper also reports that random perturbations are much less effective than deliberately optimized ones.
 
-$$DNN(\{x+\epsilon|x\in t\}) = t$$ 
+### What the Lipschitz analysis says
 
-However, this smoothness assumption, as discuss by experiment, does not hold in general.
+For a network composed of layers $\phi_1,\ldots,\phi_K$, suppose layer $k$ has Lipschitz constant $L_k$. Then the full network satisfies $\lVert\phi(x)-\phi(x+r)\rVert\leq L\lVert r\rVert$, where $L=\prod_{k=1}^K L_k$.
 
-They formalize the attacker problem as:
+This bounds how much the output can change. Combined with a known margin between the correct output and its alternatives, a sufficiently small bound can certify that the predicted label is stable within a radius. A large upper bound, however, does **not** prove that an adversarial example exists. The paper's computed bounds were too conservative to explain transfer across models or training sets.
 
-$$
-\min \|r\|_{2}\\
-\text{ subject to }f(x+r)=l\\
-x+r \in[0,1]^{m}
-$$
+## Goodfellow et al.: linearity, FGSM, and adversarial training
 
-As it has highly non-linear constraints, they use a approximation known as **L-BFGS**:
+[Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572) proposes that locally linear behavior in high-dimensional models is sufficient to explain much of the phenomenon.
 
-$$
-\min c|r|+\operatorname{loss}_{f}(x+r, l)\\
-\text{ subject to }x+r \in[0,1]^{m}
-$$
+For a linear activation $w^\top x$, constrain a perturbation by $\lVert\eta\rVert_\infty\leq\epsilon$. Choosing $\eta=\epsilon\operatorname{sign}(w)$ changes the activation by $\epsilon\lVert w\rVert_1$. Each coordinate changes only slightly, but the contributions add across many dimensions.
 
-They find that the perturbation generated has no human-aware features yet are able to create a new image which is undistinguishable but is misclassified by DNNs. The generated images are called *adversarial examples*. They also find that adversarial examples have intriguing *transferable* property which means adversarial examples generated for a certain DNN can cause misclassification by DNNs with different architectures. They show that a white noise, Gaussian in the paper, can not effectively generate adversarial examples.
+The same idea applied to a model's loss $J$ yields the **fast gradient sign method (FGSM)**:
 
-They further studied how to certify robustness of DNNs. For a DNN stacked by multiple layers, the output can be written as:
+$$\eta=\epsilon\operatorname{sign}\!\left(\nabla_x J(\theta,x,y)\right).$$
 
-$$\phi(x)=\phi_{K}\left(\phi_{K-1}\left(\ldots \phi_{1}\left(x ; W_{1}\right) ; W_{2}\right) \ldots ; W_{K}\right)$$
+FGSM needs one gradient computation, making adversarial examples far cheaper to generate than the earlier L-BFGS procedure. Goodfellow et al. use this efficiency to argue that approximate linearity, rather than extreme nonlinearity alone, can produce adversarial vulnerability.
 
-where $\phi_i$ are function represented by layer and $W_i$ are weights of layer $i$. Using Lipschitz property, i.e. if
+### Adversarial training
 
-$$\forall x, r,\left\|\phi_{k}\left(x ; W_{k}\right)-\phi_{k}\left(x+r ; W_{k}\right)\right\| \leq L_{k}\|r\|$$
+The paper trains on both clean inputs and current FGSM adversarial inputs. Because the adversarial examples are regenerated as the model changes, training repeatedly exposes the model to inputs that increase its present loss rather than to arbitrary noise.
 
-for some constant $L_{k}$, then 
+In the paper's MNIST maxout experiment, adversarial training reduced the error on FGSM adversarial examples from $89.4\%$ to $17.9\%$. The trained model was also more resistant to transferred examples, although it remained vulnerable and could still be highly confident when wrong. On the clean test set, the authors also reported a small improvement in their setting; that result should not be read as a general guarantee that robustness training always improves clean accuracy.
 
-$$\|\phi(x)-\phi(x+r)\| \leq L\|r\|$$
+## What changed between the papers
 
-where $L=\prod_{k=1}^{K} L_{k}$. In this way, the change in output is bounded by $L \|r\|$ and we are able to know in what range of $\|r\|$ adversarial examples cannot exist. Unfortunately, they show this lower bound of $\|r\|$ is rather small.
+Szegedy et al. established the phenomenon with an optimization-based attack and showed surprising transfer across models and datasets. Goodfellow et al. supplied a simpler mechanism: many small, aligned coordinate changes can accumulate into a large change in a locally linear model. That mechanism produced a one-step attack and made adversarial training much cheaper.
 
-<p style="text-align: center;"><font size='+3'><i>Explaining and Harnessing Adversarial Examples<br> by Goodfellow et al, 2015</i></font></p> 
-
-First they consider a special case: linear classifier, i.e. the classifier get output vector by:
-
-$$\boldsymbol{w}^{\top} \tilde{\boldsymbol{x}}=\boldsymbol{w}^{\top} \boldsymbol{x}+\boldsymbol{w}^{\top} \boldsymbol{\eta}$$
-
-and our aim is to maximize the change in the output vector. Therefore, our problem is:
-
-$$
-\max_{\eta} w^T \eta\\
-\text{ subject to }\|\eta\|_\infty<\epsilon
-$$
-
-The solution(refer to [appendix](https://algebraloveme.github.io/2020-02-16-appendix-for-paper-summary1/)) is $\eta = sign(w_i^T)$,  where $i=\max_{i}\{\|w_i^T\|_1\}$.
-
-They hypothesized that it is the linearity that makes the DNNs vulnerable to adversarial examples. Therefore, follow the linear case, they proposed a new attack method, also known as **FGSM**:
-
-$$\boldsymbol{\eta}=\epsilon \operatorname{sign}\left(\nabla_{\boldsymbol{x}} J(\boldsymbol{\theta}, \boldsymbol{x}, y)\right)$$
-
-Their result shows a small perturbation would fail the classifiers. In this way, they suggest it is the linearity rather than nonlinearity that should be to blame.
-
-As pointed out in the paper, NNs are not supposed to be vulnerable to adversarial examples by nature as they are proven to be universal approximators. In particular, DNNs have more capacity and should be able to learn a more robust representation of functions. Therefore, there must be something wrong with the training algorithm. Following the intuition of adversarial examples, they proposed **adversarial training(AT)**. Basically, AT could be viewed as adding adversarial examples to training data and therefore get a more robust approximation. However, as experimented in last paper(Szegedy 2014), simply train NNs on a joint dataset is not enough to get a robust network.
-
-They realized the intuition by modifying loss function. Specifically, they change the loss to:
-
-$$\bar{J}(\boldsymbol{\theta}, \boldsymbol{x}, y)=\alpha J(\boldsymbol{\theta}, \boldsymbol{x}, y)+(1-\alpha) J\left(\boldsymbol{\theta}, \boldsymbol{x}+\operatorname{\epsilon sign}\left(\nabla_{\boldsymbol{x}} J(\boldsymbol{\theta}, \boldsymbol{x}, y)\right)\right.$$
-
-which is a combination of original part and adversarial part. This methods can be viewed as constantly supply up-to-date adversarial examples to the training dataset. In this way, they even get higher precision in original test set. I should remind readers that it is not guaranteed that AT would increase precision. Actually, as discussed in later works, there is a contradiction between them and we need to trade off. Technically, the precision increasing here might be the contribution of enlarged training data.
-
-AT shows great defense ability. Adversarial rate drops dramatically and AT-trained models are more resistant to transferable adversarial examples. As already shown in last paper, although theoretically adding all data points in the neighborhood should do the same, it is not efficient to train robust models by adding randomly sampled noises. Therefore, AT is pretty useful. Actually, many works focus on AT after that.
-
-
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-<h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
-  Total readers: <span id="busuanzi_value_page_pv"></span>
-</h3>
+Neither paper proves robustness against every attack. The Lipschitz calculation is an upper-bound analysis rather than a tight certificate, and FGSM adversarial training targets a particular attack construction. Their lasting contribution is the shift in viewpoint: robustness depends not only on accuracy near observed data, but also on a model's behavior in carefully chosen nearby directions.

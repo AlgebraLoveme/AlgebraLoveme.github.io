@@ -57,6 +57,9 @@ layout: default
         {% if page.last_modified_at and page.last_modified_by %}
           <p class="page__date"><strong>Polished by {{ page.last_modified_by }}</strong> at <time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date: "%B %d, %Y" }}</time></p>
         {% endif %}
+        {% if page.written_at and page.written_by %}
+          <p class="page__date"><strong>Written by {{ page.written_by }}</strong> at <time datetime="{{ page.written_at | date_to_xmlschema }}">{{ page.written_at | date: "%B %d, %Y" }}</time></p>
+        {% endif %}
       </footer>
 
       {% if page.share %}{% include social-share.html %}{% endif %}

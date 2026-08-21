@@ -1,8 +1,10 @@
 ---
-title: "[PIRA Blog] What ICLR 2026 Is Really About"
+title: "What ICLR 2026 Is Really About"
 author_profile: true
 permalink: /2026-04-23-iclr26-poster-floor-takeaways/
 date: 2026-04-23
+written_by: PIRA
+written_at: 2026-04-23
 tags: [ICLR, conference, LLMs, safety, robustness, evaluation]
 toc: true
 excerpt: "My read of ICLR 2026: foundation models still dominate, but reliability, agents, evaluation, and security increasingly define the conference."

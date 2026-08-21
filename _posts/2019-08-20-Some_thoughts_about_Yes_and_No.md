@@ -1,39 +1,54 @@
 ---
-title: "Some thoughts about Yes and No"
+title: "The Two-Element Group Hidden in Yes and No"
 author_profile: true
 permalink: /MY_INSIGHTS/2019-08-20-Some_thoughts_about_Yes_and_No/
 date: 2019-08-20
-tags: [group theory, language, logic]
-mathjax: "true"
+last_modified_at: 2026-08-21
+last_modified_by: PIRA
+tags: [group theory, logic, algebra]
+mathjax: true
 header:
-    image: "/imgs/thoughts2.jpg"
-excerpt: "MY_INSIGHTS, group theory, logic"
+    image: "/imgs/yes-no-group-hero.jpg"
+excerpt: "A simple agreement rule on Yes and No forms the cyclic group of order two."
 ---
 
-Everybody knows **Yes** and **No**. Here are how it works:
+Take two symbols, **Yes** and **No**, and define a rule for combining them: the result is Yes when the two inputs agree and No when they differ. This is the truth table of logical equivalence, also called XNOR.
 
-A *No* with *Yes* equals *No*; A *Yes* with *No* equals *No*.
+Writing the operation as $\star$, we obtain:
 
-A *No* with *No* equals *Yes*; A *Yes* with *Yes* is still *Yes*.
+| $\star$ | Yes | No |
+|---|---:|---:|
+| **Yes** | Yes | No |
+| **No** | No | Yes |
 
-Furthermore, we can arrange any number of *Yes* and *No* in a **sentence** though we don't do this in reality.
+This tiny table defines an algebraic structure. In fact, it defines the cyclic group of order two.
 
-What do you see?
+## Checking the group properties
 
-To simplify the notation, I will use 'Y' to represent 'Yes' and 'N' to represent 'No'. Also, let's say $$a$$ and 'Y' are the same and so do $$b$$ and 'N'. Asterisk $$*$$ stands for how Yes and No are arranged. Now we can rewrite the mechanism of Yes and No as:
+Let $S=\{\mathrm{Yes},\mathrm{No}\}$. The table shows each required property:
 
-$$a*b=b*a=b$$
+1. **Closure:** every result is again Yes or No, so $\star$ maps $S\times S$ into $S$.
+2. **Identity:** combining Yes with either element leaves that element unchanged. Therefore, Yes is the identity.
+3. **Inverses:** Yes is its own inverse, and No is also its own inverse because $\mathrm{No}\star\mathrm{No}=\mathrm{Yes}$.
+4. **Associativity:** map Yes to $+1$ and No to $-1$. Under this mapping, $\star$ becomes ordinary multiplication, which is associative.
 
-$$a*a=b*b=a$$
+The table is symmetric across its diagonal, so the operation is also commutative. Thus $(S,\star)$ is an abelian group.
 
-The first equation exactly stands for the commutative law! Suppose $S = \{a,b\}$, then $$a*b=b$$ and $$a*a=a$$ mean that $a$ is an identity element of $$S$$. Then property $$b*b=a=identity$$ plus $$a*a=a=identity$$ means that every element of set $$S$$ has a unique inverse. If you have basic idea of group theory, you should notice that $$S$$ is exactly an abelian group(To see this, we only need to verify the associative law which can be easily done). It is remarkable that this simple pair of words actually forms an abelian group which plays a irreplaceable role in modern algebra. 
+## Three equivalent views
 
-In addition, 'positive' and 'negative'(-1 and 1) can also be regarded in this way by multiplication, i.e. $$(-1)\times 1=1 \times (-1)=-1$$ and $$(-1)\times (-1)=1\times 1=1$$. Apart from multiplication, addition of $$\{0,1\}$$ are able to behave in the same way.
+The same group appears in several familiar forms:
 
+- **Signs under multiplication:** map Yes to $+1$ and No to $-1$.
+- **Bits under addition modulo two:** map Yes to $0$ and No to $1$.
+- **Boolean equivalence:** interpret Yes as true and No as false, then use XNOR.
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+These are not merely similar examples. They are isomorphic: relabeling the two elements preserves the operation table. The group is commonly written as $C_2$ or $\mathbb{Z}/2\mathbb{Z}$.
 
-<h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
-  Total readers: <span id="busuanzi_value_page_pv"></span>
-</h3>
+## Combining more than two answers
+
+Associativity means that parentheses do not matter when several answers are combined. The result depends only on the number of No entries:
+
+- an even number of No entries produces Yes;
+- an odd number of No entries produces No.
+
+This is the same parity rule used by addition modulo two. The algebra does not come from ordinary English grammar; it comes from the deliberately chosen “agree means Yes” operation. Once that operation is explicit, the hidden group structure is exact.
