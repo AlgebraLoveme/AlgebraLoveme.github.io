@@ -1,40 +1,76 @@
 ---
-title: "Hardness of a variant of shortest path problem"
+title: "Why Minimizing the Absolute Weight of a Path Is NP-Hard"
 author_profile: true
 permalink: /MY_INSIGHTS/2019-11-21-Hardness_of_a_variant_of_Shortest_Path/
 date: 2019-11-21
-tags: [complexity theory]
-mathjax: "true"
+last_modified_at: 2026-08-21
+last_modified_by: PIRA
+tags: [complexity theory, graph algorithms, NP-completeness]
+mathjax: true
 header:
-    image: "/imgs/complexity.jfif"
-excerpt: "MY_INSIGHTS, complexity theory"
+    image: "/imgs/absolute-weight-path-hero.jpg"
+excerpt: "A small change to the shortest-path objective turns it into a disguised Partition problem."
 ---
 
-When I was solving one of my homework problem, I found a very fascinating question. This blog aims to setting it down.
+Ordinary shortest path minimizes the sum of the edge weights along a route. Consider one small-looking change: instead, minimize the **absolute value** of that sum. Positive and negative edges may now cancel, so a path with a large positive prefix can ultimately be better than one whose prefix is already near zero.
 
-First let me state the fine-looking problem. Given a graph with no constraint on the edge weight(as long as it $\in R$), our goal is to find the shortest path in such a manner that the absolute value of the sum of all the weighted edges this path covered is minimized.
+That loss of a reliable “best prefix” is not merely inconvenient. The resulting optimization problem is NP-hard, even on a directed acyclic graph.
 
-$$
-\min_{P} |\sum_{w_i \in P} w_i|\\
-\text{s.t. $P$ is a path of graph $G$}\\
-\text{$P$ starts from a specific vertex $w_0$ to another specific vertex $w_d$}
-$$
+## The problem
 
-Here is the background of this problem. Recently in China and many other parts of the world, shared bikes become more and more popular. However, to maintain bicycle amount each station keeps, public bike monitoring center has to remove or add some bikes to each station. Every day they get a graph of station states(number of bikes they keep now) and a problem station(full or empty) and decide a route to send/remove bikes to/from it. In the meantime, all the station they passed would be adjusted so that extra bikes would be taken and stations with insufficient supply would get enough bikes. It is natural and practical that they neither want to take many bikes from the monitoring center nor collect many bikes. Our problem is how to decide such a route.
+Let $G=(V,E)$ be a directed graph with designated vertices $s$ and $t$. Every edge $e$ has an integer weight $w(e)$, which may be positive, zero, or negative. For a simple $s$-$t$ path $P$, define its cost as $c(P)=\left|\sum_{e\in P}w(e)\right|$. The goal is to find a path of minimum cost.
 
-Unfortunately, this blog proves that our problem is NP-hard. There are some preliminaries you have to know about this proof.
+Using integers is deliberate. Complexity theory requires inputs with finite encodings; integer weights written in binary supply one. Rational weights can be handled by clearing denominators, whereas arbitrary real numbers require a separate computational model.
 
-1. The set division problem. This problem requires to divide a set of positive numbers into two subsets so that the sum of each subset is exactly half of the total. This problem is proven to be NP-hard.
-2. The variant of set division. This problem requires the same but wants the difference of two subset sums to be as small as possible. Since if we have a polynomial time algorithm to solve this problem, then we would know whether the set division problem is solvable and get a solution if so, this variant is also NP-hard.
-3. For the variant of set division, it is equivalent to get the sum of one subset to be as near as possible to the half total sum since it would make the difference smallest.
+It is helpful to state the associated decision problem:
 
-Our proof follows to construct a subproblem of the bike problem to be equivalent to the variant of set division problem. Let $W = \frac{1}{2}sum(S)$, where $S = \{a_i \text{ for some }i\}$ is an arbitrary set of positive numbers. Take $w_0 = -W$ to be the weight of the start point and $w_i = a_i$ to be other points and those points are all directly connected to each other. Now suppose we have a path given by our solver to the bike problem, then if we take one subset of the whole to be vertexes covered by this solution and traverse all those vertexes by setting them to destination point(only increases time complexity by $N$ times) and get the best one, it solves the variant of set division by *preliminary 3*. And by preliminary 2, it cannot be done if the solver takes polynomial time unless $NP=P$. Thus it completes the proof.
+> Given $G$, $s$, $t$, and a nonnegative integer $B$, is there an $s$-$t$ path $P$ with $c(P)\leq B$?
 
-The main idea of the proof comes from my treasured roommate, Runze Wang.
+This problem is in NP: a path is a polynomial-size certificate, and its weight can be summed and checked in polynomial time. We will prove NP-hardness by considering only the special case $B=0$.
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
+## Reduction from Partition
 
-<h3 id="busuanzi_container_page_pv" style="align-content: center; color:brown; font: 200">
-  Total readers: <span id="busuanzi_value_page_pv"></span>
-</h3>
+An instance of **Partition** is a list of positive integers $a_1,\ldots,a_n$. It asks whether the numbers can be divided into two groups with equal sums. Partition is one of the classical NP-complete problems described by [Karp](https://doi.org/10.1007/978-1-4684-2001-2_9).
+
+From this list, construct a layered graph with main vertices $v_0=s,v_1,\ldots,v_n=t$. Between $v_{i-1}$ and $v_i$, add two directed two-edge branches:
+
+- the upper branch has weights $+a_i$ and $0$;
+- the lower branch has weights $-a_i$ and $0$.
+
+The intermediate branch vertices keep the graph simple—there are no parallel edges. Every edge points from one layer to the next, so the result is a directed acyclic graph.
+
+<figure>
+  <a href="{{ '/imgs/partition-path-reduction.svg' | relative_url }}">
+    <img src="{{ '/imgs/partition-path-reduction.svg' | relative_url }}" alt="A chain of diamond-shaped graph gadgets. At item i, a directed path chooses either a branch weighted plus a sub i or a branch weighted minus a sub i, followed by a zero-weight edge.">
+  </a>
+  <figcaption>The reduction uses one choice gadget per input number. Every $s$-$t$ path selects exactly one sign for each $a_i$.</figcaption>
+</figure>
+
+The graph has only $3n+1$ vertices and $4n$ edges, so it can be built in polynomial time. More importantly, every $s$-$t$ path corresponds to a sign choice $\sigma_i\in\{+1,-1\}$ for each input number, and its signed weight is $\sum_{i=1}^n\sigma_i a_i$.
+
+## Why the reduction works
+
+The two directions are direct:
+
+1. **A valid partition gives a zero-cost path.** Put the numbers in one group on upper branches and those in the other group on lower branches. Equal group sums imply $\sum_i\sigma_i a_i=0$, so the path cost is zero.
+2. **A zero-cost path gives a valid partition.** Place every number whose path branch has sign $+1$ in one group and every number with sign $-1$ in the other. A path cost of zero means the two group sums are equal.
+
+Therefore, the Partition instance is a yes-instance exactly when the constructed graph contains an $s$-$t$ path of absolute weight zero. If we could solve the absolute-weight path optimization problem in polynomial time, we could run that algorithm and test whether its optimum is zero, thereby solving Partition in polynomial time.
+
+The decision problem is thus NP-complete, and the optimization problem is NP-hard. The proof is stronger than a generic negative-edge argument: the constructed graph is acyclic, so negative cycles and repeated walks play no role. If we remove the edge directions, each $v_i$ still separates the earlier gadgets from the later ones; consequently, the same construction also proves hardness for undirected simple paths.
+
+## A small example
+
+Take the numbers $3,1,2$. The path can choose $+3$, then $-1$, then $-2$, producing total weight $3-1-2=0$. Reading the signs recovers the partition $\{3\}$ and $\{1,2\}$.
+
+This example also shows why a conventional shortest-path recurrence loses the information it needs. Suppose two partial paths reach the same vertex with totals $0$ and $100$. The first looks better if we compare absolute values immediately, but a remaining edge of weight $-100$ makes the second prefix perfect. An algorithm may need to retain many attainable prefix sums rather than one “best” value per vertex.
+
+## What the proof does—and does not—say
+
+- **Nonnegative weights are easy.** If every edge weight is nonnegative, taking an absolute value changes nothing, and the problem reduces to ordinary shortest path.
+- **The hardness shown here is weak NP-hardness.** The reduction comes from Partition, which admits pseudo-polynomial algorithms. On a DAG with integral weights and $A=\sum_{e\in E}|w(e)|$, dynamic programming over vertices and attainable sums can run in time polynomial in $A$, but $A$ may be exponential in the binary input length.
+- **The route must be defined precisely.** This post uses simple paths. The acyclic reduction makes the distinction between paths and walks irrelevant for the constructed instances, but it can matter in other graphs.
+
+The motivating application was bicycle redistribution: visiting a station can contribute a signed pickup or delivery amount, and one may want the final load imbalance to be close to zero. Real routing systems also impose vehicle capacities, travel costs, time windows, and possibly station revisits. The proof above establishes hardness for the abstract cancellation objective; it should not be mistaken for a complete model of the operational problem.
+
+The central reduction idea came from my roommate, Runze Wang. The polished version makes the graph construction and both directions of the proof explicit.

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title description">
+  <title id="title">Reduction from Partition to the absolute-weight path problem</title>
+  <desc id="description">A chain of diamond-shaped gadgets. In gadget i, a path chooses either an edge of weight plus a sub i or an edge of weight minus a sub i, followed by a zero-weight edge.</desc>
+  <defs>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#087ea4"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c66a05"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#526579"/>
+    </marker>
+    <style>
+      .node { fill: #ffffff; stroke: #17324d; stroke-width: 3; }
+      .choice { fill: #ffffff; stroke-width: 3; }
+      .upper { stroke: #087ea4; }
+      .lower { stroke: #c66a05; }
+      .edge { fill: none; stroke-width: 4; stroke-linecap: round; }
+      .zero { stroke: #526579; marker-end: url(#arrow-gray); }
+      .plus { stroke: #087ea4; marker-end: url(#arrow-cyan); }
+      .minus { stroke: #c66a05; marker-end: url(#arrow-amber); }
+      .label { fill: #17324d; font: 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; text-anchor: middle; }
+      .weight { font: 21px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-weight: 600; text-anchor: middle; }
+      .plus-text { fill: #087ea4; }
+      .minus-text { fill: #a54f00; }
+      .zero-text { fill: #526579; }
+    </style>
+  </defs>
+
+  <rect x="2" y="2" width="1196" height="416" rx="24" fill="#f7fbff" stroke="#d8e4ef" stroke-width="2"/>
+
+  <!-- Item 1 -->
+  <path class="edge plus" d="M 98 198 L 205 108"/>
+  <path class="edge zero" d="M 235 108 L 342 198"/>
+  <path class="edge minus" d="M 98 222 L 205 312"/>
+  <path class="edge zero" d="M 235 312 L 342 222"/>
+
+  <!-- Item 2 -->
+  <path class="edge plus" d="M 378 198 L 485 108"/>
+  <path class="edge zero" d="M 515 108 L 622 198"/>
+  <path class="edge minus" d="M 378 222 L 485 312"/>
+  <path class="edge zero" d="M 515 312 L 622 222"/>
+
+  <!-- Omitted middle gadgets -->
+  <path d="M 658 210 L 782 210" fill="none" stroke="#8ca0b3" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 16"/>
+
+  <!-- Item n -->
+  <path class="edge plus" d="M 818 198 L 925 108"/>
+  <path class="edge zero" d="M 955 108 L 1062 198"/>
+  <path class="edge minus" d="M 818 222 L 925 312"/>
+  <path class="edge zero" d="M 955 312 L 1062 222"/>
+
+  <!-- Main and branch vertices -->
+  <circle class="node" cx="80" cy="210" r="18"/>
+  <circle class="node" cx="360" cy="210" r="18"/>
+  <circle class="node" cx="640" cy="210" r="18"/>
+  <circle class="node" cx="800" cy="210" r="18"/>
+  <circle class="node" cx="1080" cy="210" r="18"/>
+  <circle class="choice upper" cx="220" cy="95" r="15"/>
+  <circle class="choice lower" cx="220" cy="325" r="15"/>
+  <circle class="choice upper" cx="500" cy="95" r="15"/>
+  <circle class="choice lower" cx="500" cy="325" r="15"/>
+  <circle class="choice upper" cx="940" cy="95" r="15"/>
+  <circle class="choice lower" cx="940" cy="325" r="15"/>
+
+  <!-- Vertex labels -->
+  <text class="label" x="80" y="255">s = v<tspan baseline-shift="sub" font-size="15">0</tspan></text>
+  <text class="label" x="360" y="255">v<tspan baseline-shift="sub" font-size="15">1</tspan></text>
+  <text class="label" x="640" y="255">v<tspan baseline-shift="sub" font-size="15">2</tspan></text>
+  <text class="label" x="800" y="255">v<tspan baseline-shift="sub" font-size="15">n-1</tspan></text>
+  <text class="label" x="1080" y="255">t = v<tspan baseline-shift="sub" font-size="15">n</tspan></text>
+
+  <!-- Edge-weight labels -->
+  <text class="weight plus-text" x="151" y="132">+a<tspan baseline-shift="sub" font-size="14">1</tspan></text>
+  <text class="weight minus-text" x="151" y="304">-a<tspan baseline-shift="sub" font-size="14">1</tspan></text>
+  <text class="weight zero-text" x="290" y="132">0</text>
+  <text class="weight zero-text" x="290" y="304">0</text>
+
+  <text class="weight plus-text" x="431" y="132">+a<tspan baseline-shift="sub" font-size="14">2</tspan></text>
+  <text class="weight minus-text" x="431" y="304">-a<tspan baseline-shift="sub" font-size="14">2</tspan></text>
+  <text class="weight zero-text" x="570" y="132">0</text>
+  <text class="weight zero-text" x="570" y="304">0</text>
+
+  <text class="weight plus-text" x="871" y="132">+a<tspan baseline-shift="sub" font-size="14">n</tspan></text>
+  <text class="weight minus-text" x="871" y="304">-a<tspan baseline-shift="sub" font-size="14">n</tspan></text>
+  <text class="weight zero-text" x="1010" y="132">0</text>
+  <text class="weight zero-text" x="1010" y="304">0</text>
+
+  <text x="600" y="382" fill="#526579" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" text-anchor="middle">Each directed path chooses exactly one signed branch for every input number.</text>
+</svg>
