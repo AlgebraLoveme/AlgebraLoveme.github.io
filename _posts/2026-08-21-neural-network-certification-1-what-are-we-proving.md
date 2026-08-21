@@ -124,8 +124,8 @@ than a random collection of image changes.
 Two outcomes are possible:
 
 - **The attack finds a failure.** We now have a perturbed image of April
-  that the model does not label cat. This one image disproves the robustness
-  claim.
+  that the model does not label cat. That counterexample disproves the
+  robustness claim.
 - **The attack finds no failure.** The images visited by this search did not
   break the model.
 
