@@ -18,13 +18,13 @@ That loss of a reliable “best prefix” is not merely inconvenient. The result
 
 ## The problem
 
-Let $G=(V,E)$ be a directed graph with designated vertices $s$ and $t$. Every edge $e$ has an integer weight $w(e)$, which may be positive, zero, or negative. For a simple $s$-$t$ path $P$, define its cost as $c(P)=\left|\sum_{e\in P}w(e)\right|$. The goal is to find a path of minimum cost.
+Let $G=(V,E)$ be a directed graph with designated vertices $s$ and $t$. Every edge $e$ has an integer weight $w(e)$, which may be positive, zero, or negative. For a simple $s\text{-}t$ path $P$, define its cost as $c(P)=\left\lvert\sum_{e\in P}w(e)\right\rvert$. The goal is to find a path of minimum cost.
 
 Using integers is deliberate. Complexity theory requires inputs with finite encodings; integer weights written in binary supply one. Rational weights can be handled by clearing denominators, whereas arbitrary real numbers require a separate computational model.
 
 It is helpful to state the associated decision problem:
 
-> Given $G$, $s$, $t$, and a nonnegative integer $B$, is there an $s$-$t$ path $P$ with $c(P)\leq B$?
+> Given $G$, $s$, $t$, and a nonnegative integer $B$, is there an $s\text{-}t$ path $P$ with $c(P)\leq B$?
 
 This problem is in NP: a path is a polynomial-size certificate, and its weight can be summed and checked in polynomial time. We will prove NP-hardness by considering only the special case $B=0$.
 
@@ -43,10 +43,10 @@ The intermediate branch vertices keep the graph simple—there are no parallel e
   <a href="{{ '/imgs/partition-path-reduction.svg' | relative_url }}">
     <img src="{{ '/imgs/partition-path-reduction.svg' | relative_url }}" alt="A chain of diamond-shaped graph gadgets. At item i, a directed path chooses either a branch weighted plus a sub i or a branch weighted minus a sub i, followed by a zero-weight edge.">
   </a>
-  <figcaption>The reduction uses one choice gadget per input number. Every $s$-$t$ path selects exactly one sign for each $a_i$.</figcaption>
+  <figcaption>The reduction uses one choice gadget per input number. Every $s\text{-}t$ path selects exactly one sign for each $a_i$.</figcaption>
 </figure>
 
-The graph has only $3n+1$ vertices and $4n$ edges, so it can be built in polynomial time. More importantly, every $s$-$t$ path corresponds to a sign choice $\sigma_i\in\{+1,-1\}$ for each input number, and its signed weight is $\sum_{i=1}^n\sigma_i a_i$.
+The graph has only $3n+1$ vertices and $4n$ edges, so it can be built in polynomial time. More importantly, every $s\text{-}t$ path corresponds to a sign choice $\sigma_i\in\{+1,-1\}$ for each input number, and its signed weight is $\sum_{i=1}^n\sigma_i a_i$.
 
 ## Why the reduction works
 
@@ -55,7 +55,7 @@ The two directions are direct:
 1. **A valid partition gives a zero-cost path.** Put the numbers in one group on upper branches and those in the other group on lower branches. Equal group sums imply $\sum_i\sigma_i a_i=0$, so the path cost is zero.
 2. **A zero-cost path gives a valid partition.** Place every number whose path branch has sign $+1$ in one group and every number with sign $-1$ in the other. A path cost of zero means the two group sums are equal.
 
-Therefore, the Partition instance is a yes-instance exactly when the constructed graph contains an $s$-$t$ path of absolute weight zero. If we could solve the absolute-weight path optimization problem in polynomial time, we could run that algorithm and test whether its optimum is zero, thereby solving Partition in polynomial time.
+Therefore, the Partition instance is a yes-instance exactly when the constructed graph contains an $s\text{-}t$ path of absolute weight zero. If we could solve the absolute-weight path optimization problem in polynomial time, we could run that algorithm and test whether its optimum is zero, thereby solving Partition in polynomial time.
 
 The decision problem is thus NP-complete, and the optimization problem is NP-hard. The proof is stronger than a generic negative-edge argument: the constructed graph is acyclic, so negative cycles and repeated walks play no role. If we remove the edge directions, each $v_i$ still separates the earlier gadgets from the later ones; consequently, the same construction also proves hardness for undirected simple paths.
 
@@ -68,7 +68,7 @@ This example also shows why a conventional shortest-path recurrence loses the in
 ## What the proof does—and does not—say
 
 - **Nonnegative weights are easy.** If every edge weight is nonnegative, taking an absolute value changes nothing, and the problem reduces to ordinary shortest path.
-- **The hardness shown here is weak NP-hardness.** The reduction comes from Partition, which admits pseudo-polynomial algorithms. On a DAG with integral weights and $A=\sum_{e\in E}|w(e)|$, dynamic programming over vertices and attainable sums can run in time polynomial in $A$, but $A$ may be exponential in the binary input length.
+- **The hardness shown here is weak NP-hardness.** The reduction comes from Partition, which admits pseudo-polynomial algorithms. On a DAG with integral weights and $A=\sum_{e\in E}\lvert w(e)\rvert$, dynamic programming over vertices and attainable sums can run in time polynomial in $A$, but $A$ may be exponential in the binary input length.
 - **The route must be defined precisely.** This post uses simple paths. The acyclic reduction makes the distinction between paths and walks irrelevant for the constructed instances, but it can matter in other graphs.
 
 The motivating application was bicycle redistribution: visiting a station can contribute a signed pickup or delivery amount, and one may want the final load imbalance to be close to zero. Real routing systems also impose vehicle capacities, travel costs, time windows, and possibly station revisits. The proof above establishes hardness for the abstract cancellation objective; it should not be mistaken for a complete model of the operational problem.
