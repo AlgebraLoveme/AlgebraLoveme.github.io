@@ -1,5 +1,5 @@
 ---
-title: "Testing Is Not Proof: A First Look at Neural Network Certification"
+title: "Why Testing Is Not Proof: Neural Network Certification, Part 1"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-1-what-are-we-proving/
 date: 2026-08-21
@@ -104,10 +104,10 @@ absolute pixel change, so every pixel may change by at most $\epsilon$. Every
 point in $S_p(x_0,\epsilon)$ is one numerical version of April's photo permitted
 by our threat model.
 
-This threat model is mathematically convenient, but it is not a perfect model of
-visual similarity. Its pixel-wise limits do not directly describe rotation,
-camera motion, or every lighting change. We will examine such modeling choices
-in the next post.
+This set gives **allowed** a precise meaning for one robustness question. A
+question about rotation, camera motion, or lighting would use a set designed for
+those changes instead. In every case, certification begins by stating exactly
+which versions of the input belong to the claim.
 
 ## An attack searches for a version that fails
 
@@ -167,79 +167,29 @@ In words, cat must have a strictly higher score than every other class for every
 allowed version of the photo. If we prove this statement, we have certified
 **local adversarial robustness** around $x_0$ at radius $\epsilon$.
 
-Certification does not run the network separately on every image. It reasons
-about sets of possible values, using mathematical bounds, logical solving, or a
-combination of both.
-
-This task connects naturally to program verification. During inference, a fixed
-neural network is a numerical program. It applies a known sequence of operations
-to its input. Program verification describes the allowed inputs with a
-**precondition** and the required outputs with a **postcondition**:
-
-- The precondition $P(x)$ describes the allowed inputs.
-- The postcondition $Q(f(x))$ describes the required outputs.
-
-The verification claim is
-
-$$
-\text{for every }x,\qquad P(x)\Longrightarrow Q(f(x)).
-$$
-
-For April's photo, the precondition is $x\in S_p(x_0,\epsilon)$. The postcondition
-requires cat to outrank every competing class.
-
-The property holds exactly when no allowed input violates the postcondition.
-Solver-based methods such as
-[Reluplex](https://arxiv.org/abs/1702.01135) use this perspective to prove
-supported properties or produce counterexamples. Bound-based methods enclose
-all possible outputs and prove that none violate the requirement. For example,
-[Fast-Lin and Fast-Lip](https://arxiv.org/abs/1804.09699) compute
-certified lower bounds on the perturbation needed to change a ReLU network's
-decision.
-
-In this series, a **certificate** means that a sound mathematical procedure has
-established the scoped claim.
-
-## Three possible outcomes
-
-A verification attempt for April's photo can have three practically important
-outcomes:
-
-- **Verified:** the method proves that every allowed version remains classified
-  as cat.
-- **Falsified:** the method finds an allowed version with a different predicted
-  class.
-- **Unknown:** the method establishes neither result. Its approximation may be
-  too loose, it may run out of resources, or it may not support part of the
-  model.
-
-A trustworthy verified result requires **soundness**. A sound method does not
-certify a false claim when its mathematical and numerical assumptions hold.
-Soundness does not mean that the method can prove every true claim. Some sound
-methods return unknown whenever their approximation is inconclusive.
-
-Unknown is not the same as unsafe. The property may be false, or it may be true
-but difficult for this method to prove. Later posts will show how tighter bounds
-and search can resolve some unknown cases.
+Certification does not run the network separately on every image. It establishes
+the statement for the whole set at once. In this series, a **certificate** is a
+sound mathematical argument that proves this whole-set statement.
 
 ## Where the series goes next
 
 April's photo has taken us from one correct prediction to robustness,
-adversarial attacks, incomplete testing, and certification. The rest of the
-series will build the technical ideas in small steps:
+adversarial attacks, incomplete testing, and the need for certification. The
+rest of the series follows one small April classifier from its first proof to
+the results table:
 
-1. **Writing the guarantee:** turn an informal goal into input and output
-   specifications.
-2. **Proof by propagating bounds:** use interval arithmetic to reason about a
-   whole input region.
-3. **Tighter bounds with relaxations:** preserve more information with linear
-   bounds and abstract domains.
-4. **Search for a complete answer:** combine bounds with splitting,
-   branch-and-bound, and solver-based reasoning.
-5. **Training models to be certifiable:** make provable robustness part of the
-   learning objective.
-6. **Reading results critically:** compare certified models and verifiers under
-   matched assumptions.
+- **Part 2 — What would count as a proof?** We will build a tiny ReLU classifier
+  and certify it by hand.
+- **Part 3 — How can bounds travel through a network?** We will propagate ranges
+  through the same classifier.
+- **Part 4 — Why do simple bounds lose information?** We will preserve useful
+  relationships with linear bounds.
+- **Part 5 — How do we turn unknown into an answer?** We will split the input
+  region and search its pieces.
+- **Part 6 — Can we train a network to be certifiable?** We will put a certified
+  bound into the learning objective.
+- **Part 7 — How should we read certification results?** We will reconstruct the
+  exact claims behind a table of results.
 
 ## Takeaway
 

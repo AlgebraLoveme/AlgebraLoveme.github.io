@@ -1,5 +1,5 @@
 ---
-title: "Neural Network Certification, Part 6: Training Models to Be Certifiable"
+title: "Can We Train a Network to Be Certifiable? Neural Network Certification, Part 6"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-6-certified-training/
 date: 2026-08-21
@@ -8,41 +8,73 @@ written_at: 2026-08-21
 tags: [neural networks, certification, certified training, robustness]
 toc: true
 published: false
-excerpt: "Why post-hoc verification may fail, and how training can encourage both robust behavior and stronger certificates."
+excerpt: "Move from ordinary training to adversarial and certified objectives, then read what each one teaches April's classifier."
 ---
 
 <!--
 Status: outline only.
 
 Reader outcome:
-The reader understands why certifiability depends on the trained network and how
-a differentiable certificate can become part of the training objective.
+The reader can distinguish ordinary, adversarial, and certified training losses,
+follow a minimal certified-training loop, and interpret clean, attacked, and
+certified accuracy.
 -->
 
-## Verification cannot rescue every trained model
+## Can training make April's prediction easier to prove?
 
-<!-- Separate a false property from a true property that current bounds cannot prove. -->
+<!--
+Return to the proof effort in Part 5. Ask whether the network can learn parameters
+that keep the April margin positive and make its lower bound easier to establish.
+-->
 
-## From ordinary loss to a robust objective
+## Ordinary training learns from the examples it sees
 
-<!-- Review empirical risk, adversarial examples, and worst-case loss conceptually. -->
+<!--
+Introduce an ordinary classification loss on sampled images. Use April and a few
+neighboring examples to show what the objective directly rewards.
+-->
 
-## Training against a sound upper bound
+## Adversarial training adds hard searched examples
 
-<!-- Show how interval or relaxation bounds provide a differentiable surrogate. -->
+<!--
+Connect to Part 1 attacks: approximately maximize the loss inside the allowed set,
+then train on the found input. Keep the distinction between search and proof crisp.
+-->
 
-## A simple certified-training loop
+## Certified training optimizes a bound on every allowed input
 
-<!-- Present pseudocode and explain radius schedules and bound propagation. -->
+<!--
+Introduce this post's one main formal object: a certified robust loss obtained
+from a sound bound on worst-case loss or margin. Connect its calculation to the
+bound propagation already learned in Parts 3–4.
+-->
 
-## The trade-offs
+## Put the three objectives side by side
 
-<!-- Discuss clean accuracy, certified accuracy, training cost, and certificate tightness. -->
+<!--
+Use one compact equation or diagram to compare ordinary, adversarial, and
+certified objectives by what each optimizes. Avoid a broad literature survey.
+-->
 
-## What to measure
+## A minimal certified-training loop
 
-<!-- Define certified accuracy carefully and require matched radius, norm, data, and model. -->
+<!--
+Give short pseudocode: sample a batch, construct allowed sets, propagate bounds,
+compute the certified loss, update parameters. Explain any radius schedule only
+where it appears in the loop.
+-->
+
+## Read the three accuracy numbers
+
+<!--
+Define clean accuracy, attacked accuracy, and certified accuracy near their first
+joint use. Show a small hypothetical April-classifier result and ensure every
+number uses the same model, norm, and radius.
+-->
 
 ## Takeaway
 
-<!-- Certification can shape training, not merely audit the finished network. -->
+<!--
+Certification can shape the learned network rather than only auditing it later.
+End by asking how to judge a larger table of such results fairly.
+-->

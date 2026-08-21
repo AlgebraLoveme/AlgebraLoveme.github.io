@@ -1,5 +1,5 @@
 ---
-title: "Neural Network Certification, Part 5: Search for a Complete Answer"
+title: "How Do We Turn Unknown into an Answer? Neural Network Certification, Part 5"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-5-complete-verification/
 date: 2026-08-21
@@ -8,45 +8,80 @@ written_at: 2026-08-21
 tags: [neural networks, certification, branch and bound, complete verification]
 toc: true
 published: false
-excerpt: "How splitting, search, and optimization can turn inconclusive bounds into a proof or a concrete counterexample."
+excerpt: "Split April's input region, bound each piece, and search until every piece is safe or one contains a concrete failure."
 ---
 
 <!--
 Status: outline only.
 
 Reader outcome:
-The reader can distinguish soundness from completeness and describe how a
-branch-and-bound verifier combines lower bounds, upper bounds, and splitting.
+The reader can simulate branch and bound on the running classifier, distinguish
+soundness from completeness, and interpret a proof, counterexample, or timeout.
+
+Continuity requirement:
+Start from the exact unresolved region left by Part 4. Reuse the same network,
+property, bounds, and visual coordinate system so that splitting is the only new
+idea.
 -->
 
-## When a sound method says “unknown”
+## One region is too hard; can two be easier?
 
-<!-- Use an example where the property is true but the relaxation is too loose. -->
+<!--
+Open with the remaining unknown for April. Show geometrically how dividing the
+allowed set can make each local bound tighter.
+-->
 
-## Soundness and completeness are different promises
+## Bound, split, and repeat
 
-<!-- Define both plainly and separate theoretical completeness from practical timeout. -->
+<!--
+Introduce this post's one main formal object as a search tree. Work through the
+mechanism before naming it: bound a region, discard it if proved safe, split it
+if inconclusive, and repeat on its children.
+-->
 
-## Split the problem, then bound each piece
+## Work through April's search tree
 
-<!-- Walk through branch and bound on a two-dimensional or one-ReLU example. -->
+<!--
+Use the prevalidated numerical example from Parts 2–4. Show each split and each
+margin bound until all leaves are safe, or pair this proof case with a nearby
+radius where a concrete counterexample is found.
+-->
 
-## Looking for a counterexample at the same time
+## Search for a failing input at the same time
 
-<!-- Explain feasible attacks or optimization as upper bounds, not as proofs of safety. -->
+<!--
+Explain why an attack supplies candidate points while bounding handles entire
+regions. A valid failing point immediately falsifies the claim; a successful
+proof must cover every remaining region.
+-->
 
-## Other views of the same verification problem
+## Now give the method its name
 
-<!-- Introduce mixed-integer programming and satisfiability solving at a conceptual level. -->
+<!--
+Name branch and bound after the worked mechanism. Then map MILP, SMT, and
+specialized neural-network verifiers onto the same prove-or-find-a-counterexample
+goal in one concise conceptual section, linking papers through arXiv.
+-->
 
-## Why complete verification can be expensive
+## Soundness, completeness, and timeouts
 
-<!-- Explain combinatorial activation patterns and the importance of branching heuristics. -->
+<!--
+Define soundness and completeness using the finished search tree. Distinguish a
+theoretically complete procedure from a run stopped by a resource limit, because
+this distinction is required to interpret the algorithm's outcome.
+-->
 
-## Reading verifier outcomes correctly
+## Read the three outcomes from the tree
 
-<!-- Separate proved, disproved, timeout, numerical failure, and unsupported model. -->
+<!--
+Return to verified, falsified, and unknown. Show exactly what artifact supports
+each outcome: covered leaves, a concrete input, or an unfinished tree.
+-->
 
 ## Takeaway
 
-<!-- Search can close the gap left by relaxations, often at substantial computational cost. -->
+<!--
+Splitting converts one difficult whole-set problem into smaller ones that bounds
+can settle. End by asking whether training can make these proofs easier from the
+start.
+-->

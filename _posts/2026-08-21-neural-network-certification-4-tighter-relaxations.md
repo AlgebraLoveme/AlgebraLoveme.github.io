@@ -1,5 +1,5 @@
 ---
-title: "Neural Network Certification, Part 4: Tighter Bounds with Relaxations"
+title: "Why Do Simple Bounds Lose Information? Neural Network Certification, Part 4"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-4-tighter-relaxations/
 date: 2026-08-21
@@ -8,41 +8,72 @@ written_at: 2026-08-21
 tags: [neural networks, certification, linear relaxation, abstract interpretation]
 toc: true
 published: false
-excerpt: "Why interval bounds lose precision, and how linear relaxations preserve more information while remaining sound."
+excerpt: "April's classifier exposes what intervals forget, then linear bounds preserve enough relationships to prove more."
 ---
 
 <!--
 Status: outline only.
 
 Reader outcome:
-The reader understands the geometric idea behind relaxing an uncertain ReLU and
-can explain the precision-versus-cost trade-off relative to interval bounds.
+The reader can locate dependency loss in interval propagation, draw sound linear
+bounds for an uncertain ReLU, and use the retained relationships to tighten the
+same output margin.
+
+Continuity requirement:
+Begin with the larger-region unknown case from Part 3. Reuse the exact network,
+numbers, property, and diagram conventions; change the reasoning method only.
 -->
 
-## Where intervals forget too much
+## Why did April's margin cross zero?
 
-<!-- Revisit one failed certificate from Part 3 and locate the lost dependency. -->
+<!--
+Reproduce only the decisive lines of the Part 3 calculation. Track where two
+values that depend on the same input are later treated as if they could vary
+independently.
+-->
 
-## Bounding an uncertain ReLU with lines
+## The missing information is a relationship
 
-<!-- Draw the ReLU graph and derive intuitive upper and lower linear bounds. -->
+<!--
+Introduce this post's one main formal object: an affine bound that remains a
+function of the original input. Contrast it visually with a box, using the
+existing April network rather than a detached algebra example.
+-->
 
-## Carrying relationships through the network
+## Enclose an uncertain ReLU with lines
 
-<!-- Explain symbolic or affine bounds without requiring convex-analysis background. -->
+<!--
+Draw the ReLU graph on its known input interval. Derive intuitive lower and upper
+lines that contain every possible ReLU output.
+-->
 
-## A small certificate, step by step
+## Carry the lines to April's output margin
 
-<!-- Compare interval and linear-relaxation results on the same network and property. -->
+<!--
+Substitute the affine bounds through the remaining layer. Compare the resulting
+margin bound with the interval result on the exact same region and state whether
+the tighter calculation now certifies it.
+-->
 
-## The abstract-interpretation viewpoint
+## One geometric viewpoint
 
-<!-- Introduce abstract domains as sound summaries; compare boxes and richer shapes. -->
+<!--
+Name abstract interpretation only after the worked result: boxes and affine
+relationships are two sound ways to summarize a set of neuron values. Keep this
+as a short unifying perspective, not a separate tutorial or taxonomy.
+-->
 
-## Precision is not free
+## What remains unknown?
 
-<!-- Discuss tighter domains, optimization cost, memory, and implementation complexity. -->
+<!--
+Increase to the prevalidated large radius. Show in one compact calculation that
+even the tighter bound is inconclusive, and use this result to motivate splitting
+in Part 5.
+-->
 
 ## Takeaway
 
-<!-- Richer summaries can prove more properties, but require more computation. -->
+<!--
+Preserving relationships can turn an interval unknown into a certificate. End
+with the question: when one bound is still inconclusive, can smaller regions help?
+-->
