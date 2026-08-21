@@ -8,16 +8,16 @@ written_at: 2026-08-21
 tags: [neural networks, certification, formal verification, robustness]
 mathjax: true
 toc: true
-excerpt: "April the cat helps us follow one image from ordinary robustness to adversarial attacks, incomplete testing, and neural network certification."
+excerpt: "April the Siberian cat helps us follow one image from ordinary robustness to adversarial attacks, incomplete testing, and neural network certification."
 ---
 
-Meet April. He is a cat.
+Meet April. He is a Siberian cat.
 
 <figure>
   <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
-    <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" alt="April, a cream-colored cat with gray ears, sitting beside a tree in sunlight.">
+    <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
   </a>
-  <figcaption>April will be our running example. We will follow this one photo from ordinary testing to a mathematical guarantee.</figcaption>
+  <figcaption>April, a Siberian cat, will be our running example. We will follow this one photo from ordinary testing to a mathematical guarantee.</figcaption>
 </figure>
 
 Imagine that we give this photo to an image classifier and it predicts **cat**.
