@@ -13,9 +13,9 @@ excerpt: "April the Siberian cat helps us follow one image from ordinary robustn
 
 Meet April. He is a Siberian cat.
 
-<figure>
+<figure style="text-align: center;">
   <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
-    <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
+    <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="520" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
   </a>
   <figcaption>April, a Siberian cat, will be our running example. We will follow this one photo from ordinary testing to a mathematical guarantee.</figcaption>
 </figure>
@@ -66,6 +66,29 @@ chosen for its effect on the model rather than sampled at random. Research on
 chosen small perturbations could change neural network predictions. The
 [robust optimization viewpoint](https://openreview.net/pdf?id=rJzIBfZAb) asks us
 to evaluate the worst allowed perturbation rather than an average one.
+
+The comparison below makes the idea of a perturbation visible. The right image
+adds a fine noise pattern while preserving the scene that we recognize as April.
+
+<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-start;">
+  <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
+    <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
+      <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" alt="Original photograph of April the Siberian cat beside a tree.">
+    </a>
+    <figcaption><strong>Original.</strong> The classifier receives April's photograph.</figcaption>
+  </figure>
+  <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
+    <a href="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}">
+      <img src="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}" alt="Conceptual AI-generated variation of April's photograph with fine multicolored pixel noise; it is not a verified adversarial example.">
+    </a>
+    <figcaption><strong>Conceptual perturbation.</strong> A visible noise pattern illustrates a modified input.</figcaption>
+  </figure>
+</div>
+
+This is an **illustration, not a real adversarial example**. The right image was
+generated to communicate the idea. It was not optimized against a classifier,
+has no verified perturbation bound, and is not known to change any prediction.
+A real attack must satisfy its threat model and make a specific model fail.
 
 The word *allowed* is essential. We need a **threat model** that states what may
 change and by how much. It may also specify what the attacker knows and what
