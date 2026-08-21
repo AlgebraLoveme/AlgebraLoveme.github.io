@@ -100,8 +100,8 @@ The interval's position relative to zero determines one of three cases:
 - If $\overline v\leq0$, the neuron is always inactive and its output is $[0,0]$.
 - If $\underline v\geq0$, the neuron is always active and keeps the interval
   $[\underline v,\overline v]$.
-- If $\underline v<0<\overline v$, the activation is uncertain and the output is
-  $[0,\overline v]$.
+- If $\underline v<0<\overline v$, the ReLU is **unstable**: it may be active or
+  inactive, and its output interval is $[0,\overline v]$.
 
 For April's first neuron, $z_1\in[0.3,0.7]$ is always positive. Therefore,
 
@@ -109,7 +109,7 @@ $$
 h_1\in[0.3,0.7].
 $$
 
-The second interval $z_2\in[-0.2,0.2]$ crosses zero, so this ReLU is uncertain:
+The second interval $z_2\in[-0.2,0.2]$ crosses zero, so this ReLU is unstable:
 
 $$
 h_2\in[0,0.2].

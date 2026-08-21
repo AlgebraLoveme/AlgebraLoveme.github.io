@@ -16,7 +16,7 @@ Status: outline only.
 
 Reader outcome:
 The reader can locate dependency loss in interval propagation, draw sound linear
-bounds for an uncertain ReLU, and use the retained relationships to tighten the
+bounds for an unstable ReLU, and use the retained relationships to tighten the
 same output margin.
 
 Continuity requirement:
@@ -40,7 +40,7 @@ function of the original input. Contrast it visually with a box, using the
 existing April network rather than a detached algebra example.
 -->
 
-## Enclose an uncertain ReLU with lines
+## Enclose an unstable ReLU with lines
 
 <!--
 Draw the ReLU graph on its known input interval. Derive intuitive lower and upper
