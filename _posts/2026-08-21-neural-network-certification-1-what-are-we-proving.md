@@ -89,9 +89,9 @@ The word *allowed* is essential. We need a **threat model** that states what may
 change and by how much. It may also specify what the attacker knows and what
 counts as success. Different threat models describe different questions.
 
-Let $x_0$ represent April's photo. Assume that its pixel values lie between 0 and
-1. Choose an $\ell_p$ norm, with $1\leq p\leq\infty$, to measure the size of a
-change and a radius $\epsilon$ to limit it. The allowed images form the set
+Let $x_0$ represent April's photo, with pixel values normalized to $[0,1]$.
+Choose an $\ell_p$ norm, with $1\leq p\leq\infty$, to measure the size of a
+change, and use a radius $\epsilon$ to limit it. The allowed images form the set
 
 $$
 S_p(x_0,\epsilon)
