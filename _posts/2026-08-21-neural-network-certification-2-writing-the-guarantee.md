@@ -53,8 +53,8 @@ z_1 &= x_1+x_2-0.5,
 & h_1 &= \operatorname{ReLU}(z_1),\\
 z_2 &= x_1-x_2,
 & h_2 &= \operatorname{ReLU}(z_2),\\
-f_{\mathrm{cat}}(x) &= 0.2+h_1,
-& f_{\mathrm{other}}(x) &= h_2.
+f_{\mathrm{cat}}(x) &= 0.2+h_1+h_2,
+& f_{\mathrm{other}}(x) &= 2h_2.
 \end{aligned}
 $$
 
@@ -71,6 +71,7 @@ the scores reduces that comparison to the sign of one number. Define the
 
 $$
 m(x)=f_{\mathrm{cat}}(x)-f_{\mathrm{other}}(x)
+    =(0.2+h_1+h_2)-2h_2
     =0.2+h_1-h_2.
 $$
 
@@ -229,7 +230,7 @@ specification in one place:
 | Reference input | $x_0=(0.5,0.5)$ |
 | Allowed set | $S_\infty(x_0,0.1)=[0.4,0.6]^2$ |
 | Hidden neurons | $h_1=\operatorname{ReLU}(x_1+x_2-0.5)$ and $h_2=\operatorname{ReLU}(x_1-x_2)$ |
-| Scores | $f_{\mathrm{cat}}=0.2+h_1$ and $f_{\mathrm{other}}=h_2$ |
+| Scores | $f_{\mathrm{cat}}=0.2+h_1+h_2$ and $f_{\mathrm{other}}=2h_2$ |
 | Margin | $m=f_{\mathrm{cat}}-f_{\mathrm{other}}$ |
 | Property | $m(x)>0$ for every $x\in S_\infty(x_0,0.1)$ |
 | Certificate | $m(x)\geq0.3$ throughout the allowed set |

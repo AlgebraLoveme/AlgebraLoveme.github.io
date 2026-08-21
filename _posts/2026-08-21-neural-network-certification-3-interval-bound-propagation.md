@@ -53,8 +53,8 @@ z_1 &= x_1+x_2-0.5,
 & h_1 &= \operatorname{ReLU}(z_1),\\
 z_2 &= x_1-x_2,
 & h_2 &= \operatorname{ReLU}(z_2),\\
-f_{\mathrm{cat}} &= 0.2+h_1,
-& f_{\mathrm{other}} &= h_2.
+f_{\mathrm{cat}} &= 0.2+h_1+h_2,
+& f_{\mathrm{other}} &= 2h_2.
 \end{aligned}
 $$
 
@@ -115,35 +115,62 @@ $$
 h_2\in[0,0.2].
 $$
 
-## Turn the output bound into a certificate
+## Bound the margin directly with last-layer elision
 
-The output scores now inherit intervals:
+We could continue one score at a time. Using $h_1\in[0.3,0.7]$ and
+$h_2\in[0,0.2]$ gives
 
 $$
-f_{\mathrm{cat}}=0.2+h_1\in[0.5,0.9],
+f_{\mathrm{cat}}=0.2+h_1+h_2\in[0.5,1.1],
 \qquad
-f_{\mathrm{other}}=h_2\in[0,0.2].
+f_{\mathrm{other}}=2h_2\in[0,0.4].
 $$
 
-Recall the margin $m=f_{\mathrm{cat}}-f_{\mathrm{other}}$. Its lower bound uses
-the smallest cat score and the largest other score. Its upper bound uses the
-opposite endpoints:
+Subtracting these two intervals would produce
 
 $$
-m\in[0.5-0.2,\;0.9-0]=[0.3,0.9].
+m\in[0.5-0.4,\;1.1-0]=[0.1,1.1].
 $$
 
-Every possible margin is at least $0.3$. Since the entire interval is positive,
-the model predicts cat for every input in $S_\infty(x_0,0.1)$. The lower bound
-$m\geq0.3$ is the same certificate we derived by hand in Part 2.
+That interval is sound, but it has already forgotten that both scores use the
+same $h_2$. Its lower endpoint combines the smallest cat score, which uses
+$h_2=0$, with the largest other score, which uses $h_2=0.2$. One hidden value
+cannot be both numbers at once.
 
-Repeating interval calculations layer by layer is called **interval bound
+The property asks about the score difference, not the two scores separately.
+We can therefore subtract the final-layer formulas first:
+
+$$
+\begin{aligned}
+m
+&=f_{\mathrm{cat}}-f_{\mathrm{other}}\\
+&=(0.2+h_1+h_2)-2h_2\\
+&=0.2+h_1-h_2.
+\end{aligned}
+$$
+
+Now propagate the hidden intervals directly into this margin:
+
+$$
+m\in[0.2+0.3-0.2,\;0.2+0.7-0]=[0.3,0.9].
+$$
+
+This algebraic merge of the final linear layer with the desired score
+difference is called **last-layer elision**. We have not removed the layer; we
+have rewritten it together with the property before computing bounds. Here it
+raises the margin's lower bound from $0.1$ to $0.3$.
+
+Every possible margin is therefore at least $0.3$. The model predicts cat for
+every input in $S_\infty(x_0,0.1)$, giving the same certificate we derived by
+hand in Part 2.
+
+Applying these interval calculations layer by layer is called **interval bound
 propagation**, or **IBP**. Each operation encloses every value that operation can
 produce from the preceding intervals. By induction over the layers, the final
-interval encloses every possible network output. This containment is why a
-positive lower margin bound is a sound certificate.
+interval encloses every possible margin. This containment is why a positive
+lower margin bound is a sound certificate.
 
-The same bounds can also become part of a training objective, as studied in
+Last-layer elision and the use of IBP bounds in training are studied in
 [On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models](https://arxiv.org/abs/1810.12715).
 We will revisit that use in Part 6.
 
@@ -163,13 +190,15 @@ The propagation rules do not change. Applying them to the larger square gives
 | $h_1=\operatorname{ReLU}(z_1)$ | $[0.1,0.9]$ |
 | $z_2=x_1-x_2$ | $[-0.4,0.4]$ |
 | $h_2=\operatorname{ReLU}(z_2)$ | $[0,0.4]$ |
-| $f_{\mathrm{cat}}$ | $[0.3,1.1]$ |
-| $f_{\mathrm{other}}$ | $[0,0.4]$ |
-| $m=f_{\mathrm{cat}}-f_{\mathrm{other}}$ | $[-0.1,1.1]$ |
+| $f_{\mathrm{cat}}$ | $[0.3,1.5]$ |
+| $f_{\mathrm{other}}$ | $[0,0.8]$ |
+| Margin from separate score intervals | $[-0.5,1.5]$ |
+| Margin after last-layer elision | $[-0.1,1.1]$ |
 
-The margin interval now crosses zero. This result does **not** provide an input
-with a negative margin, so it does not falsify the property. It also cannot prove
-that every margin is positive. This IBP run must report **unknown**.
+Last-layer elision improves the lower bound from $-0.5$ to $-0.1$, but even the
+tighter margin interval crosses zero. This result does **not** provide an input
+with a negative margin, so it does not falsify the property. It also cannot
+prove that every margin is positive. This IBP run must report **unknown**.
 
 We can locate where information disappeared. The lower endpoint $h_1=0.1$ is
 attained at $x_1=x_2=0.3$. The upper endpoint $h_2=0.4$ is attained at $x_1=0.7$
@@ -185,8 +214,8 @@ IBP follows the same four steps for a network of any depth:
 2. For each affine layer, choose endpoints according to the signs of its weights.
 3. For each ReLU, replace $[\underline v,\overline v]$ with
    $[\max(0,\underline v),\max(0,\overline v)]$.
-4. At the output, subtract the largest competing score from the smallest score
-   of the required class.
+4. Combine the final linear layer with the required score difference, then
+   bound that margin directly. This is last-layer elision.
 
 If the resulting margin lower bound is positive, the property is verified. A
 nonpositive lower bound cannot certify the property. Falsification still
@@ -194,9 +223,10 @@ requires a concrete allowed input that violates it.
 
 ## Takeaway
 
-At radius $0.1$, interval propagation carries April's entire input square through
-the network and proves $m\geq0.3$. At radius $0.2$, the same method combines
-hidden-neuron extremes that come from different inputs and returns unknown.
+At radius $0.1$, interval propagation and last-layer elision carry April's
+entire input square through the network and prove $m\geq0.3$. At radius $0.2$,
+the same method combines hidden-neuron extremes that come from different inputs
+and returns unknown.
 
 Part 4 asks: **why do simple bounds lose this information?** We will answer by
 preserving linear relationships between neuron values.
