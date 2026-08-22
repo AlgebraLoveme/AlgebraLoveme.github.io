@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
+  <title id="title">Linear relaxation of an unstable ReLU</title>
+  <desc id="desc">The exact ReLU graph on minus 0.4 to 0.4 lies inside a triangle formed by two lower segments and one upper line.</desc>
+  <rect width="720" height="460" fill="#ffffff"/>
+  <g stroke="#d9dee7" stroke-width="1">
+    <line x1="155" y1="72" x2="155" y2="382"/>
+    <line x1="375" y1="72" x2="375" y2="382"/>
+    <line x1="595" y1="72" x2="595" y2="382"/>
+    <line x1="100" y1="258" x2="650" y2="258"/>
+    <line x1="100" y1="134" x2="650" y2="134"/>
+  </g>
+  <polygon points="155,382 375,382 595,134" fill="#4f86c6" fill-opacity="0.18"/>
+  <g stroke="#252a34" stroke-width="2.5" fill="none">
+    <line x1="88" y1="382" x2="664" y2="382"/>
+    <line x1="375" y1="398" x2="375" y2="54"/>
+  </g>
+  <path d="M 655 376 L 664 382 L 655 388" fill="none" stroke="#252a34" stroke-width="2.5"/>
+  <path d="M 369 63 L 375 54 L 381 63" fill="none" stroke="#252a34" stroke-width="2.5"/>
+  <polyline points="155,382 375,382 595,134" fill="none" stroke="#111827" stroke-width="5" stroke-linejoin="round"/>
+  <line x1="155" y1="382" x2="595" y2="134" stroke="#2f6fad" stroke-width="4"/>
+  <g fill="#ffffff" stroke-width="3">
+    <circle cx="155" cy="382" r="6" stroke="#2f6fad"/>
+    <circle cx="595" cy="134" r="6" stroke="#2f6fad"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#252a34">
+    <text x="674" y="389" font-style="italic">z₂</text>
+    <text x="386" y="58" font-style="italic">h₂</text>
+    <text x="138" y="414">−0.4</text>
+    <text x="369" y="414">0</text>
+    <text x="583" y="414">0.4</text>
+    <text x="341" y="264">0.2</text>
+    <text x="341" y="140">0.4</text>
+    <text x="465" y="204" fill="#2f6fad">upper line</text>
+    <text x="456" y="337" fill="#111827">ReLU</text>
+  </g>
+  <text x="360" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">A linear enclosure for ReLU on [−0.4, 0.4]</text>
+</svg>
