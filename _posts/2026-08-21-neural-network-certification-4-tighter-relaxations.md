@@ -129,8 +129,7 @@ can also explode.
 Consider four inequalities involving the same hidden value:
 
 $$
-h\geq x,\qquad h\geq0,\qquad
-h\leq y,qquad h\leq1-y.
+h\geq x,\quad h\geq0,\quad h\leq y,\quad h\leq1-y.
 $$
 
 Now imagine that we want to remove $h$ and describe the same possibilities
