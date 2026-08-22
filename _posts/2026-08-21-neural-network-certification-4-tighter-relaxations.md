@@ -5,10 +5,10 @@ permalink: /2026-08-21-neural-network-certification-4-tighter-relaxations/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, linear relaxation, abstract interpretation]
+tags: [neural networks, certification, linear relaxation, DeepPoly, abstract interpretation]
 mathjax: true
 toc: true
-excerpt: "April's classifier shows how linear ReLU bounds preserve relationships that intervals forget."
+excerpt: "April's classifier moves from the Triangle relaxation to DeepPoly, preserving relationships that intervals forget."
 ---
 
 ## Why did April's margin cross zero?
@@ -67,7 +67,7 @@ Instead of replacing that connection with two constants, we can enclose it
 with **linear bounds**: lines that remain functions of $z_2$, and therefore of
 $x_1$ and $x_2$.
 
-## Enclose an unstable ReLU with lines
+## Enclose an unstable ReLU with Triangle
 
 For April's radius-$0.2$ square,
 
@@ -103,13 +103,48 @@ $$
 \operatorname{ReLU}(z)\leq\frac{u}{u-\ell}(z-\ell).
 $$
 
-Replacing the exact equality with this larger, line-bounded region is called a
-**linear relaxation**. The shaded triangle includes the exact graph, so using
-it cannot exclude a possible network behavior. It also keeps a useful fact that
+Replacing the exact equality with this larger, line-bounded region is called
+the **Triangle relaxation**. It is the convex hull of this ReLU graph over the
+known interval. The shaded triangle includes the exact graph, so using it
+cannot exclude a possible network behavior. It also keeps a useful fact that
 the interval $h_2\in[0,0.4]$ discarded: the allowed upper value of $h_2$
-changes with $z_2$.
+changes with $z_2$. This relaxation appears in
+[Formal Verification of Piece-Wise Linear Feed-Forward Neural Networks](https://arxiv.org/abs/1705.01320).
 
-## Carry the lines to April's output margin
+## Why not keep every Triangle constraint?
+
+For April, three inequalities are easy to carry. A modern network may contain
+thousands of unstable ReLUs. With $k$ unstable ReLUs, Triangle adds $3k$
+inequalities, alongside the variables and affine equations for the network.
+A verifier can keep that entire coupled system and minimize the output margin
+with a linear program.
+
+The number $3k$ grows linearly, not exponentially. The scaling problem comes
+from repeatedly solving large coupled programs. If we instead eliminate hidden
+variables to propagate the polytope explicitly, the number of resulting facets
+can also explode.
+
+**DeepPoly** keeps the same kind of local ReLU lines in a more compact form. For
+each neuron, it records a concrete interval together with one affine lower
+expression and one affine upper expression. For an unstable ReLU, its symbolic
+bounds can be written as
+
+$$
+\lambda z_2\leq h_2
+\leq\frac{1}{2}z_2+0.2,
+\qquad \lambda\in\{0,1\}.
+$$
+
+The choice $\lambda=0$ keeps the lower line $h_2\geq0$; the choice
+$\lambda=1$ keeps $h_2\geq z_2$. Rather than sending all three Triangle
+constraints to one global linear program, DeepPoly chooses one lower line,
+keeps the upper line, and substitutes these expressions backward through the
+network. This procedure is called **back-substitution**.
+
+The method was introduced in
+[An Abstract Domain for Certifying Neural Networks](https://www.sri.inf.ethz.ch/publications/singh2019domain).
+
+## Back-substitute DeepPoly bounds into April's margin
 
 The first hidden neuron is easier. Its pre-activation stays positive:
 
@@ -123,9 +158,11 @@ $$
 h_1=x_1+x_2-0.5.
 $$
 
-To prove a lower bound on $m=0.2+h_1-h_2$, we need an upper bound on the term
-being subtracted. Substitute the ReLU upper line and then replace
-$z_2$ with $x_1-x_2$:
+DeepPoly starts at the property we want to bound. In
+$m=0.2+h_1-h_2$, the coefficient of $h_2$ is negative, so a lower bound on the
+margin needs the upper bound on $h_2$. The selected lower line is not used in
+this calculation. Substitute the upper line, then replace $z_2$ with
+$x_1-x_2$:
 
 $$
 \begin{aligned}
@@ -149,13 +186,15 @@ $$
 The lower bound is positive. We have now proved that April remains classified
 as a cat throughout the radius-$0.2$ square.
 
-| Method | What it remembers | Margin lower bound | Result |
+| Method | How it carries possible values | Margin lower bound | Result |
 | --- | --- | ---: | --- |
 | Interval propagation | Separate ranges for $h_1$ and $h_2$ | $-0.1$ | Unknown |
-| Linear ReLU relaxation | How $h_1$ and $h_2$ depend on the input | $0.1$ | Verified |
+| Triangle | One coupled linear program containing all three ReLU constraints | $0.1$ | Verified |
+| DeepPoly | Selected affine bounds followed by back-substitution | $0.1$ | Verified |
 
-The network and the allowed inputs have not changed. The certificate succeeds
-because the summary of their possible values is more informative.
+Triangle and DeepPoly produce the same bound for this tiny, one-unstable-ReLU
+network. The difference is how they organize the calculation: Triangle keeps a
+joint constraint system, while DeepPoly propagates selected affine bounds.
 
 ## One geometric viewpoint
 
@@ -163,15 +202,15 @@ The allowed inputs form a square. After each network layer, their possible
 neuron values form another geometric set. Tracking that exact set can be hard,
 so a verifier carries a simpler set that contains it.
 
-IBP uses axis-aligned boxes. The linear relaxation adds slanted boundaries such
-as $h_2\leq\frac{1}{2}z_2+0.2$. These boundaries preserve some relationships
-between neurons while keeping the calculations manageable.
+IBP uses axis-aligned boxes. Triangle keeps a polytope cut out by linear
+constraints. DeepPoly stores intervals and selected affine bounds such as
+$h_2\leq\frac{1}{2}z_2+0.2$, then back-substitutes them. The slanted boundaries
+preserve relationships that a box discards.
 
 This is the central idea of **abstract interpretation** in this setting:
 compute with a tractable enclosure of all possible values, while ensuring that
-the enclosure never drops a real possibility. Linear ReLU enclosures also form
-the basis of the convex relaxation in
-[Provable Defenses against Adversarial Examples via the Convex Outer Adversarial Polytope](https://arxiv.org/abs/1711.00851).
+the enclosure never drops a real possibility. Triangle and DeepPoly use
+different abstract representations, but both follow that rule.
 
 ## What should we do if the bound is inconclusive?
 
@@ -203,7 +242,7 @@ m
 \end{aligned}
 $$
 
-The linear relaxation is now inconclusive. It has neither proved the property
+The DeepPoly bound is now inconclusive. It has neither proved the property
 nor found an input that violates it.
 
 We do not have to abandon the calculation. We can divide the input square into
@@ -213,8 +252,10 @@ smaller region can follow its graph more closely.
 ## Takeaway
 
 Intervals forgot that April's hidden neurons were tied to the same input.
-Linear ReLU bounds retained enough of that relationship to improve the margin
-lower bound from $-0.1$ to $0.1$ and certify the radius-$0.2$ square.
+Triangle retained the relationship with a joint constraint system; DeepPoly
+retained selected affine bounds and back-substituted them. Both improve the
+margin lower bound from $-0.1$ to $0.1$ on the radius-$0.2$ square, while
+DeepPoly avoids solving the full Triangle linear program.
 
 At radius $0.24$, the new lower bound is $-0.02$. Part 5 asks: **can splitting
 the input region turn this unknown into a proof?**

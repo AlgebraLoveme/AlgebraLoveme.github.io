@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
-  <title id="title">Linear relaxation of an unstable ReLU</title>
-  <desc id="desc">The exact ReLU graph on minus 0.4 to 0.4 lies inside a triangle formed by two lower segments and one upper line.</desc>
+  <title id="title">Triangle relaxation of an unstable ReLU</title>
+  <desc id="desc">The exact ReLU graph on minus 0.4 to 0.4 lies inside the Triangle relaxation formed by two lower segments and one upper line.</desc>
   <rect width="720" height="460" fill="#ffffff"/>
   <g stroke="#d9dee7" stroke-width="1">
     <line x1="155" y1="72" x2="155" y2="382"/>
@@ -33,5 +33,5 @@
     <text x="465" y="204" fill="#2f6fad">upper line</text>
     <text x="456" y="337" fill="#111827">ReLU</text>
   </g>
-  <text x="360" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">A linear enclosure for ReLU on [−0.4, 0.4]</text>
+  <text x="360" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Triangle relaxation for ReLU on [−0.4, 0.4]</text>
 </svg>
