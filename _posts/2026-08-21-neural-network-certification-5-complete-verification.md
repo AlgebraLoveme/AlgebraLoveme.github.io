@@ -74,6 +74,11 @@ $$
 These two rectangles cover the original square. We have not removed a single
 allowed input.
 
+<figure style="text-align: center;">
+  <img src="{{ '/imgs/april-split-tightens-relu.svg' | relative_url }}" width="820" style="display: block; margin: 0 auto;" alt="April's input square split into left and right rectangles. Each child produces a narrower range for the second ReLU and a tighter upper chord than the original whole-square chord.">
+  <figcaption>Splitting the input square narrows the range of $z_2$. The solid child chords sit at or below the dashed whole-square chord while remaining above the exact ReLU.</figcaption>
+</figure>
+
 ### Bound the left half
 
 On $R_L$, the ReLU input has the narrower, asymmetric range
