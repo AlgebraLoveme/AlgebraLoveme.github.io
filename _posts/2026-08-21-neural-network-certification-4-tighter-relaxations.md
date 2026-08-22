@@ -126,7 +126,7 @@ can also explode.
 
 ### How eliminating one variable multiplies constraints
 
-Suppose a hidden value $h$ appears in four inequalities:
+Consider four inequalities involving the same hidden value:
 
 $$
 h\geq x,\qquad h\geq0,\qquad
