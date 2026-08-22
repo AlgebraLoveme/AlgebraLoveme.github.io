@@ -17,31 +17,35 @@ Status: outline only.
 Reader outcome:
 The reader can reconstruct the exact claim behind each reported number, compare
 models under matched conditions, and distinguish certification from attack-based
-testing and unresolved verification runs.
+testing and unresolved verification runs. The reader also keeps the soundness of
+the training objective separate from the soundness of post-training evaluation.
 -->
 
 ## Which April classifier should we trust?
 
 <!--
 Open with one hypothetical table containing several April classifiers. Include
-enough columns to tell the full story, but do not explain them before the reader
-has a concrete comparison to make.
+separate columns for the training objective and evaluation verifier, along with
+enough result columns to tell the full story. Let the concrete comparison create
+the need for each definition.
 -->
 
 ## Reconstruct the claim behind one row
 
 <!--
 Introduce this post's main formal object: a result tuple containing the model,
-input set (norm and radius), property, clean accuracy, attacked accuracy,
-certified accuracy, unresolved fraction, and runtime. Fill it from the first row.
+training objective and its soundness, input set (norm and radius), property,
+evaluation verifier, clean accuracy, attacked accuracy, certified accuracy,
+unresolved fraction, and runtime. Fill it from the first row.
 -->
 
 ## Read clean, attacked, certified, and unresolved together
 
 <!--
 Use the definitions from Part 6 and the three verifier outcomes from Parts 2 and
-5. Interpret what each number does and does not establish through the concrete
-rows rather than a detached checklist.
+5. Show how an unsound training objective can still lead to sound certified
+accuracy when the evaluation verifier is sound. Interpret each number through
+the concrete rows rather than a detached checklist.
 -->
 
 ## Make the comparison fair

@@ -171,10 +171,12 @@ the results table:
 - **Part 5 — What should we do if the bound is inconclusive?** We will repeatedly
   split and bound the input region until every piece is certified or a
   counterexample is found.
-- **Part 6 — Can we train a network to be certifiable?** We will put a certified
-  bound into the learning objective.
+- **Part 6 — How can training make robustness easier to prove?** We will bracket
+  the worst-case loss between attacks and certificates, then distinguish sound
+  bound-based objectives from unsound training surrogates.
 - **Part 7 — How should we read certification results?** We will reconstruct the
-  exact claims behind a table of results.
+  exact claims behind a table of results and separate the training objective
+  from the evaluation guarantee.
 
 ## Takeaway
 
