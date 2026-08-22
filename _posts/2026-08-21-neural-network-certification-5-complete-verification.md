@@ -35,9 +35,10 @@ $$
 m\geq-0.02.
 $$
 
-This is **unknown**, not a failing input. DeepPoly computed the bound over a
+DeepPoly therefore returns **unknown**. Its lower bound comes from a
 relaxation: a simpler enclosure that contains every real network behavior and
-some extra ones. Those extra behaviors can pull the bound below zero.
+additional artificial behaviors. The artificial part of the enclosure can
+pull the bound below zero.
 
 The next question is: **can we cover every allowed input with smaller regions
 whose bounds are positive?**
@@ -62,7 +63,7 @@ h_2\leq\frac{1}{2}z_2+0.24.
 $$
 
 A standard neural-network branch-and-bound move is to branch on the phase of
-this unstable ReLU. There are only two cases:
+this unstable ReLU. The ReLU has two phases:
 
 $$
 \begin{aligned}
@@ -76,13 +77,13 @@ R_{\mathrm{on}}
 $$
 
 The boundary $z_2=0$ is the diagonal $x_1=x_2$. It divides April's square into
-two triangles. Together they still cover the original region, so no allowed
-input disappears.
+two triangles whose union equals $R$, preserving complete coverage of the
+allowed region.
 
-This is **divide and conquer**. We divide one unresolved problem at the source
-of its uncertainty, then conquer each simpler phase separately. In the off
-triangle, $h_2=0$ exactly. In the on triangle, $h_2=z_2$ exactly. Neither child
-needs a relaxation for this ReLU.
+The split follows **divide and conquer**: divide one unresolved problem at the
+source of its uncertainty, then conquer each simpler phase separately. Fixing
+the phase makes $h_2$ linear in each child, which lets us analyze both triangles
+exactly.
 
 <figure style="text-align: center;">
   <img src="{{ '/imgs/april-split-tightens-relu.svg' | relative_url }}?v=relu-phase" width="820" style="display: block; margin: 0 auto;" alt="April's input square divided along the diagonal x1 equals x2. Above the diagonal the second ReLU is off and equals zero; below the diagonal it is on and equals x1 minus x2.">
@@ -118,7 +119,7 @@ $$
 h_2=\operatorname{ReLU}(z_2)=z_2=x_1-x_2.
 $$
 
-The margin is again linear:
+The margin is linear:
 
 $$
 \begin{aligned}
@@ -141,15 +142,15 @@ $x_1=x_2$.
 
 <figure style="text-align: center;">
   <img src="{{ '/imgs/april-branch-and-bound.svg' | relative_url }}?v=margin-surface" width="820" style="display: block; margin: 0 auto;" alt="The exact margin function shown as two connected planar patches, one for the off ReLU phase and one for the on phase, alongside a search tree whose two children are verified with margin bound 0.22.">
-  <figcaption>The surface shows the two local affine formulas; the tree groups them into two verified subproblems.</figcaption>
+  <figcaption>The surface shows the two local affine formulas. The tree groups them into two verified subproblems.</figcaption>
 </figure>
 
 ## Read the proof from the tree
 
 The left side of the figure shows the exact function that the global
 relaxation tried to enclose. The right side organizes its two linear pieces as
-a search tree. The root bound is $-0.02$, so the root cannot yet be marked
-safe. We divide it into two phase children and bound each child separately.
+a search tree. The root bound is $-0.02$, so its status remains unresolved. We
+divide it into two phase children and bound each child separately.
 
 Both child bounds are positive:
 
@@ -166,8 +167,8 @@ for the original region.
 
 April has only one unstable ReLU, so each child is already one connected
 linear region. In a larger network, an off/on child may still contain several
-linear regions created by other unstable ReLUs. Further branches group and
-separate those regions until the bounds can settle every leaf.
+linear regions created by other unstable ReLUs. Further phase branches
+continue the division until every leaf receives a decisive bound.
 
 ## Bound, split, and repeat
 
@@ -179,16 +180,15 @@ inconclusive. We can apply the same cycle again:
 3. If the bound is inconclusive, **split** the region into children.
 4. Repeat until every leaf is verified or a failing input is found.
 
-This is divide and conquer powered by sound bounds. In verification it is
-called **branch and bound**. Branching divides one unresolved case; bounding
-tries to conquer each child without examining every point inside it. Neural
-network verifiers commonly branch on whether an unstable ReLU is off or on,
-as we did. Some methods also branch on input coordinates.
+**Branch and bound** applies divide and conquer with sound bounds. Branching
+divides one unresolved case. Bounding tries to conquer each child while
+reasoning about the entire region at once. Neural network verifiers commonly
+branch on whether an unstable ReLU is off or on, as we did. Some methods also
+branch on input coordinates.
 
-The important object is not a long list of sampled inputs. It is a collection
-of regions that covers the allowed set, together with a sound bound for every
-region declared safe. A unified account of neural-network branch and bound
-appears in
+A certificate consists of regions that cover the allowed set, together with a
+sound bound for every region declared safe. A unified account of
+neural-network branch and bound appears in
 [A Unified View of Piecewise Linear Neural Network Verification](https://arxiv.org/abs/1711.00455).
 
 ## Search for a failing input at the same time
@@ -197,11 +197,11 @@ While bounds reason about whole regions, an attack searches for promising
 individual inputs and evaluates them with the exact network. The two jobs
 complement each other:
 
-- a positive lower bound proves that an entire region is safe;
+- a positive lower bound proves that an entire region is safe.
 - one concrete input with $m(x)\leq0$ disproves the claim immediately.
 
-No such input exists in April's radius-$0.24$ square, as the completed tree
-proves. If we enlarge the radius to $0.36$, however, the allowed set contains
+The completed radius-$0.24$ tree proves every allowed input safe. Enlarging the
+radius to $0.36$ brings the following input into the allowed set:
 
 $$
 x=(0.86,0.14).
@@ -217,16 +217,16 @@ m&=0.2+0.5-0.72=-0.02.
 \end{aligned}
 $$
 
-This negative margin is attached to a real input, not to a relaxation. It is a
-counterexample: the claim that April's cat score remains largest throughout
-the radius-$0.36$ square is false.
+The exact network produces this negative margin at an allowed input. The input
+is a **counterexample**, so the claim that April's cat score remains largest
+throughout the radius-$0.36$ square is false.
 
 ## How exact verifiers organize the search
 
-ReLU networks are piecewise linear. Once every relevant ReLU is fixed as
-active or inactive, the remaining problem contains only linear equations and
-inequalities. Complete verifiers explore enough of these cases to settle the
-property.
+The piecewise-linear structure also explains how complete verifiers finish the
+search. Once every relevant ReLU is fixed as active or inactive, the remaining
+problem contains only linear equations and inequalities. Complete verifiers
+explore enough of these cases to settle the property.
 
 Different methods organize that exploration differently. A
 **satisfiability-modulo-theories (SMT) solver** searches logical choices while
@@ -242,7 +242,7 @@ linear reasoning with discrete case choices.
 
 A verifier is **sound** when every reported result is justified:
 
-- **verified** means sound bounds cover every allowed input;
+- **verified** means sound bounds cover every allowed input.
 - **falsified** means a concrete allowed input violates the property.
 
 A verification procedure is **complete** when it is guaranteed to reach one
@@ -250,15 +250,15 @@ of those two conclusions for every supported problem if allowed to run to
 completion. For a ReLU verifier, this may require exploring enough activation
 cases that every remaining leaf is linear and can be solved exactly.
 
-Completeness is a statement about the procedure, not a promise that every run
-finishes quickly. If a time or memory limit stops the search while unresolved
-leaves remain, the correct result is **unknown**.
+Completeness guarantees an eventual decision when the procedure runs to
+completion. Runtime may still be long. If a time or memory limit stops the
+search while unresolved leaves remain, the correct result is **unknown**.
 
 | Reported result | Evidence | What it means |
 | --- | --- | --- |
 | Verified | Verified leaves cover the allowed set | Every allowed input preserves April's prediction |
 | Falsified | A concrete allowed input has $m\leq0$ | The robustness claim is false |
-| Unknown | At least one region remains unresolved | The run has not settled the claim |
+| Unknown | At least one region remains unresolved | The claim remains unresolved |
 
 ## Takeaway
 
@@ -270,8 +270,8 @@ tree is a certificate.
 
 Branch and bound turns an inconclusive whole-region calculation into smaller
 problems that the same bounding machinery may solve. Sound bounds certify
-regions; concrete counterexamples falsify claims; unfinished trees remain
-unknown.
+regions. Concrete counterexamples falsify claims. Unfinished trees leave the
+claim unresolved.
 
 Part 6 asks a different question: **can we train April's classifier so that
 strong bounds appear without so much search?**
