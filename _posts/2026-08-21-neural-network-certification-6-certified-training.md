@@ -227,6 +227,47 @@ to produce a network that a separate sound verifier can certify successfully.
 A sound evaluation verifier can therefore produce valid certified accuracy for
 SABR-, TAPS-, STAPS-, and MTL-IBP-trained networks.
 
+## What do the CTBench numbers show?
+
+[CTBench](https://arxiv.org/abs/2406.04848) implements the methods in one
+codebase and evaluates them under a shared benchmark protocol. The values below
+come from Table 22 of the arXiv v4 paper. The comparison uses the CNN7
+architecture with batch normalization on CIFAR-10. CNN7 contains seven
+convolutional or linear layers. The threat model is an $\ell_\infty$ ball with
+radius $2/255$.
+
+**Natural accuracy** is the percentage of validation images classified
+correctly. **Certified accuracy** is the percentage proved robust at the stated
+radius. CTBench reports both a cheap IBP certificate and a stronger MN-BaB
+certificate. MN-BaB receives up to $1000$ seconds per image, and timed-out cases
+remain uncertified.
+
+| Training method | Robust training signal | Natural accuracy | IBP-certified accuracy | MN-BaB-certified accuracy |
+| --- | --- | ---: | ---: | ---: |
+| IBP | Sound | 67.49% | 54.22% | 55.99% |
+| CROWN-IBP | Sound | 67.60% | 49.92% | 57.11% |
+| SABR | Unsound | 77.86% | 12.12% | 63.61% |
+| TAPS | Unsound | 74.44% | 28.22% | 61.27% |
+| STAPS | Unsound | 77.05% | 0.72% | 64.21% |
+| MTL-IBP | Unsound | 78.82% | 0.62% | 64.41% |
+
+All four unsound objectives improve both natural accuracy and MN-BaB-certified
+accuracy over the two sound objectives in this matched setting. CROWN-IBP is
+the strongest sound row on both measures. Relative to CROWN-IBP, the changes in
+natural and MN-BaB-certified accuracy are:
+
+- **SABR:** $+10.26$ and $+6.50$ percentage points.
+- **TAPS:** $+6.84$ and $+4.16$ percentage points.
+- **STAPS:** $+9.45$ and $+7.10$ percentage points.
+- **MTL-IBP:** $+11.22$ and $+7.30$ percentage points.
+
+The IBP-certified column reveals another part of the story. IBP proves
+$54.22\%$ of the IBP-trained model robust, while it proves only $0.72\%$ of the
+STAPS model and $0.62\%$ of the MTL-IBP model robust. MN-BaB raises those last
+two certified accuracies to $64.21\%$ and $64.41\%$. The models stay fixed
+across the two certification columns. MN-BaB proves much more of their
+robustness than IBP.
+
 ## Takeaway
 
 Robust training ideally minimizes the exact worst-case loss. Attacks supply a
