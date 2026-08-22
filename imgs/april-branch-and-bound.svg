@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
+  <title id="title">Splitting April's input square and certifying both child regions</title>
+  <desc id="desc">The left panel shows the square from 0.26 to 0.74 split at x1 equals 0.5. The right panel shows an inconclusive root bound of minus 0.02 and two verified child bounds of 0.06 and 0.14.</desc>
+  <rect width="900" height="500" fill="#ffffff"/>
+
+  <text x="225" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Split the allowed square</text>
+  <text x="670" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Bound the two children</text>
+
+  <rect x="90" y="95" width="270" height="270" fill="#eef4fb" stroke="#2f6fad" stroke-width="3"/>
+  <rect x="225" y="95" width="135" height="270" fill="#eaf7ef"/>
+  <line x1="225" y1="95" x2="225" y2="365" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="9 7"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#111827">
+    <text x="157" y="218" text-anchor="middle" font-size="23" font-weight="600">R<tspan baseline-shift="sub" font-size="16">L</tspan></text>
+    <text x="157" y="248" text-anchor="middle" font-size="17">x₁ ≤ 0.50</text>
+    <text x="292" y="218" text-anchor="middle" font-size="23" font-weight="600">R<tspan baseline-shift="sub" font-size="16">R</tspan></text>
+    <text x="292" y="248" text-anchor="middle" font-size="17">x₁ ≥ 0.50</text>
+    <text x="225" y="82" text-anchor="middle" font-size="17" fill="#7c6bb3">split at x₁ = 0.50</text>
+    <text x="225" y="420" text-anchor="middle" font-size="17">x₁</text>
+    <text x="62" y="230" text-anchor="middle" font-size="17" transform="rotate(-90 62 230)">x₂ ∈ [0.26, 0.74]</text>
+    <text x="90" y="388" text-anchor="middle" font-size="15" fill="#4b5563">0.26</text>
+    <text x="225" y="388" text-anchor="middle" font-size="15" fill="#4b5563">0.50</text>
+    <text x="360" y="388" text-anchor="middle" font-size="15" fill="#4b5563">0.74</text>
+  </g>
+
+  <rect x="535" y="80" width="270" height="92" rx="12" fill="#fff4df" stroke="#c18422" stroke-width="3"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
+    <text x="670" y="116" font-size="20" font-weight="600" fill="#111827">R = R<tspan baseline-shift="sub" font-size="14">L</tspan> ∪ R<tspan baseline-shift="sub" font-size="14">R</tspan></text>
+    <text x="670" y="148" font-size="19" fill="#9a5b08">bound −0.02 → split</text>
+  </g>
+
+  <g stroke="#6b7280" stroke-width="3" fill="none">
+    <path d="M 630 172 L 550 245"/>
+    <path d="M 710 172 L 785 245"/>
+  </g>
+
+  <rect x="440" y="245" width="220" height="120" rx="12" fill="#eaf7ef" stroke="#2d8a57" stroke-width="3"/>
+  <rect x="680" y="245" width="210" height="120" rx="12" fill="#eaf7ef" stroke="#2d8a57" stroke-width="3"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
+    <text x="550" y="282" font-size="20" font-weight="600" fill="#111827">Left child R<tspan baseline-shift="sub" font-size="14">L</tspan></text>
+    <text x="550" y="315" font-size="21" font-weight="600" fill="#1f7045">bound +0.06 ✓</text>
+    <text x="550" y="344" font-size="16" fill="#376b50">verified</text>
+
+    <text x="785" y="282" font-size="20" font-weight="600" fill="#111827">Right child R<tspan baseline-shift="sub" font-size="14">R</tspan></text>
+    <text x="785" y="315" font-size="21" font-weight="600" fill="#1f7045">bound +0.14 ✓</text>
+    <text x="785" y="344" font-size="16" fill="#376b50">verified</text>
+  </g>
+</svg>
