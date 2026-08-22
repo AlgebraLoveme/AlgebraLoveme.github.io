@@ -124,6 +124,53 @@ from repeatedly solving large coupled programs. If we instead eliminate hidden
 variables to propagate the polytope explicitly, the number of resulting facets
 can also explode.
 
+### How eliminating one variable multiplies constraints
+
+Suppose a hidden value $h$ appears in four inequalities:
+
+$$
+h\geq x,\qquad h\geq0,\qquad
+h\leq y,qquad h\leq1-y.
+$$
+
+Now imagine that we want to remove $h$ and describe the same possibilities
+using only $x$ and $y$. Every lower bound on $h$ must be no larger than every
+upper bound. Pairing the two lower bounds with the two upper bounds gives
+
+$$
+\begin{aligned}
+x&\leq y, & x&\leq1-y,\\
+0&\leq y, & 0&\leq1-y.
+\end{aligned}
+$$
+
+This is the multiplication rule. If a variable has $p$ lower bounds and $q$
+upper bounds, eliminating it can generate $pq$ new constraints:
+
+| Lower $p$ | Upper $q$ | Before: $p+q$ | After: up to $pq$ |
+| ---: | ---: | ---: | ---: |
+| $2$ | $2$ | $4$ | $4$ |
+| $4$ | $4$ | $8$ | $16$ |
+| $16$ | $16$ | $32$ | $256$ |
+| $100$ | $100$ | $200$ | $10{,}000$ |
+
+In a worst case where all generated constraints remain relevant, one projection
+can turn four lower and four upper bounds into $16$ constraints. If the next
+hidden variable then appears in $16$ lower and $16$ upper bounds, the next
+projection can generate $256$. The repeated multiplication is the explosion.
+
+This pairwise procedure is called **Fourier–Motzkin elimination**. Triangle
+begins by giving each unstable ReLU two lower faces and one upper face. After
+those constraints are combined with later layers, a hidden variable can appear
+in many lower and upper bounds. Repeating the pairwise elimination across
+layers can therefore turn a modest constraint system into a polytope with many
+facets.
+
+A verifier can avoid that projection by retaining every hidden variable, but
+then it must solve the full and increasingly large linear program. The two
+routes create the motivation for a compact approximation: avoid both a global
+Triangle program and an explicitly projected polytope.
+
 **DeepPoly** keeps the same kind of local ReLU lines in a more compact form. For
 each neuron, it records a concrete interval together with one affine lower
 expression and one affine upper expression. For an unstable ReLU, its symbolic
