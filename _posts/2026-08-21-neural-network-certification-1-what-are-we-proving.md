@@ -11,6 +11,10 @@ toc: true
 excerpt: "April the Siberian cat helps us see why an attack can disprove robustness, while only a certificate can prove it."
 ---
 
+> **Reader background.** We assume undergraduate calculus, linear algebra,
+> elementary probability, and basic neural networks. The series introduces
+> program verification and neural network certification from first principles.
+
 Meet April, my Siberian cat.
 
 <figure style="text-align: center;">
@@ -156,31 +160,31 @@ and the input set without checking every point separately. In this series, a
 **certificate** is a valid mathematical argument that proves the required
 inequalities for every input in $S_p(x_0,\epsilon)$.
 
-## Where the series goes next
+## Series map
 
 Our target is now precise: prove the score inequality over the allowed set. The
 rest of the series follows one small April classifier from its first proof to
 the field's current research frontiers:
 
-- **Part 2 — What would count as a proof?** We will build a tiny ReLU classifier
+- **[Part 2 — What would count as a proof?]({{ '/2026-08-21-neural-network-certification-2-writing-the-guarantee/' | relative_url }})** We will build a tiny ReLU classifier
   and certify it by hand.
-- **Part 3 — How can bounds travel through a network?** We will propagate ranges
+- **[Part 3 — How can bounds travel through a network?]({{ '/2026-08-21-neural-network-certification-3-interval-bound-propagation/' | relative_url }})** We will propagate ranges
   through the same classifier.
-- **Part 4 — Why do simple bounds lose information?** We will preserve useful
+- **[Part 4 — Why do simple bounds lose information?]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/' | relative_url }})** We will preserve useful
   relationships with linear bounds.
-- **Part 5 — What should we do if the bound is inconclusive?** We will repeatedly
+- **[Part 5 — What should we do if the bound is inconclusive?]({{ '/2026-08-21-neural-network-certification-5-complete-verification/' | relative_url }})** We will repeatedly
   split and bound the input region until every piece is certified or a
   counterexample is found.
-- **Part 6 — How can training make robustness easier to prove?** We will bracket
+- **[Part 6 — How can training make robustness easier to prove?]({{ '/2026-08-21-neural-network-certification-6-certified-training/' | relative_url }})** We will bracket
   the worst-case loss between attacks and certificates, then distinguish sound
   bound-based objectives from unsound training surrogates.
-- **Part 7 — What are the frontiers of neural network certification?** We will
+- **[Part 7 — What are the frontiers of neural network certification?]({{ '/2026-08-21-neural-network-certification-7-frontiers/' | relative_url }})** We will
   separate what certifiable networks can represent, what training can find,
   and what single- and multi-neuron relaxations can prove.
-- **Part 8 — How can random noise produce a certificate?** We will construct a
+- **[Part 8 — How can random noise produce a certificate?]({{ '/2026-08-21-neural-network-certification-8-randomized-smoothing/' | relative_url }})** We will construct a
   randomized-smoothed classifier, derive its certified radius, then examine
   training objectives and why average certified radius can mislead.
-- **Part 9 — How can randomized smoothing adapt?** We will use denoisers with
+- **[Part 9 — How can randomized smoothing adapt?]({{ '/2026-08-21-neural-network-certification-9-adaptive-randomized-smoothing/' | relative_url }})** We will use denoisers with
   pretrained classifiers, then certify input-dependent noise through Dual RS.
 
 ## Takeaway

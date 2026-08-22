@@ -11,11 +11,6 @@ toc: true
 excerpt: "Adapt randomized smoothing by denoising April's noisy photographs and choosing a certifiably safe noise level for each input."
 ---
 
-> **Reader background.** We assume undergraduate calculus, linear algebra,
-> elementary probability, and basic neural networks. The series introduces
-> program verification, neural network certification, abstract interpretation,
-> and randomized smoothing from first principles.
-
 ## April's photographs do not all need the same treatment
 
 [Part 8]({{ '/2026-08-21-neural-network-certification-8-randomized-smoothing/' | relative_url }})
@@ -52,8 +47,8 @@ $$
 where $\Phi^{-1}$ is the inverse standard-normal cumulative distribution
 function.
 
-Let $D$ be a denoiser and $f$ a classifier. Instead of sending $x+\eta$
-directly into $f$, compute
+Let $D$ be a denoiser and $f$ a classifier. Denoised smoothing inserts $D$
+between the noisy input and $f$:
 
 $$
 x+\eta
@@ -238,3 +233,20 @@ The two method families change different parts of randomized smoothing.
 April's noisy photograph now follows two sound adaptive routes: change the base
 mapping while keeping the theorem, or certify the selector before using an
 input-dependent noise scale.
+
+## Series takeaway
+
+[Part 1]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/' | relative_url }})
+began with a gap between testing some inputs and proving a claim for every
+allowed input. The [series map]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/#series-map' | relative_url }})
+now connects two ways to close that gap.
+
+Deterministic verification propagates sound bounds through a network and uses
+branch-and-bound when one enclosure is inconclusive. Randomized smoothing
+certifies a vote-based classifier through probability bounds. Adaptive methods
+add one shared obligation: every choice that can affect the prediction—such as
+a ReLU phase, denoiser, or noise scale—must remain covered by the proof.
+
+Neural network certification is therefore a discipline of complete coverage.
+The mathematical tools change, while the central question remains: **which
+allowed inputs and decisions does this argument prove safe?**

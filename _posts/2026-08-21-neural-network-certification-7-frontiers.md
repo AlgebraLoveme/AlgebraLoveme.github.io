@@ -11,11 +11,6 @@ toc: true
 excerpt: "Three surprising results separate what certifiable networks can represent, what training can find, and what a verifier can prove."
 ---
 
-> **Reader background.** We assume undergraduate calculus, linear algebra,
-> elementary probability, and basic neural networks. The series introduces
-> program verification, neural network certification, abstract interpretation,
-> and randomized smoothing from first principles.
-
 ## April reaches the edge of our map
 
 The first six posts followed one small classifier for April the Siberian cat.
@@ -35,7 +30,8 @@ These are three different questions:
 
 The distinction matters because the answers can point in different directions.
 Interval bound propagation (IBP) is expressive enough in principle to
-approximate every continuous target on a compact input domain.
+approximate every continuous target on a compact input domain: a closed and
+bounded region such as a box.
 A tighter relaxation can nevertheless produce a worse model during training.
 Multi-neuron relaxations can prove relationships that every single-neuron
 relaxation misses. A further barrier appears when a verifier repeatedly keeps
@@ -44,7 +40,8 @@ only convex information about small parts of a network.
 ## Frontier 1: Can an IBP-certified network approximate any continuous function?
 
 The ordinary universal approximation theorem says that sufficiently large
-neural networks can approximate any continuous function on a compact domain.
+neural networks can approximate any continuous function on a closed and
+bounded input region.
 For certification, matching the function at individual inputs is only half the
 job. We also propagate an entire input region through the network.
 
@@ -136,8 +133,7 @@ properties that help explain the result:
   <figcaption>Tightness answers a fixed-network question; continuity and sensitivity shape the training journey.</figcaption>
 </figure>
 
-The curves in the right panel are schematic. They show the distinction between
-the three properties rather than measurements from a particular model.
+The curves illustrate the three properties schematically.
 
 At fixed weights, a tighter sound bound remains better for verification. The
 training result adds a second criterion: ranking optimization objectives
@@ -232,13 +228,17 @@ convex hull would give exact scalar bounds, but computing it is generally
 intractable.
 
 The paper then shows why multi-neuron reasoning still changes what is possible.
-It gives an existential completeness result: on a fixed input domain, one can
-transform a network without changing its function so an optimal layerwise
-relaxation becomes exact. Finding the required hull may still be intractable.
+It gives an **existential completeness** result: an exact construction is
+guaranteed to exist, although the theorem does not supply an efficient way to
+find it. On a fixed input domain, one can transform a network without changing
+its function so an **optimal layerwise relaxation**—the tightest convex set
+available at every layer—becomes exact. Finding those tightest sets may still
+be intractable.
 It also studies **branch-and-bound**, which splits activation or input cases and
 verifies every resulting subproblem. For its nested-max encoding in $d$
 dimensions, the optimal layerwise multi-neuron construction uses $O(d)$
-constraints in one subproblem. An exact DeepPoly branch-and-bound proof uses
+constraints, meaning that the count grows linearly with $d$, in one subproblem.
+An exact DeepPoly branch-and-bound proof uses
 $2^{d-1}$ activation-pattern subproblems.
 
 The frontier is therefore more precise than “larger groups are tighter.” The

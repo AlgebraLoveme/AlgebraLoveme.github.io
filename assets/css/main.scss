@@ -1015,6 +1015,21 @@ mjx-container {
   display: none !important;
 }
 
+@media (max-width: 1200px) {
+  .wide-diagram__viewport img {
+    width: 940px;
+    max-width: none;
+  }
+
+  .wide-diagram__viewport::after {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    content: "Scroll horizontally to inspect the full diagram →";
+  }
+}
+
 @media (max-width: 900px) {
   :root {
     --header-height: 60px;
@@ -1199,19 +1214,6 @@ mjx-container {
 
   .page__content h2 {
     margin-top: 2.4rem;
-  }
-
-  .wide-diagram__viewport img {
-    width: 940px;
-    max-width: none;
-  }
-
-  .wide-diagram__viewport::after {
-    display: block;
-    margin-top: 0.35rem;
-    color: var(--muted);
-    font-size: 0.72rem;
-    content: "Swipe to inspect the full diagram →";
   }
 
   .grid__wrapper {

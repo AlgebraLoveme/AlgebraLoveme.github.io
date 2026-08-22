@@ -85,8 +85,10 @@ source of its uncertainty, then conquer each simpler phase separately. Fixing
 the phase makes $h_2$ linear in each child, which lets us analyze both triangles
 exactly.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-split-tightens-relu.svg' | relative_url }}?v=relu-phase" width="820" style="display: block; margin: 0 auto;" alt="April's input square divided along the diagonal x1 equals x2. Above the diagonal the second ReLU is off and equals zero; below the diagonal it is on and equals x1 minus x2.">
+  </div>
   <figcaption>Branching at $z_2=0$ replaces one unstable ReLU with two exact linear phases.</figcaption>
 </figure>
 
@@ -140,8 +142,10 @@ the off and on triangles are two connected pieces of the exact margin
 function. Each piece is a plane, and the planes meet continuously along
 $x_1=x_2$.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-branch-and-bound.svg' | relative_url }}?v=margin-surface" width="820" style="display: block; margin: 0 auto;" alt="The exact margin function shown as two connected planar patches, one for the off ReLU phase and one for the on phase, alongside a search tree whose two children are verified with margin bound 0.22.">
+  </div>
   <figcaption>The surface shows the two local affine formulas. The tree groups them into two verified subproblems.</figcaption>
 </figure>
 

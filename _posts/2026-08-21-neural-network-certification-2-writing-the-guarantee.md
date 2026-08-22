@@ -31,7 +31,7 @@ A practical image classifier may receive hundreds of thousands of color-channel
 values. Our teaching model receives only two normalized features:
 
 - $x_1$ measures the response to April's pointed ears.
-- $x_2$ measures the response to his fluffy coat.
+- $x_2$ measures the response to April's fluffy coat.
 
 For the original photo, both feature values are $0.5$, so
 

@@ -44,7 +44,7 @@ $x_2=0.3$.
 Neither interval is wrong. The missing information is the relationship between
 each hidden neuron and April's input.
 
-## Keep the relationship, not just the endpoints
+## Keep the input relationship
 
 For the second hidden neuron, IBP remembers only
 
@@ -80,8 +80,10 @@ h_2&\leq\frac{1}{2}z_2+0.2.
 \end{aligned}
 $$
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/relu-linear-relaxation.svg' | relative_url }}" width="640" style="display: block; margin: 0 auto;" alt="The ReLU graph between minus 0.4 and 0.4 enclosed by two lower lines and an upper line, forming a shaded triangular region.">
+  </div>
   <figcaption>Together, the blue upper line and the black ReLU branches form the shaded enclosure.</figcaption>
 </figure>
 
@@ -159,7 +161,8 @@ a hidden variable instead projects the feasible region cut out by the
 inequalities---a **polytope**---onto the remaining variables. This projection
 can multiply constraints.
 
-### How eliminating one variable multiplies constraints
+<details markdown="1">
+<summary>Why can eliminating one variable multiply constraints?</summary>
 
 Consider four inequalities involving the same hidden value:
 
@@ -200,6 +203,8 @@ all hidden variables avoids the projection explosion but leaves a large global
 linear program. Explicitly eliminating them can generate many pairwise
 inequalities. We now have a reason to keep only selected linear relationships.
 
+</details>
+
 ## Keep selected lines with DeepPoly
 
 **DeepPoly** records a numerical interval, one affine (linear-plus-constant)
@@ -215,9 +220,8 @@ $$
 $$
 
 The two lines that DeepPoly considers are the endpoints: $\lambda=0$ gives
-$h_2\geq0$, and $\lambda=1$ gives $h_2\geq z_2$. The values between them help
-us derive which endpoint to select; DeepPoly does not need to store the whole
-family.
+$h_2\geq0$, and $\lambda=1$ gives $h_2\geq z_2$. The values between them make
+the selection rule easy to derive. DeepPoly stores only the selected endpoint.
 
 All of these lower lines are sound, but they do not give equally tight
 enclosures. Because they share the same upper chord, DeepPoly measures the area
@@ -248,9 +252,9 @@ $$
 
 For a positive coefficient, the smallest value uses the lower expression. For
 a negative coefficient, multiplication reverses the inequality, so the
-smallest value uses the upper expression. DeepPoly makes this single
-sign-directed substitution instead of pairing every lower constraint with
-every upper constraint.
+smallest value uses the upper expression. DeepPoly makes one sign-directed
+substitution and avoids pairing every lower constraint with every upper
+constraint.
 
 Crucially, each substitution produces one affine expression, not a family of
 pairwise constraints. DeepPoly keeps a fixed number of summaries per neuron:
@@ -281,7 +285,12 @@ $$
 m\geq\frac{1}{2}(0.3)+\frac{3}{2}(0.3)-0.5=0.1.
 $$
 
-### How DeepPoly chooses the lower line
+This finishes the certificate. The lower-line rule is useful for other output
+expressions, so its geometric derivation remains available below as an
+optional deeper step.
+
+<details markdown="1">
+<summary>Why does the min-area rule select only 0 or 1?</summary>
 
 We postponed the min-area calculation because April's certificate needed only
 the upper bound on $h_2$. A different margin can depend on its lower bound, so
@@ -298,8 +307,10 @@ The candidate lower line and the fixed upper chord enclose the shaded
 trapezoid below. Its vertical side lengths are the endpoint gaps
 $-\lambda\ell$ and $(1-\lambda)u$; the distance between them is $u-\ell$.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}?v=20260822-2" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
+  </div>
   <figcaption>The continuous family makes the area calculable; DeepPoly selects between its two endpoint lines.</figcaption>
 </figure>
 
@@ -358,6 +369,8 @@ side, the diagonal lower line $z$ leaves less area.
 April's interval $[-0.4,0.4]$ is the tie case. DeepPoly's concrete rule chooses
 $\lambda=0$. The radius-$0.2$ certificate remains the same because its margin
 uses only the upper bound on $h_2$.
+
+</details>
 
 Triangle and DeepPoly give the same certificate for April's tiny network. The
 difference is how they organize the calculation: Triangle retains a joint

@@ -11,16 +11,15 @@ toc: true
 excerpt: "Follow noisy copies of April's photo from majority vote to a probabilistic robustness certificate, then examine training and evaluation."
 ---
 
-> **Reader background.** We assume undergraduate calculus, linear algebra,
-> elementary probability, and basic neural networks. The series introduces
-> program verification, neural network certification, abstract interpretation,
-> and randomized smoothing from first principles.
-
 ## One photograph of April becomes a cloud
 
 Earlier methods tracked every allowed perturbation through every network layer.
 Randomized smoothing instead treats a neural network as a black box and
 certifies a new classifier built from its noisy votes.
+
+We now leave April's two-class teaching model and let the black-box base
+classifier use a richer label set: **Siberian cat**, **tree**, and **other
+animal**.
 
 Start with April's photograph. Add independent Gaussian noise to every pixel,
 classify each noisy copy, and count the labels. Some copies may look grainy,
@@ -76,6 +75,12 @@ votes.
 
 ## A probability gap becomes a certified radius
 
+The 20 dots above illustrate a Gaussian cloud; their visible frequencies are
+not probability estimates for certification. For the idealized calculation
+below, assume the exact class probabilities admit the bounds $p_A=0.80$ and
+$p_B=0.10$. A finite-sample certificate will replace those assumed bounds with
+statistical confidence bounds in the next section.
+
 Let $c_A$ be the most probable class. Suppose we know
 
 $$
@@ -110,7 +115,7 @@ inside an $\ell_2$ ball: all changes whose total Euclidean length is below
 $R$.
 
 Assume pixel coordinates are scaled to $[0,1]$, so $\sigma$ and $R$ use those
-normalized units. For the April vote in the figure, take $\sigma=0.25$,
+normalized units. For this idealized example, take $\sigma=0.25$,
 $p_A=0.80$, and $p_B=0.10$. Since
 
 $$
@@ -253,8 +258,8 @@ A more informative evaluation retains the distribution. Two useful views are:
 - **the empirical distribution of $p_A$:** how noisy accuracy is spread across
   easy and difficult inputs.
 
-Reported ACR uses confidence bounds rather than the ideal probabilities in our
-calculation, so it also depends on the sample count and confidence level. The
+Actual ACR replaces the ideal probabilities in our calculation with confidence
+bounds, so it also depends on the sample count and confidence level. The
 curves reveal whether progress reaches many inputs, including difficult ones,
 or mostly extends radii that were already large.
 

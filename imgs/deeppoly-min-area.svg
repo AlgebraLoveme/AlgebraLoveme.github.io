@@ -22,7 +22,7 @@
 
   <polyline points="140,330 464,330 680,120" fill="none" stroke="#111827" stroke-width="4.5" stroke-linejoin="round"/>
   <line x1="140" y1="330" x2="680" y2="120" stroke="#2f6fad" stroke-width="4"/>
-  <line x1="140" y1="405" x2="680" y2="280" stroke="#c45d34" stroke-width="4"/>
+  <line x1="140" y1="405" x2="680" y2="280" stroke="#b9473e" stroke-width="4"/>
 
   <g stroke="#7c6bb3" stroke-width="2.5" stroke-dasharray="6 5" fill="none">
     <line x1="140" y1="330" x2="140" y2="405"/>
@@ -45,7 +45,7 @@
     <text x="128" y="374" text-anchor="end" fill="#6b579f">−λℓ</text>
     <text x="692" y="205" fill="#6b579f">(1 − λ)u</text>
     <text x="520" y="105" fill="#2f6fad">upper chord</text>
-    <text x="500" y="400" fill="#c45d34">lower line h = λz</text>
+    <text x="500" y="400" fill="#b9473e">lower line h = λz</text>
     <text x="500" y="220" fill="#111827">ReLU</text>
   </g>
 

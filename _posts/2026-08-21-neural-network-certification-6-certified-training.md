@@ -11,7 +11,7 @@ toc: true
 excerpt: "Follow April's worst-case loss from attacks to sound bounds, then separate sound certified training from unsound training surrogates."
 ---
 
-## April is robust, yet her proof took work
+## April is robust, yet the proof took work
 
 [Part 5]({{ '/2026-08-21-neural-network-certification-5-complete-verification/' | relative_url }})
 proved that April's tiny classifier is robust at radius $0.24$. Its exact worst
@@ -23,13 +23,6 @@ The classifier already made the right prediction throughout the region. Its
 parameters made that fact difficult for a fast bound to establish. This
 suggests a new question: **can training learn a robust classifier whose
 robustness is also easy to prove?**
-
-<figure style="text-align: center;">
-  <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
-    <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="260" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
-  </a>
-  <figcaption>One photograph gives us a training example. Robust training must also account for every allowed variation around it.</figcaption>
-</figure>
 
 ## The target is the worst loss in the allowed region
 
@@ -110,8 +103,10 @@ $L_{\mathrm{cert}}\approx0.703$. The coarser interval bound $-0.26$ gives the
 larger certified loss $0.832$. Both certified losses safely cover the exact
 worst-case loss.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-certified-training-bracket.svg' | relative_url }}" width="820" style="display: block; margin: 0 auto;" alt="April's clean loss, attacked loss, exact worst-case loss, and two certified upper losses arranged on a vertical scale. The attacked loss is at or below the exact worst-case loss, while sound certified losses are at or above it. An unsound training proxy has no guaranteed side relative to the exact value.">
+  </div>
   <figcaption>Attacks approach the worst-case loss from below. Sound certificates approach it from above.</figcaption>
 </figure>
 
@@ -143,7 +138,7 @@ bound-based robust training signals.
 
 ## Why train with an unsound surrogate?
 
-April's numbers show the central optimization problem. Her exact worst-case
+April's numbers show the central optimization problem. The exact worst-case
 loss is $0.589$, while the IBP training signal is $0.832$. The extra loss comes
 from artificial behaviors admitted by the relaxation. During training, the
 optimizer reacts to those artificial behaviors as well as the real network.
@@ -238,9 +233,9 @@ radius $2/255$.
 
 **Natural accuracy** is the percentage of validation images classified
 correctly. **Certified accuracy** is the percentage proved robust at the stated
-radius. CTBench reports both a cheap IBP certificate and a stronger MN-BaB
-certificate. MN-BaB receives up to $1000$ seconds per image, and timed-out cases
-remain uncertified.
+radius. CTBench reports both a cheap IBP certificate and a stronger
+**multi-neuron branch-and-bound (MN-BaB)** certificate. MN-BaB receives up to
+$1000$ seconds per image, and timed-out cases remain uncertified.
 
 | Training method | Robust training signal | Natural accuracy | IBP-certified accuracy | MN-BaB-certified accuracy |
 | --- | --- | ---: | ---: | ---: |

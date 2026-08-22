@@ -18,15 +18,9 @@ we proved that April's output margin remains positive when either input feature
 changes by at most $0.1$. The proof bounded two hidden neurons by hand. A larger
 network needs the same reasoning applied systematically across every layer.
 
-<figure style="text-align: center;">
-  <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
-    <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="280" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
-  </a>
-  <figcaption>Instead of following one feature pair for April, we will follow a range of possible values through every neuron.</figcaption>
-</figure>
-
+We now follow whole ranges of April's feature values through every neuron.
 Attach a lower and upper bound to each input, then calculate new bounds after
-every network operation. One pass through the network can then cover the entire
+every network operation. One pass through the network can cover the entire
 allowed set.
 
 ## Give each input a lower and upper bound
@@ -137,8 +131,8 @@ same $h_2$. Its lower endpoint combines the smallest cat score, which uses
 $h_2=0$, with the largest other score, which uses $h_2=0.2$. One hidden value
 cannot be both numbers at once.
 
-The property asks about the score difference, not the two scores separately.
-We can therefore subtract the final-layer formulas first:
+The property depends directly on the score difference, so we first combine the
+two final-layer formulas into that shared expression:
 
 $$
 \begin{aligned}
