@@ -1,51 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
-  <title id="title">April's completed ReLU phase branch-and-bound tree</title>
-  <desc id="desc">The input square is divided diagonally into off and on ReLU phases. The search tree branches at z2 equals zero, and both child regions have a verified margin lower bound of 0.22.</desc>
-  <rect width="900" height="500" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">April's piecewise-linear margin surface and branch-and-bound tree</title>
+  <desc id="desc">The exact margin surface consists of a blue off-phase plane and an orange on-phase plane joined along x1 equals x2. A search tree groups the two pieces into children, each verified with lower margin 0.22.</desc>
+  <rect width="1000" height="520" fill="#ffffff"/>
 
-  <text x="225" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Divide the unstable ReLU</text>
-  <text x="670" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Conquer both phases</text>
+  <text x="275" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="23" font-weight="600" fill="#111827">Exact piecewise-linear margin</text>
+  <text x="760" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="23" font-weight="600" fill="#111827">Group the two pieces</text>
 
-  <!-- Diagonally divided input square. -->
-  <polygon points="90,95 360,95 90,365" fill="#e7f1fb"/>
-  <polygon points="90,365 360,95 360,365" fill="#fff0e8"/>
-  <rect x="90" y="95" width="270" height="270" fill="none" stroke="#374151" stroke-width="3"/>
-  <line x1="90" y1="365" x2="360" y2="95" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="9 7"/>
+  <!-- Projected input square beneath the surface. -->
+  <polygon points="230,390 470,390 350,295 110,295" fill="#f7f8fa" stroke="#a6adb8" stroke-width="2"/>
+  <line x1="230" y1="390" x2="350" y2="295" stroke="#c5cad2" stroke-width="1.5" stroke-dasharray="6 5"/>
 
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="165" y="170" font-size="23" font-weight="600" fill="#2f6fad">R<tspan baseline-shift="sub" font-size="15">off</tspan></text>
-    <text x="165" y="200" font-size="17" fill="#2f6fad">z₂ ≤ 0</text>
-    <text x="290" y="295" font-size="23" font-weight="600" fill="#c45d34">R<tspan baseline-shift="sub" font-size="15">on</tspan></text>
-    <text x="290" y="325" font-size="17" fill="#a94826">z₂ ≥ 0</text>
-    <text x="225" y="82" font-size="17" fill="#7c6bb3">x₁ = x₂</text>
-    <text x="225" y="400" font-size="17" fill="#111827">R = R<tspan baseline-shift="sub" font-size="12">off</tspan> ∪ R<tspan baseline-shift="sub" font-size="12">on</tspan></text>
+  <!-- Vertical guides from the surface to the input plane. -->
+  <g stroke="#a6adb8" stroke-width="2" stroke-dasharray="6 5">
+    <line x1="110" y1="225" x2="110" y2="295"/>
+    <line x1="350" y1="145" x2="350" y2="295"/>
   </g>
 
-  <!-- Search tree. -->
-  <rect x="535" y="72" width="270" height="105" rx="12" fill="#fff4df" stroke="#c18422" stroke-width="3"/>
+  <!-- Two affine surface patches. -->
+  <polygon points="230,390 110,225 350,145" fill="#8bb9e3" fill-opacity="0.78" stroke="#2f6fad" stroke-width="3" stroke-linejoin="round"/>
+  <polygon points="230,390 470,390 350,145" fill="#efb08f" fill-opacity="0.78" stroke="#c45d34" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="230" y1="390" x2="350" y2="145" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="9 7"/>
+
+  <!-- Shared minimum edge. -->
+  <line x1="230" y1="390" x2="470" y2="390" stroke="#23804d" stroke-width="5"/>
+
+  <!-- Surface labels. -->
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="670" y="110" font-size="20" font-weight="600" fill="#111827">Root region R</text>
-    <text x="670" y="143" font-size="18" fill="#9a5b08">bound −0.02</text>
-    <text x="670" y="166" font-size="16" fill="#9a5b08">branch at z₂ = 0</text>
+    <text x="195" y="248" font-size="19" font-weight="600" fill="#174f7e">Off plane</text>
+    <text x="195" y="274" font-size="16" fill="#174f7e">m = x₁ + x₂ − 0.3</text>
+    <text x="355" y="300" font-size="19" font-weight="600" fill="#8f3e20">On plane</text>
+    <text x="355" y="326" font-size="16" fill="#8f3e20">m = 2x₂ − 0.3</text>
+    <text x="430" y="128" font-size="15" fill="#7c6bb3">join: x₁ = x₂</text>
+    <text x="350" y="421" font-size="16" font-weight="600" fill="#1f7045">minimum m = 0.22</text>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#4b5563">
+    <text x="88" y="219">0.70</text>
+    <text x="320" y="132">1.18</text>
+    <text x="214" y="385" text-anchor="end">0.22</text>
+  </g>
+  <line x1="397" y1="132" x2="358" y2="145" stroke="#7c6bb3" stroke-width="1.5"/>
+
+  <!-- Axes. -->
+  <g stroke="#252a34" stroke-width="2.5" fill="none">
+    <line x1="230" y1="390" x2="500" y2="390"/>
+    <path d="M 490 384 L 500 390 L 490 396"/>
+    <line x1="230" y1="390" x2="92" y2="281"/>
+    <path d="M 102 284 L 92 281 L 96 291"/>
+    <line x1="230" y1="390" x2="230" y2="118"/>
+    <path d="M 224 128 L 230 118 L 236 128"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-style="italic" fill="#252a34">
+    <text x="507" y="397">x₁</text>
+    <text x="72" y="278">x₂</text>
+    <text x="240" y="120">m</text>
+  </g>
+
+  <!-- Branch-and-bound tree. -->
+  <rect x="625" y="72" width="270" height="102" rx="12" fill="#fff4df" stroke="#c18422" stroke-width="3"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
+    <text x="760" y="108" font-size="20" font-weight="600" fill="#111827">Root region R</text>
+    <text x="760" y="139" font-size="18" fill="#9a5b08">bound −0.02</text>
+    <text x="760" y="163" font-size="16" fill="#9a5b08">branch at z₂ = 0</text>
   </g>
 
   <g stroke="#6b7280" stroke-width="3" fill="none">
-    <path d="M 630 177 L 550 245"/>
-    <path d="M 710 177 L 785 245"/>
+    <path d="M 720 174 L 655 245"/>
+    <path d="M 800 174 L 865 245"/>
   </g>
 
-  <rect x="440" y="245" width="220" height="132" rx="12" fill="#e7f1fb" stroke="#2f6fad" stroke-width="3"/>
-  <rect x="680" y="245" width="210" height="132" rx="12" fill="#fff0e8" stroke="#c45d34" stroke-width="3"/>
+  <rect x="555" y="245" width="200" height="132" rx="12" fill="#e7f1fb" stroke="#2f6fad" stroke-width="3"/>
+  <rect x="765" y="245" width="200" height="132" rx="12" fill="#fff0e8" stroke="#c45d34" stroke-width="3"/>
 
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="550" y="280" font-size="20" font-weight="600" fill="#2f6fad">Off: z₂ ≤ 0</text>
-    <text x="550" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
-    <text x="550" y="350" font-size="16" fill="#376b50">verified</text>
+    <text x="655" y="281" font-size="19" font-weight="600" fill="#2f6fad">Off-plane group</text>
+    <text x="655" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
+    <text x="655" y="350" font-size="16" fill="#376b50">verified</text>
 
-    <text x="785" y="280" font-size="20" font-weight="600" fill="#c45d34">On: z₂ ≥ 0</text>
-    <text x="785" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
-    <text x="785" y="350" font-size="16" fill="#376b50">verified</text>
+    <text x="865" y="281" font-size="19" font-weight="600" fill="#c45d34">On-plane group</text>
+    <text x="865" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
+    <text x="865" y="350" font-size="16" fill="#376b50">verified</text>
   </g>
 
-  <text x="665" y="430" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111827">Both leaves verified  ⇒  root verified</text>
+  <text x="760" y="427" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111827">Both groups cover R  ⇒  root verified</text>
 </svg>

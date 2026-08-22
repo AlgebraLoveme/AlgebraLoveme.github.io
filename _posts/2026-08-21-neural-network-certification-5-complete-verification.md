@@ -133,16 +133,23 @@ Every input in the on triangle is safe. The phase split has removed the loose
 ReLU chord entirely, turning the inconclusive bound $-0.02$ into the exact
 bound $0.22$ on both children.
 
+The two children also reveal the network's geometry. A ReLU network is
+**piecewise linear**: fixing its ReLU phases selects one affine formula. Here
+the off and on triangles are two connected pieces of the exact margin
+function. Each piece is a plane, and the planes meet continuously along
+$x_1=x_2$.
+
 <figure style="text-align: center;">
-  <img src="{{ '/imgs/april-branch-and-bound.svg' | relative_url }}?v=relu-phase" width="760" style="display: block; margin: 0 auto;" alt="April's square split diagonally into ReLU-off and ReLU-on triangles, alongside a search tree whose inconclusive root has two verified children with margin bound 0.22.">
-  <figcaption>The two verified leaves cover the entire original square, so together they form one certificate.</figcaption>
+  <img src="{{ '/imgs/april-branch-and-bound.svg' | relative_url }}?v=margin-surface" width="820" style="display: block; margin: 0 auto;" alt="The exact margin function shown as two connected planar patches, one for the off ReLU phase and one for the on phase, alongside a search tree whose two children are verified with margin bound 0.22.">
+  <figcaption>The surface shows the two local affine formulas; the tree groups them into two verified subproblems.</figcaption>
 </figure>
 
 ## Read the proof from the tree
 
-The top box in the figure represents the original region $R$. Its lower bound
-is $-0.02$, so it cannot yet be marked safe. We divide it into two child
-regions and bound each child separately.
+The left side of the figure shows the exact function that the global
+relaxation tried to enclose. The right side organizes its two linear pieces as
+a search tree. The root bound is $-0.02$, so the root cannot yet be marked
+safe. We divide it into two phase children and bound each child separately.
 
 Both child bounds are positive:
 
@@ -156,6 +163,11 @@ Because $R=R_{\mathrm{off}}\cup R_{\mathrm{on}}$, every allowed input belongs
 to at least one verified leaf. The tree is therefore a proof for the entire
 radius-$0.24$ square. The smallest leaf bound, $0.22$, is a valid lower bound
 for the original region.
+
+April has only one unstable ReLU, so each child is already one connected
+linear region. In a larger network, an off/on child may still contain several
+linear regions created by other unstable ReLUs. Further branches group and
+separate those regions until the bounds can settle every leaf.
 
 ## Bound, split, and repeat
 
