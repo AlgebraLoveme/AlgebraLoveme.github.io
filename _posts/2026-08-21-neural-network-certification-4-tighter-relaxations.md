@@ -204,12 +204,13 @@ symbolic bounds can be written as
 $$
 \lambda z_2\leq h_2
 \leq\frac{1}{2}z_2+0.2,
-\quad \lambda\in\{0,1\}.
+\quad 0\leq\lambda\leq1.
 $$
 
-Choosing $\lambda=0$ keeps $h_2\geq0$; choosing $\lambda=1$ keeps
-$h_2\geq z_2$. DeepPoly keeps one of these lower lines and the upper chord
-rather than sending all three Triangle constraints to a global linear program.
+The endpoints $\lambda=0$ and $\lambda=1$ recover the two Triangle lower
+lines, $h_2\geq0$ and $h_2\geq z_2$. DeepPoly keeps one lower line and the
+upper chord rather than sending all three Triangle constraints to a global
+linear program. We will derive its concrete choice after the certificate.
 
 ### Why the constraints do not multiply
 
@@ -258,6 +259,66 @@ Back-substitution immediately recovers
 $$
 m\geq\frac{1}{2}x_1+\frac{3}{2}x_2-0.5\geq0.1.
 $$
+
+### How DeepPoly chooses the lower line
+
+The certificate above needed only the upper bound on $h_2$. Another output may
+need its lower bound, so DeepPoly must choose between $h_2\geq0$ and
+$h_2\geq z_2$.
+
+For any unstable ReLU with $z\in[\ell,u]$, every slope
+$\lambda\in[0,1]$ gives a sound lower line:
+
+$$
+\operatorname{ReLU}(z)\geq\lambda z.
+$$
+
+To see why the min-area heuristic needs only two candidates, look at the gap
+between this lower line and the fixed upper chord. At $z=\ell$, the gap is
+$-\lambda\ell$. At $z=u$, it is $(1-\lambda)u$. The gap changes linearly, so
+the enclosed area is the interval width times the average endpoint gap:
+
+$$
+\begin{aligned}
+A(\lambda)
+&=\frac{1}{2}(u-\ell)
+  \bigl[-\lambda\ell+(1-\lambda)u\bigr]\\
+&=\frac{1}{2}(u-\ell)\bigl[u-\lambda(u+\ell)\bigr].
+\end{aligned}
+$$
+
+The expression is linear in $\lambda$. A linear function on $[0,1]$ reaches
+its minimum at an endpoint, so DeepPoly only needs to compare
+$\lambda=0$ and $\lambda=1$:
+
+$$
+A(0)=\frac{1}{2}u(u-\ell),\qquad
+A(1)=\frac{1}{2}(-\ell)(u-\ell).
+$$
+
+The resulting switch rule is
+
+$$
+\lambda^\star=
+\begin{cases}
+0, & u\leq-\ell,\\
+1, & u>-\ell.
+\end{cases}
+$$
+
+If the interval reaches farther into the negative side, $u\leq-\ell$, the
+flat lower line $0$ leaves less area. If it reaches farther into the positive
+side, the diagonal lower line $z$ leaves less area.
+
+| ReLU input interval | $A(0)$ | $A(1)$ | Selected lower line |
+| --- | ---: | ---: | --- |
+| $[-0.6,0.2]$ | $0.08$ | $0.24$ | $0$ ($\lambda=0$) |
+| $[-0.4,0.4]$ | $0.16$ | $0.16$ | Tie; choose $0$ |
+| $[-0.2,0.6]$ | $0.24$ | $0.08$ | $z$ ($\lambda=1$) |
+
+April's interval $[-0.4,0.4]$ is the tie case. DeepPoly's concrete rule chooses
+$\lambda=0$ when the areas are equal. The radius-$0.2$ certificate remains the
+same because its margin uses only the upper bound on $h_2$.
 
 Triangle and DeepPoly give the same certificate for April's tiny network. The
 difference is how they organize the calculation: Triangle retains a joint
