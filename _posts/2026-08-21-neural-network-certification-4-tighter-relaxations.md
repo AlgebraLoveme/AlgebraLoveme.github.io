@@ -11,32 +11,35 @@ toc: true
 excerpt: "Triangle first recovers a relationship that intervals forgot; DeepPoly then carries useful linear bounds without a global constraint system."
 ---
 
-## Why did April's margin cross zero?
+## Why did IBP's margin bound become negative?
 
 In [Part 3]({{ '/2026-08-21-neural-network-certification-3-interval-bound-propagation/' | relative_url }}),
-interval bound propagation followed April's entire input square through the
-network. At radius $0.2$,
+interval bound propagation followed an entire input square through April the
+Siberian cat's tiny classifier. At radius $0.2$,
 
 $$
 x_1,x_2\in[0.3,0.7].
 $$
 
-IBP found
+Recall that $z_i$ is the input to ReLU $i$, while
+$h_i=\operatorname{ReLU}(z_i)=\max(0,z_i)$ is its output. IBP found
 
 $$
 h_1\in[0.1,0.9],\quad h_2\in[0,0.4].
 $$
 
-After last-layer elision, the margin is $m=0.2+h_1-h_2$. Treating the two
+Combining the final layer with the score difference---a rewrite called
+**last-layer elision**---gives the margin $m=0.2+h_1-h_2$. Treating the two
 hidden intervals independently gives
 
 $$
 m\geq0.2+0.1-0.4=-0.1.
 $$
 
-The bound crosses zero, so IBP returns **unknown**. But the calculation combines
-two hidden values that cannot occur together. The value $h_1=0.1$ comes from
-$x_1=x_2=0.3$, whereas $h_2=0.4$ comes from $x_1=0.7$ and $x_2=0.3$.
+This lower bound is negative, so IBP returns **unknown**. But the calculation
+combines two hidden values that cannot occur together. The value $h_1=0.1$
+comes from $x_1=x_2=0.3$, whereas $h_2=0.4$ comes from $x_1=0.7$ and
+$x_2=0.3$.
 
 Neither interval is wrong. The missing information is the relationship between
 each hidden neuron and April's input.
@@ -144,15 +147,17 @@ certificate for the radius-$0.2$ square.
 ## Why does Triangle become expensive?
 
 For April, one triangle is easy to carry. A modern network may contain
-thousands of unstable ReLUs. With $k$ unstable ReLUs, Triangle adds $3k$
-inequalities, plus the variables and affine equations for the network. A
-verifier can retain this whole system and minimize the margin with a linear
-program. The initial constraint count grows linearly, but the programs become
-large.
+thousands of unstable ReLUs. Triangle then leaves us two computational choices.
+We can retain every hidden variable and solve one growing global linear
+program, or eliminate hidden variables so that each bound refers only to
+earlier variables.
 
-Another option is to eliminate hidden variables and describe the resulting
-polytope directly in terms of earlier variables. This is where the number of
-constraints can multiply.
+With $k$ unstable ReLUs, retaining them adds $3k$ inequalities, plus the
+variables and affine equations for the network. The initial constraint count
+grows linearly, but the resulting linear program can become large. Eliminating
+a hidden variable instead projects the feasible region cut out by the
+inequalities---a **polytope**---onto the remaining variables. This projection
+can multiply constraints.
 
 ### How eliminating one variable multiplies constraints
 
@@ -192,32 +197,35 @@ projection can generate $256$. Repeated multiplication creates the explosion.
 
 This pairwise operation is called **Fourier–Motzkin elimination**. Retaining
 all hidden variables avoids the projection explosion but leaves a large global
-linear program. Explicitly eliminating them risks creating a polytope with many
-facets. We now have a reason to keep only selected linear relationships.
+linear program. Explicitly eliminating them can generate many pairwise
+inequalities. We now have a reason to keep only selected linear relationships.
 
 ## Keep selected lines with DeepPoly
 
-**DeepPoly** records a concrete interval, one affine lower expression, and one
-affine upper expression for each neuron. For April's unstable ReLU, its
-symbolic bounds can be written as
+**DeepPoly** records a numerical interval, one affine (linear-plus-constant)
+lower expression, and one affine upper expression for each neuron. For an
+unstable ReLU, it keeps the upper chord and one of Triangle's two lower lines:
+$h\geq0$ or $h\geq z$.
+
+To compare those two choices, place them inside the sound family
 
 $$
-\lambda z_2\leq h_2
-\leq\frac{1}{2}z_2+0.2,
-\quad 0\leq\lambda\leq1.
+\lambda z_2\leq h_2,
+\qquad 0\leq\lambda\leq1.
 $$
 
-The endpoints $\lambda=0$ and $\lambda=1$ recover the two Triangle lower
-lines, $h_2\geq0$ and $h_2\geq z_2$. DeepPoly keeps one lower line and the
-upper chord rather than sending all three Triangle constraints to a global
-linear program.
+The two lines that DeepPoly considers are the endpoints: $\lambda=0$ gives
+$h_2\geq0$, and $\lambda=1$ gives $h_2\geq z_2$. The values between them help
+us derive which endpoint to select; DeepPoly does not need to store the whole
+family.
 
 All of these lower lines are sound, but they do not give equally tight
 enclosures. Because they share the same upper chord, DeepPoly measures the area
-between each candidate lower line and that chord. A smaller area admits fewer
-artificial $(z_2,h_2)$ pairs and therefore preserves more information. DeepPoly
-chooses the candidate with the smallest area; this is its **min-area
-heuristic**. We will derive the concrete choice after seeing back-substitution.
+between each lower line and that chord. A smaller area admits fewer points that
+lie inside the relaxation but not on the exact ReLU graph, so it preserves more
+information. DeepPoly chooses the endpoint with the smaller area; this is its
+**min-area heuristic**. We will derive the concrete choice after seeing
+back-substitution.
 
 ### Why the constraints do not multiply
 
@@ -246,32 +254,38 @@ every upper constraint.
 
 Crucially, each substitution produces one affine expression, not a family of
 pairwise constraints. DeepPoly keeps a fixed number of summaries per neuron:
-one lower expression, one upper expression, and one interval. It never
-constructs the $pq$ facets produced by explicit projection. This is how
-DeepPoly avoids the projection explosion.
+one lower expression, one upper expression, and one interval. An expression
+may involve many earlier neurons, but the number of stored expressions does
+not multiply. DeepPoly never constructs the up to $pq$ pairwise inequalities
+produced by explicit projection. This is how it avoids the projection
+explosion.
 
-DeepPoly repeats the sign-directed substitutions backward until only input
-variables remain. This procedure is **back-substitution**. For April's margin,
-the coefficient of $h_2$ is $-1$, so the rule selects its upper bound:
+DeepPoly applies the sign rule to the current margin expression, then repeats
+the substitution backward until only input variables remain. This procedure
+is **back-substitution**. For April's margin, the coefficient of $h_2$ is $-1$,
+so the rule selects the upper bound on $h_2$:
 
 $$
 \begin{aligned}
-h_1&=x_1+x_2-0.5,\\
-h_2&\leq\frac{1}{2}(x_1-x_2)+0.2.
+m&=0.2+h_1-h_2\\
+&\geq0.2+h_1-\left(\frac{1}{2}z_2+0.2\right)\\
+&=h_1-\frac{1}{2}z_2\\
+&=(x_1+x_2-0.5)-\frac{1}{2}(x_1-x_2)\\
+&=\frac{1}{2}x_1+\frac{3}{2}x_2-0.5.
 \end{aligned}
 $$
 
-Back-substitution immediately recovers
+Both input coefficients are positive. Using $x_1,x_2\geq0.3$ therefore gives
 
 $$
-m\geq\frac{1}{2}x_1+\frac{3}{2}x_2-0.5\geq0.1.
+m\geq\frac{1}{2}(0.3)+\frac{3}{2}(0.3)-0.5=0.1.
 $$
 
 ### How DeepPoly chooses the lower line
 
 We postponed the min-area calculation because April's certificate needed only
-the upper bound on $h_2$. Another output may need its lower bound, so we now
-derive how DeepPoly chooses between $h_2\geq0$ and $h_2\geq z_2$.
+the upper bound on $h_2$. A different margin can depend on its lower bound, so
+we now derive how DeepPoly chooses between $h_2\geq0$ and $h_2\geq z_2$.
 
 For any unstable ReLU with $z\in[\ell,u]$, every slope
 $\lambda\in[0,1]$ gives a sound lower line:
@@ -286,7 +300,7 @@ $-\lambda\ell$ and $(1-\lambda)u$; the distance between them is $u-\ell$.
 
 <figure style="text-align: center;">
   <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
-  <figcaption>DeepPoly measures the shaded area between a candidate lower line and the fixed upper chord.</figcaption>
+  <figcaption>The continuous family makes the area calculable; DeepPoly selects between its two endpoint lines.</figcaption>
 </figure>
 
 The area of a trapezoid is its width times the average of its two parallel side
@@ -301,7 +315,7 @@ A(\lambda)
 \end{aligned}
 $$
 
-The expression is linear in $\lambda$. Its slope is
+As a function of $\lambda$, $A$ has derivative
 
 $$
 \frac{dA}{d\lambda}
@@ -348,7 +362,8 @@ uses only the upper bound on $h_2$.
 Triangle and DeepPoly give the same certificate for April's tiny network. The
 difference is how they organize the calculation: Triangle retains a joint
 constraint system, while DeepPoly back-substitutes one sign-selected bound at
-each step without generating projected facets. DeepPoly was introduced in
+each step without generating projected pairwise inequalities. DeepPoly was
+introduced in
 [An Abstract Domain for Certifying Neural Networks](https://www.sri.inf.ethz.ch/publications/singh2019domain).
 
 | Method | Representation | Margin lower bound | Result |
