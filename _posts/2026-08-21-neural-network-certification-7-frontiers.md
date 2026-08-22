@@ -163,5 +163,6 @@ dynamics, and scalable selection of informative neuron groups.
 Return to April and the three verbs. Existence belongs to the network class;
 finding belongs to optimization; proving belongs to the verifier's abstraction.
 Progress in neural network certification requires us to say which frontier a
-new result moves.
+new result moves. Part 8 will approach certification through a different object:
+the probability that April's label wins when random noise is added to the input.
 -->

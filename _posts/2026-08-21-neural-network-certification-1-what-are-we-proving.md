@@ -176,7 +176,12 @@ the field's current research frontiers:
   bound-based objectives from unsound training surrogates.
 - **Part 7 — What are the frontiers of neural network certification?** We will
   separate what certifiable networks can represent, what training can find,
-  and what single-neuron or multi-neuron relaxations can prove.
+  and what single- and multi-neuron relaxations can prove.
+- **Part 8 — How can random noise produce a certificate?** We will construct a
+  randomized-smoothed classifier, derive its certified radius, then examine
+  training objectives and why average certified radius can mislead.
+- **Part 9 — How can randomized smoothing adapt?** We will use denoisers with
+  pretrained classifiers, then certify input-dependent noise through Dual RS.
 
 ## Takeaway
 
