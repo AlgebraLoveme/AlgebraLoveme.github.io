@@ -1,76 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
-  <title id="title">How splitting April's input square tightens the ReLU upper bound</title>
-  <desc id="desc">The input square is divided at x1 equals 0.5. The left and right child regions produce narrower asymmetric ranges for z2, and their solid upper chords are tighter than the dashed whole-square chord.</desc>
-  <rect width="1000" height="500" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+  <title id="title">Dividing April's input square by the phase of an unstable ReLU</title>
+  <desc id="desc">The diagonal x1 equals x2 divides the input square into a blue off phase where z2 is nonpositive and h2 equals zero, and an orange on phase where z2 is nonnegative and h2 equals z2.</desc>
+  <rect width="1000" height="480" fill="#ffffff"/>
 
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#111827">
-    <text x="160" y="42" text-anchor="middle" font-size="22" font-weight="600">Split the input square</text>
-    <text x="485" y="42" text-anchor="middle" font-size="22" font-weight="600" fill="#2f6fad">Left child R<tspan baseline-shift="sub" font-size="15">L</tspan></text>
-    <text x="815" y="42" text-anchor="middle" font-size="22" font-weight="600" fill="#c45d34">Right child R<tspan baseline-shift="sub" font-size="15">R</tspan></text>
+    <text x="220" y="38" text-anchor="middle" font-size="23" font-weight="600">Divide at z₂ = 0</text>
+    <text x="750" y="38" text-anchor="middle" font-size="23" font-weight="600">Conquer two linear phases</text>
   </g>
 
-  <!-- Input square. -->
-  <rect x="45" y="105" width="230" height="230" fill="#eef4fb" stroke="#2f6fad" stroke-width="3"/>
-  <rect x="160" y="105" width="115" height="230" fill="#fff1e9"/>
-  <line x1="160" y1="105" x2="160" y2="335" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="9 7"/>
+  <!-- Input square and diagonal phase boundary. -->
+  <polygon points="70,90 370,90 70,390" fill="#e7f1fb"/>
+  <polygon points="70,390 370,90 370,390" fill="#fff0e8"/>
+  <rect x="70" y="90" width="300" height="300" fill="none" stroke="#374151" stroke-width="3"/>
+  <line x1="70" y1="390" x2="370" y2="90" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="10 7"/>
 
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="102" y="210" font-size="24" font-weight="600" fill="#2f6fad">R<tspan baseline-shift="sub" font-size="16">L</tspan></text>
-    <text x="102" y="242" font-size="17" fill="#2f6fad">x₁ ≤ 0.50</text>
-    <text x="218" y="210" font-size="24" font-weight="600" fill="#c45d34">R<tspan baseline-shift="sub" font-size="16">R</tspan></text>
-    <text x="218" y="242" font-size="17" fill="#a94826">x₁ ≥ 0.50</text>
-    <text x="160" y="90" font-size="17" fill="#7c6bb3">split at x₁ = 0.50</text>
-    <text x="45" y="360" font-size="15" fill="#4b5563">0.26</text>
-    <text x="160" y="360" font-size="15" fill="#4b5563">0.50</text>
-    <text x="275" y="360" font-size="15" fill="#4b5563">0.74</text>
-    <text x="160" y="388" font-size="18" fill="#111827">R = R<tspan baseline-shift="sub" font-size="13">L</tspan> ∪ R<tspan baseline-shift="sub" font-size="13">R</tspan></text>
+    <text x="155" y="165" font-size="24" font-weight="600" fill="#2f6fad">R<tspan baseline-shift="sub" font-size="16">off</tspan></text>
+    <text x="155" y="197" font-size="18" fill="#2f6fad">x₁ ≤ x₂</text>
+    <text x="285" y="315" font-size="24" font-weight="600" fill="#c45d34">R<tspan baseline-shift="sub" font-size="16">on</tspan></text>
+    <text x="285" y="347" font-size="18" fill="#a94826">x₁ ≥ x₂</text>
+    <text x="220" y="72" font-size="17" fill="#7c6bb3">branch boundary: x₁ = x₂</text>
+    <text x="70" y="416" font-size="15" fill="#4b5563">0.26</text>
+    <text x="370" y="416" font-size="15" fill="#4b5563">0.74</text>
+    <text x="220" y="444" font-size="18" fill="#111827">x₁</text>
   </g>
-  <text x="23" y="220" text-anchor="middle" transform="rotate(-90 23 220)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="17" fill="#111827">x₂ ∈ [0.26, 0.74]</text>
+  <text x="42" y="245" text-anchor="middle" transform="rotate(-90 42 245)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111827">x₂</text>
+  <text x="58" y="392" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#4b5563">0.26</text>
+  <text x="58" y="96" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#4b5563">0.74</text>
 
-  <!-- Left-child ReLU plot. -->
-  <polygon points="355,335 522,335 605,239" fill="#2f6fad" fill-opacity="0.12"/>
-  <g stroke="#252a34" stroke-width="2.2" fill="none">
-    <line x1="340" y1="335" x2="620" y2="335"/>
-    <line x1="522" y1="360" x2="522" y2="105"/>
+  <!-- Arrows from the two phase regions. -->
+  <g fill="none" stroke-width="4">
+    <path d="M 265 130 C 430 90, 470 118, 550 148" stroke="#2f6fad"/>
+    <path d="M 330 350 C 430 400, 480 365, 550 330" stroke="#c45d34"/>
   </g>
-  <polyline points="355,335 522,335 605,239" fill="none" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
-  <line x1="355" y1="335" x2="605" y2="191" stroke="#8b929e" stroke-width="3" stroke-dasharray="9 7"/>
-  <line x1="355" y1="335" x2="605" y2="239" stroke="#2f6fad" stroke-width="4"/>
+  <path d="M 537 138 L 552 149 L 534 152" fill="none" stroke="#2f6fad" stroke-width="4"/>
+  <path d="M 536 327 L 552 330 L 540 342" fill="none" stroke="#c45d34" stroke-width="4"/>
 
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="355" y="360" font-size="15" fill="#4b5563">−0.48</text>
-    <text x="522" y="360" font-size="15" fill="#4b5563">0</text>
-    <text x="605" y="360" font-size="15" fill="#4b5563">0.24</text>
-    <text x="480" y="393" font-size="17" fill="#111827">z₂ ∈ [−0.48, 0.24]</text>
-    <text x="480" y="422" font-size="17" font-weight="600" fill="#2f6fad">h₂ ≤ ⅓z₂ + 0.16</text>
-  </g>
-
-  <!-- Right-child ReLU plot. -->
-  <polygon points="685,335 768,335 935,143" fill="#c45d34" fill-opacity="0.12"/>
-  <g stroke="#252a34" stroke-width="2.2" fill="none">
-    <line x1="670" y1="335" x2="950" y2="335"/>
-    <line x1="768" y1="360" x2="768" y2="105"/>
-  </g>
-  <polyline points="685,335 768,335 935,143" fill="none" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
-  <line x1="685" y1="287" x2="935" y2="143" stroke="#8b929e" stroke-width="3" stroke-dasharray="9 7"/>
-  <line x1="685" y1="335" x2="935" y2="143" stroke="#c45d34" stroke-width="4"/>
+  <!-- Exact phase cards. -->
+  <rect x="550" y="82" width="390" height="145" rx="14" fill="#e7f1fb" stroke="#2f6fad" stroke-width="3"/>
+  <rect x="550" y="263" width="390" height="145" rx="14" fill="#fff0e8" stroke="#c45d34" stroke-width="3"/>
 
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="685" y="360" font-size="15" fill="#4b5563">−0.24</text>
-    <text x="768" y="360" font-size="15" fill="#4b5563">0</text>
-    <text x="935" y="360" font-size="15" fill="#4b5563">0.48</text>
-    <text x="810" y="393" font-size="17" fill="#111827">z₂ ∈ [−0.24, 0.48]</text>
-    <text x="810" y="422" font-size="17" font-weight="600" fill="#c45d34">h₂ ≤ ⅔z₂ + 0.16</text>
-  </g>
+    <text x="745" y="120" font-size="22" font-weight="600" fill="#2f6fad">Off phase</text>
+    <text x="745" y="158" font-size="21" fill="#111827">z₂ ≤ 0  ⇒  h₂ = 0</text>
+    <text x="745" y="195" font-size="17" fill="#355f84">the flat ReLU branch is exact</text>
 
-  <!-- Legend. -->
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#4b5563">
-    <line x1="330" y1="466" x2="380" y2="466" stroke="#8b929e" stroke-width="3" stroke-dasharray="9 7"/>
-    <text x="390" y="472">whole-square chord</text>
-    <line x1="565" y1="466" x2="615" y2="466" stroke="#2f6fad" stroke-width="4"/>
-    <line x1="565" y1="474" x2="615" y2="474" stroke="#c45d34" stroke-width="4"/>
-    <text x="625" y="472">child chord</text>
-    <line x1="750" y1="466" x2="800" y2="466" stroke="#111827" stroke-width="4"/>
-    <text x="810" y="472">exact ReLU</text>
+    <text x="745" y="301" font-size="22" font-weight="600" fill="#c45d34">On phase</text>
+    <text x="745" y="339" font-size="21" fill="#111827">z₂ ≥ 0  ⇒  h₂ = z₂</text>
+    <text x="745" y="376" font-size="17" fill="#8f4529">the diagonal ReLU branch is exact</text>
   </g>
 </svg>

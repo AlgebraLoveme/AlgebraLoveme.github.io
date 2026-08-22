@@ -1,49 +1,51 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
-  <title id="title">Splitting April's input square and certifying both child regions</title>
-  <desc id="desc">The left panel shows the square from 0.26 to 0.74 split at x1 equals 0.5. The right panel shows an inconclusive root bound of minus 0.02 and two verified child bounds of 0.06 and 0.14.</desc>
+  <title id="title">April's completed ReLU phase branch-and-bound tree</title>
+  <desc id="desc">The input square is divided diagonally into off and on ReLU phases. The search tree branches at z2 equals zero, and both child regions have a verified margin lower bound of 0.22.</desc>
   <rect width="900" height="500" fill="#ffffff"/>
 
-  <text x="225" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Split the allowed square</text>
-  <text x="670" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Bound the two children</text>
+  <text x="225" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Divide the unstable ReLU</text>
+  <text x="670" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Conquer both phases</text>
 
-  <rect x="90" y="95" width="270" height="270" fill="#eef4fb" stroke="#2f6fad" stroke-width="3"/>
-  <rect x="225" y="95" width="135" height="270" fill="#eaf7ef"/>
-  <line x1="225" y1="95" x2="225" y2="365" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="9 7"/>
+  <!-- Diagonally divided input square. -->
+  <polygon points="90,95 360,95 90,365" fill="#e7f1fb"/>
+  <polygon points="90,365 360,95 360,365" fill="#fff0e8"/>
+  <rect x="90" y="95" width="270" height="270" fill="none" stroke="#374151" stroke-width="3"/>
+  <line x1="90" y1="365" x2="360" y2="95" stroke="#7c6bb3" stroke-width="4" stroke-dasharray="9 7"/>
 
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" fill="#111827">
-    <text x="157" y="218" text-anchor="middle" font-size="23" font-weight="600">R<tspan baseline-shift="sub" font-size="16">L</tspan></text>
-    <text x="157" y="248" text-anchor="middle" font-size="17">x₁ ≤ 0.50</text>
-    <text x="292" y="218" text-anchor="middle" font-size="23" font-weight="600">R<tspan baseline-shift="sub" font-size="16">R</tspan></text>
-    <text x="292" y="248" text-anchor="middle" font-size="17">x₁ ≥ 0.50</text>
-    <text x="225" y="82" text-anchor="middle" font-size="17" fill="#7c6bb3">split at x₁ = 0.50</text>
-    <text x="225" y="420" text-anchor="middle" font-size="17">x₁</text>
-    <text x="62" y="230" text-anchor="middle" font-size="17" transform="rotate(-90 62 230)">x₂ ∈ [0.26, 0.74]</text>
-    <text x="90" y="388" text-anchor="middle" font-size="15" fill="#4b5563">0.26</text>
-    <text x="225" y="388" text-anchor="middle" font-size="15" fill="#4b5563">0.50</text>
-    <text x="360" y="388" text-anchor="middle" font-size="15" fill="#4b5563">0.74</text>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
+    <text x="165" y="170" font-size="23" font-weight="600" fill="#2f6fad">R<tspan baseline-shift="sub" font-size="15">off</tspan></text>
+    <text x="165" y="200" font-size="17" fill="#2f6fad">z₂ ≤ 0</text>
+    <text x="290" y="295" font-size="23" font-weight="600" fill="#c45d34">R<tspan baseline-shift="sub" font-size="15">on</tspan></text>
+    <text x="290" y="325" font-size="17" fill="#a94826">z₂ ≥ 0</text>
+    <text x="225" y="82" font-size="17" fill="#7c6bb3">x₁ = x₂</text>
+    <text x="225" y="400" font-size="17" fill="#111827">R = R<tspan baseline-shift="sub" font-size="12">off</tspan> ∪ R<tspan baseline-shift="sub" font-size="12">on</tspan></text>
   </g>
 
-  <rect x="535" y="80" width="270" height="92" rx="12" fill="#fff4df" stroke="#c18422" stroke-width="3"/>
+  <!-- Search tree. -->
+  <rect x="535" y="72" width="270" height="105" rx="12" fill="#fff4df" stroke="#c18422" stroke-width="3"/>
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="670" y="116" font-size="20" font-weight="600" fill="#111827">R = R<tspan baseline-shift="sub" font-size="14">L</tspan> ∪ R<tspan baseline-shift="sub" font-size="14">R</tspan></text>
-    <text x="670" y="148" font-size="19" fill="#9a5b08">bound −0.02 → split</text>
+    <text x="670" y="110" font-size="20" font-weight="600" fill="#111827">Root region R</text>
+    <text x="670" y="143" font-size="18" fill="#9a5b08">bound −0.02</text>
+    <text x="670" y="166" font-size="16" fill="#9a5b08">branch at z₂ = 0</text>
   </g>
 
   <g stroke="#6b7280" stroke-width="3" fill="none">
-    <path d="M 630 172 L 550 245"/>
-    <path d="M 710 172 L 785 245"/>
+    <path d="M 630 177 L 550 245"/>
+    <path d="M 710 177 L 785 245"/>
   </g>
 
-  <rect x="440" y="245" width="220" height="120" rx="12" fill="#eaf7ef" stroke="#2d8a57" stroke-width="3"/>
-  <rect x="680" y="245" width="210" height="120" rx="12" fill="#eaf7ef" stroke="#2d8a57" stroke-width="3"/>
+  <rect x="440" y="245" width="220" height="132" rx="12" fill="#e7f1fb" stroke="#2f6fad" stroke-width="3"/>
+  <rect x="680" y="245" width="210" height="132" rx="12" fill="#fff0e8" stroke="#c45d34" stroke-width="3"/>
 
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="550" y="282" font-size="20" font-weight="600" fill="#111827">Left child R<tspan baseline-shift="sub" font-size="14">L</tspan></text>
-    <text x="550" y="315" font-size="21" font-weight="600" fill="#1f7045">bound +0.06 ✓</text>
-    <text x="550" y="344" font-size="16" fill="#376b50">verified</text>
+    <text x="550" y="280" font-size="20" font-weight="600" fill="#2f6fad">Off: z₂ ≤ 0</text>
+    <text x="550" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
+    <text x="550" y="350" font-size="16" fill="#376b50">verified</text>
 
-    <text x="785" y="282" font-size="20" font-weight="600" fill="#111827">Right child R<tspan baseline-shift="sub" font-size="14">R</tspan></text>
-    <text x="785" y="315" font-size="21" font-weight="600" fill="#1f7045">bound +0.14 ✓</text>
-    <text x="785" y="344" font-size="16" fill="#376b50">verified</text>
+    <text x="785" y="280" font-size="20" font-weight="600" fill="#c45d34">On: z₂ ≥ 0</text>
+    <text x="785" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
+    <text x="785" y="350" font-size="16" fill="#376b50">verified</text>
   </g>
+
+  <text x="665" y="430" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111827">Both leaves verified  ⇒  root verified</text>
 </svg>

@@ -42,7 +42,7 @@ some extra ones. Those extra behaviors can pull the bound below zero.
 The next question is: **can we cover every allowed input with smaller regions
 whose bounds are positive?**
 
-## Cut the square where the bound is loose
+## Divide at the unstable ReLU
 
 Recall April's two hidden neurons:
 
@@ -61,98 +61,80 @@ $$
 h_2\leq\frac{1}{2}z_2+0.24.
 $$
 
-Because $z_2=x_1-x_2$, narrowing either input coordinate narrows the range
-used to build this line. Split the $x_1$ interval at its midpoint, $0.5$:
+A standard neural-network branch-and-bound move is to branch on the phase of
+this unstable ReLU. There are only two cases:
 
 $$
 \begin{aligned}
-R_L&=[0.26,0.5]\times[0.26,0.74],\\
-R_R&=[0.5,0.74]\times[0.26,0.74].
+R_{\mathrm{off}}
+&=R\cap\{z_2\leq0\}
+ =R\cap\{x_1\leq x_2\},\\
+R_{\mathrm{on}}
+&=R\cap\{z_2\geq0\}
+ =R\cap\{x_1\geq x_2\}.
 \end{aligned}
 $$
 
-These two rectangles cover the original square. We have not removed a single
-allowed input.
+The boundary $z_2=0$ is the diagonal $x_1=x_2$. It divides April's square into
+two triangles. Together they still cover the original region, so no allowed
+input disappears.
+
+This is **divide and conquer**. We divide one unresolved problem at the source
+of its uncertainty, then conquer each simpler phase separately. In the off
+triangle, $h_2=0$ exactly. In the on triangle, $h_2=z_2$ exactly. Neither child
+needs a relaxation for this ReLU.
 
 <figure style="text-align: center;">
-  <img src="{{ '/imgs/april-split-tightens-relu.svg' | relative_url }}" width="820" style="display: block; margin: 0 auto;" alt="April's input square split into left and right rectangles. Each child produces a narrower range for the second ReLU and a tighter upper chord than the original whole-square chord.">
-  <figcaption>Splitting the input square narrows the range of $z_2$. The solid child chords sit at or below the dashed whole-square chord while remaining above the exact ReLU.</figcaption>
+  <img src="{{ '/imgs/april-split-tightens-relu.svg' | relative_url }}?v=relu-phase" width="820" style="display: block; margin: 0 auto;" alt="April's input square divided along the diagonal x1 equals x2. Above the diagonal the second ReLU is off and equals zero; below the diagonal it is on and equals x1 minus x2.">
+  <figcaption>Branching at $z_2=0$ replaces one unstable ReLU with two exact linear phases.</figcaption>
 </figure>
 
-### Bound the left half
+### Conquer the off phase
 
-On $R_L$, the ReLU input has the narrower, asymmetric range
-
-$$
-z_2=x_1-x_2\in[-0.48,0.24].
-$$
-
-The upper chord fitted to these endpoints is
+On $R_{\mathrm{off}}$, we know $z_2\leq0$, so
 
 $$
-h_2\leq\frac{1}{3}z_2+0.16.
+h_2=\operatorname{ReLU}(z_2)=0.
 $$
 
-Substitute this line and the exact expression for $h_1$ into the margin:
+The margin is now linear:
 
 $$
 \begin{aligned}
 m
-&\geq0.2+(x_1+x_2-0.5)
-       -\left(\frac{1}{3}(x_1-x_2)+0.16\right)\\
-&=\frac{2}{3}x_1+\frac{4}{3}x_2-0.46.
+&=0.2+(x_1+x_2-0.5)-0\\
+&=x_1+x_2-0.3\\
+&\geq0.26+0.26-0.3=0.22.
 \end{aligned}
 $$
 
-Both coefficients are positive. The smallest value therefore occurs at
-$x_1=x_2=0.26$:
+Every input in the off triangle is safe.
+
+### Conquer the on phase
+
+On $R_{\mathrm{on}}$, we know $z_2\geq0$, so
 
 $$
-m\geq\frac{2}{3}(0.26)+\frac{4}{3}(0.26)-0.46=0.06.
+h_2=\operatorname{ReLU}(z_2)=z_2=x_1-x_2.
 $$
 
-Every input in $R_L$ is safe.
-
-### Bound the right half
-
-On $R_R$,
-
-$$
-z_2=x_1-x_2\in[-0.24,0.48],
-$$
-
-so the fitted upper chord becomes
-
-$$
-h_2\leq\frac{2}{3}z_2+0.16.
-$$
-
-Back-substitution now gives
+The margin is again linear:
 
 $$
 \begin{aligned}
 m
-&\geq0.2+(x_1+x_2-0.5)
-       -\left(\frac{2}{3}(x_1-x_2)+0.16\right)\\
-&=\frac{1}{3}x_1+\frac{5}{3}x_2-0.46.
+&=0.2+(x_1+x_2-0.5)-(x_1-x_2)\\
+&=2x_2-0.3\\
+&\geq2(0.26)-0.3=0.22.
 \end{aligned}
 $$
 
-The minimum over $R_R$ occurs at $x_1=0.5$ and $x_2=0.26$:
-
-$$
-m\geq\frac{1}{3}(0.5)+\frac{5}{3}(0.26)-0.46=0.14.
-$$
-
-Every input in $R_R$ is also safe.
-
-Splitting changed the ReLU ranges, allowing each upper chord to follow the
-ReLU more closely. The intercept fell from $0.24$ on the whole square to
-$0.16$ on each half. That improvement turned one inconclusive bound into two
-positive bounds.
+Every input in the on triangle is safe. The phase split has removed the loose
+ReLU chord entirely, turning the inconclusive bound $-0.02$ into the exact
+bound $0.22$ on both children.
 
 <figure style="text-align: center;">
-  <img src="{{ '/imgs/april-branch-and-bound.svg' | relative_url }}" width="760" style="display: block; margin: 0 auto;" alt="April's square split vertically into left and right rectangles, alongside a search tree whose root has an inconclusive margin bound and whose two children have positive bounds.">
+  <img src="{{ '/imgs/april-branch-and-bound.svg' | relative_url }}?v=relu-phase" width="760" style="display: block; margin: 0 auto;" alt="April's square split diagonally into ReLU-off and ReLU-on triangles, alongside a search tree whose inconclusive root has two verified children with margin bound 0.22.">
   <figcaption>The two verified leaves cover the entire original square, so together they form one certificate.</figcaption>
 </figure>
 
@@ -165,14 +147,15 @@ regions and bound each child separately.
 Both child bounds are positive:
 
 $$
-\min_{x\in R_L}m(x)\geq0.06,
+\min_{x\in R_{\mathrm{off}}}m(x)\geq0.22,
 \qquad
-\min_{x\in R_R}m(x)\geq0.14.
+\min_{x\in R_{\mathrm{on}}}m(x)\geq0.22.
 $$
 
-Because $R=R_L\cup R_R$, every allowed input belongs to at least one verified
-leaf. The tree is therefore a proof for the entire radius-$0.24$ square. The
-smallest leaf bound, $0.06$, is a valid lower bound for the original region.
+Because $R=R_{\mathrm{off}}\cup R_{\mathrm{on}}$, every allowed input belongs
+to at least one verified leaf. The tree is therefore a proof for the entire
+radius-$0.24$ square. The smallest leaf bound, $0.22$, is a valid lower bound
+for the original region.
 
 ## Bound, split, and repeat
 
@@ -184,10 +167,11 @@ inconclusive. We can apply the same cycle again:
 3. If the bound is inconclusive, **split** the region into children.
 4. Repeat until every leaf is verified or a failing input is found.
 
-This procedure is **branch and bound**. Branching creates smaller cases;
-bounding tries to settle each case without examining every point inside it.
-A verifier may branch on an input coordinate, as we did, or on whether an
-unstable ReLU is active or inactive.
+This is divide and conquer powered by sound bounds. In verification it is
+called **branch and bound**. Branching divides one unresolved case; bounding
+tries to conquer each child without examining every point inside it. Neural
+network verifiers commonly branch on whether an unstable ReLU is off or on,
+as we did. Some methods also branch on input coordinates.
 
 The important object is not a long list of sampled inputs. It is a collection
 of regions that covers the allowed set, together with a sound bound for every
@@ -267,9 +251,10 @@ leaves remain, the correct result is **unknown**.
 ## Takeaway
 
 One DeepPoly pass gave April the inconclusive bound $m\geq-0.02$ at radius
-$0.24$. Splitting the input square at $x_1=0.5$ produced two tighter bounds,
-$0.06$ and $0.14$. Because the two verified rectangles cover the original
-square, their search tree is a certificate.
+$0.24$. Branching on the unstable ReLU at $z_2=0$ divided the square along
+$x_1=x_2$. The off and on phases both give the exact bound $m\geq0.22$.
+Because the two verified triangles cover the original square, their search
+tree is a certificate.
 
 Branch and bound turns an inconclusive whole-region calculation into smaller
 problems that the same bounding machinery may solve. Sound bounds certify
