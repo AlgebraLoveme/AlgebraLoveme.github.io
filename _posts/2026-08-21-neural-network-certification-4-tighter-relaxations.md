@@ -211,10 +211,40 @@ Choosing $\lambda=0$ keeps $h_2\geq0$; choosing $\lambda=1$ keeps
 $h_2\geq z_2$. DeepPoly keeps one of these lower lines and the upper chord
 rather than sending all three Triangle constraints to a global linear program.
 
-To bound a later neuron, DeepPoly substitutes the selected affine expressions
-backward until only input variables remain. This is **back-substitution**. For
-April's margin, the coefficient of $h_2$ is negative, so only its upper bound is
-needed:
+### Why the constraints do not multiply
+
+Suppose DeepPoly has summarized a hidden value $h$ with two affine expressions:
+
+$$
+L_h(x)\leq h\leq U_h(x).
+$$
+
+Let the expression being lower-bounded contain the term $c h$. The sign of $c$
+determines the one bound we need:
+
+$$
+c h\geq
+\begin{cases}
+cL_h(x), & c\geq0,\\
+cU_h(x), & c<0.
+\end{cases}
+$$
+
+For a positive coefficient, the smallest value uses the lower expression. For
+a negative coefficient, multiplication reverses the inequality, so the
+smallest value uses the upper expression. DeepPoly makes this single
+sign-directed substitution instead of pairing every lower constraint with
+every upper constraint.
+
+Crucially, each substitution produces one affine expression, not a family of
+pairwise constraints. DeepPoly keeps a fixed number of summaries per neuron:
+one lower expression, one upper expression, and one interval. It never
+constructs the $pq$ facets produced by explicit projection. This is how
+DeepPoly avoids the projection explosion.
+
+DeepPoly repeats the sign-directed substitutions backward until only input
+variables remain. This procedure is **back-substitution**. For April's margin,
+the coefficient of $h_2$ is $-1$, so the rule selects its upper bound:
 
 $$
 \begin{aligned}
@@ -231,8 +261,8 @@ $$
 
 Triangle and DeepPoly give the same certificate for April's tiny network. The
 difference is how they organize the calculation: Triangle retains a joint
-constraint system, while DeepPoly propagates selected affine bounds. DeepPoly
-was introduced in
+constraint system, while DeepPoly back-substitutes one sign-selected bound at
+each step without generating projected facets. DeepPoly was introduced in
 [An Abstract Domain for Certifying Neural Networks](https://www.sri.inf.ethz.ch/publications/singh2019domain).
 
 | Method | Representation | Margin lower bound | Result |
@@ -291,7 +321,8 @@ IBP lost the relationship between April's hidden neurons and returned unknown
 at radius $0.2$. Triangle restored that relationship and proved
 $m\geq0.1$. After seeing why a full Triangle system becomes expensive,
 DeepPoly retained selected affine bounds and recovered the same certificate by
-back-substitution.
+back-substitution, without constructing the facets created by explicit
+projection.
 
 At radius $0.24$, the new lower bound is $-0.02$. Part 5 asks: **can splitting
 the input region turn this unknown into a proof?**
