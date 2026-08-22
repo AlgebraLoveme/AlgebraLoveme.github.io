@@ -46,7 +46,7 @@
     <text x="692" y="205" fill="#6b579f">(1 − λ)u</text>
     <text x="520" y="105" fill="#2f6fad">upper chord</text>
     <text x="500" y="400" fill="#c45d34">lower line h = λz</text>
-    <text x="515" y="251" fill="#111827">ReLU</text>
+    <text x="500" y="220" fill="#111827">ReLU</text>
   </g>
 
   <text x="280" y="307" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="600" fill="#6b579f">shaded area A(λ)</text>

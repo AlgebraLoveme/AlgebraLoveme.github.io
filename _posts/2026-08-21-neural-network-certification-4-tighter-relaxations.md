@@ -299,7 +299,7 @@ trapezoid below. Its vertical side lengths are the endpoint gaps
 $-\lambda\ell$ and $(1-\lambda)u$; the distance between them is $u-\ell$.
 
 <figure style="text-align: center;">
-  <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
+  <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}?v=20260822-2" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
   <figcaption>The continuous family makes the area calculable; DeepPoly selects between its two endpoint lines.</figcaption>
 </figure>
 
