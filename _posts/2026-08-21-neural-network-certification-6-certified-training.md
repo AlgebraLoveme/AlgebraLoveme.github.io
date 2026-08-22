@@ -281,5 +281,6 @@ search into feature space, STAPS combines those choices, and MTL-IBP blends
 attack and IBP losses.
 
 The final guarantee always comes from sound post-training verification. Part 7
-will use that distinction to read training methods, attacks, and certificates
-correctly in one results table.
+will ask what lies beyond today's workflow: which certifiable networks can
+exist, which ones training can find, and which relationships a verifier can
+express.

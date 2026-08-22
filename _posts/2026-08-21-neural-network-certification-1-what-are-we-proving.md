@@ -160,7 +160,7 @@ inequalities for every input in $S_p(x_0,\epsilon)$.
 
 Our target is now precise: prove the score inequality over the allowed set. The
 rest of the series follows one small April classifier from its first proof to
-the results table:
+the field's current research frontiers:
 
 - **Part 2 — What would count as a proof?** We will build a tiny ReLU classifier
   and certify it by hand.
@@ -174,9 +174,9 @@ the results table:
 - **Part 6 — How can training make robustness easier to prove?** We will bracket
   the worst-case loss between attacks and certificates, then distinguish sound
   bound-based objectives from unsound training surrogates.
-- **Part 7 — How should we read certification results?** We will reconstruct the
-  exact claims behind a table of results and separate the training objective
-  from the evaluation guarantee.
+- **Part 7 — What are the frontiers of neural network certification?** We will
+  separate what certifiable networks can represent, what training can find,
+  and what single-neuron or multi-neuron relaxations can prove.
 
 ## Takeaway
 
