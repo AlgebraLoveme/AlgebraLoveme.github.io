@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 430" role="img" aria-labelledby="title desc">
+  <title id="title">Denoised randomized smoothing pipeline</title>
+  <desc id="desc">April's image receives Gaussian noise, passes through a denoiser, and is labeled by a fixed classifier. The denoiser and classifier form the base mapping that randomized smoothing certifies.</desc>
+  <defs>
+    <clipPath id="p1"><rect x="46" y="115" width="190" height="190" rx="14"/></clipPath><clipPath id="p2"><rect x="304" y="115" width="190" height="190" rx="14"/></clipPath><clipPath id="p3"><rect x="562" y="115" width="190" height="190" rx="14"/></clipPath>
+    <filter id="noise"><feTurbulence baseFrequency="0.75" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .34 0"/><feBlend in="SourceGraphic" mode="screen"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#5b7088"/></marker>
+  </defs>
+  <rect width="1050" height="430" fill="#fff"/>
+  <text x="525" y="39" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">Treat the denoiser and classifier as one base mapping</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+    <image href="April_the_cat.jpg" x="46" y="115" width="190" height="190" preserveAspectRatio="xMidYMid slice" clip-path="url(#p1)"/>
+    <rect x="46" y="115" width="190" height="190" rx="14" fill="none" stroke="#2f5da8" stroke-width="3"/>
+    <text x="141" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#1f437e">clean input x</text>
+    <line x1="244" y1="210" x2="290" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="267" y="194" text-anchor="middle" font-size="16" fill="#4b5563">+ η</text>
+
+    <g clip-path="url(#p2)" filter="url(#noise)"><image href="April_the_cat.jpg" x="304" y="115" width="190" height="190" preserveAspectRatio="xMidYMid slice"/></g>
+    <rect x="304" y="115" width="190" height="190" rx="14" fill="none" stroke="#b9822f" stroke-width="3"/>
+    <text x="399" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#76511f">noisy input x + η</text>
+    <line x1="502" y1="210" x2="548" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="525" y="194" text-anchor="middle" font-size="16" font-weight="650" fill="#49397f">D</text>
+
+    <image href="April_the_cat.jpg" x="562" y="115" width="190" height="190" preserveAspectRatio="xMidYMid slice" clip-path="url(#p3)"/>
+    <rect x="562" y="115" width="190" height="190" rx="14" fill="none" stroke="#59449b" stroke-width="3"/>
+    <text x="657" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#49397f">denoised D(x + η)</text>
+    <line x1="760" y1="210" x2="806" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="783" y="194" text-anchor="middle" font-size="16" font-weight="650" fill="#286437">f</text>
+
+    <rect x="820" y="137" width="190" height="146" rx="16" fill="#e1efde" stroke="#347a45" stroke-width="3"/>
+    <text x="915" y="181" text-anchor="middle" font-size="18" fill="#286437">classifier vote</text>
+    <text x="915" y="220" text-anchor="middle" font-size="23" font-weight="700" fill="#286437">Siberian cat</text>
+    <text x="915" y="253" text-anchor="middle" font-size="15" fill="#376b50">repeat across noise</text>
+
+    <path d="M542 334 V382 H1018 V334" fill="none" stroke="#3b8587" stroke-width="3"/>
+    <text x="780" y="410" text-anchor="middle" font-size="17" font-weight="650" fill="#296668">base classifier h = f ∘ D</text>
+  </g>
+</svg>

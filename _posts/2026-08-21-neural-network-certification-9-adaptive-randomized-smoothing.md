@@ -4,161 +4,221 @@ author_profile: true
 permalink: /2026-08-21-neural-network-certification-9-adaptive-randomized-smoothing/
 date: 2026-08-21
 written_by: PIRA
-written_at: 2026-08-21
+written_at: 2026-08-22
 tags: [neural networks, certification, randomized smoothing, denoising]
+mathjax: true
 toc: true
-published: false
 excerpt: "Adapt randomized smoothing by denoising April's noisy photographs and choosing a certifiably safe noise level for each input."
 ---
 
-<!--
-Status: outline only.
-
-Reader outcome:
-The reader can explain how denoised smoothing certifies a pretrained classifier,
-why an input-dependent noise level requires a new soundness argument, and how
-Dual RS certifies both its variance choice and its final prediction.
--->
+> **Reader background.** We assume undergraduate calculus, linear algebra,
+> elementary probability, and basic neural networks. The series introduces
+> program verification, neural network certification, abstract interpretation,
+> and randomized smoothing from first principles.
 
 ## April's photographs do not all need the same treatment
 
-<!--
-Recall the Part 8 pipeline and place two April photographs beside it: a clear
-close-up and a difficult image with a busy background. The same base classifier
-and global Gaussian variance process both images.
+Part 8 built a smoothed classifier by adding Gaussian noise, asking a base
+classifier for labels, and taking the most probable label. Its certificate came
+from a fixed noise level $\sigma$.
 
-Ask the central question:
+Now place two April photographs beside that pipeline. One is a clear close-up.
+The other has difficult lighting and a busy background. The same base model and
+the same $\sigma$ process both images.
+
+This raises a new question:
 
 **Which parts of randomized smoothing can adapt to the model or the input
 without breaking the certificate?**
 
-Preview two answers. A denoiser changes the base classifier seen by the smoothing
-theorem. Input-dependent smoothing changes the noise distribution and therefore
-needs an additional proof.
--->
+We will change two components. Denoised smoothing changes the function that
+receives the noisy input. Input-dependent smoothing changes the noise level
+itself.
 
-## Denoised smoothing reuses a pretrained classifier
+## A denoiser can stand in front of a pretrained classifier
 
-<!--
-Place a denoiser before the classifier:
+Let $D$ be a denoiser and $f$ a classifier. Instead of sending $x+\eta$
+directly into $f$, compute
 
-\[
-x+\eta \longrightarrow D(x+\eta) \longrightarrow f(D(x+\eta)).
-\]
+$$
+x+\eta
+\longrightarrow D(x+\eta)
+\longrightarrow f(D(x+\eta)).
+$$
 
-Use a three-panel April figure: noisy photograph, denoised photograph, and
-classification. Explain the key compositional idea: randomized smoothing can
-treat \(f\circ D\) as its base classifier, so the Part 8 theorem applies to the
-composition. The classifier's parameters can remain unchanged while the
-denoiser learns to remove the injected noise.
+The composition
 
-Primary source:
-https://arxiv.org/abs/2003.01908
--->
+$$
+h=f\circ D
+$$
 
-## Diffusion models become smoothing denoisers
+is simply another base classifier. The smoothing theorem from Part 8 allowed
+the base classifier to be any function, so we can define
 
-<!--
-Present diffusion denoised smoothing as the same composition with a powerful
-pretrained diffusion model in the denoising position. Reuse the three-panel
-April figure and change only the denoiser box, making the relationship to the
-previous section immediate.
+$$
+g_D(x)=\arg\max_c
+\Pr\bigl(f(D(x+\eta))=c\bigr)
+$$
 
-Explain why the modular view matters: an off-the-shelf denoiser and an
-off-the-shelf classifier can be combined under the smoothing theorem without
-fine-tuning either model in the cited construction.
+and apply the same Gaussian radius formula.
 
-Primary source:
-https://arxiv.org/abs/2206.10550
--->
+<figure style="text-align: center;">
+  <img src="{{ '/imgs/april-denoised-smoothing.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="April's clean photograph is perturbed by Gaussian noise, passed through a denoiser, and classified. The denoiser and classifier together form the base classifier inside randomized smoothing.">
+  <figcaption>Denoised smoothing changes the base classifier while reusing the Gaussian theorem.</figcaption>
+</figure>
+
+[Denoised smoothing](https://arxiv.org/abs/2003.01908) trains $D$ so that noisy
+images recover features useful to an existing classifier. The classifier's
+parameters can remain fixed. This makes it possible to add a certified
+robustness wrapper around a pretrained or even black-box image service.
+
+Human-visible reconstruction quality can remain imperfect. The certificate
+depends on whether the composed classifier $f\circ D$ predicts consistently
+across the Gaussian cloud.
+
+## Diffusion models provide powerful off-the-shelf denoisers
+
+A diffusion model learns to reverse a gradual noising process. That skill fits
+the denoising position in the previous pipeline.
+
+The method
+[(Certified!!) Adversarial Robustness for
+Free!](https://arxiv.org/abs/2206.10550) combines a pretrained diffusion model
+with a pretrained image classifier. For each Gaussian-perturbed input, the
+diffusion model performs a denoising step and the classifier supplies a vote.
+The published construction requires no fine-tuning of either pretrained model.
+
+The logical chain stays short:
+
+1. the diffusion denoiser and classifier form one base mapping;
+2. Gaussian smoothing turns that mapping into a smoothed classifier;
+3. the noisy class probability produces the certified $\ell_2$ radius.
+
+This modular view lets advances in generative denoising contribute to
+certification without changing the smoothing theorem.
 
 ## One global noise level creates conflicting goals
 
-<!--
-Return to \(\sigma\). A small value tends to preserve accuracy near the clean
-input, while a large value can support predictions at larger certified radii.
-One global value forces the clear and difficult April photographs to use the
-same trade-off.
+The noise scale $\sigma$ appears both in the data distribution and in the
+radius:
 
-Plan a certified-accuracy-versus-radius figure for two global noise levels. One
-curve leads at small radii and the other at large radii. Let this crossing create
-the motivation for choosing \(\sigma\) by input.
--->
+$$
+R=\sigma\Phi^{-1}(p_A)
+$$
 
-## Why can we not simply substitute an input-dependent variance?
+for the common one-probability form of the certificate.
 
-<!--
-Compare standard smoothing at neighboring inputs \(x\) and \(x'\). With global
-\(\sigma\), both predictions shift the same Gaussian distribution. With an
-arbitrary \(\sigma(x)\), moving the input can also change the distribution's
-shape, so the Part 8 theorem does not directly compare the two classifiers.
+A smaller $\sigma$ perturbs April's image less, so the base classifier often
+retains higher noisy accuracy $p_A$. A larger $\sigma$ multiplies the normal
+quantile by a larger number and explores a wider neighborhood, but it can make
+classification harder. Different inputs balance these effects at different
+noise levels.
 
-Use overlapping one-dimensional Gaussian curves to make the proof gap visible.
-Then introduce data-dependent randomized smoothing and the later analysis of
-the conditions required for sound input-dependent certificates.
+<figure style="text-align: center;">
+  <img src="{{ '/imgs/april-global-noise-tradeoff.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="A clear April image favors a small Gaussian cloud for high accuracy at small radii, while another image favors a larger cloud for stronger performance at larger radii. One global sigma must choose one cloud for both inputs.">
+  <figcaption>A global noise level asks every input to accept the same accuracy–radius trade-off.</figcaption>
+</figure>
 
-Data-dependent randomized smoothing:
-https://arxiv.org/abs/2012.04351
+This is a routing problem in disguise. For each photograph, we would like to
+select the noise level that gives the most useful certificate.
 
-Analysis of input-dependent smoothing guarantees:
-https://arxiv.org/abs/2110.05365
--->
+## Why can we not substitute an arbitrary $\sigma(x)$?
 
-## Local constancy makes the variance choice certifiable
+The standard proof compares the Gaussian distribution centered at $x$ with the
+same distribution shifted to $x+\delta$. A global $\sigma$ ensures that only
+the center moves.
 
-<!--
-State the key condition before naming the method: if every input throughout the
-certified neighborhood selects the same variance, the standard smoothing
-theorem can reason about one fixed Gaussian distribution there.
+If we replace it with an arbitrary function $\sigma(x)$, a nearby input may
+change both the center and the spread:
 
-Draw a one-dimensional input line partitioned into regions labeled by their
-selected \(\sigma\). Put April's input strictly inside one region and show a
-certified ball that does not cross a variance boundary. This figure prepares
-the Dual RS construction.
--->
+$$
+\mathcal N(x,\sigma(x)^2I)
+\quad\hbox{versus}\quad
+\mathcal N(x+\delta,\sigma(x+\delta)^2I).
+$$
 
-## Dual RS certifies the noise selector
+The Part 8 theorem does not compare this pair. A method that chooses a useful
+variance per test point therefore needs an argument connecting the choices at
+neighboring points.
 
-<!--
-Present Dual RS as two connected smoothed components:
+[Data-dependent randomized smoothing](https://arxiv.org/abs/2012.04351) uses
+piecewise-constant choices together with stored robust regions to make its
+construction certifiable. A later
+[analysis of input-dependent smoothing](https://arxiv.org/abs/2110.05365)
+formalizes why rapidly changing variance functions cannot inherit the ordinary
+certificate and studies conditions that restore a sound guarantee.
 
-1. A variance estimator selects a useful noise level for the current input.
-2. A standard smoothed classifier makes the final prediction at that level.
+## Local constancy supplies the missing connection
 
-Explain how independently smoothing the variance estimator certifies that its
-choice remains locally constant. The final radius must stay inside both
-guarantees: the region where the variance choice is fixed and the region where
-the selected RS classifier keeps April's label.
+Suppose the selected noise level remains constant throughout a ball around
+$x$:
 
-Plan a routing figure with easy and difficult April photographs sent to
-different noise levels. Highlight the two certificates before combining them.
+$$
+\sigma(x')=\sigma(x)
+\qquad\text{for every }x'\text{ with }
+\lVert x'-x\rVert_2<R_\sigma.
+$$
 
-Primary source:
-https://arxiv.org/abs/2512.01782
--->
+Inside that ball, all inputs invoke the same Gaussian variance. The standard
+smoothing comparison is available again.
 
-## One framework, two kinds of adaptation
+The
+[Dual Randomized Smoothing theorem](https://arxiv.org/abs/2512.01782) states
+this precisely. If $\sigma(\cdot)$ is constant throughout the classifier's
+certified neighborhood, the input-dependent smoothed classifier preserves its
+label there. In practice, both the constancy claim and the class-probability
+claim are estimated statistically. If their failure probabilities are
+$\alpha_\sigma$ and $\alpha_c$, the union bound gives joint confidence at least
 
-<!--
-Complete a comparison table:
+$$
+1-(\alpha_\sigma+\alpha_c).
+$$
 
-- Denoised smoothing changes the base mapping inside the standard smoothing
-  construction.
-- Diffusion denoised smoothing supplies that mapping with pretrained models.
-- Input-dependent smoothing changes the noise distribution and requires a
-  condition connecting neighboring inputs.
-- Dual RS certifies a locally constant routing decision before applying a
-  standard smoothed classifier.
+No independence assumption is needed for that confidence calculation.
 
-For each row, identify the changed component, the theorem that supports it, and
-the figure in which April travels through the pipeline.
--->
+## Dual RS certifies the selector and the prediction
 
-## Takeaway
+Dual RS implements the idea with two smoothed models.
 
-<!--
-Return to the two April photographs. A denoiser can adapt how noisy inputs are
-interpreted. A certified variance selector can adapt how much noise each input
-receives. Both methods preserve a clear route back to the probability theorem
-from Part 8.
--->
+1. A **variance estimator** predicts one value from a finite set such as
+   $\{0.25,0.5,1.0\}$. It is independently smoothed, so it returns both a
+   selected variance and a radius $R_\sigma$ within which that selection cannot
+   change.
+2. A **classification model** is smoothed with the selected variance. It
+   returns April's label and a classification radius $R_c$.
+
+The final certified radius is
+
+$$
+R=\min(R_\sigma,R_c).
+$$
+
+The minimum has a direct meaning. Before reaching $R_\sigma$, the route stays
+on the same noise level. Before reaching $R_c$, that route's smoothed classifier
+keeps the same label. Staying inside both radii preserves the entire two-stage
+decision.
+
+<figure style="text-align: center;">
+  <img src="{{ '/imgs/april-dual-rs.svg' | relative_url }}" width="940" style="display: block; margin: 0 auto;" alt="Dual randomized smoothing first uses a smoothed variance estimator to choose sigma and certify radius R sigma. It then uses a classifier smoothed at that sigma to predict Siberian cat and certify radius R c. The final radius is the smaller of the two.">
+  <figcaption>One certificate protects the route; the other protects the class prediction.</figcaption>
+</figure>
+
+The estimator can also route inputs among pretrained expert RS models, each
+specialized for one noise level. Improving an expert then improves the inputs
+routed to it without redesigning the certification theorem.
+
+## Two kinds of adaptation, one proof discipline
+
+The two method families change different parts of randomized smoothing.
+
+| Method | What adapts? | Why the certificate remains valid |
+| --- | --- | --- |
+| Denoised smoothing | The base mapping becomes $f\circ D$. | The smoothing theorem permits any base classifier. |
+| Diffusion denoised smoothing | A pretrained diffusion model supplies $D$. | The same composition argument applies. |
+| Input-dependent smoothing | The variance becomes $\sigma(x)$. | Neighboring variance choices must be connected by an additional soundness condition. |
+| Dual RS | A smoothed estimator selects the variance or expert. | Local constancy is certified first; the selected classifier is certified second. |
+
+April's noisy photograph now follows a complete adaptive pipeline. A denoiser
+can change how the image is interpreted. A certified selector can change how
+much noise the image receives. Every adaptation keeps a visible route back to
+the probability theorem from Part 8.

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+  <title id="title">Gaussian noisy votes around April's input</title>
+  <desc id="desc">Gaussian samples surround April's input across three decision regions of a base classifier. Most samples lie in the Siberian cat region, producing the smoothed prediction.</desc>
+  <defs><radialGradient id="cloud"><stop offset="0" stop-color="#59449b" stop-opacity="0.22"/><stop offset="1" stop-color="#59449b" stop-opacity="0"/></radialGradient><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#5b7088"/></marker></defs>
+  <rect width="1000" height="540" fill="#fff"/>
+  <text x="500" y="36" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">The smoothed classifier counts a Gaussian cloud</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+    <clipPath id="panel"><rect x="48" y="72" width="636" height="410" rx="16"/></clipPath>
+    <g clip-path="url(#panel)">
+      <rect x="48" y="72" width="636" height="410" fill="#e1efde"/>
+      <path d="M48 72 H684 V174 C570 148 500 204 422 198 C322 190 274 128 190 152 C130 168 90 206 48 214 Z" fill="#f5e5bf"/>
+      <path d="M48 384 C164 342 215 350 292 385 C382 426 455 394 530 348 C590 311 636 324 684 346 V482 H48 Z" fill="#e5e0ef"/>
+      <path d="M48 214 C98 194 142 160 196 154 C279 145 322 208 420 205 C506 202 574 160 684 181" fill="none" stroke="#b9822f" stroke-width="3"/>
+      <path d="M48 384 C164 342 215 350 292 385 C382 426 455 394 530 348 C590 311 636 324 684 346" fill="none" stroke="#59449b" stroke-width="3"/>
+      <circle cx="362" cy="279" r="168" fill="url(#cloud)"/>
+      <circle cx="362" cy="279" r="14" fill="#111827" stroke="#fff" stroke-width="4"/>
+      <text x="380" y="270" font-size="16" font-weight="650" fill="#111827">April x</text>
+      <g fill="#347a45" stroke="#fff" stroke-width="2">
+        <circle cx="270" cy="232" r="8"/><circle cx="306" cy="279" r="8"/><circle cx="324" cy="223" r="8"/><circle cx="350" cy="332" r="8"/><circle cx="377" cy="235" r="8"/><circle cx="396" cy="302" r="8"/><circle cx="418" cy="259" r="8"/><circle cx="454" cy="288" r="8"/><circle cx="469" cy="231" r="8"/><circle cx="402" cy="348" r="8"/><circle cx="302" cy="340" r="8"/><circle cx="488" cy="315" r="8"/><circle cx="247" cy="303" r="8"/><circle cx="436" cy="206" r="8"/><circle cx="335" cy="190" r="8"/><circle cx="517" cy="278" r="8"/>
+      </g>
+      <g fill="#b9822f" stroke="#fff" stroke-width="2"><circle cx="248" cy="174" r="8"/><circle cx="423" cy="169" r="8"/></g>
+      <g fill="#59449b" stroke="#fff" stroke-width="2"><circle cx="281" cy="404" r="8"/><circle cx="456" cy="390" r="8"/></g>
+      <text x="84" y="112" font-size="17" font-weight="650" fill="#76511f">tree region</text>
+      <text x="650" y="257" text-anchor="end" font-size="17" font-weight="650" fill="#286437">Siberian cat region</text>
+      <text x="83" y="454" font-size="17" font-weight="650" fill="#49397f">other animal region</text>
+    </g>
+    <rect x="48" y="72" width="636" height="410" rx="16" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="700" y1="278" x2="746" y2="278" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="758" y="126" width="210" height="304" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="863" y="162" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">Noisy votes</text>
+    <rect x="790" y="195" width="146" height="42" rx="8" fill="#b4d7af"/><text x="805" y="222" font-size="16" font-weight="650" fill="#286437">cat</text><text x="922" y="222" text-anchor="end" font-size="16" fill="#286437">80%</text>
+    <rect x="790" y="255" width="60" height="42" rx="8" fill="#e9c67f"/><text x="805" y="282" font-size="16" font-weight="650" fill="#76511f">tree</text><text x="922" y="282" text-anchor="end" font-size="16" fill="#76511f">10%</text>
+    <rect x="790" y="315" width="60" height="42" rx="8" fill="#c5b9dd"/><text x="805" y="342" font-size="16" font-weight="650" fill="#49397f">other</text><text x="922" y="342" text-anchor="end" font-size="16" fill="#49397f">10%</text>
+    <text x="863" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#286437">g(x) = Siberian cat</text>
+  </g>
+</svg>

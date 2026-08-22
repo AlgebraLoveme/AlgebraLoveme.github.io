@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+  <title id="title">Tight verification and difficult certified training</title>
+  <desc id="desc">At fixed weights a tighter sound bound lies closer to the exact loss. Across changing weights a schematic loose bound changes smoothly while a tighter bound has jumps and high sensitivity.</desc>
+  <rect width="1000" height="540" fill="#fff"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">A bound plays two different roles</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+    <rect x="36" y="72" width="410" height="420" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="241" y="106" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">Verification at fixed weights</text>
+    <line x1="100" y1="432" x2="100" y2="150" stroke="#374151" stroke-width="2.5"/>
+    <line x1="100" y1="432" x2="396" y2="432" stroke="#374151" stroke-width="2.5"/>
+    <text x="63" y="292" text-anchor="middle" transform="rotate(-90 63 292)" font-size="16" fill="#4b5563">upper loss bound</text>
+    <line x1="132" y1="356" x2="370" y2="356" stroke="#111827" stroke-width="4"/>
+    <text x="250" y="346" text-anchor="middle" font-size="16" fill="#111827">exact worst loss</text>
+    <line x1="132" y1="304" x2="370" y2="304" stroke="#3b8587" stroke-width="8"/>
+    <text x="250" y="291" text-anchor="middle" font-size="16" font-weight="600" fill="#296668">tighter sound bound</text>
+    <line x1="132" y1="208" x2="370" y2="208" stroke="#59449b" stroke-width="8"/>
+    <text x="250" y="195" text-anchor="middle" font-size="16" font-weight="600" fill="#49397f">looser sound bound</text>
+    <path d="M384 208 L405 208 L405 356 L384 356" fill="none" stroke="#7a858c" stroke-width="2.5"/>
+    <text x="375" y="277" text-anchor="end" font-size="14" fill="#5b6470">smaller gap</text>
+
+    <rect x="478" y="72" width="486" height="420" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
+    <text x="721" y="106" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">Training while weights move</text>
+    <line x1="540" y1="432" x2="540" y2="150" stroke="#374151" stroke-width="2.5"/>
+    <line x1="540" y1="432" x2="918" y2="432" stroke="#374151" stroke-width="2.5"/>
+    <text x="729" y="466" text-anchor="middle" font-size="16" fill="#4b5563">weights θ along one direction</text>
+    <text x="506" y="292" text-anchor="middle" transform="rotate(-90 506 292)" font-size="16" fill="#4b5563">training loss</text>
+    <path d="M560 200 C615 225 648 260 692 292 C740 327 792 347 900 371" fill="none" stroke="#59449b" stroke-width="5"/>
+    <path d="M560 252 C608 268 638 298 665 323 L666 378 C704 347 730 344 761 350 L762 407 C808 378 850 391 900 421" fill="none" stroke="#3b8587" stroke-width="5"/>
+    <circle cx="596" cy="216" r="6" fill="#59449b"/><circle cx="649" cy="263" r="6" fill="#59449b"/><circle cx="706" cy="302" r="6" fill="#59449b"/>
+    <path d="M600 217 L642 257" stroke="#b9822f" stroke-width="2.5"/><path d="M655 267 L700 298" stroke="#b9822f" stroke-width="2.5"/>
+    <text x="785" y="182" font-size="15" font-weight="600" fill="#49397f">loose, smooth signal</text>
+    <line x1="770" y1="190" x2="700" y2="282" stroke="#49397f" stroke-width="1.8"/>
+    <text x="781" y="258" font-size="15" font-weight="600" fill="#296668">tighter, sensitive signal</text>
+    <line x1="774" y1="265" x2="744" y2="344" stroke="#296668" stroke-width="1.8"/>
+    <text x="842" y="405" text-anchor="middle" font-size="14" fill="#6b7280">schematic</text>
+  </g>
+</svg>

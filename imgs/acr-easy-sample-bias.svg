@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">Average certified radius favors easy samples</title>
+  <desc id="desc">With sigma 0.5, raising pA by 0.01 increases a hard sample's ideal radius by 0.013 but an easy sample's radius by 0.136.</desc>
+  <rect width="1000" height="520" fill="#fff"/>
+  <text x="500" y="38" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">The same ΔpA = 0.01 receives different ACR weight</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+    <rect x="54" y="76" width="416" height="380" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="262" y="113" text-anchor="middle" font-size="21" font-weight="700" fill="#405368">Hard April photograph</text>
+    <text x="262" y="142" text-anchor="middle" font-size="16" fill="#5b6470">pA: 0.60 → 0.61</text>
+    <line x1="108" y1="385" x2="422" y2="385" stroke="#374151" stroke-width="2"/>
+    <rect x="148" y="340" width="86" height="45" fill="#8fc3dc" stroke="#2f5da8" stroke-width="2"/>
+    <rect x="288" y="335" width="86" height="50" fill="#2f5da8"/>
+    <text x="191" y="329" text-anchor="middle" font-size="16" fill="#1f437e">0.127</text>
+    <text x="331" y="324" text-anchor="middle" font-size="16" fill="#1f437e">0.140</text>
+    <text x="191" y="415" text-anchor="middle" font-size="15" fill="#4b5563">before</text><text x="331" y="415" text-anchor="middle" font-size="15" fill="#4b5563">after</text>
+    <rect x="119" y="177" width="286" height="76" rx="12" fill="#cee5ef"/>
+    <text x="262" y="208" text-anchor="middle" font-size="17" fill="#1f437e">radius gain</text>
+    <text x="262" y="237" text-anchor="middle" font-size="25" font-weight="700" fill="#1f437e">+0.013</text>
+
+    <rect x="530" y="76" width="416" height="380" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
+    <text x="738" y="113" text-anchor="middle" font-size="21" font-weight="700" fill="#49397f">Easy April photograph</text>
+    <text x="738" y="142" text-anchor="middle" font-size="16" fill="#65558f">pA: 0.98 → 0.99</text>
+    <line x1="584" y1="385" x2="898" y2="385" stroke="#374151" stroke-width="2"/>
+    <rect x="624" y="315" width="86" height="70" fill="#c5b9dd" stroke="#59449b" stroke-width="2"/>
+    <rect x="764" y="300" width="86" height="85" fill="#59449b"/>
+    <text x="667" y="304" text-anchor="middle" font-size="16" fill="#49397f">1.027</text>
+    <text x="807" y="289" text-anchor="middle" font-size="16" fill="#49397f">1.163</text>
+    <text x="667" y="415" text-anchor="middle" font-size="15" fill="#4b5563">before</text><text x="807" y="415" text-anchor="middle" font-size="15" fill="#4b5563">after</text>
+    <rect x="595" y="177" width="286" height="76" rx="12" fill="#e5e0ef"/>
+    <text x="738" y="208" text-anchor="middle" font-size="17" fill="#49397f">radius gain</text>
+    <text x="738" y="237" text-anchor="middle" font-size="25" font-weight="700" fill="#49397f">+0.136</text>
+
+    <text x="500" y="490" text-anchor="middle" font-size="16" fill="#5b6470">Illustrative ideal radii with σ = 0.5 and R = σΦ⁻¹(pA)</text>
+  </g>
+</svg>
