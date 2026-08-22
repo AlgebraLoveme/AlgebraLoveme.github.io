@@ -210,7 +210,14 @@ $$
 The endpoints $\lambda=0$ and $\lambda=1$ recover the two Triangle lower
 lines, $h_2\geq0$ and $h_2\geq z_2$. DeepPoly keeps one lower line and the
 upper chord rather than sending all three Triangle constraints to a global
-linear program. We will derive its concrete choice after the certificate.
+linear program.
+
+All of these lower lines are sound, but they do not give equally tight
+enclosures. Because they share the same upper chord, DeepPoly measures the area
+between each candidate lower line and that chord. A smaller area admits fewer
+artificial $(z_2,h_2)$ pairs and therefore preserves more information. DeepPoly
+chooses the candidate with the smallest area; this is its **min-area
+heuristic**. We will derive the concrete choice after seeing back-substitution.
 
 ### Why the constraints do not multiply
 
@@ -262,9 +269,9 @@ $$
 
 ### How DeepPoly chooses the lower line
 
-The certificate above needed only the upper bound on $h_2$. Another output may
-need its lower bound, so DeepPoly must choose between $h_2\geq0$ and
-$h_2\geq z_2$.
+We postponed the min-area calculation because April's certificate needed only
+the upper bound on $h_2$. Another output may need its lower bound, so we now
+derive how DeepPoly chooses between $h_2\geq0$ and $h_2\geq z_2$.
 
 For any unstable ReLU with $z\in[\ell,u]$, every slope
 $\lambda\in[0,1]$ gives a sound lower line:
@@ -273,10 +280,17 @@ $$
 \operatorname{ReLU}(z)\geq\lambda z.
 $$
 
-To see why the min-area heuristic needs only two candidates, look at the gap
-between this lower line and the fixed upper chord. At $z=\ell$, the gap is
-$-\lambda\ell$. At $z=u$, it is $(1-\lambda)u$. The gap changes linearly, so
-the enclosed area is the interval width times the average endpoint gap:
+The candidate lower line and the fixed upper chord enclose the shaded
+trapezoid below. Its vertical side lengths are the endpoint gaps
+$-\lambda\ell$ and $(1-\lambda)u$; the distance between them is $u-\ell$.
+
+<figure style="text-align: center;">
+  <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
+  <figcaption>DeepPoly measures the shaded area between a candidate lower line and the fixed upper chord.</figcaption>
+</figure>
+
+The area of a trapezoid is its width times the average of its two parallel side
+lengths. Therefore,
 
 $$
 \begin{aligned}
@@ -287,8 +301,16 @@ A(\lambda)
 \end{aligned}
 $$
 
-The expression is linear in $\lambda$. A linear function on $[0,1]$ reaches
-its minimum at an endpoint, so DeepPoly only needs to compare
+The expression is linear in $\lambda$. Its slope is
+
+$$
+\frac{dA}{d\lambda}
+=-\frac{1}{2}(u-\ell)(u+\ell).
+$$
+
+Because $u-\ell>0$, the area increases with $\lambda$ when $u<-\ell$ and
+decreases when $u>-\ell$. When $u=-\ell$, the area is constant. No interior
+value of $\lambda$ can be strictly better, so DeepPoly only needs to compare
 $\lambda=0$ and $\lambda=1$:
 
 $$
@@ -306,7 +328,10 @@ $$
 \end{cases}
 $$
 
-If the interval reaches farther into the negative side, $u\leq-\ell$, the
+At equality, every $\lambda\in[0,1]$ has the same area; the concrete rule above
+breaks the tie with $\lambda=0$.
+
+If the interval reaches farther into the negative side, $u<-\ell$, the
 flat lower line $0$ leaves less area. If it reaches farther into the positive
 side, the diagonal lower line $z$ leaves less area.
 
@@ -317,8 +342,8 @@ side, the diagonal lower line $z$ leaves less area.
 | $[-0.2,0.6]$ | $0.24$ | $0.08$ | $z$ ($\lambda=1$) |
 
 April's interval $[-0.4,0.4]$ is the tie case. DeepPoly's concrete rule chooses
-$\lambda=0$ when the areas are equal. The radius-$0.2$ certificate remains the
-same because its margin uses only the upper bound on $h_2$.
+$\lambda=0$. The radius-$0.2$ certificate remains the same because its margin
+uses only the upper bound on $h_2$.
 
 Triangle and DeepPoly give the same certificate for April's tiny network. The
 difference is how they organize the calculation: Triangle retains a joint

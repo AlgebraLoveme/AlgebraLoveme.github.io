@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Area used by DeepPoly's lower-line heuristic</title>
+  <desc id="desc">The upper ReLU chord and a candidate lower line enclose a shaded trapezoid. The endpoint gaps are minus lambda ell and one minus lambda times u, separated by width u minus ell.</desc>
+  <rect width="800" height="520" fill="#ffffff"/>
+
+  <text x="400" y="34" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Area between the upper chord and a candidate lower line</text>
+
+  <g stroke="#d9dee7" stroke-width="1">
+    <line x1="140" y1="80" x2="140" y2="425"/>
+    <line x1="464" y1="80" x2="464" y2="425"/>
+    <line x1="680" y1="80" x2="680" y2="425"/>
+  </g>
+
+  <polygon points="140,330 680,120 680,280 140,405" fill="#7c6bb3" fill-opacity="0.20"/>
+
+  <g stroke="#252a34" stroke-width="2.5" fill="none">
+    <line x1="82" y1="330" x2="748" y2="330"/>
+    <line x1="464" y1="426" x2="464" y2="62"/>
+  </g>
+  <path d="M 739 324 L 748 330 L 739 336" fill="none" stroke="#252a34" stroke-width="2.5"/>
+  <path d="M 458 71 L 464 62 L 470 71" fill="none" stroke="#252a34" stroke-width="2.5"/>
+
+  <polyline points="140,330 464,330 680,120" fill="none" stroke="#111827" stroke-width="4.5" stroke-linejoin="round"/>
+  <line x1="140" y1="330" x2="680" y2="120" stroke="#2f6fad" stroke-width="4"/>
+  <line x1="140" y1="405" x2="680" y2="280" stroke="#c45d34" stroke-width="4"/>
+
+  <g stroke="#7c6bb3" stroke-width="2.5" stroke-dasharray="6 5" fill="none">
+    <line x1="140" y1="330" x2="140" y2="405"/>
+    <line x1="680" y1="120" x2="680" y2="280"/>
+  </g>
+
+  <g stroke="#252a34" stroke-width="2" fill="none">
+    <line x1="140" y1="452" x2="680" y2="452"/>
+    <line x1="140" y1="443" x2="140" y2="461"/>
+    <line x1="680" y1="443" x2="680" y2="461"/>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#252a34">
+    <text x="758" y="337" font-style="italic">z</text>
+    <text x="475" y="66" font-style="italic">h</text>
+    <text x="134" y="356" text-anchor="middle">ℓ</text>
+    <text x="458" y="356" text-anchor="middle">0</text>
+    <text x="680" y="356" text-anchor="middle">u</text>
+    <text x="410" y="482" text-anchor="middle">width: u − ℓ</text>
+    <text x="128" y="374" text-anchor="end" fill="#6b579f">−λℓ</text>
+    <text x="692" y="205" fill="#6b579f">(1 − λ)u</text>
+    <text x="518" y="175" fill="#2f6fad">upper chord</text>
+    <text x="520" y="304" fill="#c45d34">lower line h = λz</text>
+    <text x="515" y="251" fill="#111827">ReLU</text>
+  </g>
+
+  <text x="260" y="250" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="20" font-weight="600" fill="#6b579f">shaded area A(λ)</text>
+</svg>
