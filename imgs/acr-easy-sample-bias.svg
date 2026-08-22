@@ -1,35 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
-  <title id="title">Average certified radius favors easy samples</title>
-  <desc id="desc">With sigma 0.5, raising pA by 0.01 increases a hard sample's ideal radius by 0.013 but an easy sample's radius by 0.136.</desc>
-  <rect width="1000" height="520" fill="#fff"/>
-  <text x="500" y="38" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">The same ΔpA = 0.01 receives different ACR weight</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+  <title id="title">Equal probability gains create unequal certified-radius gains</title>
+  <desc id="desc">At sigma 0.5, raising the top-class probability by 0.01 adds 0.013 radius near probability 0.60 and 0.136 radius near probability 0.98. Two bars share the same zero-to-0.14 scale.</desc>
+  <rect width="1000" height="500" fill="#fff"/>
   <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
-    <rect x="54" y="76" width="416" height="380" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-    <text x="262" y="113" text-anchor="middle" font-size="21" font-weight="700" fill="#405368">Hard April photograph</text>
-    <text x="262" y="142" text-anchor="middle" font-size="16" fill="#5b6470">pA: 0.60 → 0.61</text>
-    <line x1="108" y1="385" x2="422" y2="385" stroke="#374151" stroke-width="2"/>
-    <rect x="148" y="340" width="86" height="45" fill="#8fc3dc" stroke="#2f5da8" stroke-width="2"/>
-    <rect x="288" y="335" width="86" height="50" fill="#2f5da8"/>
-    <text x="191" y="329" text-anchor="middle" font-size="16" fill="#1f437e">0.127</text>
-    <text x="331" y="324" text-anchor="middle" font-size="16" fill="#1f437e">0.140</text>
-    <text x="191" y="415" text-anchor="middle" font-size="15" fill="#4b5563">before</text><text x="331" y="415" text-anchor="middle" font-size="15" fill="#4b5563">after</text>
-    <rect x="119" y="177" width="286" height="76" rx="12" fill="#cee5ef"/>
-    <text x="262" y="208" text-anchor="middle" font-size="17" fill="#1f437e">radius gain</text>
-    <text x="262" y="237" text-anchor="middle" font-size="25" font-weight="700" fill="#1f437e">+0.013</text>
-
-    <rect x="530" y="76" width="416" height="380" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
-    <text x="738" y="113" text-anchor="middle" font-size="21" font-weight="700" fill="#49397f">Easy April photograph</text>
-    <text x="738" y="142" text-anchor="middle" font-size="16" fill="#65558f">pA: 0.98 → 0.99</text>
-    <line x1="584" y1="385" x2="898" y2="385" stroke="#374151" stroke-width="2"/>
-    <rect x="624" y="315" width="86" height="70" fill="#c5b9dd" stroke="#59449b" stroke-width="2"/>
-    <rect x="764" y="300" width="86" height="85" fill="#59449b"/>
-    <text x="667" y="304" text-anchor="middle" font-size="16" fill="#49397f">1.027</text>
-    <text x="807" y="289" text-anchor="middle" font-size="16" fill="#49397f">1.163</text>
-    <text x="667" y="415" text-anchor="middle" font-size="15" fill="#4b5563">before</text><text x="807" y="415" text-anchor="middle" font-size="15" fill="#4b5563">after</text>
-    <rect x="595" y="177" width="286" height="76" rx="12" fill="#e5e0ef"/>
-    <text x="738" y="208" text-anchor="middle" font-size="17" fill="#49397f">radius gain</text>
-    <text x="738" y="237" text-anchor="middle" font-size="25" font-weight="700" fill="#49397f">+0.136</text>
-
-    <text x="500" y="490" text-anchor="middle" font-size="16" fill="#5b6470">Illustrative ideal radii with σ = 0.5 and R = σΦ⁻¹(pA)</text>
+    <text x="500" y="42" text-anchor="middle" font-size="24" font-weight="650" fill="#111827">The same probability gain can receive ten times the ACR weight</text>
+    <rect x="70" y="78" width="860" height="336" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="104" y="133" font-size="19" font-weight="700" fill="#1f437e">Difficult input</text>
+    <text x="104" y="160" font-size="16" fill="#4b5563">p<tspan baseline-shift="sub" font-size="12">A</tspan>: 0.60 → 0.61</text>
+    <rect x="300" y="118" width="540" height="40" rx="8" fill="#e5e7eb"/>
+    <rect x="300" y="118" width="50" height="40" rx="8" fill="#2f5da8"/>
+    <text x="365" y="145" font-size="18" font-weight="700" fill="#1f437e">ΔR = 0.013</text>
+    <text x="104" y="246" font-size="19" font-weight="700" fill="#49397f">Easy input</text>
+    <text x="104" y="273" font-size="16" fill="#4b5563">p<tspan baseline-shift="sub" font-size="12">A</tspan>: 0.98 → 0.99</text>
+    <rect x="300" y="231" width="540" height="40" rx="8" fill="#e5e7eb"/>
+    <rect x="300" y="231" width="525" height="40" rx="8" fill="#59449b"/>
+    <text x="811" y="216" text-anchor="end" font-size="18" font-weight="700" fill="#49397f">ΔR = 0.136</text>
+    <line x1="300" y1="328" x2="840" y2="328" stroke="#374151" stroke-width="2"/>
+    <g stroke="#7a858c" stroke-width="1.5" fill="#4b5563" font-size="15" text-anchor="middle">
+      <line x1="300" y1="322" x2="300" y2="336"/><text x="300" y="360" stroke="none">0</text>
+      <line x1="493" y1="322" x2="493" y2="336"/><text x="493" y="360" stroke="none">0.05</text>
+      <line x1="686" y1="322" x2="686" y2="336"/><text x="686" y="360" stroke="none">0.10</text>
+      <line x1="840" y1="322" x2="840" y2="336"/><text x="840" y="360" stroke="none">0.14</text>
+    </g>
+    <text x="570" y="393" text-anchor="middle" font-size="16" fill="#5b6470">certified-radius gain ΔR (shared scale)</text>
+    <text x="500" y="456" text-anchor="middle" font-size="16" fill="#5b6470">Illustrative ideal values with σ = 0.5 and R = σΦ⁻¹(p<tspan baseline-shift="sub" font-size="12">A</tspan>)</text>
   </g>
 </svg>

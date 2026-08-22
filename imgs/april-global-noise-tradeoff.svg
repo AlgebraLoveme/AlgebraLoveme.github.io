@@ -1,25 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
-  <title id="title">One global randomized smoothing noise level creates a trade-off</title>
-  <desc id="desc">A small noise cloud preserves local accuracy and a large cloud reaches farther. Two April inputs prefer different noise levels, while standard smoothing chooses one global sigma.</desc>
-  <rect width="1000" height="500" fill="#fff"/>
-  <text x="500" y="38" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">Different inputs can prefer different noise levels</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="title desc">
+  <title id="title">Different inputs maximize certified radius at different noise scales</title>
+  <desc id="desc">Two schematic certified-radius curves peak at different sigma values. A fragile input peaks at a small sigma, while an input stable under stronger perturbations peaks at a larger sigma. One global sigma cannot maximize both.</desc>
+  <rect width="1000" height="520" fill="#fff"/>
   <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
-    <rect x="48" y="75" width="410" height="340" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-    <text x="253" y="112" text-anchor="middle" font-size="21" font-weight="700" fill="#1f437e">Clear April photograph</text>
-    <circle cx="250" cy="250" r="55" fill="#cee5ef" stroke="#2f5da8" stroke-width="3" stroke-dasharray="7 6"/>
-    <circle cx="250" cy="250" r="13" fill="#111827"/>
-    <g fill="#2f5da8"><circle cx="222" cy="221" r="6"/><circle cx="282" cy="229" r="6"/><circle cx="266" cy="274" r="6"/><circle cx="215" cy="265" r="6"/><circle cx="248" cy="206" r="6"/></g>
-    <text x="250" y="339" text-anchor="middle" font-size="18" font-weight="650" fill="#1f437e">small σ keeps pA high</text>
-    <text x="250" y="368" text-anchor="middle" font-size="16" fill="#5b6470">strong at smaller radii</text>
-
-    <rect x="542" y="75" width="410" height="340" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
-    <text x="747" y="112" text-anchor="middle" font-size="21" font-weight="700" fill="#49397f">Another April photograph</text>
-    <circle cx="744" cy="250" r="116" fill="#e5e0ef" stroke="#59449b" stroke-width="3" stroke-dasharray="9 7"/>
-    <circle cx="744" cy="250" r="13" fill="#111827"/>
-    <g fill="#59449b"><circle cx="680" cy="194" r="6"/><circle cx="815" cy="190" r="6"/><circle cx="803" cy="282" r="6"/><circle cx="672" cy="302" r="6"/><circle cx="744" cy="156" r="6"/><circle cx="850" cy="246" r="6"/><circle cx="718" cy="340" r="6"/></g>
-    <text x="744" y="395" text-anchor="middle" font-size="18" font-weight="650" fill="#49397f">large σ multiplies a wider radius</text>
-
-    <rect x="260" y="443" width="480" height="39" rx="18" fill="#f5e5bf" stroke="#b9822f" stroke-width="2"/>
-    <text x="500" y="469" text-anchor="middle" font-size="17" font-weight="650" fill="#76511f">standard RS must choose one global σ for both</text>
+    <text x="500" y="42" text-anchor="middle" font-size="24" font-weight="650" fill="#111827">Each input has its own best noise scale</text>
+    <rect x="62" y="78" width="876" height="340" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <line x1="132" y1="362" x2="880" y2="362" stroke="#374151" stroke-width="2.5"/>
+    <line x1="132" y1="362" x2="132" y2="122" stroke="#374151" stroke-width="2.5"/>
+    <text x="506" y="402" text-anchor="middle" font-size="17" fill="#4b5563">noise scale σ</text>
+    <text x="94" y="242" text-anchor="middle" transform="rotate(-90 94 242)" font-size="17" fill="#4b5563">certified radius R(σ)</text>
+    <path d="M132 348 C205 310 248 190 338 172 C408 160 452 223 492 325" fill="none" stroke="#2f5da8" stroke-width="5"/>
+    <path d="M520 325 C584 235 655 142 748 154 C819 163 855 253 880 338" fill="none" stroke="#59449b" stroke-width="5"/>
+    <line x1="338" y1="172" x2="338" y2="362" stroke="#2f5da8" stroke-width="2" stroke-dasharray="7 6"/>
+    <line x1="748" y1="154" x2="748" y2="362" stroke="#59449b" stroke-width="2" stroke-dasharray="7 6"/>
+    <circle cx="338" cy="172" r="8" fill="#2f5da8"/><circle cx="748" cy="154" r="8" fill="#59449b"/>
+    <text x="300" y="140" text-anchor="end" font-size="18" font-weight="700" fill="#1f437e">fragile input</text>
+    <text x="300" y="163" text-anchor="end" font-size="15" fill="#1f437e">best at smaller σ</text>
+    <text x="782" y="124" font-size="18" font-weight="700" fill="#49397f">stable input</text>
+    <text x="782" y="147" font-size="15" fill="#49397f">best at larger σ</text>
+    <text x="338" y="388" text-anchor="middle" font-size="15" fill="#1f437e">σ<tspan baseline-shift="sub" font-size="11">small</tspan></text>
+    <text x="748" y="388" text-anchor="middle" font-size="15" fill="#49397f">σ<tspan baseline-shift="sub" font-size="11">large</tspan></text>
+    <rect x="250" y="447" width="500" height="45" rx="20" fill="#f5e5bf" stroke="#b9822f" stroke-width="2"/>
+    <text x="500" y="476" text-anchor="middle" font-size="17" font-weight="650" fill="#76511f">standard RS chooses one global σ for every input</text>
   </g>
 </svg>

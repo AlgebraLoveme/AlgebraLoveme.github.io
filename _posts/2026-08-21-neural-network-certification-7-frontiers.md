@@ -34,15 +34,12 @@ These are three different questions:
 3. **Prove:** Can the verifier preserve enough information to certify it?
 
 The distinction matters because the answers can point in different directions.
-IBP is expressive enough in principle to approximate every continuous target.
+Interval bound propagation (IBP) is expressive enough in principle to
+approximate every continuous target on a compact input domain.
 A tighter relaxation can nevertheless produce a worse model during training.
 Multi-neuron relaxations can prove relationships that every single-neuron
-relaxation misses, yet convexity still imposes a broader barrier.
-
-<figure style="text-align: center;">
-  <img src="{{ '/imgs/april-three-frontiers.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="Three connected research questions: whether a certifiable model exists, whether training can find it, and whether a verifier can prove its behavior. Each question is paired with one result discussed in the post.">
-  <figcaption>Exist, find, and prove locate three different frontiers.</figcaption>
-</figure>
+relaxation misses. A further barrier appears when a verifier repeatedly keeps
+only convex information about small parts of a network.
 
 ## Frontier 1: Can an IBP-certified network approximate any continuous function?
 
@@ -60,8 +57,11 @@ $$
 
 An ordinary approximating network $n$ should make $n(t)$ close to $s(t)$ for
 every $t$. An **interval-certified approximator** must additionally make the
-IBP range $n^\#(B)$ close to the true range $s(B)$. The symbol $n^\#(B)$ means:
-run the interval rules from Part 3 through $n$, starting from $B$.
+IBP range $n^\#(B)$ close to the true range $s(B)$. IBP carries lower and upper
+intervals through each layer. Its bounds are **sound**: they contain every
+value the network can actually produce. The symbol $n^\#(B)$ means: run those
+interval rules from [Part 3]({{ '/2026-08-21-neural-network-certification-3-interval-bound-propagation/' | relative_url }})
+through $n$, starting from $B$.
 
 The [universal approximation theorem for interval-certified ReLU
 networks](https://arxiv.org/abs/1909.13846) says that, for every continuous
@@ -70,8 +70,10 @@ both requirements. The pointwise curve can be accurate, and its simple IBP
 bounds can be arbitrarily close to the best output range of $s$ on each input
 box.
 
-<figure style="text-align: center;">
-  <img src="{{ '/imgs/april-interval-universal-approximation.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="A continuous target score and a nearby piecewise-linear network curve. Three input intervals map to narrow output bands whose IBP bounds closely surround the target function ranges.">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
+  <img src="{{ '/imgs/april-interval-universal-approximation.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="A continuous target score and a nearby piecewise-linear network curve. Each of three input intervals has one exact vertical output range and a slightly wider sound IBP range.">
+  </div>
   <figcaption>Interval approximation asks the curve and its propagated ranges to agree with the target.</figcaption>
 </figure>
 
@@ -95,8 +97,8 @@ representation question while leaving a concrete optimization challenge:
 **How do we reliably find compact, accurate networks that IBP can certify?**
 
 This is where Part 6's training objectives return. A bound participates in
-training thousands of times, so its behavior as the weights move matters as
-much as its value at one finished network.
+training thousands of times, so its behavior as the weights move also matters,
+alongside its value at one finished network.
 
 ## Frontier 2: Why can a tighter bound train a worse certifiable model?
 
@@ -112,9 +114,9 @@ $$
 \theta\longmapsto L_{\mathrm{cert}}(\theta),
 $$
 
-where $\theta$ contains the weights. Tightness describes the height of this
-surface. Training also depends on how the surface changes from one nearby
-$\theta$ to another.
+where $\theta$ contains the weights. Tightness describes the pointwise vertical
+gap between this certified loss and the exact worst-case loss. Training also
+depends on how the surface changes from one nearby $\theta$ to another.
 
 The [paradox of certified training](https://arxiv.org/abs/2102.06700) is that
 loose interval-based training often produces networks with higher certified
@@ -123,28 +125,35 @@ properties that help explain the result:
 
 - **Continuity:** a small change in the weights should not make the training
   bound jump abruptly.
-- **Sensitivity:** nearby weights should not cause an excessively large change
-  in the bound or its gradient.
+- **Sensitivity:** the bound should not become algebraically nonlinear and
+  complicated too quickly as the weights change. High sensitivity can create
+  an optimization landscape with many local optima and saddle points.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-certified-training-paradox.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="Two panels compare verification and training. At fixed weights a tighter interval sits closer to the exact loss. Across changing weights a schematic loose loss varies smoothly while a tighter loss has abrupt and sensitive changes that make gradient steps harder to follow.">
+  </div>
   <figcaption>Tightness answers a fixed-network question; continuity and sensitivity shape the training journey.</figcaption>
 </figure>
 
 The curves in the right panel are schematic. They show the distinction between
 the three properties rather than measurements from a particular model.
 
-The paradox does not reverse the meaning of “tighter.” At fixed weights, a
-tighter sound bound remains better for verification. The training result tells
-us that **precision alone does not rank optimization objectives**. A promising
-certified-training loss must combine useful precision with dynamics that
-gradient-based optimization can follow.
+At fixed weights, a tighter sound bound remains better for verification. The
+training result adds a second criterion: ranking optimization objectives
+requires more than precision. A promising certified-training loss must combine
+useful precision with dynamics that gradient-based optimization can follow.
+
+Training addressed whether we can find good weights. Now freeze the weights
+again and ask what information a verifier can retain.
 
 ## Frontier 3: What can one-neuron-at-a-time reasoning express?
 
-Triangle and DeepPoly from Part 4 relax each unstable ReLU separately. Even the
-tightest possible convex shape for one ReLU can forget how that ReLU depends on
-other values in the same layer.
+Triangle and DeepPoly from [Part 4]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/' | relative_url }})
+use a **convex relaxation**: a tractable convex superset of the network's exact
+behaviors. They enclose each **unstable ReLU**, whose input interval crosses
+zero, with linear inequalities one ReLU at a time. Even the tightest such shape
+for one ReLU can forget how it depends on other values in the same layer.
 
 Consider the network
 
@@ -198,8 +207,10 @@ $$
 The exact lower bound $f\geq0$ follows from $c\geq0$ and $b\geq0$, so the
 multi-neuron relaxation recovers the exact range $[0,1]$.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/max-single-vs-multi-relaxation.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="The max of two inputs is encoded by a ReLU network. A single-neuron Triangle constraint permits a relaxed output of 1.5 at input 1,1. A joint constraint between the ReLU output and the second input removes that impossible value and proves the exact upper bound 1.">
+  </div>
   <figcaption>The ReLU envelope is locally tight; the joint relationship supplies the missing proof.</figcaption>
 </figure>
 
@@ -209,25 +220,26 @@ relaxations](https://arxiv.org/abs/2410.06816). It establishes a genuine
 separation: no single-neuron relaxation can exactly bound every ReLU network
 encoding the two-dimensional max function, while a suitable multi-neuron
 relaxation can bound the construction above exactly. Practical methods such as
-[PRIMA](https://arxiv.org/abs/2103.03638) approximate convex hulls over small
-groups of neurons to recover useful relationships at scale.
+[PRIMA](https://arxiv.org/abs/2103.03638) approximate convex hulls—the smallest
+convex sets containing all exact feasible points—over small neuron groups.
 
-## Convexity creates a wider frontier
+## How much joint information is enough?
 
-Joint reasoning is more expressive, but grouping more neurons does not make a
-general convex relaxation complete. The same expressiveness study proves a
-**universal convex barrier**: even optimal relaxations over any fixed finite
-number of neurons or consecutive layers remain incomplete for general
-networks.
+Joint reasoning is more expressive. The same study proves a precise boundary:
+no verifier that repeatedly convexifies only a bounded-size neuron group or a
+bounded window of consecutive layers is exact for every network. The global
+convex hull would give exact scalar bounds, but computing it is generally
+intractable.
 
 The paper then shows why multi-neuron reasoning still changes what is possible.
-It can become complete after an equivalence-preserving network transformation
-that carries the needed input information forward. It also needs fewer convex
-input partitions than single-neuron methods for certain function families.
-For the nested max function in $d$ dimensions, the paper's multi-neuron
-construction uses constraints growing linearly with $d$, whereas a DeepPoly
-branch-and-bound proof needs $2^{d-1}$ activation branches to obtain exact
-bounds.
+It gives an existential completeness result: on a fixed input domain, one can
+transform a network without changing its function so an optimal layerwise
+relaxation becomes exact. Finding the required hull may still be intractable.
+It also studies **branch-and-bound**, which splits activation or input cases and
+verifies every resulting subproblem. For its nested-max encoding in $d$
+dimensions, the optimal layerwise multi-neuron construction uses $O(d)$
+constraints in one subproblem. An exact DeepPoly branch-and-bound proof uses
+$2^{d-1}$ activation-pattern subproblems.
 
 The frontier is therefore more precise than “larger groups are tighter.” The
 research question is:
@@ -241,7 +253,7 @@ We can now answer the opening question one verb at a time.
 
 | Question | What we learned | Research direction |
 | --- | --- | --- |
-| Can a certifiable model **exist**? | Interval-certified networks can approximate every continuous target. | Construct interval-friendly architectures efficiently. |
+| Can a certifiable model **exist**? | Interval-certified networks can approximate every continuous target on a compact input domain. | Construct interval-friendly architectures efficiently. |
 | Can training **find** it? | Tightness, continuity, and sensitivity jointly shape certified training. | Design precise objectives with navigable optimization surfaces. |
 | Can a verifier **prove** it? | Joint relaxations express facts that one-neuron-at-a-time relaxations lose, while convexity leaves a general barrier. | Select useful groups, transformations, and partitions at manageable cost. |
 

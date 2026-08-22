@@ -14,7 +14,8 @@
       <path d="M48 384 C164 342 215 350 292 385 C382 426 455 394 530 348 C590 311 636 324 684 346" fill="none" stroke="#59449b" stroke-width="3"/>
       <circle cx="362" cy="279" r="168" fill="url(#cloud)"/>
       <circle cx="362" cy="279" r="14" fill="#111827" stroke="#fff" stroke-width="4"/>
-      <text x="380" y="270" font-size="16" font-weight="650" fill="#111827">April x</text>
+      <rect x="335" y="287" width="70" height="22" rx="5" fill="#fff" fill-opacity="0.88"/>
+      <text x="370" y="303" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">input x</text>
       <g fill="#347a45" stroke="#fff" stroke-width="2">
         <circle cx="270" cy="232" r="8"/><circle cx="306" cy="279" r="8"/><circle cx="324" cy="223" r="8"/><circle cx="350" cy="332" r="8"/><circle cx="377" cy="235" r="8"/><circle cx="396" cy="302" r="8"/><circle cx="418" cy="259" r="8"/><circle cx="454" cy="288" r="8"/><circle cx="469" cy="231" r="8"/><circle cx="402" cy="348" r="8"/><circle cx="302" cy="340" r="8"/><circle cx="488" cy="315" r="8"/><circle cx="247" cy="303" r="8"/><circle cx="436" cy="206" r="8"/><circle cx="335" cy="190" r="8"/><circle cx="517" cy="278" r="8"/>
       </g>
@@ -28,9 +29,9 @@
     <line x1="700" y1="278" x2="746" y2="278" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
     <rect x="758" y="126" width="210" height="304" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
     <text x="863" y="162" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">Noisy votes</text>
-    <rect x="790" y="195" width="146" height="42" rx="8" fill="#b4d7af"/><text x="805" y="222" font-size="16" font-weight="650" fill="#286437">cat</text><text x="922" y="222" text-anchor="end" font-size="16" fill="#286437">80%</text>
-    <rect x="790" y="255" width="60" height="42" rx="8" fill="#e9c67f"/><text x="805" y="282" font-size="16" font-weight="650" fill="#76511f">tree</text><text x="922" y="282" text-anchor="end" font-size="16" fill="#76511f">10%</text>
-    <rect x="790" y="315" width="60" height="42" rx="8" fill="#c5b9dd"/><text x="805" y="342" font-size="16" font-weight="650" fill="#49397f">other</text><text x="922" y="342" text-anchor="end" font-size="16" fill="#49397f">10%</text>
+    <text x="790" y="198" font-size="15" font-weight="650" fill="#286437">cat</text><text x="946" y="198" text-anchor="end" font-size="15" fill="#286437">80%</text><rect x="790" y="207" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="207" width="116.8" height="24" rx="6" fill="#b4d7af"/>
+    <text x="790" y="262" font-size="15" font-weight="650" fill="#76511f">tree</text><text x="946" y="262" text-anchor="end" font-size="15" fill="#76511f">10%</text><rect x="790" y="271" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="271" width="14.6" height="24" rx="6" fill="#e9c67f"/>
+    <text x="790" y="326" font-size="15" font-weight="650" fill="#49397f">other</text><text x="946" y="326" text-anchor="end" font-size="15" fill="#49397f">10%</text><rect x="790" y="335" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="335" width="14.6" height="24" rx="6" fill="#c5b9dd"/>
     <text x="863" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#286437">g(x) = Siberian cat</text>
   </g>
 </svg>

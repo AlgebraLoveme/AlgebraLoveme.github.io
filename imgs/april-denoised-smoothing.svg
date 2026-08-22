@@ -23,7 +23,7 @@
 
     <image href="April_the_cat.jpg" x="562" y="115" width="190" height="190" preserveAspectRatio="xMidYMid slice" clip-path="url(#p3)"/>
     <rect x="562" y="115" width="190" height="190" rx="14" fill="none" stroke="#59449b" stroke-width="3"/>
-    <text x="657" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#49397f">denoised D(x + η)</text>
+    <text x="657" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#49397f">schematic D(x + η)</text>
     <line x1="760" y1="210" x2="806" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
     <text x="783" y="194" text-anchor="middle" font-size="16" font-weight="650" fill="#286437">f</text>
 

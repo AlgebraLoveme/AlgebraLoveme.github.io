@@ -603,6 +603,16 @@ hr {
   margin: 2rem 0;
 }
 
+.wide-diagram__viewport {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.wide-diagram__viewport img {
+  display: block;
+}
+
 .page__content figcaption {
   margin-top: 0.55rem;
   color: var(--muted);
@@ -1189,6 +1199,19 @@ mjx-container {
 
   .page__content h2 {
     margin-top: 2.4rem;
+  }
+
+  .wide-diagram__viewport img {
+    width: 940px;
+    max-width: none;
+  }
+
+  .wide-diagram__viewport::after {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--muted);
+    font-size: 0.72rem;
+    content: "Swipe to inspect the full diagram →";
   }
 
   .grid__wrapper {

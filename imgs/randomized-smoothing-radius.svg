@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 430" role="img" aria-labelledby="title desc">
   <title id="title">From noisy class probabilities to a certified radius</title>
   <desc id="desc">Class probabilities for Siberian cat, tree, and other are transformed through Gaussian quantiles into a radius of 0.265, which defines a certified l2 ball around April's input.</desc>
-  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#5b7088"/></marker></defs>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker></defs>
   <rect width="1000" height="430" fill="#fff"/>
   <text x="500" y="38" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">Probability lead → Gaussian quantiles → distance</text>
   <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
     <rect x="42" y="76" width="274" height="298" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
     <text x="179" y="112" text-anchor="middle" font-size="19" font-weight="650" fill="#111827">1. Bound the votes</text>
-    <text x="72" y="156" font-size="16" fill="#286437">Siberian cat</text><rect x="72" y="169" width="176" height="28" rx="6" fill="#b4d7af"/><text x="280" y="190" text-anchor="end" font-size="16" fill="#286437">pA = 0.80</text>
-    <text x="72" y="231" font-size="16" fill="#76511f">tree</text><rect x="72" y="244" width="55" height="28" rx="6" fill="#e9c67f"/><text x="280" y="265" text-anchor="end" font-size="16" fill="#76511f">pB = 0.10</text>
-    <text x="72" y="306" font-size="16" fill="#49397f">other</text><rect x="72" y="319" width="55" height="28" rx="6" fill="#c5b9dd"/><text x="280" y="340" text-anchor="end" font-size="16" fill="#49397f">0.10</text>
+    <text x="72" y="156" font-size="16" fill="#286437">Siberian cat</text><text x="280" y="156" text-anchor="end" font-size="16" fill="#286437">pA = 0.80</text><rect x="72" y="169" width="176" height="28" rx="6" fill="#e5e7eb"/><rect x="72" y="169" width="140.8" height="28" rx="6" fill="#b4d7af"/>
+    <text x="72" y="231" font-size="16" fill="#76511f">tree</text><text x="280" y="231" text-anchor="end" font-size="16" fill="#76511f">pB = 0.10</text><rect x="72" y="244" width="176" height="28" rx="6" fill="#e5e7eb"/><rect x="72" y="244" width="17.6" height="28" rx="6" fill="#e9c67f"/>
+    <text x="72" y="306" font-size="16" fill="#49397f">other</text><text x="280" y="306" text-anchor="end" font-size="16" fill="#49397f">0.10</text><rect x="72" y="319" width="176" height="28" rx="6" fill="#e5e7eb"/><rect x="72" y="319" width="17.6" height="28" rx="6" fill="#c5b9dd"/>
     <line x1="327" y1="224" x2="365" y2="224" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
 
     <rect x="378" y="76" width="284" height="298" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>

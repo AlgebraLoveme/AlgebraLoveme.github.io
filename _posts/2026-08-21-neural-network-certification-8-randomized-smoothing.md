@@ -18,9 +18,9 @@ excerpt: "Follow noisy copies of April's photo from majority vote to a probabili
 
 ## One photograph of April becomes a cloud
 
-The previous posts certified a deterministic neural network by propagating an
-entire input region through it. That approach follows the network's internal
-computations. Randomized smoothing takes a different route.
+Earlier methods tracked every allowed perturbation through every network layer.
+Randomized smoothing instead treats a neural network as a black box and
+certifies a new classifier built from its noisy votes.
 
 Start with April's photograph. Add independent Gaussian noise to every pixel,
 classify each noisy copy, and count the labels. Some copies may look grainy,
@@ -47,8 +47,9 @@ $$
 $$
 
 The vector $\eta$ contains one independent Gaussian noise value per input
-coordinate. The parameter $\sigma$ controls the spread: larger $\sigma$ creates
-a wider cloud around the original input.
+coordinate, and $I$ is the identity matrix. The parameter $\sigma$ is the
+noise standard deviation: larger $\sigma$ creates a wider cloud around the
+original input.
 
 The **smoothed classifier** is
 
@@ -66,8 +67,10 @@ Read the formula from the inside out:
 The classifier being certified is $g$. The base classifier $f$ supplies the
 votes.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-randomized-smoothing-cloud.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="A point representing April is surrounded by Gaussian noisy samples in three base-classifier decision regions. Most samples fall in the Siberian cat region, so the smoothed classifier predicts Siberian cat.">
+  </div>
   <figcaption>The base classifier may vary across the cloud; the smoothed classifier returns its most probable label.</figcaption>
 </figure>
 
@@ -93,7 +96,8 @@ where $\Phi$ is the cumulative distribution function of a standard normal
 random variable. Its inverse $\Phi^{-1}(p)$ converts a probability into the
 corresponding position on the normal curve.
 
-The theorem states that
+An **adversarial input** is $x+\delta$, deliberately chosen subject to a norm
+limit. The theorem states that
 
 $$
 \lVert\delta\rVert_2<R
@@ -102,10 +106,12 @@ g(x+\delta)=c_A.
 $$
 
 One probability calculation therefore covers **every** perturbation $\delta$
-inside an $\ell_2$ ball.
+inside an $\ell_2$ ball: all changes whose total Euclidean length is below
+$R$.
 
-For the April vote in the figure, take $\sigma=0.25$, $p_A=0.80$, and
-$p_B=0.10$. Since
+Assume pixel coordinates are scaled to $[0,1]$, so $\sigma$ and $R$ use those
+normalized units. For the April vote in the figure, take $\sigma=0.25$,
+$p_A=0.80$, and $p_B=0.10$. Since
 
 $$
 \Phi^{-1}(0.80)\approx0.842,
@@ -119,14 +125,30 @@ $$
 R\approx\frac{0.25}{2}(0.842+1.282)=0.265.
 $$
 
-The geometry behind the theorem is a shift of probability mass. An adversarial
-perturbation moves the center of the Gaussian cloud. The two normal quantiles
-measure how far the center can move before the leading class could lose its
-probability advantage. The formal proof uses the Neyman–Pearson lemma to find
-the decision region whose probability changes most under that shift.
+Here is the bridge from a vote gap to a distance. Write
+$r=\lVert\delta\rVert_2$. After the Gaussian center moves by $\delta$, the
+leading-class probability is at least
 
-<figure style="text-align: center;">
-  <img src="{{ '/imgs/randomized-smoothing-radius.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="A three-stage diagram converts class probabilities 0.90, 0.07, and 0.03 through Gaussian quantiles into a certified radius of approximately 0.345 around April's input.">
+$$
+\Phi\!\left(\Phi^{-1}(p_A)-\frac r\sigma\right),
+$$
+
+while any competitor's probability is at most
+
+$$
+\Phi\!\left(\Phi^{-1}(p_B)+\frac r\sigma\right).
+$$
+
+The first remains larger whenever
+$r<\frac{\sigma}{2}(\Phi^{-1}(p_A)-\Phi^{-1}(p_B))$. The Neyman–Pearson lemma
+justifies these worst-case bounds: among decision regions with the stated
+original probability, a half-space perpendicular to $\delta$ changes the most
+when the Gaussian center shifts.
+
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
+  <img src="{{ '/imgs/randomized-smoothing-radius.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="A three-stage diagram converts a lower bound p A equals 0.80 and competitor upper bound p B equals 0.10 through Gaussian quantiles into a certified radius of approximately 0.265 around April's input.">
+  </div>
   <figcaption>The probability lead is converted into distance by Gaussian quantiles.</figcaption>
 </figure>
 
@@ -140,14 +162,22 @@ probabilities were known exactly, the radius theorem would make a deterministic
 statement: every input in the ball receives the same label from $g$.
 
 Second, a computer cannot evaluate the exact probabilities of a modern neural
-network. It draws a finite sample of noisy inputs and counts the votes. A
-binomial confidence interval turns those counts into a lower bound
-$\underline p_A$ and, when needed, an upper bound $\overline p_B$.
+network. A standard sound procedure separates selection from estimation:
+
+1. use a pilot batch of noisy inputs to choose a candidate class $c_A$;
+2. use a fresh, larger batch to compute a one-sided confidence lower bound
+   $\underline p_A$ for that class;
+3. set $\overline p_B=1-\underline p_A$;
+4. return $R=\sigma\Phi^{-1}(\underline p_A)$ when
+   $\underline p_A>1/2$, and abstain otherwise.
+
+The shortcut follows because
+$\Phi^{-1}(1-p)=-\Phi^{-1}(p)$ in the two-bound formula.
 
 The practical certificate therefore says:
 
-> with confidence at least $1-\alpha$, every perturbation inside the reported
-> radius preserves the smoothed classifier's label.
+> Over the Monte Carlo sampling, the chance of returning an invalid
+> label-radius pair is at most $\alpha$.
 
 The standard certification procedure uses many noisy samples, computes the
 confidence bound, and either returns a radius or **abstains**. A narrow vote
@@ -160,14 +190,17 @@ the stated guarantee.
 The radius grows when the correct class remains highly probable under Gaussian
 noise. Training methods differ in how they create that probability advantage.
 
-| Method | Training signal | Main idea |
-| --- | --- | --- |
-| Gaussian training | Cross-entropy on $x+\eta$ | Teach the base classifier directly on the noise used at certification time. |
-| [SmoothAdv](https://arxiv.org/abs/1906.04584) | Adversarial training against a differentiable approximation of the smoothed classifier | Search for inputs whose noisy vote is difficult, then train on them. |
-| [MACER](https://arxiv.org/abs/2001.02378) | A surrogate derived from the certified radius | Increase the probability margin without an inner adversarial attack. |
-| [Consistency](https://arxiv.org/abs/2006.04062) | Agreement between predictions on noisy copies | Make the model's output stable across the Gaussian cloud. |
-| [SmoothMix](https://arxiv.org/abs/2111.09277) | Mixup along adversarial directions | Calibrate confidence near difficult decision regions. |
-| [CAT-RS](https://arxiv.org/abs/2212.09000) | Confidence-aware, sample-dependent losses | Adjust robust training pressure according to noisy accuracy. |
+Three broad strategies appear repeatedly:
+
+- **Learn from Gaussian noise.** Ordinary Gaussian training teaches $f$ on the
+  same noisy inputs used at certification time.
+- **Directly enlarge the useful vote or radius margin.** [MACER](https://arxiv.org/abs/2001.02378)
+  optimizes a radius-based objective, while [Consistency](https://arxiv.org/abs/2006.04062)
+  encourages noisy copies to produce similar predictions.
+- **Emphasize difficult or uncertain inputs.** [SmoothAdv](https://arxiv.org/abs/1906.04584)
+  searches for perturbations that weaken the noisy vote; [SmoothMix](https://arxiv.org/abs/2111.09277)
+  mixes examples along such directions; [CAT-RS](https://arxiv.org/abs/2212.09000)
+  adjusts the training pressure using confidence.
 
 These methods modify training. The certificate is still computed afterward
 from noisy class probabilities and the smoothing theorem. This mirrors Part 6:
@@ -179,7 +212,7 @@ Each correctly classified input receives a certified radius. A common summary
 is the **average certified radius** (ACR): add those radii, using radius zero for
 an incorrect input, and divide by the dataset size.
 
-The average hides how the radii are distributed. More subtly, the radius
+The average hides how the radii are distributed. More subtly, the ideal radius
 
 $$
 R=\sigma\Phi^{-1}(p_A)
@@ -189,14 +222,18 @@ for the common one-probability certificate is highly nonlinear in $p_A$.
 Improving an already easy input can change the radius much more than the same
 probability improvement on a hard input.
 
-Take $\sigma=0.5$. Increasing $p_A$ from $0.60$ to $0.61$ changes the ideal
-radius from about $0.127$ to $0.140$, a gain of $0.013$. Increasing $p_A$ from
+Here $p_A$ means the top-class noisy-vote probability. To isolate the formula's
+nonlinearity, ignore sampling for this numerical comparison. Take $\sigma=0.5$.
+Increasing $p_A$ from $0.60$ to $0.61$ changes the ideal radius from about
+$0.127$ to $0.140$, a gain of $0.013$. Increasing $p_A$ from
 $0.98$ to $0.99$ changes it from about $1.027$ to $1.163$, a gain of $0.136$.
 Both probability improvements are $0.01$; the easy input contributes more than
 ten times as much radius gain.
 
-<figure style="text-align: center;">
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/acr-easy-sample-bias.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="Two equal increases of 0.01 in the leading-class probability are compared. A hard input's certified radius grows by 0.013, while an easy input's radius grows by 0.136 when sigma is 0.5.">
+  </div>
   <figcaption>Equal probability improvements receive very different weight in average certified radius.</figcaption>
 </figure>
 
@@ -216,8 +253,10 @@ A more informative evaluation retains the distribution. Two useful views are:
 - **the empirical distribution of $p_A$:** how noisy accuracy is spread across
   easy and difficult inputs.
 
-These curves reveal whether progress reaches many April photographs or mostly
-extends radii that were already large.
+Reported ACR uses confidence bounds rather than the ideal probabilities in our
+calculation, so it also depends on the sample count and confidence level. The
+curves reveal whether progress reaches many inputs, including difficult ones,
+or mostly extends radii that were already large.
 
 ## Put the probabilistic pipeline together
 
