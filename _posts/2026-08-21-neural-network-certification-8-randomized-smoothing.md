@@ -215,6 +215,9 @@ the training signal and the final evaluation guarantee are separate objects.
 
 ## A single average can reward the wrong progress
 
+The training strategies above need an evaluation measure that tells us whether
+their changed vote probabilities improve robustness across the dataset.
+
 Each correctly classified input receives a certified radius. A common summary
 is the **average certified radius** (ACR): add those radii, using radius zero for
 an incorrect input, and divide by the dataset size.

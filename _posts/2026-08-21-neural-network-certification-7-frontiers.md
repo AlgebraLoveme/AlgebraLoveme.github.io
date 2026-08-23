@@ -135,8 +135,6 @@ properties that help explain the result:
   <figcaption>Tightness answers a fixed-network question; continuity and sensitivity shape the training journey.</figcaption>
 </figure>
 
-The curves illustrate the three properties schematically.
-
 At fixed weights, a tighter sound bound remains better for verification. The
 training result adds a second criterion: ranking optimization objectives
 requires more than precision. A promising certified-training loss must combine
@@ -236,11 +234,13 @@ find it. On a fixed input domain, one can transform a network without changing
 its function so an **optimal layerwise relaxation**—the tightest convex set
 available at every layer—becomes exact. Finding those tightest sets may still
 be intractable.
-It also studies **branch-and-bound**, which splits activation or input cases and
-verifies every resulting subproblem. For its nested-max encoding in $d$
-dimensions, the optimal layerwise multi-neuron construction uses $O(d)$
-constraints, meaning that the count grows linearly with $d$, in one subproblem.
-An exact DeepPoly branch-and-bound proof uses
+This leaves the computational cost of exactness unresolved. The study makes
+that cost concrete by comparing the construction with **branch-and-bound**,
+which splits activation or input cases and verifies every resulting
+subproblem. For its nested-max encoding in $d$ dimensions, the optimal
+layerwise multi-neuron construction uses $O(d)$ constraints, meaning that the
+count grows linearly with $d$, in one subproblem. An exact DeepPoly
+branch-and-bound proof uses
 $2^{d-1}$ activation-pattern subproblems.
 
 The frontier is therefore more precise than “larger groups are tighter.” The

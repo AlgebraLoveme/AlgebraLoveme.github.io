@@ -181,8 +181,8 @@ IBP with attack-based search, commonly [projected gradient descent
 | [STAPS](https://arxiv.org/abs/2305.04574) | Combine SABR's small input box with TAPS's feature-space attack | Both approximations remove the full-region upper-bound guarantee |
 | [MTL-IBP](https://arxiv.org/abs/2305.13991) | Blend an adversarial loss with an IBP certified loss | The blend has no general upper-bound guarantee when the adversarial term has positive weight |
 
-The mechanics become easier to remember once we state the bet behind each
-method.
+Each method gives up the full-region upper-bound guarantee at a different point
+in the computation and relies on a corresponding working assumption.
 
 **SABR bets that the attack found the hard neighborhood.** SABR, short for
 **Small Adversarial Bounding Regions**, first uses PGD to decide where bounding
@@ -253,6 +253,10 @@ A sound evaluation verifier can therefore produce valid certified accuracy for
 SABR-, TAPS-, STAPS-, and MTL-IBP-trained networks.
 
 ## What do the CTBench numbers show?
+
+The mechanisms above explain why each surrogate might help. To test whether
+they actually produce more certifiable networks, we need a comparison that
+holds the architecture and evaluation protocol fixed.
 
 [CTBench](https://arxiv.org/abs/2406.04848) implements the methods in one
 codebase and evaluates them under a shared benchmark protocol. The values below

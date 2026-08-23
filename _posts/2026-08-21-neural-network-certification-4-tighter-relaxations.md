@@ -392,6 +392,10 @@ introduced in
 
 ## Three abstractions, one safety rule
 
+The comparison above measures how precisely each abstraction bounded April's
+margin. Every certificate also depends on a shared validity condition: the
+abstract representation must contain every value the exact network can reach.
+
 The allowed inputs form a square. As they pass through a network, the possible
 neuron values form new geometric sets. A verifier works with simpler sets that
 contain every exact value.

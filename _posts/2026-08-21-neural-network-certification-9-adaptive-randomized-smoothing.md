@@ -108,6 +108,9 @@ converts its noisy votes into an $\ell_2$ certificate.
 
 ## One global noise level creates conflicting goals
 
+Denoising adapted the base mapping while keeping one global noise level. We now
+turn to the second component from the opening question: the noise scale.
+
 The noise scale $\sigma$ appears both in the data distribution and in the
 radius:
 
