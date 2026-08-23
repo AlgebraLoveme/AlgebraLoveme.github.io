@@ -141,8 +141,9 @@ bound-based robust training signals.
 
 April's numbers show the central optimization problem. The exact worst-case
 loss is $0.589$, while the IBP training signal is $0.832$. The extra loss comes
-from artificial behaviors admitted by the relaxation. During training, the
-optimizer reacts to those artificial behaviors as well as the real network.
+from spurious behaviors admitted by the relaxation, which the exact network
+cannot produce. During training, losses from the exact network and from these
+spurious behaviors both influence the optimizer.
 This pressure can tighten bounds and impose strong regularization on the
 learned classifier. The relationship between IBP bound tightness and this
 regularization is analyzed in

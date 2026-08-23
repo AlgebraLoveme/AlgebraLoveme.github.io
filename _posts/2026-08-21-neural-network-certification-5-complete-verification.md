@@ -38,8 +38,8 @@ $$
 
 DeepPoly therefore returns **unknown**. Its lower bound comes from a
 relaxation: a simpler enclosure that contains every real network behavior and
-additional artificial behaviors. The artificial part of the enclosure can
-pull the bound below zero.
+additional **spurious behaviors** that the exact network cannot produce. These
+spurious behaviors can pull the bound below zero.
 
 The next question is: **can we cover every allowed input with smaller regions
 whose bounds are positive?**
