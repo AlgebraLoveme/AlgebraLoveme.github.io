@@ -19,7 +19,7 @@ $$e^{\pi i}=-1$$
 
 $$\hat{f}(\xi) = \int_{-\infty}^{\infty}f(x)e^{2\pi i x\xi}dx$$
 
-Find my CV [here](../CV_en.pdf).
+Find my CV [here]({{ '/assets/files/CV_en.pdf' | relative_url }}).
 
 Feel free to contact me if you have any questions or interests.
 
@@ -208,7 +208,7 @@ We propose a way to reuse a learned design model to speed up circuit redesign wh
 
 - Training Certifiably Robust Neural Networks. January 2024 at Zhejiang University, China.
  <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
-  <a href="../230122_ZJU.pdf">
+  <a href="{{ '/assets/files/230122_ZJU.pdf' | relative_url }}">
     <img src="../assets/keynote-icon.png" alt="Slide" style="height:1em;"/>
   </a>
 </span>
