@@ -116,9 +116,23 @@ The predicted class is the one with the highest score. An attack starts from
 $x_0$ and searches inside $S_p(x_0,\epsilon)$ for an input on which some other
 class outranks **cat**.
 
-A gradient-based attack, for example, uses information about how the model's
-loss changes with the pixels. At each step, it uses this information to change
-the pixels in a direction expected to cause a mistake.
+A standard gradient-based attack is [projected gradient descent
+(PGD)](https://arxiv.org/abs/1706.06083). Despite the name, PGD takes steps that
+*increase* the classification loss when its goal is to make any class outrank
+cat. The word *projected* describes how every step is returned to the allowed
+set. Starting from April's image—or from a random point inside that set—PGD
+repeatedly:
+
+1. computes the gradient of the loss with respect to the pixels, which measures
+   how the loss changes with each pixel;
+2. changes the pixels in a direction that increases the loss;
+3. projects the modified image back into $S_p(x_0,\epsilon)$.
+
+For an $\ell_\infty$ threat model, the projection clips each pixel so that it
+remains within $\epsilon$ of April's original pixel value and within the valid
+range $[0,1]$. After several steps, PGD reports the highest-loss candidate it
+found. Multiple random starting points, called **restarts**, let it search
+different paths through the allowed set.
 
 Two outcomes are possible:
 
