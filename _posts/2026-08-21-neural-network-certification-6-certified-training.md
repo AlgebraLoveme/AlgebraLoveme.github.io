@@ -134,9 +134,11 @@ changes both the network and its certificate. A minimal training step is:
 
 This loop rewards two useful changes at once. It can increase the true margins,
 and it can reshape the network so that bound propagation loses less information.
-[Interval bound propagation (IBP)](https://arxiv.org/abs/1810.12715) and
-[CROWN-IBP](https://arxiv.org/abs/1906.06316) are prominent examples of sound
-bound-based robust training signals.
+[Interval bound propagation (IBP)](https://arxiv.org/abs/1810.12715) carries
+independent intervals through the network. [CROWN-IBP](https://arxiv.org/abs/1906.06316),
+introduced in [Part 4's discussion of back-substitution cost]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/#scaling-back-substitution-with-crown-ibp' | relative_url }}),
+uses IBP for intermediate intervals and spends a linear backward pass on the
+final class margins. Both produce sound robust training signals.
 
 ## Why train with an unsound surrogate?
 

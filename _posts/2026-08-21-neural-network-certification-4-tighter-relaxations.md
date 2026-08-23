@@ -7,10 +7,10 @@ date: 2026-08-21
 show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, linear relaxation, DeepPoly, abstract interpretation, "Certification Series: 04"]
+tags: [neural networks, certification, linear relaxation, DeepPoly, CROWN-IBP, abstract interpretation, "Certification Series: 04"]
 mathjax: true
 toc: true
-excerpt: "Triangle first recovers a relationship that intervals forgot; DeepPoly then carries useful linear bounds without a global constraint system."
+excerpt: "Triangle recovers relationships that intervals forgot; DeepPoly carries selected linear bounds, while CROWN-IBP trades some of that information for speed."
 ---
 
 ## Why did IBP's margin bound become negative?
@@ -290,9 +290,59 @@ $$
 m\geq\frac{1}{2}(0.3)+\frac{3}{2}(0.3)-0.5=0.1.
 $$
 
-This finishes the certificate. The lower-line rule is useful for other output
-expressions, so its geometric derivation remains available below as an
-optional deeper step.
+This finishes the certificate.
+
+## Scaling back-substitution with CROWN-IBP
+
+April's certificate required one backward calculation for the final margin.
+DeepPoly must also obtain a numerical interval $[\ell,u]$ for each hidden
+pre-activation before relaxing its ReLU: the interval identifies a stable or
+unstable ReLU and determines the upper chord. To tighten such an intermediate
+interval, DeepPoly treats that hidden value as a temporary output and
+back-substitutes its lower and upper expressions toward the input. The
+[GPUPoly analysis of DeepPoly](https://arxiv.org/abs/2007.10868) makes this
+all-layer back-substitution cost explicit.
+
+This work grows with the width of the hidden layers. Bounding every value in a
+layer of width $n_m$ creates $2n_m$ backward targets: one lower and one upper
+bound per value. By comparison, a $C$-class classifier has only $C-1$ margins
+against the true class. A feature map with $64$ channels of size $32\times32$
+contains
+
+$$
+n_m=64\cdot32\cdot32=65{,}536
+$$
+
+hidden values, while a ten-class prediction has nine relevant margins. Carrying
+linear expressions backward for every intermediate bound can therefore cost
+far more than bounding the final safety questions.
+
+[CROWN-IBP](https://arxiv.org/abs/1906.06316) changes where that effort is
+spent:
+
+1. Run IBP forward to obtain an interval $[\ell,u]$ for every hidden
+   pre-activation.
+2. Use those intervals to choose sound linear ReLU relaxations.
+3. Run CROWN-style back-substitution only for the final class margins.
+
+For April's one-hidden-layer network, the IBP pass already obtains the exact
+pre-activation intervals $z_1\in[0.1,0.9]$ and $z_2\in[-0.4,0.4]$.
+CROWN-IBP therefore builds the same ReLU lines and repeats the margin
+calculation above, giving $m\geq0.1$.
+
+The forward IBP pass is cheap because it carries two numbers per hidden value.
+It also discards relationships between hidden values before the backward pass
+begins. The final CROWN pass retains affine relationships while bounding each
+margin, but its ReLU relaxations are built from the coarser IBP intervals. The
+result remains sound and can admit more spurious values than a calculation that
+tightens every intermediate bound through linear back-substitution.
+
+This exchange of precision for speed becomes especially useful in
+[certified training]({{ '/2026-08-21-neural-network-certification-6-certified-training/' | relative_url }}),
+where the bounds must be recomputed after every parameter update.
+
+The lower-line rule is useful for other output expressions, so its geometric
+derivation remains available below as an optional deeper step.
 
 <details markdown="1">
 <summary>Why does the min-area rule select only 0 or 1?</summary>
@@ -377,11 +427,11 @@ uses only the upper bound on $h_2$.
 
 </details>
 
-Triangle and DeepPoly give the same certificate for April's tiny network. The
-difference is how they organize the calculation: Triangle retains a joint
-constraint system, while DeepPoly back-substitutes one sign-selected bound at
-each step without generating projected pairwise inequalities. DeepPoly was
-introduced in
+Triangle, DeepPoly, and CROWN-IBP give the same certificate for April's tiny
+network. Triangle retains a joint constraint system. DeepPoly back-substitutes
+one sign-selected bound at each step without generating projected pairwise
+inequalities. CROWN-IBP obtains hidden intervals with IBP and reserves linear
+back-substitution for the final margin. DeepPoly was introduced in
 [An Abstract Domain for Certifying Neural Networks](https://www.sri.inf.ethz.ch/publications/singh2019domain).
 
 | Method | Representation | Margin lower bound | Result |
@@ -389,12 +439,15 @@ introduced in
 | IBP | Independent intervals | $-0.1$ | Unknown |
 | Triangle | Joint linear constraints | $0.1$ | Verified |
 | DeepPoly | Selected affine bounds and back-substitution | $0.1$ | Verified |
+| CROWN-IBP | IBP hidden intervals and final-margin back-substitution | $0.1$ | Verified |
 
 ## Three abstractions, one safety rule
 
-The comparison above measures how precisely each abstraction bounded April's
-margin. Every certificate also depends on a shared validity condition: the
-abstract representation must contain every value the exact network can reach.
+The four rows use three underlying representations: CROWN-IBP combines IBP
+intervals for hidden bounds with affine relaxations for final margins. The
+comparison above measures how precisely each representation bounded April's
+margin. Every certificate also depends on a shared validity condition: it must
+contain every value the exact network can reach.
 
 The allowed inputs form a square. As they pass through a network, the possible
 neuron values form new geometric sets. A verifier works with simpler sets that
@@ -445,7 +498,8 @@ at radius $0.2$. Triangle restored that relationship and proved
 $m\geq0.1$. After seeing why a full Triangle system becomes expensive,
 DeepPoly retained selected affine bounds and recovered the same certificate by
 back-substitution, without constructing the facets created by explicit
-projection.
+projection. CROWN-IBP reduced the cost of intermediate bounds by computing them
+with IBP, then spent linear back-substitution only on the final margins.
 
 At radius $0.24$, the new lower bound is $-0.02$. Part 5 asks: **can splitting
 the input region turn this unknown into a proof?**
