@@ -4,6 +4,7 @@ series_nav_title: "How Can Bounds Travel Through a Network?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-3-interval-bound-propagation/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-21
 tags: [neural networks, certification, interval bound propagation, robustness, "Certification Series: 03"]

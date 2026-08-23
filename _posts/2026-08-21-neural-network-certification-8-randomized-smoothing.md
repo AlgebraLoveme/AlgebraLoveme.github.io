@@ -4,6 +4,7 @@ series_nav_title: "How Can Random Noise Certify?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-8-randomized-smoothing/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-22
 tags: [neural networks, certification, randomized smoothing, probabilistic methods, "Certification Series: 08"]

@@ -4,6 +4,7 @@ series_nav_title: "Why Testing Is Not Proof"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-1-what-are-we-proving/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-21
 tags: [neural networks, certification, formal verification, robustness, "Certification Series: 01"]

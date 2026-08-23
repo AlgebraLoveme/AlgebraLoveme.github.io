@@ -52,7 +52,7 @@ layout: default
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
         {% endif %}
         {% include page__taxonomy.html %}
-        {% if page.date %}
+        {% if page.date and page.show_initial_release != false %}
           <p class="page__date"><strong>{{ site.data.ui-text[site.locale].date_label | default: "Initial Release:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time></p>
         {% endif %}
         {% if page.last_modified_at and page.last_modified_by %}

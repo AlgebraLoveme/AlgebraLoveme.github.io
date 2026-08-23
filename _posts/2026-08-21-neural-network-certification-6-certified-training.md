@@ -4,6 +4,7 @@ series_nav_title: "How Can Training Help?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-6-certified-training/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-22
 tags: [neural networks, certification, certified training, robustness, "Certification Series: 06"]

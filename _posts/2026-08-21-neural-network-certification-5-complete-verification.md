@@ -4,6 +4,7 @@ series_nav_title: "What If the Bound Is Inconclusive?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-5-complete-verification/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-22
 tags: [neural networks, certification, branch and bound, complete verification, "Certification Series: 05"]

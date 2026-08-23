@@ -4,6 +4,7 @@ series_nav_title: "Denoisers and Input-Dependent Noise"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-9-adaptive-randomized-smoothing/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-22
 tags: [neural networks, certification, randomized smoothing, denoising, "Certification Series: 09"]

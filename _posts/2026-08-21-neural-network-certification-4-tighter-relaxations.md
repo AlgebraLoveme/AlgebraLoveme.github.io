@@ -4,6 +4,7 @@ series_nav_title: "Why Do Simple Bounds Lose Information?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-4-tighter-relaxations/
 date: 2026-08-21
+show_initial_release: false
 written_by: PIRA
 written_at: 2026-08-22
 tags: [neural networks, certification, linear relaxation, DeepPoly, abstract interpretation, "Certification Series: 04"]
