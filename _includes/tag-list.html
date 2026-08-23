@@ -3,7 +3,15 @@
     <!-- Sort alphabetically regardless of case e.g. a B c d E -->
     <!-- modified from http://www.codeofclimber.ru/2015/sorting-site-tags-in-jekyll/ -->
   {% endcomment %}
-  {% capture page_tags %}{% for tag in page.tags %}{{ tag | downcase }}|{{ tag }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+  {% capture page_tags -%}
+    {%- for tag in page.tags -%}
+      {%- assign tag_parts = tag | split: ': ' -%}
+      {%- assign tag_name_words = tag_parts[0] | downcase | split: ' ' -%}
+      {%- unless tag_parts.size == 2 and tag_name_words.last == 'series' -%}
+        {{- tag | downcase -}}|{{- tag -}},
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endcapture %}
   {% assign tag_hashes = page_tags | split: ',' | sort %}
 
   <p class="page__taxonomy">

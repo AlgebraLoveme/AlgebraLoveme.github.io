@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-1-what-are-we-proving/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-21
-tags: [neural networks, certification, formal verification, robustness]
+tags: [neural networks, certification, formal verification, robustness, "Certification Series: 01"]
 mathjax: true
 toc: true
 excerpt: "April the Siberian cat helps us see why an attack can disprove robustness, while only a certificate can prove it."

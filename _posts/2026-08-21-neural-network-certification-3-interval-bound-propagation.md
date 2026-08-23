@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-3-interval-bound-propagation
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-21
-tags: [neural networks, certification, interval bound propagation, robustness]
+tags: [neural networks, certification, interval bound propagation, robustness, "Certification Series: 03"]
 mathjax: true
 toc: true
 excerpt: "Follow ranges through April's tiny classifier and turn a lower bound on its output margin into a certificate."

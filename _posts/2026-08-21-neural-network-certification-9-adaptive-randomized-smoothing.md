@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-9-adaptive-randomized-smooth
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, randomized smoothing, denoising]
+tags: [neural networks, certification, randomized smoothing, denoising, "Certification Series: 09"]
 mathjax: true
 toc: true
 excerpt: "Adapt randomized smoothing by denoising April's noisy photographs and choosing a certifiably safe noise level for each input."

@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-8-randomized-smoothing/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, randomized smoothing, probabilistic methods]
+tags: [neural networks, certification, randomized smoothing, probabilistic methods, "Certification Series: 08"]
 mathjax: true
 toc: true
 excerpt: "Follow noisy copies of April's photo from majority vote to a probabilistic robustness certificate, then examine training and evaluation."

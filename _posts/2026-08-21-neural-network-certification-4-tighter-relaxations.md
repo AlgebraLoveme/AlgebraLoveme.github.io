@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-4-tighter-relaxations/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, linear relaxation, DeepPoly, abstract interpretation]
+tags: [neural networks, certification, linear relaxation, DeepPoly, abstract interpretation, "Certification Series: 04"]
 mathjax: true
 toc: true
 excerpt: "Triangle first recovers a relationship that intervals forgot; DeepPoly then carries useful linear bounds without a global constraint system."

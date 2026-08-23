@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-2-writing-the-guarantee/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-21
-tags: [neural networks, certification, specifications, robustness]
+tags: [neural networks, certification, specifications, robustness, "Certification Series: 02"]
 mathjax: true
 toc: true
 excerpt: "April meets a tiny ReLU classifier as we turn an informal promise into a mathematical statement and prove it by hand."

@@ -1,0 +1,43 @@
+{% comment %}
+  A series tag has the form "Series Name: 01". Keep the numeric suffix
+  fixed-width so sorting the tags also sorts the posts.
+{% endcomment %}
+{%- assign active_series_name = nil -%}
+{%- for tag in page.tags -%}
+  {%- assign tag_parts = tag | split: ': ' -%}
+  {%- assign tag_name_words = tag_parts[0] | downcase | split: ' ' -%}
+  {%- if tag_parts.size == 2 and tag_name_words.last == 'series' -%}
+    {%- assign active_series_name = tag_parts[0] -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if active_series_name -%}
+  {%- capture matching_series_tags -%}
+    {%- for tag_group in site.tags -%}
+      {%- assign candidate_parts = tag_group[0] | split: ': ' -%}
+      {%- if candidate_parts.size == 2 and candidate_parts[0] == active_series_name -%}
+        {{- tag_group[0] -}}||
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- assign ordered_series_tags = matching_series_tags | split: '||' | sort -%}
+
+  <section class="series-nav" aria-label="{{ active_series_name | escape }}">
+    <header><h4 class="nav__title">{{ active_series_name }}</h4></header>
+    <ol class="series-nav__list">
+      {%- for series_tag in ordered_series_tags -%}
+        {%- assign series_posts = site.tags[series_tag] -%}
+        {%- for series_post in series_posts -%}
+          <li>
+            {%- if series_post.url == page.url -%}
+              <span class="series-nav__current" aria-current="page">{{ series_post.title }}</span>
+            {%- else -%}
+              <a href="{{ series_post.url | relative_url }}">{{ series_post.title }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      {%- endfor -%}
+    </ol>
+  </section>
+{%- endif -%}

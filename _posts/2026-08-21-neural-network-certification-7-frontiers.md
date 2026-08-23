@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-7-frontiers/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, theory, abstract interpretation]
+tags: [neural networks, certification, theory, abstract interpretation, "Certification Series: 07"]
 mathjax: true
 toc: true
 excerpt: "Three surprising results separate what certifiable networks can represent, what training can find, and what a verifier can prove."

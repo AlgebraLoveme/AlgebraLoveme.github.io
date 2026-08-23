@@ -5,7 +5,7 @@ permalink: /2026-08-21-neural-network-certification-6-certified-training/
 date: 2026-08-21
 written_by: PIRA
 written_at: 2026-08-22
-tags: [neural networks, certification, certified training, robustness]
+tags: [neural networks, certification, certified training, robustness, "Certification Series: 06"]
 mathjax: true
 toc: true
 excerpt: "Follow April's worst-case loss from attacks to sound bounds, then separate sound certified training from unsound training surrogates."
