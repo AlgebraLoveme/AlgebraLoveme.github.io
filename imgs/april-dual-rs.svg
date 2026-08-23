@@ -10,8 +10,8 @@
     <text x="470" y="38" text-anchor="middle" font-size="15" fill="#405368">input x also enters the classifier</text>
 
     <rect x="198" y="82" width="346" height="328" rx="18" fill="#fbf8ff" stroke="#59449b" stroke-width="2.5"/>
-    <text x="371" y="120" text-anchor="middle" font-size="21" font-weight="700" fill="#49397f">1. Smoothed variance estimator</text>
-    <text x="371" y="151" text-anchor="middle" font-size="16" fill="#65558f">Which noise level should x use?</text>
+    <text x="371" y="111" text-anchor="middle" font-size="21" font-weight="700" fill="#49397f"><tspan x="371">1. Smoothed variance</tspan><tspan x="371" dy="24">estimator</tspan></text>
+    <text x="371" y="165" text-anchor="middle" font-size="16" fill="#65558f">Which noise level should x use?</text>
     <g><rect x="244" y="185" width="78" height="45" rx="10" fill="#e5e0ef"/><text x="283" y="214" text-anchor="middle" font-size="17" fill="#49397f">0.25</text><rect x="332" y="178" width="78" height="59" rx="10" fill="#59449b"/><text x="371" y="214" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">0.5</text><rect x="420" y="185" width="78" height="45" rx="10" fill="#e5e0ef"/><text x="459" y="214" text-anchor="middle" font-size="17" fill="#49397f">1.0</text></g>
     <text x="371" y="275" text-anchor="middle" font-size="19" font-weight="700" fill="#49397f">select σ = 0.5</text>
     <rect x="246" y="305" width="250" height="66" rx="12" fill="#c5b9dd"/>
@@ -20,8 +20,8 @@
     <line x1="556" y1="244" x2="610" y2="244" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
     <text x="583" y="226" text-anchor="middle" font-size="14" fill="#405368">selected σ</text>
     <rect x="624" y="82" width="346" height="328" rx="18" fill="#f2f8f1" stroke="#347a45" stroke-width="2.5"/>
-    <text x="797" y="120" text-anchor="middle" font-size="21" font-weight="700" fill="#286437">2. Classifier smoothed at σ = 0.5</text>
-    <text x="797" y="151" text-anchor="middle" font-size="16" fill="#376b50">Which class wins the noisy vote?</text>
+    <text x="797" y="111" text-anchor="middle" font-size="21" font-weight="700" fill="#286437"><tspan x="797">2. Classifier smoothed</tspan><tspan x="797" dy="24">at σ = 0.5</tspan></text>
+    <text x="797" y="165" text-anchor="middle" font-size="16" fill="#376b50">Which class wins the noisy vote?</text>
     <rect x="681" y="185" width="232" height="76" rx="14" fill="#b4d7af"/>
     <text x="797" y="216" text-anchor="middle" font-size="17" fill="#286437">prediction</text><text x="797" y="244" text-anchor="middle" font-size="22" font-weight="700" fill="#286437">Siberian cat</text>
     <rect x="672" y="305" width="250" height="66" rx="12" fill="#b4d7af"/>

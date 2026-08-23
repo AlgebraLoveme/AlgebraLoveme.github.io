@@ -30,8 +30,8 @@
     <g fill="#3b8587"><circle cx="666" cy="378" r="5"/><circle cx="762" cy="407" r="5"/></g>
     <text x="785" y="182" font-size="15" font-weight="600" fill="#49397f">loose, smooth signal</text>
     <line x1="770" y1="190" x2="700" y2="282" stroke="#49397f" stroke-width="1.8"/>
-    <text x="781" y="258" font-size="15" font-weight="600" fill="#296668">tighter, discontinuous signal</text>
-    <line x1="774" y1="265" x2="744" y2="344" stroke="#296668" stroke-width="1.8"/>
+    <text x="790" y="248" text-anchor="middle" font-size="15" font-weight="600" fill="#296668"><tspan x="790">tighter, discontinuous</tspan><tspan x="790" dy="18">signal</tspan></text>
+    <line x1="774" y1="271" x2="744" y2="344" stroke="#296668" stroke-width="1.8"/>
     <text x="842" y="405" text-anchor="middle" font-size="14" fill="#6b7280">schematic</text>
   </g>
 </svg>
