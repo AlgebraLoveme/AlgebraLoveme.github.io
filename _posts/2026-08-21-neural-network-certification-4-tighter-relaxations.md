@@ -292,55 +292,6 @@ $$
 
 This finishes the certificate.
 
-## Scaling back-substitution with CROWN-IBP
-
-April's certificate required one backward calculation for the final margin.
-DeepPoly must also obtain a numerical interval $[\ell,u]$ for each hidden
-pre-activation before relaxing its ReLU: the interval identifies a stable or
-unstable ReLU and determines the upper chord. To tighten such an intermediate
-interval, DeepPoly treats that hidden value as a temporary output and
-back-substitutes its lower and upper expressions toward the input. The
-[GPUPoly analysis of DeepPoly](https://arxiv.org/abs/2007.10868) makes this
-all-layer back-substitution cost explicit.
-
-This work grows with the width of the hidden layers. Bounding every value in a
-layer of width $n_m$ creates $2n_m$ backward targets: one lower and one upper
-bound per value. By comparison, a $C$-class classifier has only $C-1$ margins
-against the true class. A feature map with $64$ channels of size $32\times32$
-contains
-
-$$
-n_m=64\cdot32\cdot32=65{,}536
-$$
-
-hidden values, while a ten-class prediction has nine relevant margins. Carrying
-linear expressions backward for every intermediate bound can therefore cost
-far more than bounding the final safety questions.
-
-[CROWN-IBP](https://arxiv.org/abs/1906.06316) changes where that effort is
-spent:
-
-1. Run IBP forward to obtain an interval $[\ell,u]$ for every hidden
-   pre-activation.
-2. Use those intervals to choose sound linear ReLU relaxations.
-3. Run CROWN-style back-substitution only for the final class margins.
-
-For April's one-hidden-layer network, the IBP pass already obtains the exact
-pre-activation intervals $z_1\in[0.1,0.9]$ and $z_2\in[-0.4,0.4]$.
-CROWN-IBP therefore builds the same ReLU lines and repeats the margin
-calculation above, giving $m\geq0.1$.
-
-The forward IBP pass is cheap because it carries two numbers per hidden value.
-It also discards relationships between hidden values before the backward pass
-begins. The final CROWN pass retains affine relationships while bounding each
-margin, but its ReLU relaxations are built from the coarser IBP intervals. The
-result remains sound and can admit more spurious values than a calculation that
-tightens every intermediate bound through linear back-substitution.
-
-This exchange of precision for speed becomes especially useful in
-[certified training]({{ '/2026-08-21-neural-network-certification-6-certified-training/' | relative_url }}),
-where the bounds must be recomputed after every parameter update.
-
 The lower-line rule is useful for other output expressions, so its geometric
 derivation remains available below as an optional deeper step.
 
@@ -426,6 +377,55 @@ $\lambda=0$. The radius-$0.2$ certificate remains the same because its margin
 uses only the upper bound on $h_2$.
 
 </details>
+
+## Scaling back-substitution with CROWN-IBP
+
+April's certificate required one backward calculation for the final margin.
+DeepPoly must also obtain a numerical interval $[\ell,u]$ for each hidden
+pre-activation before relaxing its ReLU: the interval identifies a stable or
+unstable ReLU and determines the upper chord. To tighten such an intermediate
+interval, DeepPoly treats that hidden value as a temporary output and
+back-substitutes its lower and upper expressions toward the input. The
+[GPUPoly analysis of DeepPoly](https://arxiv.org/abs/2007.10868) makes this
+all-layer back-substitution cost explicit.
+
+This work grows with the width of the hidden layers. Bounding every value in a
+layer of width $n_m$ creates $2n_m$ backward targets: one lower and one upper
+bound per value. By comparison, a $C$-class classifier has only $C-1$ margins
+against the true class. A feature map with $64$ channels of size $32\times32$
+contains
+
+$$
+n_m=64\cdot32\cdot32=65{,}536
+$$
+
+hidden values, while a ten-class prediction has nine relevant margins. Carrying
+linear expressions backward for every intermediate bound can therefore cost
+far more than bounding the final safety questions.
+
+[CROWN-IBP](https://arxiv.org/abs/1906.06316) changes where that effort is
+spent:
+
+1. Run IBP forward to obtain an interval $[\ell,u]$ for every hidden
+   pre-activation.
+2. Use those intervals to choose sound linear ReLU relaxations.
+3. Run CROWN-style back-substitution only for the final class margins.
+
+For April's one-hidden-layer network, the IBP pass already obtains the exact
+pre-activation intervals $z_1\in[0.1,0.9]$ and $z_2\in[-0.4,0.4]$.
+CROWN-IBP therefore builds the same ReLU lines and repeats the margin
+calculation above, giving $m\geq0.1$.
+
+The forward IBP pass is cheap because it carries two numbers per hidden value.
+It also discards relationships between hidden values before the backward pass
+begins. The final CROWN pass retains affine relationships while bounding each
+margin, but its ReLU relaxations are built from the coarser IBP intervals. The
+result remains sound and can admit more spurious values than a calculation that
+tightens every intermediate bound through linear back-substitution.
+
+This exchange of precision for speed becomes especially useful in
+[certified training]({{ '/2026-08-21-neural-network-certification-6-certified-training/' | relative_url }}),
+where the bounds must be recomputed after every parameter update.
 
 Triangle, DeepPoly, and CROWN-IBP give the same certificate for April's tiny
 network. Triangle retains a joint constraint system. DeepPoly back-substitutes
