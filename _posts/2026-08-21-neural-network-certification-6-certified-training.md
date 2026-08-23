@@ -171,7 +171,8 @@ computation. A deep network can be viewed as a **feature extractor** followed by
 a **classifier**.
 The feature extractor turns an input into a hidden representation. The space of
 these representations is called **feature space**. The methods below combine
-IBP with attack-based search, commonly projected gradient descent (PGD).
+IBP with attack-based search, commonly [projected gradient descent
+(PGD)]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/' | relative_url }}#an-attack-searches-for-an-allowed-input-that-fails).
 
 | Method | Training signal | Source of unsoundness |
 | --- | --- | --- |
@@ -180,18 +181,34 @@ IBP with attack-based search, commonly projected gradient descent (PGD).
 | [STAPS](https://arxiv.org/abs/2305.04574) | Combine SABR's small input box with TAPS's feature-space attack | Both approximations remove the full-region upper-bound guarantee |
 | [MTL-IBP](https://arxiv.org/abs/2305.13991) | Blend an adversarial loss with an IBP certified loss | The blend has no general upper-bound guarantee when the adversarial term has positive weight |
 
-SABR, short for **Small Adversarial Bounding Regions**, changes the region sent
-through the bound propagator. For April, it would search the radius-$0.24$
-square for a hard point, draw a smaller square around that point, and run IBP on
-the smaller square. The resulting IBP bound is sound for the selected square.
-Its role in training is an unsound proxy for the original full square.
+The mechanics become easier to remember once we state the bet behind each
+method.
 
-TAPS changes where bounding ends and attack-based search begins. It splits the
-network into a feature extractor and a classifier. IBP carries the full input
-region through the feature extractor, producing a box of possible hidden
-features. Projected gradient descent then searches that box for hard inputs to
-the classifier. STAPS applies both choices: a small adversarial input box and a
-feature-space attack.
+**SABR bets that the attack found the hard neighborhood.** SABR, short for
+**Small Adversarial Bounding Regions**, first uses PGD to decide where bounding
+effort should go. For April, it would search the radius-$0.24$ square for a hard
+point, draw a smaller square around that point, and run IBP on the smaller
+square. The working intuition is that a strong attack may reach the
+neighborhood of the true worst-case point even when it does not find that point
+exactly. The local box can then cover the most relevant neighborhood while its
+smaller width makes the IBP bound tighter. The bound is sound for that local
+box; the box may omit the true worst-case region of the original square.
+
+**TAPS lets two approximation errors pull in opposite directions.** It splits
+the network into a feature extractor and a classifier. IBP carries the full
+input region through the feature extractor and produces a box containing every
+hidden feature vector that the true network can produce. Because this box can
+also contain spurious feature vectors, its largest classifier loss may be too
+high relative to the true network. PGD then searches inside the box, but may
+miss the box's hardest feature vector and return a loss that is too low for that
+box. TAPS aims for these upward and downward errors to offset partly, yielding
+a useful approximation of the true worst-case loss. Their sizes need not match,
+so the result has no guaranteed side relative to the exact loss.
+
+**STAPS combines the two bets.** It first selects SABR's small input box and
+then applies TAPS's feature-space search. The attack chooses a locally hard
+input region, and TAPS's search then aims to keep the resulting training signal
+precise.
 
 Multi-task learning with IBP (MTL-IBP) makes the interpolation explicit:
 
@@ -201,10 +218,20 @@ L_{\mathrm{MTL\text{-}IBP}}
 \qquad 0\leq\alpha\leq1.
 $$
 
-The endpoint $\alpha=1$ recovers the sound IBP loss. Smaller values give the
-attack a larger role and remove the general upper-bound guarantee. The weight
-$\alpha$ therefore controls how strongly training follows the sound, often
-loose IBP signal.
+**MTL-IBP searches between the two sides of the bracket.** The attack loss lies
+at or below the exact worst-case loss, while the IBP loss lies at or above it.
+The convex combination moves continuously between those two endpoints. A
+well-chosen $\alpha$ may therefore make their opposing errors balance and place
+the training signal closer to the unknown exact loss.
+
+For $0<\alpha<1$, the blend has no guaranteed order relative to the exact
+worst-case loss. Its useful role is to control the training trade-off: small
+$\alpha$ follows the attack more closely, while large $\alpha$ applies more of
+IBP's verifiability-inducing pressure. The MTL-IBP study calls the ability to
+span this range of training signals **expressivity**. In practice, $\alpha$ is
+tuned for the eventual trade-off between accuracy and certifiability. The
+study's experiments also show that the loss closest to the exact worst-case
+loss need not produce the best trained model.
 
 ## Training soundness and certificate soundness are separate
 
