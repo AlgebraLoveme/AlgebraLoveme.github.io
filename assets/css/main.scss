@@ -797,34 +797,23 @@ mjx-container {
   color: var(--accent);
 }
 
-.series-nav {
+.series-panel {
   margin-top: 1rem;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--border);
 }
 
 .series-nav__list {
   margin: 0;
   padding-left: 1.25rem;
-  font-size: 0.78rem;
-  line-height: 1.4;
+  list-style: decimal;
 }
 
 .series-nav__list li + li {
-  margin-top: 0.4rem;
-}
-
-.series-nav__list a {
-  color: var(--muted);
-  text-decoration: none;
-}
-
-.series-nav__list a:hover,
-.series-nav__list a:focus-visible {
-  color: var(--accent);
+  margin-top: 0.12rem;
 }
 
 .series-nav__current {
+  display: block;
+  padding: 0.28rem 0;
   color: var(--text);
   font-weight: 700;
 }

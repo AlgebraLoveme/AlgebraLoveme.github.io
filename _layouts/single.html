@@ -39,9 +39,9 @@ layout: default
             <summary>{{ page.toc_label | default: site.data.ui-text[site.locale].toc_label | default: "On this page" }}</summary>
             <nav class="toc">
               {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" %}
-              {% include series-list.html %}
             </nav>
           </details>
+          {% include series-list.html mobile=true %}
         {% endif %}
         {{ content }}
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
