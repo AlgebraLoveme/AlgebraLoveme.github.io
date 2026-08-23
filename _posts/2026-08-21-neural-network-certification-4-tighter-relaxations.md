@@ -1,5 +1,6 @@
 ---
 title: "Why Do Simple Bounds Lose Information? Neural Network Certification, Part 4"
+series_nav_title: "Why Do Simple Bounds Lose Information?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-4-tighter-relaxations/
 date: 2026-08-21

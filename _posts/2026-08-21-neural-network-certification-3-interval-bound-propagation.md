@@ -1,5 +1,6 @@
 ---
 title: "How Can Bounds Travel Through a Network? Neural Network Certification, Part 3"
+series_nav_title: "How Can Bounds Travel Through a Network?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-3-interval-bound-propagation/
 date: 2026-08-21

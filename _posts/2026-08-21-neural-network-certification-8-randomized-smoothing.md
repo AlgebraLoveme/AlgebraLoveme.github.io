@@ -1,5 +1,6 @@
 ---
 title: "How Can Random Noise Produce a Certificate? Neural Network Certification, Part 8"
+series_nav_title: "How Can Random Noise Certify?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-8-randomized-smoothing/
 date: 2026-08-21

@@ -1,5 +1,6 @@
 ---
 title: "Denoisers and Input-Dependent Noise: Neural Network Certification, Part 9"
+series_nav_title: "Denoisers and Input-Dependent Noise"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-9-adaptive-randomized-smoothing/
 date: 2026-08-21

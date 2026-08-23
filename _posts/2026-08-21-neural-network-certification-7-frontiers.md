@@ -1,5 +1,6 @@
 ---
 title: "Three Research Frontiers: Neural Network Certification, Part 7"
+series_nav_title: "Three Research Frontiers"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-7-frontiers/
 date: 2026-08-21

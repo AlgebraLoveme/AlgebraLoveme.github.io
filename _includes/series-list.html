@@ -35,7 +35,7 @@
       {%- for series_tag in ordered_series_tags -%}
         {%- assign series_posts = site.tags[series_tag] -%}
         {%- for series_post in series_posts -%}
-          {%- assign series_link_title = series_post.title | split: ': ' | first -%}
+          {%- assign series_link_title = series_post.series_nav_title | default: series_post.title -%}
           <li>
             {%- if series_post.url == page.url -%}
               <span class="series-nav__current" aria-current="page">{{ series_link_title }}</span>

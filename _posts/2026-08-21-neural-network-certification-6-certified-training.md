@@ -1,5 +1,6 @@
 ---
 title: "How Can Training Make Robustness Easier to Prove? Neural Network Certification, Part 6"
+series_nav_title: "How Can Training Help?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-6-certified-training/
 date: 2026-08-21

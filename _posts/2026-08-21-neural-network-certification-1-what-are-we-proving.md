@@ -1,5 +1,6 @@
 ---
 title: "Why Testing Is Not Proof: Neural Network Certification, Part 1"
+series_nav_title: "Why Testing Is Not Proof"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-1-what-are-we-proving/
 date: 2026-08-21

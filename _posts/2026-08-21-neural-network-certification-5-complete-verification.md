@@ -1,5 +1,6 @@
 ---
 title: "What Should We Do If the Bound Is Inconclusive? Neural Network Certification, Part 5"
+series_nav_title: "What If the Bound Is Inconclusive?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-5-complete-verification/
 date: 2026-08-21

@@ -1,5 +1,6 @@
 ---
 title: "What Would Count as a Proof? Neural Network Certification, Part 2"
+series_nav_title: "What Would Count as a Proof?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-2-writing-the-guarantee/
 date: 2026-08-21
