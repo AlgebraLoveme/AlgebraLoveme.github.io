@@ -210,27 +210,30 @@ inequalities. We now have a reason to keep only selected linear relationships.
 
 **DeepPoly** records a numerical interval, one affine (linear-plus-constant)
 lower expression, and one affine upper expression for each neuron. For an
-unstable ReLU, it keeps the upper chord and one of Triangle's two lower lines:
-$h\geq0$ or $h\geq z$.
+unstable ReLU, it stores exactly one of Triangle's two lower lines,
+$h\geq0$ or $h\geq z$, together with the upper chord.
 
-To compare those two choices, place them inside the sound family
+DeepPoly decides which lower bound to retain with its **min-area heuristic**.
+Both candidates share the same upper chord, so DeepPoly compares the area
+between each candidate and that chord. This area is a geometric proxy for how
+much spurious region the relaxation admits. A point in that region satisfies the
+relaxed inequalities while falling outside the exact ReLU graph. Choosing the
+smaller-area candidate heuristically reduces this spurious region and preserves
+more information.
+
+To derive which candidate has the smaller area, place both inside the sound
+family
 
 $$
 \lambda z_2\leq h_2,
 \qquad 0\leq\lambda\leq1.
 $$
 
-The two lines that DeepPoly considers are the endpoints: $\lambda=0$ gives
-$h_2\geq0$, and $\lambda=1$ gives $h_2\geq z_2$. The values between them make
-the selection rule easy to derive. DeepPoly stores only the selected endpoint.
-
-All of these lower lines are sound, but they do not give equally tight
-enclosures. Because they share the same upper chord, DeepPoly measures the area
-between each lower line and that chord. A smaller area admits fewer points that
-lie inside the relaxation but not on the exact ReLU graph, so it preserves more
-information. DeepPoly chooses the endpoint with the smaller area; this is its
-**min-area heuristic**. We will derive the concrete choice after seeing
-back-substitution.
+The two candidates are the endpoints: $\lambda=0$ gives $h_2\geq0$, and
+$\lambda=1$ gives $h_2\geq z_2$. DeepPoly stores the endpoint with the smaller
+area. The intermediate values of $\lambda$ provide one area formula that covers
+both endpoints. We will use that formula to derive the concrete switch rule
+after seeing back-substitution.
 
 ### Why the constraints do not multiply
 
