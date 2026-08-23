@@ -50,9 +50,9 @@
   <text x="215" y="144" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="600" fill="#1f7045">Sound IBP upper loss</text>
   <text x="215" y="167" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" fill="#376b50">0.832</text>
 
-  <path d="M 590 320 L 610 320 L 610 156 L 590 156" fill="none" stroke="#23804d" stroke-width="3"/>
-  <text x="585" y="192" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#1f7045">guaranteed</text>
-  <text x="585" y="212" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#1f7045">upper side</text>
+  <path d="M 620 320 L 640 320 L 640 156 L 620 156" fill="none" stroke="#23804d" stroke-width="3"/>
+  <text x="615" y="192" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#1f7045">guaranteed</text>
+  <text x="615" y="212" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#1f7045">upper side</text>
 
   <!-- Unsound proxy panel. -->
   <rect x="690" y="70" width="275" height="450" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
@@ -60,6 +60,7 @@
   <text x="827" y="133" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#65558f">no guaranteed ordering</text>
 
   <line x1="730" y1="326" x2="925" y2="326" stroke="#7c6bb3" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect x="735" y="291" width="184" height="31" rx="6" fill="#fbf8ff"/>
   <text x="827" y="316" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="600" fill="#5b4a91">exact worst-case loss</text>
 
   <line x1="827" y1="190" x2="827" y2="438" stroke="#8066b3" stroke-width="3" stroke-dasharray="7 6" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
@@ -68,6 +69,7 @@
   <circle cx="827" cy="405" r="9" fill="#a78bda"/>
   <text x="847" y="410" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" fill="#5b4a91">could be below</text>
 
-  <rect x="722" y="458" width="210" height="42" rx="9" fill="#efe8fb"/>
-  <text x="827" y="484" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#4d3b78">useful for learning, proof deferred</text>
+  <rect x="710" y="451" width="234" height="55" rx="9" fill="#efe8fb"/>
+  <text x="827" y="475" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#4d3b78">useful for training</text>
+  <text x="827" y="495" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="600" fill="#4d3b78">certify after training</text>
 </svg>
