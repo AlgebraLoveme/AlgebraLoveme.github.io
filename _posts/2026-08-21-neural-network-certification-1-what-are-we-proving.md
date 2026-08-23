@@ -178,9 +178,10 @@ inequalities for every input in $S_p(x_0,\epsilon)$.
 
 ## Series map
 
-Our target is now precise: prove the score inequality over the allowed set. The
-rest of the series follows one small April classifier from its first proof to
-the field's current research frontiers:
+Our target is now precise: prove the score inequality over the allowed set.
+Parts 2 through 6 follow one small April classifier from its first proof through
+certified training. Parts 7 through 9 broaden the view to theoretical frontiers
+and probabilistic certification:
 
 - **[Part 2 — What would count as a proof?]({{ '/2026-08-21-neural-network-certification-2-writing-the-guarantee/' | relative_url }})** We will build a tiny ReLU classifier
   and certify it by hand.

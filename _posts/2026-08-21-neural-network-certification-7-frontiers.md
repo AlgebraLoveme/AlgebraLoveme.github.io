@@ -151,17 +151,23 @@ behaviors. They enclose each **unstable ReLU**, whose input interval crosses
 zero, with linear inequalities one ReLU at a time. Even the tightest such shape
 for one ReLU can forget how it depends on other values in the same layer.
 
+Part 4's global linear program still retained the shared affine equations
+between neurons. Here **single-neuron** describes the nonlinear constraints it
+adds: each ReLU envelope is derived from that ReLU's scalar interval, so the
+envelope adds no new inequality that directly couples its output $c$ to a
+neighboring value such as $b$.
+
 Consider the network
 
 $$
 a=x_1-x_2,\qquad b=x_2,\qquad
-c=\operatorname{ReLU}(a),\qquad d=b,
+c=\operatorname{ReLU}(a),
 $$
 
 with output
 
 $$
-f=c+d=x_2+\operatorname{ReLU}(x_1-x_2)
+f=c+b=x_2+\operatorname{ReLU}(x_1-x_2)
 =\max(x_1,x_2).
 $$
 
@@ -178,7 +184,7 @@ At $x_1=x_2=1$, this permits $a=0$, $b=1$, and $c=0.5$. The relaxed output can
 therefore reach
 
 $$
-f=c+d=1.5,
+f=c+b=1.5,
 $$
 
 although the exact network output there is $1$. The ReLU envelope is optimal

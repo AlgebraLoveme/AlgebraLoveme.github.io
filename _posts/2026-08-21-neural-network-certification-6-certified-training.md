@@ -101,9 +101,15 @@ margin is $0.22$ and the loss is approximately $0.589$. Part 5's exact proof
 tells us that this attack happened to find a worst-case point.
 
 The sound DeepPoly lower margin $-0.02$ gives
-$L_{\mathrm{cert}}\approx0.703$. The coarser interval bound $-0.26$ gives the
-larger certified loss $0.832$. Both certified losses safely cover the exact
-worst-case loss.
+$L_{\mathrm{cert}}\approx0.703$. At the same radius, IBP gives
+$h_1\in[0.02,0.98]$ and $h_2\in[0,0.48]$, so its independent intervals yield
+
+$$
+m\geq0.2+0.02-0.48=-0.26.
+$$
+
+This coarser margin gives the larger certified loss $0.832$. Both certified
+losses safely cover the exact worst-case loss.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
@@ -152,16 +158,17 @@ learned classifier. The relationship between IBP bound tightness and this
 regularization is analyzed in
 [Understanding Certified Training with Interval Bound Propagation](https://arxiv.org/abs/2306.10426).
 
-An **unsound certified-training objective** uses a more targeted approximation
-$L_{\mathrm{proxy}}$. The guarantee
+An **unsound training surrogate for certification-oriented training** uses a
+more targeted approximation $L_{\mathrm{proxy}}$. The guarantee
 
 $$
 L_{\mathrm{proxy}}\geq L_{\mathrm{worst}}
 $$
 
-may fail during training. The word *unsound* describes this missing inequality.
-The missing inequality gives no ranking of the model's eventual clean or
-certified accuracy.
+may fail during training. The word *unsound* describes only this optimization
+signal: it cannot serve as a certificate. A separate sound verifier can still
+certify the trained network. The missing inequality gives no ranking of the
+model's eventual clean or certified accuracy.
 
 The design question becomes: **which part of the expensive full-region bound
 should a training surrogate replace?**
@@ -237,10 +244,10 @@ loss need not produce the best trained model.
 
 ## Training soundness and certificate soundness are separate
 
-The adjective *unsound* applies to the training objective. After training, we
-freeze the network and run a sound verifier over the full allowed region. Every
-property proved by that verifier has a valid certificate, regardless of the
-objective that produced the network.
+The distinction becomes operational when training ends: we freeze the network
+and run a sound verifier over the full allowed region. Every property proved by
+that verifier has a valid certificate, regardless of the objective that
+produced the network.
 
 The complete workflow has two stages:
 

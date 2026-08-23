@@ -222,20 +222,6 @@ relaxed inequalities while falling outside the exact ReLU graph. Choosing the
 smaller-area candidate heuristically reduces this spurious region and preserves
 more information.
 
-To derive which candidate has the smaller area, place both inside the sound
-family
-
-$$
-\lambda z_2\leq h_2,
-\qquad 0\leq\lambda\leq1.
-$$
-
-The two candidates are the endpoints: $\lambda=0$ gives $h_2\geq0$, and
-$\lambda=1$ gives $h_2\geq z_2$. DeepPoly stores the endpoint with the smaller
-area. The intermediate values of $\lambda$ provide one area formula that covers
-both endpoints. We will use that formula to derive the concrete switch rule
-after seeing back-substitution.
-
 ### Why the constraints do not multiply
 
 Suppose DeepPoly has summarized a hidden value $h$ with two affine expressions:
@@ -292,15 +278,14 @@ $$
 
 This finishes the certificate.
 
-The lower-line rule is useful for other output expressions, so its geometric
-derivation remains available below as an optional deeper step.
+### Optional: How DeepPoly chooses its lower ReLU line
+
+April's certificate needed only the upper bound on $h_2$. Other output
+expressions can depend on its lower bound, so the geometric derivation of
+DeepPoly's min-area switch rule remains available as a deeper step.
 
 <details markdown="1">
-<summary>Why does the min-area rule select only 0 or 1?</summary>
-
-We postponed the min-area calculation because April's certificate needed only
-the upper bound on $h_2$. A different margin can depend on its lower bound, so
-we now derive how DeepPoly chooses between $h_2\geq0$ and $h_2\geq z_2$.
+<summary>Derive DeepPoly's min-area switch rule</summary>
 
 For any unstable ReLU with $z\in[\ell,u]$, every slope
 $\lambda\in[0,1]$ gives a sound lower line:
@@ -409,19 +394,21 @@ spent:
 1. Run IBP forward to obtain an interval $[\ell,u]$ for every hidden
    pre-activation.
 2. Use those intervals to choose sound linear ReLU relaxations.
-3. Run CROWN-style back-substitution only for the final class margins.
+3. Run the same sign-directed affine back-substitution used above only for the
+   final class margins.
 
 For April's one-hidden-layer network, the IBP pass already obtains the exact
 pre-activation intervals $z_1\in[0.1,0.9]$ and $z_2\in[-0.4,0.4]$.
 CROWN-IBP therefore builds the same ReLU lines and repeats the margin
-calculation above, giving $m\geq0.1$.
+calculation above, giving $m\geq0.1$. This equality is specific to April's
+shallow network, where IBP computes exact intervals for the first affine layer.
 
 The forward IBP pass is cheap because it carries two numbers per hidden value.
-It also discards relationships between hidden values before the backward pass
-begins. The final CROWN pass retains affine relationships while bounding each
-margin, but its ReLU relaxations are built from the coarser IBP intervals. The
-result remains sound and can admit more spurious values than a calculation that
-tightens every intermediate bound through linear back-substitution.
+In a deeper network, its intervals may already combine incompatible hidden
+extrema and discard their relationships. The final CROWN pass uses those
+intervals to construct its ReLU lines and cannot retroactively tighten them.
+The result remains sound and can admit more spurious values than a calculation
+that tightens every intermediate bound through linear back-substitution.
 
 This exchange of precision for speed becomes especially useful in
 [certified training]({{ '/2026-08-21-neural-network-certification-6-certified-training/' | relative_url }}),

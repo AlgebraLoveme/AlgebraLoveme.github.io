@@ -246,12 +246,12 @@ began with a gap between testing some inputs and proving a claim for every
 allowed input. The [series map]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/#series-map' | relative_url }})
 now connects two ways to close that gap.
 
-Deterministic verification propagates sound bounds through a network and uses
-branch-and-bound when one enclosure is inconclusive. Randomized smoothing
-certifies a vote-based classifier through probability bounds. Adaptive methods
-add one shared obligation: every choice that can affect the prediction—such as
-a ReLU phase, denoiser, or noise scale—must remain covered by the proof.
+Deterministic verification covers every possible ReLU phase with sound bounds
+and, when needed, branches. Denoised smoothing places a fixed denoiser inside
+the base mapping covered by the smoothing theorem. Input-dependent smoothing
+adds an adaptive selector, whose local constancy requires its own certificate
+before the selected noise scale or expert can be used.
 
 Neural network certification is therefore a discipline of complete coverage.
 The mathematical tools change, while the central question remains: **which
-allowed inputs and decisions does this argument prove safe?**
+allowed inputs and model behaviors does this argument cover?**

@@ -35,6 +35,11 @@ values. Our teaching model receives only two normalized features:
 - $x_1$ measures the response to April's pointed ears.
 - $x_2$ measures the response to April's fluffy coat.
 
+From Parts 2 through 6, $x$ denotes this artificial two-dimensional feature
+vector, and every certificate concerns this toy feature-space classifier. A
+pixel-space certificate for the photograph would also need to analyze the full
+computation that maps pixels to these features.
+
 For the original photo, both feature values are $0.5$, so
 
 $$
@@ -223,7 +228,7 @@ this promise to search and timeouts.
 
 ## April's specification, in one box
 
-The next three posts will use exactly the same classifier. Here is the complete
+The next four posts will use exactly the same classifier. Here is the complete
 specification in one place:
 
 | Piece | April classifier |

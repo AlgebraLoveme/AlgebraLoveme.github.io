@@ -186,6 +186,13 @@ The practical certificate therefore says:
 > Over the Monte Carlo sampling, the chance of returning an invalid
 > label-radius pair is at most $\alpha$.
 
+These samples play a different role from attack samples. They estimate a
+probability under the specified Gaussian distribution. A statistical
+confidence bound on that probability, combined with the analytic smoothing
+theorem, covers every adversarial perturbation in the certified ball. The
+remaining failure probability $\alpha$ concerns the Monte Carlo certification
+procedure.
+
 The standard certification procedure uses many noisy samples, computes the
 confidence bound, and either returns a radius or **abstains**. A narrow vote
 margin may identify the winning class while providing insufficient statistical
@@ -218,9 +225,10 @@ the training signal and the final evaluation guarantee are separate objects.
 The training strategies above need an evaluation measure that tells us whether
 their changed vote probabilities improve robustness across the dataset.
 
-Each correctly classified input receives a certified radius. A common summary
-is the **average certified radius** (ACR): add those radii, using radius zero for
-an incorrect input, and divide by the dataset size.
+For each dataset input, the smoothed classifier may return the correct label,
+an incorrect label, or abstain. A common summary is the **average certified
+radius** (ACR): add the radii of correctly classified inputs, assign radius zero
+to misclassified or abstained inputs, and divide by the dataset size.
 
 The average hides how the radii are distributed. More subtly, the ideal radius
 
