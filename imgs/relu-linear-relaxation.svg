@@ -22,6 +22,7 @@
     <circle cx="155" cy="382" r="6" stroke="#2f6fad"/>
     <circle cx="595" cy="134" r="6" stroke="#2f6fad"/>
   </g>
+  <path d="M 545 106 L 565 151" fill="none" stroke="#2f6fad" stroke-width="1.8"/>
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#252a34">
     <text x="674" y="389" font-style="italic">z₂</text>
     <text x="386" y="58" font-style="italic">h₂</text>
@@ -30,7 +31,7 @@
     <text x="583" y="414">0.4</text>
     <text x="341" y="264">0.2</text>
     <text x="341" y="140">0.4</text>
-    <text x="465" y="204" fill="#2f6fad">upper line</text>
+    <text x="538" y="101" text-anchor="end" fill="#2f6fad">upper line</text>
     <text x="456" y="337" fill="#111827">ReLU</text>
   </g>
   <text x="360" y="32" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Triangle relaxation for ReLU on [−0.4, 0.4]</text>
