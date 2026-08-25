@@ -67,10 +67,10 @@ An **interval-certified approximator** must control two errors:
 
 - **Prediction error:** $n(t)$ stays close to $s(t)$ at every input $t$.
 - **Range error:** the lower and upper endpoints of the IBP interval
-  $n^\#(B)$ stay close to the endpoints of $S(B)$ for every input interval
+  $n^{\sharp}(B)$ stay close to the endpoints of $S(B)$ for every input interval
   $B$.
 
-The notation $n^\#(B)$ means that we start from $B$ and run the interval rules
+The notation $n^{\sharp}(B)$ means that we start from $B$ and run the interval rules
 from [Part 3]({{ '/2026-08-21-neural-network-certification-3-interval-bound-propagation/' | relative_url }})
 through $n$. The resulting interval is sound: it contains every value that $n$
 can actually produce on $B$. Small prediction error makes the network accurate.
