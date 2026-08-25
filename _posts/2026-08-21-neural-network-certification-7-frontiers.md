@@ -10,64 +10,77 @@ written_at: 2026-08-22
 tags: [neural networks, certification, theory, abstract interpretation, "Certification Series: 07"]
 mathjax: true
 toc: true
-excerpt: "Three surprising results separate what certifiable networks can represent, what training can find, and what a verifier can prove."
+excerpt: "Three surprising results separate which functions certifiable networks can approximate, which models training can find, and which facts a verifier can prove."
 ---
 
-## April reaches the edge of our map
+## April's classifier leads to three different questions
 
-The first six posts followed one small classifier for April the Siberian cat.
-We stated a robustness claim, propagated bounds, tightened them, split an
-inconclusive region, and trained networks whose robustness is easier to prove.
+The first six posts built a certification pipeline around one small classifier
+for April the Siberian cat. We stated a robustness property, propagated and
+tightened bounds, split inconclusive cases, and trained models whose robustness
+is easier to prove.
 
-Those tools raise a deeper question:
+That pipeline can encounter three fundamentally different obstacles:
 
-**What limits certified neural networks: what a model can represent, what
-training can find, or what a verifier can prove?**
+1. **Exist:** Can we choose a network whose predictions and certified bounds
+   approximate the behavior we want as closely as needed?
+2. **Find:** Can a training algorithm reach accurate and certifiable weights?
+3. **Prove:** For a fixed network, can a verifier recover the relationships
+   needed to prove its exact output bounds?
 
-These are three different questions:
+The first and third questions are especially easy to conflate. The existence
+question lets us choose a suitable network and an arbitrarily small positive
+error tolerance. The proof question keeps the network fixed and asks for exact
+bounds. Training sits between them: a useful network may exist even when
+optimization cannot find it.
 
-1. **Exist:** Is there a network with the behavior and certificate we want?
-2. **Find:** Can a training algorithm reach such a network?
-3. **Prove:** Can the verifier preserve enough information to certify it?
-
-The distinction matters because the answers can point in different directions.
-Interval bound propagation (IBP) is expressive enough in principle to
-approximate every continuous target on a compact input domain: a closed and
-bounded region such as a box.
-A tighter relaxation can nevertheless produce a worse model during training.
-Multi-neuron relaxations can prove relationships that every single-neuron
-relaxation misses. A further barrier appears when a verifier repeatedly keeps
-only convex information about small parts of a network.
+Each question also challenges a plausible intuition. IBP looks too coarse to
+support both accurate predictions and arbitrarily precise interval bounds. A
+tighter bound seems like it should provide a better training objective. The
+tightest possible relaxation of every ReLU seems like it should be enough to
+bound the whole network exactly. The three frontiers below test these
+intuitions one at a time.
 
 ## Frontier 1: Can an IBP-certified network approximate any continuous function?
 
-The ordinary universal approximation theorem says that sufficiently large
-neural networks can approximate any continuous function on a closed and
-bounded input region.
-For certification, matching the function at individual inputs is only half the
-job. We also propagate an entire input region through the network.
+Part 3 showed why the first intuition is reasonable. IBP propagates a separate
+interval for each value and loses relationships between values. Those lost
+relationships can make its bounds widen through the network. Could this
+coarseness prevent any network from being both accurate and tightly bounded by
+IBP, regardless of its size?
+
+The ordinary universal approximation theorem gives only the accuracy half of
+the answer. It says that sufficiently large neural networks can approximate
+any continuous function on a compact input domain. In ordinary Euclidean
+space, a compact domain is closed and bounded, such as an input box. A
+certificate also needs useful bounds for every allowed input region inside
+that domain.
 
 Suppose brightness is summarized by one number $t$, and $s(t)$ is April's cat
-score. For an interval $B=[t_1,t_2]$, the exact output range is
+score. For an interval $B=[t_1,t_2]$, the exact range of target scores is
 
 $$
-s(B)=\{s(t):t\in B\}.
+S(B)=\left[\min_{t\in B}s(t),\ \max_{t\in B}s(t)\right].
 $$
 
-An ordinary approximating network $n$ should make $n(t)$ close to $s(t)$ for
-every $t$. An **interval-certified approximator** must additionally make the
-IBP range $n^\#(B)$ close to the true range $s(B)$. IBP carries lower and upper
-intervals through each layer. Its bounds are **sound**: they contain every
-value the network can actually produce. The symbol $n^\#(B)$ means: run those
-interval rules from [Part 3]({{ '/2026-08-21-neural-network-certification-3-interval-bound-propagation/' | relative_url }})
-through $n$, starting from $B$.
+An **interval-certified approximator** must control two errors:
+
+- **Prediction error:** $n(t)$ stays close to $s(t)$ at every input $t$.
+- **Range error:** the lower and upper endpoints of the IBP interval
+  $n^\#(B)$ stay close to the endpoints of $S(B)$ for every input interval
+  $B$.
+
+The notation $n^\#(B)$ means that we start from $B$ and run the interval rules
+from [Part 3]({{ '/2026-08-21-neural-network-certification-3-interval-bound-propagation/' | relative_url }})
+through $n$. The resulting interval is sound: it contains every value that $n$
+can actually produce on $B$. Small prediction error makes the network accurate.
+Small range error makes its simple IBP certificate precise.
 
 The [universal approximation theorem for interval-certified ReLU
-networks](https://arxiv.org/abs/1909.13846) says that, for every continuous
-$s$ and every desired error tolerance, a ReLU network exists that satisfies
-both requirements. The pointwise curve can be accurate, and its simple IBP
-bounds can be arbitrarily close to the best output range of $s$ on each input
-box.
+networks](https://arxiv.org/abs/1909.13846) answers the question affirmatively.
+For every continuous target $s$ and every desired error tolerance, a ReLU
+network exists that satisfies both requirements. Its predictions approximate
+$s$, and its IBP intervals approximate the exact target ranges.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
@@ -76,86 +89,98 @@ box.
   <figcaption>Interval approximation asks the curve and its propagated ranges to agree with the target.</figcaption>
 </figure>
 
-This result is stronger than saying that IBP happens to work on some friendly
-network. It says that the class of interval-certifiable networks is rich enough
-to represent any continuous target to arbitrary precision. A later
-[interval universal approximation theorem](https://arxiv.org/abs/2007.06093)
-extends the result from ReLU to a broad family of activation functions.
+The theorem settles the existence question. It allows us to choose a network
+adapted to the target and the desired tolerance. Frontier 3 will instead keep a
+network fixed and ask whether a relaxation can recover its exact bounds. A
+later [interval universal approximation
+theorem](https://arxiv.org/abs/2007.06093) extends the existence result from
+ReLU to a broad family of activation functions.
 
 ## Existence leads to a construction question
 
-The theorem begins with “there exists.” Training begins with random weights and
-must produce a useful network with finite computation.
+An existence theorem removes one possible obstacle: the class of
+IBP-certifiable networks is rich enough. A training algorithm still begins
+with an architecture and initial weights, then must reach a useful network with
+finite computation.
 
-The generalized interval-approximation result studies this gap directly. Its
-constructive proof grows exponentially with the approximation domain, and the
-paper establishes hardness for constructing networks whose interval ranges are
-arbitrarily precise. The existence theorem therefore resolves the
-representation question while leaving a concrete optimization challenge:
+The generalized interval-approximation study makes this gap concrete. Its
+proof constructs a network by dividing the input domain into a grid. As the
+input dimension grows, the number of grid regions grows exponentially. The
+paper also proves, under standard complexity assumptions, that no efficient
+general construction can produce arbitrarily precise interval approximators.
+Universal approximation therefore leaves an algorithmic question:
 
 **How do we reliably find compact, accurate networks that IBP can certify?**
 
-This is where Part 6's training objectives return. A bound participates in
-training thousands of times, so its behavior as the weights move also matters,
-alongside its value at one finished network.
+This is where Part 6's training objectives return. During certified training,
+a bound is evaluated after every update. Its value at one finished network
+matters for verification. Its behavior while the weights move matters for
+optimization.
 
-## Frontier 2: Why can a tighter bound train a worse certifiable model?
+## Frontier 2: Why can a tighter training bound produce a worse model?
 
-Fix a trained network. If relaxation $A$ gives a smaller sound upper bound than
-relaxation $B$, then $A$ is more precise for that network. It can only help the
-verification decision.
+Fix a trained network. Suppose relaxation $A$ always gives a smaller sound
+upper bound than relaxation $B$ for the violation we want to rule out. Then
+$A$ is tighter: any case proved safe by $B$ is also proved safe by $A$.
 
-During training, the weights are not fixed. Each gradient step changes the
-network and therefore changes the bound used as the next loss. The optimizer
-must follow a whole surface
+This fixed-network fact suggests a natural training strategy. Use the tighter
+relaxation as the loss because it follows the true worst-case value more
+closely. The reasoning misses one change: training does not keep the network
+fixed.
+
+Each gradient step changes the weights and therefore changes the next bound.
+The optimizer must navigate the whole surface
 
 $$
 \theta\longmapsto L_{\mathrm{cert}}(\theta),
 $$
 
-where $\theta$ contains the weights. Tightness describes the pointwise vertical
-gap between this certified loss and the exact worst-case loss. Training also
-depends on how the surface changes from one nearby $\theta$ to another.
+where $\theta$ contains all trainable weights. Tightness measures the vertical
+gap between this certified loss and the exact worst-case loss at one value of
+$\theta$. Optimization also depends on how the surface changes between nearby
+weight values.
 
-The [paradox of certified training](https://arxiv.org/abs/2102.06700) is that
-loose interval-based training often produces networks with higher certified
-robustness than training with tighter relaxations. The study identifies two
-properties that help explain the result:
+The [paradox of certified training](https://arxiv.org/abs/2102.06700) is the
+observed reversal of the fixed-network intuition: loose interval-based
+training often produces networks with higher certified robustness than
+training with tighter relaxations. The study identifies two properties beyond
+tightness that help explain the result:
 
-- **Continuity:** a small change in the weights should not make the training
-  bound jump abruptly.
-- **Sensitivity:** the bound should not become algebraically nonlinear and
-  complicated too quickly as the weights change. High sensitivity can create
-  an optimization landscape with many local optima and saddle points.
+- **Continuity:** nearby weights should produce nearby bound values. A jump
+  gives the current gradient no information about the landscape across the
+  discontinuity.
+- **Sensitivity:** this measures how algebraically complicated the bound
+  becomes as the weights change. High sensitivity can create high-degree
+  rational loss surfaces with additional local optima and saddle points.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-certified-training-paradox.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="Two panels compare verification and training. At fixed weights a tighter interval sits closer to the exact loss. Across changing weights a schematic loose loss varies smoothly while a tighter loss has abrupt and sensitive changes that make gradient steps harder to follow.">
   </div>
-  <figcaption>Tightness answers a fixed-network question; continuity and sensitivity shape the training journey.</figcaption>
+  <figcaption>Tightness answers a fixed-network question. Continuity and sensitivity shape the training journey.</figcaption>
 </figure>
 
-At fixed weights, a tighter sound bound remains better for verification. The
-training result adds a second criterion: ranking optimization objectives
-requires more than precision. A promising certified-training loss must combine
-useful precision with dynamics that gradient-based optimization can follow.
+At fixed weights, a tighter sound bound remains better for verification.
+During training, the optimizer must also be able to follow the bound as the
+weights change. A useful certified-training objective therefore needs both
+precision and navigable optimization dynamics.
 
 Training addressed whether we can find good weights. Now freeze the weights
 again and ask what information a verifier can retain.
 
-## Frontier 3: What can one-neuron-at-a-time reasoning express?
+## Frontier 3: Why can the tightest per-ReLU relaxation still miss the exact bound?
 
 Triangle and DeepPoly from [Part 4]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/' | relative_url }})
 use a **convex relaxation**: a tractable convex superset of the network's exact
-behaviors. They enclose each **unstable ReLU**, whose input interval crosses
-zero, with linear inequalities one ReLU at a time. Even the tightest such shape
-for one ReLU can forget how it depends on other values in the same layer.
+behaviors. For every **unstable ReLU**, whose input interval crosses zero, they
+add linear inequalities that enclose the ReLU graph. The tightest possible
+envelope for one ReLU seems like the best local choice. The question is whether
+locally tight choices produce a globally exact bound.
 
-Part 4's global linear program still retained the shared affine equations
-between neurons. Here **single-neuron** describes the nonlinear constraints it
-adds: each ReLU envelope is derived from that ReLU's scalar interval, so the
-envelope adds no new inequality that directly couples its output $c$ to a
-neighboring value such as $b$.
+The verifier still retains the shared affine equations between neurons. The
+term **single-neuron relaxation** refers to the nonlinear envelope added at
+each ReLU: that envelope is derived only from the ReLU's scalar input interval.
+It adds no new inequality coupling the ReLU output to a neighboring value.
 
 Consider the network
 
@@ -171,7 +196,8 @@ f=c+b=x_2+\operatorname{ReLU}(x_1-x_2)
 =\max(x_1,x_2).
 $$
 
-Let $(x_1,x_2)\in[0,1]^2$. The exact output range is plainly $[0,1]$.
+Let $(x_1,x_2)\in[0,1]^2$. Because $f$ is the maximum of two numbers in
+$[0,1]$, its exact output range is $[0,1]$.
 
 A single-neuron Triangle relaxation sees only $a\in[-1,1]$ when it relaxes
 $c=\operatorname{ReLU}(a)$. Its upper line is
@@ -180,27 +206,30 @@ $$
 c\leq\frac{a+1}{2}.
 $$
 
-At $x_1=x_2=1$, this permits $a=0$, $b=1$, and $c=0.5$. The relaxed output can
-therefore reach
+At $x_1=x_2=1$, the exact ReLU value is $c=\operatorname{ReLU}(0)=0$.
+The Triangle constraints also permit the spurious value $c=0.5$. Pairing it
+with $a=0$ and $b=1$ makes the relaxed output reach
 
 $$
 f=c+b=1.5,
 $$
 
-although the exact network output there is $1$. The ReLU envelope is optimal
-for $c$ as a function of $a$ alone. The missing fact is the relationship with
-$b=x_2$.
+although the exact network output there is $1$. The envelope is optimal for
+$c$ as a function of $a$ alone. Its spurious value survives because the
+envelope does not record how $c$ and $b=x_2$ depend on the same inputs.
 
-## Multi-neuron relaxations remember joint geometry
+## Joint constraints remove the spurious value
 
-A multi-neuron relaxation studies a group of values together. For the same
-network, the joint convex hull supplies two additional constraints:
+A multi-neuron relaxation derives constraints for a group of values together.
+For the same network, joint reasoning supplies two valid inequalities:
 
 $$
 c\leq 1-b,\qquad c\leq a+b.
 $$
 
-The first immediately gives
+Their meaning is visible from the original inputs. Since $x_1\leq1$, we have
+$c=\max(x_1-b,0)\leq1-b$. Since $x_2\geq0$, we also have
+$c=\max(x_1-x_2,0)\leq x_1=a+b$. The first inequality immediately gives
 
 $$
 f=c+b\leq 1.
@@ -213,41 +242,47 @@ multi-neuron relaxation recovers the exact range $[0,1]$.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/max-single-vs-multi-relaxation.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="The max of two inputs is encoded by a ReLU network. A single-neuron Triangle constraint permits a relaxed output of 1.5 at input 1,1. A joint constraint between the ReLU output and the second input removes that impossible value and proves the exact upper bound 1.">
   </div>
-  <figcaption>The ReLU envelope is locally tight; the joint relationship supplies the missing proof.</figcaption>
+  <figcaption>The ReLU envelope is locally tight. The joint relationship supplies the missing proof.</figcaption>
 </figure>
 
-This example comes from the current
-[expressiveness analysis of multi-neuron convex
-relaxations](https://arxiv.org/abs/2410.06816). It establishes a genuine
-separation: no single-neuron relaxation can exactly bound every ReLU network
-encoding the two-dimensional max function, while a suitable multi-neuron
-relaxation can bound the construction above exactly. Practical methods such as
-[PRIMA](https://arxiv.org/abs/2103.03638) approximate convex hulls—the smallest
-convex sets containing all exact feasible points—over small neuron groups.
+The [expressiveness analysis of multi-neuron convex
+relaxations](https://arxiv.org/abs/2410.06816) proves that this example reflects
+a genuine separation. No single-neuron relaxation can exactly bound every ReLU
+network encoding the two-dimensional maximum, while a suitable multi-neuron
+relaxation bounds the construction above exactly.
 
-## How much joint information is enough?
+Computing the joint convex hull of an entire network can be expensive.
+Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) therefore
+approximate convex hulls over small groups of neurons. The convex hull is the
+smallest convex set containing all exact feasible points. This raises the next
+question: would larger groups eventually make the verifier exact?
 
-Joint reasoning is more expressive. The same study proves a precise boundary:
-no verifier that repeatedly convexifies only a bounded-size neuron group or a
-bounded window of consecutive layers is exact for every network. The global
-convex hull would give exact scalar bounds, but computing it is generally
-intractable.
+## Can larger neuron groups make the verifier exact?
 
-The paper then shows why multi-neuron reasoning still changes what is possible.
-It gives an **existential completeness** result: an exact construction is
-guaranteed to exist, although the theorem does not supply an efficient way to
-find it. On a fixed input domain, one can transform a network without changing
-its function so an **optimal layerwise relaxation**—the tightest convex set
-available at every layer—becomes exact. Finding those tightest sets may still
-be intractable.
-This leaves the computational cost of exactness unresolved. The study makes
-that cost concrete by comparing the construction with **branch-and-bound**,
-which splits activation or input cases and verifies every resulting
-subproblem. For its nested-max encoding in $d$ dimensions, the optimal
-layerwise multi-neuron construction uses $O(d)$ constraints, meaning that the
-count grows linearly with $d$, in one subproblem. An exact DeepPoly
-branch-and-bound proof uses
-$2^{d-1}$ activation-pattern subproblems.
+The same study proves a universal convex barrier. Even the optimal convex
+description of every neuron in each complete layer is inexact for some
+networks. Extending the relaxation across any fixed finite number of
+consecutive layers still cannot guarantee exactness. A larger local window
+preserves more relationships, but spurious points can reappear when the
+verifier convexifies and propagates information through the remaining layers.
+
+Multi-neuron reasoning nevertheless creates two routes to exact bounds that
+single-neuron reasoning cannot match as efficiently:
+
+1. **Transform the network.** Add carefully designed ReLU neurons that preserve
+   the original function while carrying important input relationships forward.
+   The paper proves that a polynomial-size transformation exists for which an
+   optimal layerwise multi-neuron relaxation becomes exact.
+2. **Partition the input.** Divide the input region into convex pieces whose
+   reachable sets remain convex through the network, then bound every piece.
+   This reconnects multi-neuron relaxations with the divide-and-conquer method
+   from [Part 5]({{ '/2026-08-21-neural-network-certification-5-complete-verification/' | relative_url }}).
+
+The nested maximum makes the potential difference concrete. For
+$\max(x_1,\ldots,x_d)$ on $[0,1]^d$, the paper's multi-neuron construction
+needs one subproblem and a number of constraints that grows linearly with $d$.
+An exact DeepPoly branch-and-bound proof must instead separate all
+$2^{d-1}$ activation patterns for this construction.
 
 The frontier is therefore more precise than “larger groups are tighter.” The
 research question is:
@@ -255,20 +290,22 @@ research question is:
 **Which joint relationships should a verifier preserve, and how can it expose
 them without paying for every possible relationship?**
 
-## Put the three frontiers on one map
+## Put existence, training, and proof back together
 
-We can now answer the opening question one verb at a time.
+The three frontiers describe different stages of the same pipeline.
 
 | Question | What we learned | Research direction |
 | --- | --- | --- |
-| Can a certifiable model **exist**? | Interval-certified networks can approximate every continuous target on a compact input domain. | Construct interval-friendly architectures efficiently. |
-| Can training **find** it? | Tightness, continuity, and sensitivity jointly shape certified training. | Design precise objectives with navigable optimization surfaces. |
-| Can a verifier **prove** it? | Joint relaxations express facts that one-neuron-at-a-time relaxations lose, while convexity leaves a general barrier. | Select useful groups, transformations, and partitions at manageable cost. |
+| Can a suitable certifiable model **exist**? | For any continuous target and error tolerance, a network exists whose predictions and IBP ranges achieve that tolerance. | Construct compact interval-friendly architectures efficiently. |
+| Can training **find** one? | Bound tightness, continuity, and sensitivity jointly shape the optimization result. | Design precise objectives with navigable loss surfaces. |
+| Can a verifier **prove exact bounds for a fixed model**? | Joint relaxations preserve relationships that single-neuron relaxations lose, while every fixed local convex scope has a general barrier. | Select useful groups, transformations, and partitions at manageable cost. |
 
-Existence belongs to the network class. Finding belongs to optimization.
-Proving belongs to the verifier's abstraction. A new result in neural network
-certification becomes easier to understand once we ask which frontier it moves.
+Existence permits a carefully chosen network and an approximation tolerance.
+Training asks for an algorithm that reaches useful weights. Exact verification
+fixes those weights and asks whether the abstraction preserves enough
+information. Keeping these quantifiers separate prevents progress at one stage
+from being mistaken for progress at all three.
 
-Part 8 will approach certification through a different mathematical object:
-the probability that April's label wins when random noise is added to the
-input.
+Every certificate so far has propagated deterministic bounds over an allowed
+input region. Part 8 takes a probabilistic route: add random noise, measure how
+often April's label wins, and convert that probability into a certified radius.

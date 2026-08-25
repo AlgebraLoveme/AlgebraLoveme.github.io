@@ -21,6 +21,6 @@
     <text x="338" y="388" text-anchor="middle" font-size="15" fill="#1f437e">σ<tspan baseline-shift="sub" font-size="11">small</tspan></text>
     <text x="748" y="388" text-anchor="middle" font-size="15" fill="#49397f">σ<tspan baseline-shift="sub" font-size="11">large</tspan></text>
     <rect x="250" y="447" width="500" height="45" rx="20" fill="#f5e5bf" stroke="#b9822f" stroke-width="2"/>
-    <text x="500" y="476" text-anchor="middle" font-size="17" font-weight="650" fill="#76511f">standard RS chooses one global σ for every input</text>
+    <text x="500" y="476" text-anchor="middle" font-size="17" font-weight="650" fill="#76511f">standard smoothing uses one global σ for every input</text>
   </g>
 </svg>

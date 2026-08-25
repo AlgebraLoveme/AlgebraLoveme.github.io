@@ -48,9 +48,9 @@ ways we have decided to allow. This raises two concrete questions:
 
 For April's photo, we may require the predicted class to remain **cat** under a
 specified amount of image noise. Another task might allow small rotations rather
-than pixel noise, or require a numerical output to remain within a safe range
-rather than preserving a class label. The word *robust* is incomplete until we
-answer both questions.
+than pixel noise. A regression task might instead require a numerical output to
+remain within a safe range. The word *robust* is incomplete until we answer both
+questions.
 
 ## From robustness to adversarial robustness
 
@@ -65,11 +65,8 @@ An allowed image that changes the prediction is an **adversarial example**.
 Research on [adversarial examples](https://arxiv.org/abs/1312.6199) showed that
 small, carefully chosen perturbations could change neural network predictions.
 The [robust optimization viewpoint](https://arxiv.org/abs/1706.06083) frames
-robustness as performance under the worst allowed perturbation rather than under
-average noise.
-
-The right panel below is a conceptual illustration with visible noise, making a
-pixel perturbation easy to see while April remains recognizable.
+robustness through performance under the worst allowed perturbation. This
+worst-case target leads directly to adversarial attacks.
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-start;">
   <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
@@ -82,7 +79,7 @@ pixel perturbation easy to see while April remains recognizable.
     <a href="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}">
       <img src="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}" alt="Conceptual illustration of April's photograph with fine multicolored pixel noise.">
     </a>
-    <figcaption><strong>Conceptual perturbation.</strong> Visible noise illustrates a modified input rather than the output of a classifier attack.</figcaption>
+    <figcaption><strong>Conceptual perturbation.</strong> Visible noise illustrates a modified input. No classifier attack generated this image.</figcaption>
   </figure>
 </div>
 
@@ -120,12 +117,12 @@ A standard gradient-based attack is [projected gradient descent
 (PGD)](https://arxiv.org/abs/1706.06083). Despite the name, PGD takes steps that
 *increase* the classification loss when its goal is to make any class outrank
 cat. The word *projected* describes how every step is returned to the allowed
-set. Starting from April's image—or from a random point inside that set—PGD
+set. Starting from April's image or from a random point inside that set, PGD
 repeatedly:
 
 1. computes the gradient of the loss with respect to the pixels, which measures
-   how the loss changes with each pixel;
-2. changes the pixels in a direction that increases the loss;
+   how the loss changes with each pixel.
+2. changes the pixels in a direction that increases the loss.
 3. projects the modified image back into $S_p(x_0,\epsilon)$.
 
 For an $\ell_\infty$ threat model, the projection clips each pixel so that it
@@ -144,10 +141,11 @@ Two outcomes are possible:
 ## Why attack-based testing is incomplete
 
 Why can the second outcome not prove robustness? Within $S_p(x_0,\epsilon)$,
-each of the $d$ pixel values may vary, and those choices combine. For example, a
-$224\times224$ RGB input has $d=150{,}528$ pixel values. In the real-valued
-model, the set contains infinitely many points. A digital system has only
-finitely many pixel values, but still far too many arrays to enumerate.
+each of the $d$ pixel values may vary, and those choices combine. A
+$224\times224$ RGB input has three color values at every pixel, so
+$d=224\cdot224\cdot3=150{,}528$. In the real-valued model, the set contains
+infinitely many points. A digital system has only finitely many pixel values,
+but still far too many arrays to enumerate.
 
 A stronger attack may find an adversarial input that an earlier attack missed.
 If an attack finds no counterexample, none of the inputs it examined violated
@@ -196,8 +194,9 @@ and probabilistic certification:
   the worst-case loss between attacks and certificates, then distinguish sound
   bound-based objectives from unsound training surrogates.
 - **[Part 7 — What are the frontiers of neural network certification?]({{ '/2026-08-21-neural-network-certification-7-frontiers/' | relative_url }})** We will
-  separate what certifiable networks can represent, what training can find,
-  and what single- and multi-neuron relaxations can prove.
+  separate which functions certifiable networks can approximate, which models
+  training can find, and which exact bounds a verifier can prove for a fixed
+  network.
 - **[Part 8 — How can random noise produce a certificate?]({{ '/2026-08-21-neural-network-certification-8-randomized-smoothing/' | relative_url }})** We will construct a
   randomized-smoothed classifier, derive its certified radius, then examine
   training objectives and why average certified radius can mislead.

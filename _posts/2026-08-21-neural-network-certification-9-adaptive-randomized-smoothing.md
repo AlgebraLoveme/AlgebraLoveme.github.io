@@ -1,6 +1,6 @@
 ---
-title: "Denoisers and Input-Dependent Noise: Neural Network Certification, Part 9"
-series_nav_title: "Denoisers and Input-Dependent Noise"
+title: "How Can Randomized Smoothing Adapt? Neural Network Certification, Part 9"
+series_nav_title: "How Can Randomized Smoothing Adapt?"
 author_profile: true
 permalink: /2026-08-21-neural-network-certification-9-adaptive-randomized-smoothing/
 date: 2026-08-21
@@ -92,7 +92,7 @@ composed classifier $f\circ D$ across the Gaussian cloud.
 This makes the source of the denoiser a practical design choice. Can we reuse a
 pretrained model that already knows how to remove image noise?
 
-## Diffusion models provide powerful off-the-shelf denoisers
+## Reuse an off-the-shelf denoiser
 
 A diffusion model learns to reverse a gradual noising process. That skill fits
 the denoising position in the previous pipeline.
@@ -222,13 +222,13 @@ decision.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-dual-rs.svg' | relative_url }}" width="940" style="display: block; margin: 0 auto;" alt="Dual randomized smoothing first uses a smoothed variance estimator to choose sigma and certify radius R sigma. It then uses a classifier smoothed at that sigma to predict Siberian cat and certify radius R c. The final radius is the smaller of the two.">
   </div>
-  <figcaption>One certificate protects the route; the other protects the class prediction.</figcaption>
+  <figcaption>One certificate protects the route. The other protects the class prediction.</figcaption>
 </figure>
 
-The estimator can also route inputs among pretrained expert RS models, each
-specialized for one noise scale. Improving an expert can improve certificates
-for inputs routed to it, after recertification, without changing the soundness
-argument.
+The estimator can also route inputs among pretrained randomized-smoothing
+experts, each specialized for one noise scale. Improving an expert can improve
+certificates for inputs routed to it, after recertification, without changing
+the soundness argument.
 
 ## Two kinds of adaptation, one proof discipline
 
@@ -237,7 +237,7 @@ The two method families change different parts of randomized smoothing.
 | What adapts? | Example | Why the certificate remains valid |
 | --- | --- | --- |
 | The base mapping becomes $f\circ D$. | Diffusion denoised smoothing supplies a pretrained $D$. | The smoothing theorem permits any base classifier. |
-| The noise scale becomes $\sigma(x)$. | Dual RS certifies a selector over scales or experts. | Local constancy is certified first; the selected classifier is certified second. |
+| The noise scale becomes $\sigma(x)$. | Dual RS certifies a selector over scales or experts. | Local constancy is certified first. The selected classifier is certified second. |
 
 April's noisy photograph now follows two sound adaptive routes: change the base
 mapping while keeping the theorem, or certify the selector before using an
@@ -247,8 +247,8 @@ input-dependent noise scale.
 
 [Part 1]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/' | relative_url }})
 began with a gap between testing some inputs and proving a claim for every
-allowed input. The [series map]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/#series-map' | relative_url }})
-now connects two ways to close that gap.
+allowed input. Across the [series map]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/#series-map' | relative_url }}),
+we followed two routes to close that gap.
 
 Deterministic verification covers every possible ReLU phase with sound bounds
 and, when needed, branches. Denoised smoothing places a fixed denoiser inside

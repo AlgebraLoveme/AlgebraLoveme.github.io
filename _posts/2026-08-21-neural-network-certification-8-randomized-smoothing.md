@@ -60,9 +60,9 @@ $$
 
 Read the formula from the inside out:
 
-1. sample a noisy input $x+\eta$;
-2. ask the base classifier $f$ for its label;
-3. compute the probability of each class across the noise;
+1. sample a noisy input $x+\eta$.
+2. ask the base classifier $f$ for its label.
+3. compute the probability of each class across the noise.
 4. let $g$ return the most probable class.
 
 The classifier being certified is $g$. The base classifier $f$ supplies the
@@ -77,7 +77,7 @@ votes.
 
 ## A probability gap becomes a certified radius
 
-The 20 dots above illustrate a Gaussian cloud; their visible frequencies are
+The 20 dots above illustrate a Gaussian cloud. Their visible frequencies are
 not probability estimates for certification. For the idealized calculation
 below, assume the exact class probabilities admit the bounds $p_A=0.80$ and
 $p_B=0.10$. A finite-sample certificate will replace those assumed bounds with
@@ -171,10 +171,10 @@ statement: every input in the ball receives the same label from $g$.
 Second, a computer cannot evaluate the exact probabilities of a modern neural
 network. A standard sound procedure separates selection from estimation:
 
-1. use a pilot batch of noisy inputs to choose a candidate class $c_A$;
+1. use a pilot batch of noisy inputs to choose a candidate class $c_A$.
 2. use a fresh, larger batch to compute a one-sided confidence lower bound
-   $\underline p_A$ for that class;
-3. set $\overline p_B=1-\underline p_A$;
+   $\underline p_A$ for that class.
+3. set $\overline p_B=1-\underline p_A$.
 4. return $R=\sigma\Phi^{-1}(\underline p_A)$ when
    $\underline p_A>1/2$, and abstain otherwise.
 
@@ -199,6 +199,10 @@ margin may identify the winning class while providing insufficient statistical
 evidence for a positive radius. Abstention keeps sampling uncertainty inside
 the stated guarantee.
 
+This procedure certifies a fixed base classifier. Obtaining a useful radius
+also requires that classifier to give the correct class a large probability
+advantage under Gaussian noise.
+
 ## How should the base classifier be trained?
 
 The radius grows when the correct class remains highly probable under Gaussian
@@ -212,18 +216,20 @@ Three broad strategies appear repeatedly:
   optimizes a radius-based objective, while [Consistency](https://arxiv.org/abs/2006.04062)
   encourages noisy copies to produce similar predictions.
 - **Emphasize difficult or uncertain inputs.** [SmoothAdv](https://arxiv.org/abs/1906.04584)
-  searches for perturbations that weaken the noisy vote; [SmoothMix](https://arxiv.org/abs/2111.09277)
-  mixes examples along such directions; [CAT-RS](https://arxiv.org/abs/2212.09000)
-  adjusts the training pressure using confidence.
+  searches for perturbations that weaken the noisy vote.
+  [SmoothMix](https://arxiv.org/abs/2111.09277) mixes examples along such
+  directions. [CAT-RS](https://arxiv.org/abs/2212.09000) adjusts the training
+  pressure using confidence.
 
 These methods modify training. The certificate is still computed afterward
 from noisy class probabilities and the smoothing theorem. This mirrors Part 6:
 the training signal and the final evaluation guarantee are separate objects.
 
-## A single average can reward the wrong progress
+Once training changes the vote probabilities, we need a dataset-level measure
+to decide whether robustness improved. A common choice is average certified
+radius.
 
-The training strategies above need an evaluation measure that tells us whether
-their changed vote probabilities improve robustness across the dataset.
+## Why can average certified radius reward the wrong progress?
 
 For each dataset input, the smoothed classifier may return the correct label,
 an incorrect label, or abstain. A common summary is the **average certified
@@ -245,7 +251,7 @@ nonlinearity, ignore sampling for this numerical comparison. Take $\sigma=0.5$.
 Increasing $p_A$ from $0.60$ to $0.61$ changes the ideal radius from about
 $0.127$ to $0.140$, a gain of $0.013$. Increasing $p_A$ from
 $0.98$ to $0.99$ changes it from about $1.027$ to $1.163$, a gain of $0.136$.
-Both probability improvements are $0.01$; the easy input contributes more than
+Both probability improvements are $0.01$. The easy input contributes more than
 ten times as much radius gain.
 
 <figure class="wide-diagram" style="text-align: center;">
@@ -267,7 +273,7 @@ accuracy on hard samples relative to Gaussian training.
 A more informative evaluation retains the distribution. Two useful views are:
 
 - **certified accuracy at radius $r$:** the fraction of the dataset that is
-  correctly certified at least up to $r$, plotted for many radii;
+  correctly certified at least up to $r$, plotted for many radii.
 - **the empirical distribution of $p_A$:** how noisy accuracy is spread across
   easy and difficult inputs.
 

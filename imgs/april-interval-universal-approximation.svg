@@ -23,10 +23,10 @@
     <polyline points="120,386 205,371 290,337 375,312 460,261 545,247 630,230 715,175 800,168 892,130" fill="none" stroke="#b9473e" stroke-width="3.5" stroke-dasharray="10 7"/>
 
     <g font-size="16">
-      <line x1="624" y1="112" x2="671" y2="112" stroke="#111827" stroke-width="4"/>
-      <text x="682" y="118" fill="#111827">continuous target</text>
-      <line x1="624" y1="137" x2="671" y2="137" stroke="#b9473e" stroke-width="3.5" stroke-dasharray="9 6"/>
-      <text x="682" y="143" fill="#7e322c">ReLU network</text>
+      <line x1="624" y1="87" x2="671" y2="87" stroke="#111827" stroke-width="4"/>
+      <text x="682" y="93" fill="#111827">continuous target</text>
+      <line x1="624" y1="112" x2="671" y2="112" stroke="#b9473e" stroke-width="3.5" stroke-dasharray="9 6"/>
+      <text x="682" y="118" fill="#7e322c">ReLU network</text>
       <rect x="158" y="94" width="20" height="14" fill="#8fc3dc" fill-opacity="0.6" stroke="#2f5da8"/>
       <text x="188" y="107" fill="#2f5da8">true output range</text>
       <rect x="158" y="119" width="20" height="14" fill="#c5b9dd" fill-opacity="0.6" stroke="#59449b"/>

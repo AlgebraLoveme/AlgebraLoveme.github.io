@@ -103,7 +103,8 @@ S_\infty(x_0,0.1)
 $$
 
 The allowed set is a square. It contains every pair formed by choosing
-$x_1\in[0.4,0.6]$ and $x_2\in[0.4,0.6]$, not only its four corners.
+$x_1\in[0.4,0.6]$ and $x_2\in[0.4,0.6]$, including all interior points and all
+four corners.
 
 The statement we want to prove is
 
@@ -175,9 +176,11 @@ $$
 
 The exact smallest margin is not needed. A guaranteed positive lower bound is
 enough to prove that every allowed input is classified as cat. The derivation
-above is our first certificate.
+above is our first certificate. To scale this argument beyond a toy network,
+we need a general language for the inputs, computation, and output claim that
+the certificate connects.
 
-## Name the pieces of the proof
+## Turn the hand proof into a verification problem
 
 During inference, a fixed neural network is a numerical program. It takes an
 input, follows a fixed sequence of operations, and returns an output. Program
@@ -226,10 +229,12 @@ A method is **complete** if it is guaranteed to return verified or falsified for
 every supported instance when allowed to run to completion. Part 5 will connect
 this promise to search and timeouts.
 
+Before automating the calculation in Part 3, collect the complete toy problem
+that the next four posts will share.
+
 ## April's specification, in one box
 
-The next four posts will use exactly the same classifier. Here is the complete
-specification in one place:
+Here is the complete specification in one place:
 
 | Piece | April classifier |
 | --- | --- |

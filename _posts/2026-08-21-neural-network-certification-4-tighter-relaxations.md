@@ -10,7 +10,7 @@ written_at: 2026-08-22
 tags: [neural networks, certification, linear relaxation, DeepPoly, CROWN-IBP, abstract interpretation, "Certification Series: 04"]
 mathjax: true
 toc: true
-excerpt: "Triangle recovers relationships that intervals forgot; DeepPoly carries selected linear bounds, while CROWN-IBP trades some of that information for speed."
+excerpt: "Triangle recovers relationships that intervals forgot. DeepPoly carries selected linear bounds, while CROWN-IBP trades some information for speed."
 ---
 
 ## Why did IBP's margin bound become negative?
@@ -30,8 +30,8 @@ $$
 h_1\in[0.1,0.9],\quad h_2\in[0,0.4].
 $$
 
-Combining the final layer with the score difference---a rewrite called
-**last-layer elision**---gives the margin $m=0.2+h_1-h_2$. Treating the two
+Combining the final layer with the score difference, a rewrite called
+**last-layer elision**, gives the margin $m=0.2+h_1-h_2$. Treating the two
 hidden intervals independently gives
 
 $$
@@ -60,11 +60,11 @@ $$
 z_2=x_1-x_2,\quad h_2=\operatorname{ReLU}(z_2).
 $$
 
-The value of $h_2$ therefore changes with $x_1-x_2$; it is not free to move
-independently inside $[0,0.4]$. We need a sound description that keeps some of
-this relationship.
+The value of $h_2$ therefore changes with $x_1-x_2$. Its feasible value remains
+tied to the input even though the interval $[0,0.4]$ no longer records that
+relationship. We need a sound description that preserves some of it.
 
-## First repair: enclose ReLU with Triangle
+## First repair: enclose an unstable ReLU with three lines
 
 Over April's radius-$0.2$ square,
 
@@ -207,12 +207,13 @@ inequalities. We now have a reason to keep only selected linear relationships.
 
 </details>
 
-## Keep selected lines with DeepPoly
+## Avoid constraint explosion by keeping selected lines
 
-**DeepPoly** records a numerical interval, one affine (linear-plus-constant)
-lower expression, and one affine upper expression for each neuron. For an
-unstable ReLU, it stores exactly one of Triangle's two lower lines,
-$h\geq0$ or $h\geq z$, together with the upper chord.
+[**DeepPoly**](https://www.sri.inf.ethz.ch/publications/singh2019domain) records
+a numerical interval, one affine (linear-plus-constant) lower expression, and
+one affine upper expression for each neuron. For an unstable ReLU, it stores
+exactly one of Triangle's two lower lines, $h\geq0$ or $h\geq z$, together with
+the upper chord.
 
 DeepPoly decides which lower bound to retain with its **min-area heuristic**.
 Both candidates share the same upper chord, so DeepPoly compares the area
@@ -296,13 +297,13 @@ $$
 
 The candidate lower line and the fixed upper chord enclose the shaded
 trapezoid below. Its vertical side lengths are the endpoint gaps
-$-\lambda\ell$ and $(1-\lambda)u$; the distance between them is $u-\ell$.
+$-\lambda\ell$ and $(1-\lambda)u$. The distance between them is $u-\ell$.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}?v=20260822-2" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
   </div>
-  <figcaption>The continuous family makes the area calculable; DeepPoly selects between its two endpoint lines.</figcaption>
+  <figcaption>The continuous family makes the area calculable. DeepPoly selects between its two endpoint lines.</figcaption>
 </figure>
 
 The area of a trapezoid is its width times the average of its two parallel side
@@ -344,7 +345,7 @@ $$
 \end{cases}
 $$
 
-At equality, every $\lambda\in[0,1]$ has the same area; the concrete rule above
+At equality, every $\lambda\in[0,1]$ has the same area. The concrete rule above
 breaks the tie with $\lambda=0$.
 
 If the interval reaches farther into the negative side, $u<-\ell$, the
@@ -354,7 +355,7 @@ side, the diagonal lower line $z$ leaves less area.
 | ReLU input interval | $A(0)$ | $A(1)$ | Selected lower line |
 | --- | ---: | ---: | --- |
 | $[-0.6,0.2]$ | $0.08$ | $0.24$ | $0$ ($\lambda=0$) |
-| $[-0.4,0.4]$ | $0.16$ | $0.16$ | Tie; choose $0$ |
+| $[-0.4,0.4]$ | $0.16$ | $0.16$ | Tie. Choose $0$ |
 | $[-0.2,0.6]$ | $0.24$ | $0.08$ | $z$ ($\lambda=1$) |
 
 April's interval $[-0.4,0.4]$ is the tie case. DeepPoly's concrete rule chooses
@@ -409,10 +410,11 @@ shallow network, where IBP computes exact intervals for the first affine layer.
 
 The forward IBP pass is cheap because it carries two numbers per hidden value.
 In a deeper network, its intervals may already combine incompatible hidden
-extrema and discard their relationships. The final CROWN pass uses those
-intervals to construct its ReLU lines and cannot retroactively tighten them.
-The result remains sound and can admit more spurious values than a calculation
-that tightens every intermediate bound through linear back-substitution.
+extrema and discard their relationships. The final affine back-substitution
+pass uses those intervals to construct its ReLU lines and cannot retroactively
+tighten them. The result remains sound and can admit more spurious values than
+a calculation that tightens every intermediate bound through linear
+back-substitution.
 
 This exchange of precision for speed becomes especially useful in
 [certified training]({{ '/2026-08-21-neural-network-certification-6-certified-training/' | relative_url }}),
@@ -422,8 +424,7 @@ Triangle, DeepPoly, and CROWN-IBP give the same certificate for April's tiny
 network. Triangle retains a joint constraint system. DeepPoly back-substitutes
 one sign-selected bound at each step without generating projected pairwise
 inequalities. CROWN-IBP obtains hidden intervals with IBP and reserves linear
-back-substitution for the final margin. DeepPoly was introduced in
-[An Abstract Domain for Certifying Neural Networks](https://www.sri.inf.ethz.ch/publications/singh2019domain).
+back-substitution for the final margin.
 
 | Method | Representation | Margin lower bound | Result |
 | --- | --- | ---: | --- |
@@ -448,6 +449,10 @@ IBP uses boxes. Triangle uses a polytope cut out by linear constraints.
 DeepPoly uses intervals together with selected affine bounds. These are
 different forms of **abstract interpretation**, but they obey the same safety
 rule: never discard a value that the network can actually produce.
+
+Soundness makes a positive bound trustworthy. Precision determines whether
+the bound becomes positive in the first place. Enlarging April's input region
+once more shows what happens when even DeepPoly remains inconclusive.
 
 ## What should we do if the bound is inconclusive?
 

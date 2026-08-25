@@ -227,7 +227,11 @@ The exact network produces this negative margin at an allowed input. The input
 is a **counterexample**, so the claim that April's cat score remains largest
 throughout the radius-$0.36$ square is false.
 
-## How exact verifiers organize the search
+April's examples ended after one split or one counterexample. Larger networks
+may require many phase choices, so a complete verifier needs a systematic way
+to explore them without leaving any case uncovered.
+
+## How complete verifiers organize the search
 
 The piecewise-linear structure also explains how complete verifiers finish the
 search. Once every relevant ReLU is fixed as active or inactive, the remaining
@@ -248,8 +252,8 @@ linear reasoning with discrete case choices.
 
 A verifier is **sound** when every reported result is justified:
 
-- **verified** means sound bounds cover every allowed input.
-- **falsified** means a concrete allowed input violates the property.
+- **Verified** means sound bounds cover every allowed input.
+- **Falsified** means a concrete allowed input violates the property.
 
 A verification procedure is **complete** when it is guaranteed to reach one
 of those two conclusions for every supported problem if allowed to run to

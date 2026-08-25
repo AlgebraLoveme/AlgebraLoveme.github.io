@@ -152,9 +152,9 @@ m\in[0.2+0.3-0.2,\;0.2+0.7-0]=[0.3,0.9].
 $$
 
 This algebraic merge of the final linear layer with the desired score
-difference is called **last-layer elision**. We have not removed the layer; we
-have rewritten it together with the property before computing bounds. Here it
-raises the margin's lower bound from $0.1$ to $0.3$.
+difference is called **last-layer elision**. It preserves the layer's effect by
+rewriting that layer together with the property before computing bounds. Here
+it raises the margin's lower bound from $0.1$ to $0.3$.
 
 Every possible margin is therefore at least $0.3$. The model predicts cat for
 every input in $S_\infty(x_0,0.1)$, giving the same certificate we derived by
@@ -162,9 +162,11 @@ hand in Part 2.
 
 Applying these interval calculations layer by layer is called **interval bound
 propagation**, or **IBP**. Each operation encloses every value that operation can
-produce from the preceding intervals. By induction over the layers, the final
-interval encloses every possible margin. This containment is why a positive
-lower margin bound is a sound certificate.
+produce from the preceding intervals. The input intervals contain every
+allowed input. Each sound propagation step preserves that containment, so
+repeating the argument layer by layer makes the final interval contain every
+possible margin. This induction is why a positive lower margin bound is a
+sound certificate.
 
 Last-layer elision and the use of IBP bounds in training are studied in
 [On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models](https://arxiv.org/abs/1810.12715).

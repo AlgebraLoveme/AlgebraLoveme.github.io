@@ -158,8 +158,8 @@ learned classifier. The relationship between IBP bound tightness and this
 regularization is analyzed in
 [Understanding Certified Training with Interval Bound Propagation](https://arxiv.org/abs/2306.10426).
 
-An **unsound training surrogate for certification-oriented training** uses a
-more targeted approximation $L_{\mathrm{proxy}}$. The guarantee
+An **unsound training surrogate** uses a more targeted approximation
+$L_{\mathrm{proxy}}$. The guarantee
 
 $$
 L_{\mathrm{proxy}}\geq L_{\mathrm{worst}}
@@ -201,7 +201,7 @@ square. The working intuition is that a strong attack may reach the
 neighborhood of the true worst-case point even when it does not find that point
 exactly. The local box can then cover the most relevant neighborhood while its
 smaller width makes the IBP bound tighter. The bound is sound for that local
-box; the box may omit the true worst-case region of the original square.
+box. The box may omit the true worst-case region of the original square.
 
 **TAPS lets two approximation errors pull in opposite directions.** It splits
 the network into a feature extractor and a classifier. IBP carries the full
@@ -322,6 +322,6 @@ search into feature space, STAPS combines those choices, and MTL-IBP blends
 attack and IBP losses.
 
 The final guarantee always comes from sound post-training verification. Part 7
-will ask what lies beyond today's workflow: which certifiable networks can
-exist, which ones training can find, and which relationships a verifier can
-express.
+will separate three research questions: which target functions certifiable
+networks can approximate, which useful networks training can find, and which
+exact bounds a verifier can prove for a fixed network.
