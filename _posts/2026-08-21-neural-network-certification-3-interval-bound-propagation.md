@@ -111,7 +111,7 @@ $$
 h_2\in[0,0.2].
 $$
 
-## Bound the margin directly with last-layer elision
+## Why combine the scores before bounding them?
 
 We could continue one score at a time. Using $h_1\in[0.3,0.7]$ and
 $h_2\in[0,0.2]$ gives
@@ -169,6 +169,10 @@ lower margin bound is a sound certificate.
 Last-layer elision and the use of IBP bounds in training are studied in
 [On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models](https://arxiv.org/abs/1810.12715).
 We will revisit that use in Part 6.
+
+IBP succeeds on April's radius-$0.1$ square. To see when its independent
+intervals begin to lose useful relationships, keep the network fixed and
+enlarge only the allowed input region.
 
 ## Increase the radius: the bound becomes inconclusive
 

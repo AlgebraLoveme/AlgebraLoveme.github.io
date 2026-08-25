@@ -363,6 +363,11 @@ uses only the upper bound on $h_2$.
 
 </details>
 
+DeepPoly avoids multiplying constraints, but it still back-substitutes to
+tighten intervals for many hidden values. [CROWN-IBP](https://arxiv.org/abs/1906.06316)
+reduces this cost by using IBP for hidden intervals and reserving
+back-substitution for the final margins.
+
 ## Scaling back-substitution with CROWN-IBP
 
 April's certificate required one backward calculation for the final margin.
@@ -388,8 +393,7 @@ hidden values, while a ten-class prediction has nine relevant margins. Carrying
 linear expressions backward for every intermediate bound can therefore cost
 far more than bounding the final safety questions.
 
-[CROWN-IBP](https://arxiv.org/abs/1906.06316) changes where that effort is
-spent:
+CROWN-IBP uses three steps:
 
 1. Run IBP forward to obtain an interval $[\ell,u]$ for every hidden
    pre-activation.

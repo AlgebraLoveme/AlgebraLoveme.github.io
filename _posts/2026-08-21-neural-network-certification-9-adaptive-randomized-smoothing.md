@@ -89,6 +89,9 @@ robustness wrapper around a pretrained or even black-box image service.
 The certificate depends on how large the winning-class probability is for the
 composed classifier $f\circ D$ across the Gaussian cloud.
 
+This makes the source of the denoiser a practical design choice. Can we reuse a
+pretrained model that already knows how to remove image noise?
+
 ## Diffusion models provide powerful off-the-shelf denoisers
 
 A diffusion model learns to reverse a gradual noising process. That skill fits
@@ -192,9 +195,10 @@ $$
 
 No independence assumption is needed for that confidence calculation.
 
-## Dual RS certifies the selector and the prediction
+## Dual randomized smoothing certifies the selector and the prediction
 
-Dual RS implements the idea with two smoothed models.
+**Dual randomized smoothing (Dual RS)** implements the idea with two smoothed
+models.
 
 1. The paper's **variance estimator** predicts one noise standard deviation
    $\sigma$ from a finite set such as $\{0.25,0.5,1.0\}$. It is independently

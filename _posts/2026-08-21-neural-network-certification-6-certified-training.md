@@ -261,15 +261,18 @@ to produce a network that a separate sound verifier can certify successfully.
 A sound evaluation verifier can therefore produce valid certified accuracy for
 SABR-, TAPS-, STAPS-, and MTL-IBP-trained networks.
 
-## What do the CTBench numbers show?
+## How do the training methods compare under one benchmark?
 
-The mechanisms above explain why each surrogate might help. To test whether
-they actually produce more certifiable networks, we need a comparison that
-holds the architecture and evaluation protocol fixed.
+The mechanisms above explain why each objective might help. We now want to
+compare the networks they produce. A fair benchmark should use the same
+architecture, threat model, and evaluation protocol for every method. It should
+then measure how often each network classifies clean inputs correctly and how
+often a sound verifier proves robustness.
 
-[CTBench](https://arxiv.org/abs/2406.04848) implements the methods in one
-codebase and evaluates them under a shared benchmark protocol. The values below
-come from Table 22 of the arXiv v4 paper. The comparison uses the CNN7
+[CTBench](https://arxiv.org/abs/2406.04848) provides this controlled comparison.
+It implements the methods in one codebase and evaluates them under a shared
+benchmark protocol. The values below come from Table 22 of the arXiv v4 paper.
+The comparison uses the CNN7
 architecture with batch normalization on CIFAR-10. CNN7 contains seven
 convolutional or linear layers. The threat model is an $\ell_\infty$ ball with
 radius $2/255$.
