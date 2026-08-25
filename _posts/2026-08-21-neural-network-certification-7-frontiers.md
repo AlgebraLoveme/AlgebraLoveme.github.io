@@ -84,9 +84,9 @@ $s$, and its IBP intervals approximate the exact target ranges.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
-  <img src="{{ '/imgs/april-interval-universal-approximation.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="A continuous target score and a nearby piecewise-linear network curve. Each of three input intervals has one exact vertical output range and a slightly wider sound IBP range.">
+  <img src="{{ '/imgs/april-interval-universal-approximation.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="A continuous target score and a nearby piecewise-linear network curve. Over each of three input intervals, blue markers identify the target extrema and the exact target range, while a dashed purple IBP-certified range is slightly wider and contains the network values.">
   </div>
-  <figcaption>Interval approximation asks the curve and its propagated ranges to agree with the target.</figcaption>
+  <figcaption>The blue band spans the target's exact extrema on each interval. The dashed IBP-certified band also encloses the network's values while staying close to that target range.</figcaption>
 </figure>
 
 The theorem settles the existence question. It allows us to choose a network
