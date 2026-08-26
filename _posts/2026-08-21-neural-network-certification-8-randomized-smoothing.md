@@ -103,6 +103,32 @@ where $\Phi$ is the cumulative distribution function of a standard normal
 random variable. Its inverse $\Phi^{-1}(p)$ converts a probability into the
 corresponding position on the normal curve.
 
+The full formula uses both the leading-class lower bound $p_A$ and a
+competitor upper bound $p_B$. A common certificate uses only $p_A$. All
+competing classes together have probability at most $1-p_A$, so every single
+competitor also has probability at most
+
+$$
+p_B\leq 1-p_A.
+$$
+
+This is the common **relaxed competitor bound**. It treats all probability
+outside $c_A$ as though one hypothetical competitor owns it, so it requires no
+separate estimate of the runner-up class.
+
+Substituting the valid choice $p_B=1-p_A$ into the two-probability formula and
+using $\Phi^{-1}(1-p)=-\Phi^{-1}(p)$ gives
+
+$$
+R_A=\sigma\Phi^{-1}(p_A),
+\qquad p_A>\frac12.
+$$
+
+This is the common **one-probability certificate**, and it remains valid for
+any number of classes. When a separately computed $p_B$ is smaller than
+$1-p_A$, the two-probability formula uses that extra information to certify a
+larger radius.
+
 An **adversarial input** is $x+\delta$, deliberately chosen subject to a norm
 limit. The theorem states that
 
@@ -132,6 +158,17 @@ $$
 R\approx\frac{0.25}{2}(0.842+1.282)=0.265.
 $$
 
+If only $p_A=0.80$ is available, every competitor is instead bounded by
+$1-p_A=0.20$. The one-probability radius is
+
+$$
+R_A=0.25\Phi^{-1}(0.80)\approx0.210.
+$$
+
+Both radii are sound. The first uses the additional fact that the strongest
+competitor has probability at most $0.10$, while the second needs only the
+leading-class probability.
+
 Here is the bridge from a vote gap to a distance. Write
 $r=\lVert\delta\rVert_2$. After the Gaussian center moves by $\delta$, the
 leading-class probability is at least
@@ -151,6 +188,16 @@ $r<\frac{\sigma}{2}(\Phi^{-1}(p_A)-\Phi^{-1}(p_B))$. The Neyman–Pearson lemma
 justifies these worst-case bounds: among decision regions with the stated
 original probability, a half-space perpendicular to $\delta$ changes the most
 when the Gaussian center shifts.
+
+For the one-probability certificate, substitute $p_B=1-p_A$. The competitor's
+shifted upper bound becomes
+
+$$
+\Phi\!\left(\Phi^{-1}(1-p_A)+\frac r\sigma\right).
+$$
+
+The leading-class lower bound stays larger precisely while
+$r<\sigma\Phi^{-1}(p_A)$, recovering $R_A$ above.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
@@ -174,12 +221,13 @@ network. A standard sound procedure separates selection from estimation:
 1. use a pilot batch of noisy inputs to choose a candidate class $c_A$.
 2. use a fresh, larger batch to compute a one-sided confidence lower bound
    $\underline p_A$ for that class.
-3. set $\overline p_B=1-\underline p_A$.
+3. use $1-\underline p_A$ as an upper bound for every competing class.
 4. return $R=\sigma\Phi^{-1}(\underline p_A)$ when
    $\underline p_A>1/2$, and abstain otherwise.
 
-The shortcut follows because
-$\Phi^{-1}(1-p)=-\Phi^{-1}(p)$ in the two-bound formula.
+This is the finite-sample form of the one-probability certificate above. A
+confidence lower bound replaces the ideal $p_A$, so sampling uncertainty stays
+inside the stated guarantee.
 
 The practical certificate therefore says:
 
