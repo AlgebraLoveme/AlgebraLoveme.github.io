@@ -247,8 +247,7 @@ input-dependent noise scale.
 
 [Part 1]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/' | relative_url }})
 began with a gap between testing some inputs and proving a claim for every
-allowed input. Across the [series map]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/#series-map' | relative_url }}),
-we followed two routes to close that gap.
+allowed input. Across the series, we followed two routes to close that gap.
 
 Deterministic verification covers every possible ReLU phase with sound bounds
 and, when needed, branches. Denoised smoothing places a fixed denoiser inside
