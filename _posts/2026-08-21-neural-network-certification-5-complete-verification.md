@@ -16,8 +16,8 @@ excerpt: "Split April's input region, bound each piece, and assemble the local r
 ## One bound cannot settle April's square
 
 [Part 4]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/' | relative_url }})
-left April the Siberian cat with an unresolved question. We allowed both input
-coordinates to move within
+left April the Siberian cat with an unresolved question. At radius $0.24$, both
+input coordinates vary within
 
 $$
 R=[0.26,0.74]\times[0.26,0.74],
@@ -37,10 +37,11 @@ $$
 m\geq-0.02.
 $$
 
-DeepPoly therefore returns **unknown**. Its lower bound comes from a
-relaxation: a simpler enclosure that contains every real network behavior and
-additional **spurious behaviors** that the exact network cannot produce. These
-spurious behaviors can pull the bound below zero.
+DeepPoly therefore returns **unknown** because $-0.02$ does not establish a
+positive margin. The lower bound comes from a relaxation: a simpler enclosure
+that contains every real network behavior and additional **spurious behaviors**
+that the exact network cannot produce. These spurious behaviors can pull the
+bound below zero.
 
 The next question is: **can we cover every allowed input with smaller regions
 whose bounds are positive?**
@@ -57,15 +58,16 @@ h_2&=\operatorname{ReLU}(x_1-x_2).
 $$
 
 The first ReLU stays active throughout $R$, so
-$h_1=x_1+x_2-0.5$. The loose step is the upper bound on $h_2$. Over the whole
-square, its input $z_2=x_1-x_2$ ranges from $-0.48$ to $0.48$, giving
+$h_1=x_1+x_2-0.5$. The loose part of the bound is the upper bound on $h_2$.
+Over the whole square, its input $z_2=x_1-x_2$ ranges from $-0.48$ to $0.48$,
+giving
 
 $$
 h_2\leq\frac{1}{2}z_2+0.24.
 $$
 
-A standard neural-network branch-and-bound move is to branch on the phase of
-this unstable ReLU. The ReLU has two phases:
+To answer it, use a standard branch-and-bound move: split the region on the
+phase of this unstable ReLU. The two possible phases are
 
 $$
 \begin{aligned}
@@ -82,7 +84,7 @@ The boundary $z_2=0$ is the diagonal $x_1=x_2$. It divides April's square into
 two triangles whose union equals $R$, preserving complete coverage of the
 allowed region.
 
-The split follows **divide and conquer**: divide one unresolved problem at the
+This split follows **divide and conquer**: divide one unresolved problem at the
 source of its uncertainty, then conquer each simpler phase separately. Fixing
 the phase makes $h_2$ linear in each child, which lets us analyze both triangles
 exactly.
@@ -187,15 +189,18 @@ inconclusive. We can apply the same cycle again:
 4. Repeat until every leaf is verified or a failing input is found.
 
 **Branch and bound** applies divide and conquer with sound bounds. Branching
-divides one unresolved case. Bounding tries to conquer each child while
-reasoning about the entire region at once. Neural network verifiers commonly
-branch on whether an unstable ReLU is off or on, as we did. Some methods also
-branch on input coordinates.
+divides one unresolved case. Bounding tests whether the property holds
+throughout a child region at once. Neural network verifiers commonly branch on
+whether an unstable ReLU is off or on, as we did. Some methods also branch on
+input coordinates.
 
 A certificate consists of regions that cover the allowed set, together with a
 sound bound for every region declared safe. A unified account of
 neural-network branch and bound appears in
 [A Unified View of Piecewise Linear Neural Network Verification](https://arxiv.org/abs/1711.00455).
+
+Bounds can close safe branches. If the property is false, a concrete failing
+input can end the search immediately.
 
 ## Search for a failing input at the same time
 
@@ -203,8 +208,8 @@ While bounds reason about whole regions, an attack searches for promising
 individual inputs and evaluates them with the exact network. The two jobs
 complement each other:
 
-- a positive lower bound proves that an entire region is safe.
-- one concrete input with $m(x)\leq0$ disproves the claim immediately.
+- A positive lower bound proves that an entire region is safe.
+- One concrete input with $m(x)\leq0$ disproves the claim immediately.
 
 The completed radius-$0.24$ tree proves every allowed input safe. Enlarging the
 radius to $0.36$ brings the following input into the allowed set:
@@ -248,16 +253,20 @@ Specialized branch-and-bound verifiers maintain an explicit set of subproblems
 and use neural-network bounds to prune them. All three combine continuous
 linear reasoning with discrete case choices.
 
-## Soundness, completeness, and timeouts
+Regardless of that organization, a verifier must answer three questions: can we
+trust every result, will the search eventually decide the property, and what
+does a timeout mean?
+
+## What do soundness and completeness promise?
 
 A verifier is **sound** when every reported result is justified:
 
 - **Verified** means sound bounds cover every allowed input.
 - **Falsified** means a concrete allowed input violates the property.
 
-A verification procedure is **complete** when it is guaranteed to reach one
-of those two conclusions for every supported problem if allowed to run to
-completion. For a ReLU verifier, this may require exploring enough activation
+A verification procedure is **complete** when, given enough time and memory, it
+is guaranteed to reach one of those two conclusions for every supported
+problem. For a ReLU verifier, this may require exploring enough activation
 cases that every remaining leaf is linear and can be solved exactly.
 
 Completeness guarantees an eventual decision when the procedure runs to
@@ -270,7 +279,7 @@ search while unresolved leaves remain, the correct result is **unknown**.
 | Falsified | A concrete allowed input has $m\leq0$ | The robustness claim is false |
 | Unknown | At least one region remains unresolved | The claim remains unresolved |
 
-## Takeaway
+## A complete proof covers every branch
 
 One DeepPoly pass gave April the inconclusive bound $m\geq-0.02$ at radius
 $0.24$. Branching on the unstable ReLU at $z_2=0$ divided the square along

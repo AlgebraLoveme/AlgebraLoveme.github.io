@@ -26,15 +26,15 @@ Meet April, my Siberian cat.
   <figcaption>We will use this photograph of April to move from one correct prediction to a mathematical guarantee.</figcaption>
 </figure>
 
-Imagine that an image classifier receives this photo and predicts **cat**. It is
-right on this input. Now darken the photo, compress it, add camera noise, or
-change a few pixels. Will the prediction remain cat?
+Imagine that an image classifier receives this photo and predicts **cat**. The
+prediction is correct for this input. Now darken the photo, compress it, add
+camera noise, or change a few pixels. Will the prediction remain cat?
 
 ## Why models need to be robust
 
 Suppose our classifier labels 9,800 of 10,000 test images correctly, giving 98%
-test accuracy. This aggregate does not tell us whether one correct prediction
-will survive nearby changes.
+test accuracy. That aggregate measure does not tell us whether a correct
+prediction will survive nearby changes.
 
 The same scene can reach the model through different cameras, lighting
 conditions, compression settings, and preprocessing pipelines. We still see
@@ -63,10 +63,11 @@ robustness** therefore asks a worst-case question:
 
 An allowed image that changes the prediction is an **adversarial example**.
 Research on [adversarial examples](https://arxiv.org/abs/1312.6199) showed that
-small, carefully chosen perturbations could change neural network predictions.
+small, carefully chosen perturbations can change neural network predictions.
 The [robust optimization viewpoint](https://arxiv.org/abs/1706.06083) frames
 robustness through performance under the worst allowed perturbation. This
-worst-case target leads directly to adversarial attacks.
+worst-case target motivates adversarial attacks, which search for an allowed
+failure.
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: flex-start;">
   <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
@@ -86,13 +87,13 @@ worst-case target leads directly to adversarial attacks.
 Restricting which changes are **allowed** prevents a trivial attack. Replacing
 April's photo with a photo of a dog might change the prediction, but it tells us
 nothing about whether the classifier is stable near the original photo. A
-**threat model** draws the boundary: it states what may change, by how much, and
+**threat model** draws this boundary by stating what may change, by how much, and
 what counts as a successful attack.
 
 Let $x_0$ represent April's photo, with pixel values normalized to $[0,1]$. We
 measure a pixel perturbation with an $\ell_p$ norm, where
 $1\leq p\leq\infty$, and limit its size with a radius $\epsilon$. The allowed
-images form the set
+images therefore form the set
 
 $$
 S_p(x_0,\epsilon)
@@ -114,10 +115,10 @@ $x_0$ and searches inside $S_p(x_0,\epsilon)$ for an input on which some other
 class outranks **cat**.
 
 A standard gradient-based attack is [projected gradient descent
-(PGD)](https://arxiv.org/abs/1706.06083). Despite the name, PGD takes steps that
-*increase* the classification loss when its goal is to make any class outrank
-cat. The word *projected* describes how every step is returned to the allowed
-set. Starting from April's image or from a random point inside that set, PGD
+(PGD)](https://arxiv.org/abs/1706.06083). In the setting here, PGD takes steps
+that *increase* the classification loss so that another class can outrank cat.
+The word *projected* describes how every step is returned to the allowed set.
+Starting from April's image or from a random point inside that set, PGD
 repeatedly:
 
 1. computes the gradient of the loss with respect to the pixels, which measures
@@ -140,19 +141,20 @@ Two outcomes are possible:
 
 ## Why attack-based testing is incomplete
 
-Why can the second outcome not prove robustness? Within $S_p(x_0,\epsilon)$,
+Why does the second outcome fail to prove robustness? Within
+$S_p(x_0,\epsilon)$,
 each of the $d$ pixel values may vary, and those choices combine. A
 $224\times224$ RGB input has three color values at every pixel, so
 $d=224\cdot224\cdot3=150{,}528$. In the real-valued model, the set contains
 infinitely many points. A digital system has only finitely many pixel values,
-but still far too many arrays to enumerate.
+yet it still has far too many arrays to enumerate.
 
 A stronger attack may find an adversarial input that an earlier attack missed.
 If an attack finds no counterexample, none of the inputs it examined violated
-the property, but every unexamined input in $S_p(x_0,\epsilon)$ remains
-unresolved. Running more attacks may examine more inputs and strengthen the
-empirical evidence. It does not establish the desired claim that no input in
-$S_p(x_0,\epsilon)$ violates the property. The difference is coverage:
+the property, while every unexamined input in $S_p(x_0,\epsilon)$ remains
+unresolved. Running more attacks can examine more inputs and strengthen the
+empirical evidence. It still does not establish that no input in
+$S_p(x_0,\epsilon)$ violates the property. The decisive difference is coverage:
 **examined inputs** versus **all allowed inputs**.
 
 ## Certification covers every allowed input
@@ -165,8 +167,8 @@ $$
 f_y(x)>f_j(x)\quad\text{for every }j\neq y.
 $$
 
-The inequality says that cat has a strictly higher score than every other class
-for every allowed input. Proving it certifies
+The inequality requires cat to have a strictly higher score than every other
+class for every allowed input. Proving it certifies
 **local adversarial robustness** around $x_0$ at radius $\epsilon$.
 
 Because enumeration is impossible, a certificate must reason about the network
@@ -176,10 +178,10 @@ inequalities for every input in $S_p(x_0,\epsilon)$.
 
 ## Series map
 
-Our target is now precise: prove the score inequality over the allowed set.
-Parts 2 through 6 follow one small April classifier from its first proof through
-certified training. Parts 7 through 9 broaden the view to theoretical frontiers
-and probabilistic certification:
+This proof target determines the route through the series. Parts 2 through 6
+follow one small April classifier from its first proof through certified
+training. Parts 7 through 9 broaden the view to theoretical frontiers and
+probabilistic certification:
 
 - **[Part 2 — What would count as a proof?]({{ '/2026-08-21-neural-network-certification-2-writing-the-guarantee/' | relative_url }})** We will build a tiny ReLU classifier
   and certify it by hand.
@@ -203,9 +205,10 @@ and probabilistic certification:
 - **[Part 9 — How can randomized smoothing adapt?]({{ '/2026-08-21-neural-network-certification-9-adaptive-randomized-smoothing/' | relative_url }})** We will use denoisers with
   pretrained classifiers, then certify input-dependent noise through Dual RS.
 
-## Takeaway
+## Testing and certification answer different questions
 
-An attack asks, “Can I find an allowed input that changes the prediction?” One
-counterexample disproves robustness. If the attack finds none, the question
-remains open. Certification closes it by proving that **every input in the
-allowed set** keeps the required prediction.
+The distinction drives the rest of the series. An attack asks, “Can I find an
+allowed input that changes the prediction?” One counterexample disproves
+robustness. A failed search leaves the claim unresolved. Certification supplies
+the missing universal step by proving that **every input in the allowed set**
+keeps the required prediction.

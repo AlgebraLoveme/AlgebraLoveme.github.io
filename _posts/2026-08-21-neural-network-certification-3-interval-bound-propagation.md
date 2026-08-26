@@ -20,14 +20,14 @@ we proved that April's output margin remains positive when either input feature
 changes by at most $0.1$. The proof bounded two hidden neurons by hand. A larger
 network needs the same reasoning applied systematically across every layer.
 
-We now follow whole ranges of April's feature values through every neuron.
-Attach a lower and upper bound to each input, then calculate new bounds after
-every network operation. One pass through the network can cover the entire
-allowed set.
+To scale that proof, we follow whole ranges of April's feature values through
+every neuron. Attach a lower and upper bound to each input, then calculate new
+bounds after every network operation. One pass through the network can cover
+the entire allowed set.
 
 ## Give each input a lower and upper bound
 
-An **interval** $[\underline v,\overline v]$ represents every value $v$ satisfying
+An **interval** $[\underline v,\overline v]$ summarizes every value $v$ satisfying
 
 $$
 \underline v\leq v\leq\overline v.
@@ -41,7 +41,7 @@ x_1\in[0.4,0.6],\qquad x_2\in[0.4,0.6].
 $$
 
 These two intervals describe the same square used in Part 2. We now propagate
-them through the fixed classifier
+them through the fixed classifier:
 
 $$
 \begin{aligned}
@@ -75,14 +75,14 @@ z_2\in
 =[-0.2,0.2].
 $$
 
-The same endpoint rule handles any affine neuron. To compute the lower output
+These endpoint choices handle any affine neuron. To compute the lower output
 bound, use the lower input endpoint for a positive weight and the upper input
 endpoint for a negative weight. Reverse those choices for the upper output
 bound, then add the bias.
 
 ## Carry the bounds through ReLU
 
-ReLU is monotone, so applying it to an interval gives
+Because ReLU is monotone, applying it to an interval gives
 
 $$
 v\in[\underline v,\overline v]
@@ -91,7 +91,7 @@ v\in[\underline v,\overline v]
 \in[\max(0,\underline v),\max(0,\overline v)].
 $$
 
-The interval's position relative to zero determines one of three cases:
+The interval's position relative to zero determines which of three cases applies:
 
 - If $\overline v\leq0$, the neuron is always inactive and its output is $[0,0]$.
 - If $\underline v\geq0$, the neuron is always active and keeps the interval
@@ -113,7 +113,7 @@ $$
 
 ## Why combine the scores before bounding them?
 
-We could continue one score at a time. Using $h_1\in[0.3,0.7]$ and
+We could bound each score separately. Using $h_1\in[0.3,0.7]$ and
 $h_2\in[0,0.2]$ gives
 
 $$
@@ -128,10 +128,10 @@ $$
 m\in[0.5-0.4,\;1.1-0]=[0.1,1.1].
 $$
 
-That interval is sound, but it has already forgotten that both scores use the
-same $h_2$. Its lower endpoint combines the smallest cat score, which uses
-$h_2=0$, with the largest other score, which uses $h_2=0.2$. One hidden value
-cannot be both numbers at once.
+That interval contains every possible margin, but it has forgotten that both
+scores use the same $h_2$. Its lower endpoint combines the smallest cat score,
+which uses $h_2=0$, with the largest other score, which uses $h_2=0.2$. One
+hidden value cannot take both values at once.
 
 The property depends directly on the score difference, so we first combine the
 two final-layer formulas into that shared expression:
@@ -153,18 +153,18 @@ $$
 
 This algebraic merge of the final linear layer with the desired score
 difference is called **last-layer elision**. It preserves the layer's effect by
-rewriting that layer together with the property before computing bounds. Here
-it raises the margin's lower bound from $0.1$ to $0.3$.
+rewriting that layer together with the property before computing bounds. Here,
+the rewrite raises the margin's lower bound from $0.1$ to $0.3$.
 
 Every possible margin is therefore at least $0.3$. The model predicts cat for
-every input in $S_\infty(x_0,0.1)$, giving the same certificate we derived by
+every input in $S_\infty(x_0,0.1)$, which recovers the certificate derived by
 hand in Part 2.
 
 Applying these interval calculations layer by layer is called **interval bound
 propagation**, or **IBP**. Each operation encloses every value that operation can
 produce from the preceding intervals. The input intervals contain every
-allowed input. Each sound propagation step preserves that containment, so
-repeating the argument layer by layer makes the final interval contain every
+allowed input, and each sound propagation step preserves that containment.
+Repeating the argument layer by layer makes the final interval contain every
 possible margin. This induction is why a positive lower margin bound is a
 sound certificate.
 
@@ -172,13 +172,13 @@ Last-layer elision and the use of IBP bounds in training are studied in
 [On the Effectiveness of Interval Bound Propagation for Training Verifiably Robust Models](https://arxiv.org/abs/1810.12715).
 We will revisit that use in Part 6.
 
-IBP succeeds on April's radius-$0.1$ square. To see when its independent
-intervals begin to lose useful relationships, keep the network fixed and
-enlarge only the allowed input region.
+IBP succeeds on April's radius-$0.1$ square. To see when independent intervals
+lose useful relationships, keep the network fixed and enlarge only the allowed
+input region.
 
 ## Increase the radius: the bound becomes inconclusive
 
-Now allow each feature to change by $0.2$ instead of $0.1$:
+Now expand the allowed change for each feature from $0.1$ to $0.2$:
 
 $$
 x_1,x_2\in[0.3,0.7].
@@ -198,17 +198,21 @@ The propagation rules do not change. Applying them to the larger square gives
 | Margin after last-layer elision | $[-0.1,1.1]$ |
 
 Last-layer elision improves the lower bound from $-0.5$ to $-0.1$, but even the
-tighter margin interval crosses zero. This result does **not** provide an input
-with a negative margin, so it does not falsify the property. It also cannot
+tighter margin interval crosses zero. The interval alone supplies no concrete
+input with a negative margin, so it cannot falsify the property. It also cannot
 prove that every margin is positive. This IBP run must report **unknown**.
 
 We can locate where information disappeared. The lower endpoint $h_1=0.1$ is
 attained at $x_1=x_2=0.3$. The upper endpoint $h_2=0.4$ is attained at $x_1=0.7$
-and $x_2=0.3$. No single input produces both extremes. When the margin
-calculation combines them, it treats the two hidden values as if they could vary
-independently.
+and $x_2=0.3$. No single input produces both extremes. Combining the intervals
+in the margin calculation therefore allows the two hidden values to vary as if
+they were independent.
 
-## The propagation rule in one pass
+Each neuron is summarized by two endpoints. This fixed-size bookkeeping scales to
+networks of any depth, while the same summary can discard relationships between
+neurons. We can now state the calculation as an algorithm.
+
+## Turn the calculation into the IBP algorithm
 
 IBP follows the same four steps for a network of any depth:
 
@@ -223,7 +227,7 @@ If the resulting margin lower bound is positive, the property is verified. A
 nonpositive lower bound cannot certify the property. Falsification still
 requires a concrete allowed input that violates it.
 
-## Takeaway
+## IBP scales the proof but can lose relationships
 
 At radius $0.1$, interval propagation and last-layer elision carry April's
 entire input square through the network and prove $m\geq0.3$. At radius $0.2$,

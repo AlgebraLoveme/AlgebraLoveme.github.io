@@ -15,9 +15,10 @@ excerpt: "Follow noisy copies of April's photo from majority vote to a probabili
 
 ## One photograph of April becomes a cloud
 
-Earlier methods tracked every allowed perturbation through every network layer.
-Randomized smoothing instead treats a neural network as a black box and
-certifies a new classifier built from its noisy votes.
+The deterministic methods in Parts 2 through 6 tracked every allowed
+perturbation through every network layer. Randomized smoothing takes a
+different route: it treats a neural network as a black box and certifies a new
+classifier built from its noisy votes.
 
 We now leave April's two-class teaching model and let the black-box base
 classifier use a richer label set: **Siberian cat**, **tree**, and **other
@@ -75,6 +76,9 @@ votes.
   <figcaption>The base classifier may vary across the cloud; the smoothed classifier returns its most probable label.</figcaption>
 </figure>
 
+The vote identifies the smoothed label. Certification must also convert that
+label's probability lead into a distance around April's input.
+
 ## A probability gap becomes a certified radius
 
 The 20 dots above illustrate a Gaussian cloud. Their visible frequencies are
@@ -112,9 +116,9 @@ $$
 p_B\leq 1-p_A.
 $$
 
-This is the common **relaxed competitor bound**. It treats all probability
-outside $c_A$ as though one hypothetical competitor owns it, so it requires no
-separate estimate of the runner-up class.
+The inequality above is the common **relaxed competitor bound**. It treats all
+probability outside $c_A$ as though one hypothetical competitor owns it, so it
+requires no separate estimate of the runner-up class.
 
 Substituting the valid choice $p_B=1-p_A$ into the two-probability formula and
 using $\Phi^{-1}(1-p)=-\Phi^{-1}(p)$ gives
@@ -124,10 +128,11 @@ R_A=\sigma\Phi^{-1}(p_A),
 \qquad p_A>\frac12.
 $$
 
-This is the common **one-probability certificate**, and it remains valid for
-any number of classes. When a separately computed $p_B$ is smaller than
-$1-p_A$, the two-probability formula uses that extra information to certify a
-larger radius.
+The resulting formula is the common **one-probability certificate**, and it
+remains valid for any number of classes. When a separately computed $p_B$ is
+smaller than $1-p_A$, the two-probability formula uses that extra information
+to certify a larger radius. The Monte Carlo procedure below will estimate a
+lower bound on $p_A$ and substitute it into this one-probability formula.
 
 An **adversarial input** is $x+\delta$, deliberately chosen subject to a norm
 limit. The theorem states that
@@ -169,7 +174,7 @@ Both radii are sound. The first uses the additional fact that the strongest
 competitor has probability at most $0.10$, while the second needs only the
 leading-class probability.
 
-Here is the bridge from a vote gap to a distance. Write
+To see why these formulas cover a whole ball, write
 $r=\lVert\delta\rVert_2$. After the Gaussian center moves by $\delta$, the
 leading-class probability is at least
 
@@ -183,7 +188,8 @@ $$
 \Phi\!\left(\Phi^{-1}(p_B)+\frac r\sigma\right).
 $$
 
-The first remains larger whenever
+The leading-class lower bound remains larger than the competitor upper bound
+whenever
 $r<\frac{\sigma}{2}(\Phi^{-1}(p_A)-\Phi^{-1}(p_B))$. The Neyman–Pearson lemma
 justifies these worst-case bounds: among decision regions with the stated
 original probability, a half-space perpendicular to $\delta$ changes the most
@@ -208,42 +214,44 @@ $r<\sigma\Phi^{-1}(p_A)$, recovering $R_A$ above.
 
 ## Where does probability enter the certificate?
 
-There are two layers of probability, and separating them prevents a common
-misreading.
+Probability enters the certificate in two different ways, and separating them
+prevents a common misreading.
 
-First, Gaussian noise defines the ideal classifier $g$. If its class
-probabilities were known exactly, the radius theorem would make a deterministic
-statement: every input in the ball receives the same label from $g$.
+First, Gaussian noise defines the mathematical smoothed classifier $g$. If its
+class probabilities were known exactly, the radius theorem would make a
+deterministic statement: every input in the ball receives the same label from
+$g$.
 
 Second, a computer cannot evaluate the exact probabilities of a modern neural
-network. A standard sound procedure separates selection from estimation:
+network. A sound finite-sample procedure therefore separates selection from
+estimation:
 
-1. use a pilot batch of noisy inputs to choose a candidate class $c_A$.
-2. use a fresh, larger batch to compute a one-sided confidence lower bound
+1. Use a pilot batch of noisy inputs to choose a candidate class $c_A$.
+2. Use a fresh, larger batch to compute a one-sided confidence lower bound
    $\underline p_A$ for that class.
-3. use $1-\underline p_A$ as an upper bound for every competing class.
-4. return $R=\sigma\Phi^{-1}(\underline p_A)$ when
+3. Use $1-\underline p_A$ as an upper bound for every competing class.
+4. Return $R=\sigma\Phi^{-1}(\underline p_A)$ when
    $\underline p_A>1/2$, and abstain otherwise.
 
-This is the finite-sample form of the one-probability certificate above. A
-confidence lower bound replaces the ideal $p_A$, so sampling uncertainty stays
-inside the stated guarantee.
+The procedure is the finite-sample form of the one-probability certificate
+above. A confidence lower bound replaces the ideal $p_A$, so sampling
+uncertainty stays inside the stated guarantee. Choose the one-sided bound with
+failure probability $\alpha$.
 
 The practical certificate therefore says:
 
-> Over the Monte Carlo sampling, the chance of returning an invalid
-> label-radius pair is at most $\alpha$.
+> With probability at least $1-\alpha$ over the Monte Carlo samples, the
+> returned label-radius pair is valid.
 
-These samples play a different role from attack samples. They estimate a
-probability under the specified Gaussian distribution. A statistical
+The noisy samples here are evaluation samples, not attack samples. They
+estimate a probability under the specified Gaussian distribution. A statistical
 confidence bound on that probability, combined with the analytic smoothing
 theorem, covers every adversarial perturbation in the certified ball. The
-remaining failure probability $\alpha$ concerns the Monte Carlo certification
+failure probability $\alpha$ belongs to the Monte Carlo certification
 procedure.
 
-The standard certification procedure uses many noisy samples, computes the
-confidence bound, and either returns a radius or **abstains**. A narrow vote
-margin may identify the winning class while providing insufficient statistical
+The algorithm either returns this radius or **abstains**. A narrow vote margin
+may identify the winning class while providing insufficient statistical
 evidence for a positive radius. Abstention keeps sampling uncertainty inside
 the stated guarantee.
 
@@ -253,8 +261,9 @@ advantage under Gaussian noise.
 
 ## How should the base classifier be trained?
 
-The radius grows when the correct class remains highly probable under Gaussian
-noise. Training methods differ in how they create that probability advantage.
+At a fixed noise level $\sigma$, the radius grows when the correct class
+remains highly probable under Gaussian noise. Training methods differ in how
+they create that probability advantage.
 
 Three broad strategies appear repeatedly:
 
@@ -284,7 +293,7 @@ an incorrect label, or abstain. A common summary is the **average certified
 radius** (ACR): add the radii of correctly classified inputs, assign radius zero
 to misclassified or abstained inputs, and divide by the dataset size.
 
-The average hides how the radii are distributed. More subtly, the ideal radius
+An average hides how the radii are distributed. More subtly, the ideal radius
 
 $$
 R=\sigma\Phi^{-1}(p_A)
@@ -330,9 +339,9 @@ bounds, so it also depends on the sample count and confidence level. The
 curves reveal whether progress reaches many inputs, including difficult ones,
 or mostly extends radii that were already large.
 
-## Put the probabilistic pipeline together
+## From noisy votes to a probabilistic certificate
 
-Randomized smoothing can now be read as one chain:
+The pieces form one chain:
 
 $$
 \text{base classifier}

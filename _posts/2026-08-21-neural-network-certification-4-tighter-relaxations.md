@@ -30,25 +30,26 @@ $$
 h_1\in[0.1,0.9],\quad h_2\in[0,0.4].
 $$
 
-Combining the final layer with the score difference, a rewrite called
-**last-layer elision**, gives the margin $m=0.2+h_1-h_2$. Treating the two
-hidden intervals independently gives
+We can eliminate the final affine layer and write the score difference directly
+as $m=0.2+h_1-h_2$. This rewrite is called **last-layer elision**. Treating the
+two hidden intervals independently gives
 
 $$
 m\geq0.2+0.1-0.4=-0.1.
 $$
 
-This lower bound is negative, so IBP returns **unknown**. But the calculation
+This lower bound is negative, so IBP returns **unknown**. The calculation
 combines two hidden values that cannot occur together. The value $h_1=0.1$
 comes from $x_1=x_2=0.3$, whereas $h_2=0.4$ comes from $x_1=0.7$ and
 $x_2=0.3$.
 
-Neither interval is wrong. The missing information is the relationship between
+Each interval is sound on its own. What is missing is the relationship between
 each hidden neuron and April's input.
 
 ## Keep the input relationship
 
-For the second hidden neuron, IBP remembers only
+To recover that missing dependency, start with the second hidden neuron. IBP
+remembers only
 
 $$
 0\leq h_2\leq0.4.
@@ -62,7 +63,8 @@ $$
 
 The value of $h_2$ therefore changes with $x_1-x_2$. Its feasible value remains
 tied to the input even though the interval $[0,0.4]$ no longer records that
-relationship. We need a sound description that preserves some of it.
+relationship. The next step is a sound description that retains this dependence
+while remaining tractable.
 
 ## First repair: enclose an unstable ReLU with three lines
 
@@ -72,8 +74,8 @@ $$
 z_2=x_1-x_2\in[-0.4,0.4].
 $$
 
-This interval crosses zero, so the ReLU is unstable. Three lines enclose its
-graph over the interval:
+This interval crosses zero, so the ReLU is unstable: its active phase can change
+within the input region. Three lines enclose its graph over the interval:
 
 $$
 \begin{aligned}
@@ -89,23 +91,22 @@ $$
   <figcaption>Together, the blue upper line and the black ReLU branches form the shaded enclosure.</figcaption>
 </figure>
 
-The upper line joins the ReLU endpoints $(-0.4,0)$ and $(0.4,0.4)$. Because
-ReLU is convex, the segment between those endpoints stays above its graph. For
-any unstable ReLU with $z\in[\ell,u]$ and $\ell<0<u$, the same chord is
+The upper line joins the ReLU endpoints $(-0.4,0)$ and $(0.4,0.4)$. Convexity
+of ReLU guarantees that the segment between those endpoints stays above its
+graph. For any unstable ReLU with $z\in[\ell,u]$ and $\ell<0<u$, the same chord is
 
 $$
 \operatorname{ReLU}(z)\leq\frac{u}{u-\ell}(z-\ell).
 $$
 
-The two lower lines and the upper chord form the **Triangle relaxation**: the
+The two lower lines and the upper chord form the **Triangle relaxation**, the
 convex hull of the ReLU graph over its known interval. Every exact ReLU value
-lies inside the triangle, so the enclosure is sound. This relaxation appears
-in
+lies inside the triangle, so the enclosure is sound. This relaxation appears in
 [Formal Verification of Piece-Wise Linear Feed-Forward Neural Networks](https://arxiv.org/abs/1705.01320).
 
 ## Let Triangle certify April's larger square
 
-April's first ReLU stays active because
+Now apply this enclosure to the full input square. April's first ReLU stays active because
 
 $$
 z_1=x_1+x_2-0.5\in[0.1,0.9].
@@ -148,19 +149,21 @@ $$
 The lower bound is positive. Triangle has turned IBP's unknown into a
 certificate for the radius-$0.2$ square.
 
+The calculation is small because April's network has only one unstable ReLU.
+A larger network must carry a triangle for every unstable ReLU, which creates a
+scaling question.
+
 ## Why does Triangle become expensive?
 
-For April, one triangle is easy to carry. A modern network may contain
-thousands of unstable ReLUs. Triangle then leaves us two computational choices.
-We can retain every hidden variable and solve one growing global linear
-program, or eliminate hidden variables so that each bound refers only to
-earlier variables.
+With many unstable ReLUs, we face two computational choices. We can retain every
+hidden variable and solve one growing global linear program, or eliminate
+hidden variables so that each bound refers only to earlier variables.
 
 With $k$ unstable ReLUs, retaining them adds $3k$ inequalities, plus the
 variables and affine equations for the network. The initial constraint count
 grows linearly, but the resulting linear program can become large. Eliminating
-a hidden variable instead projects the feasible region cut out by the
-inequalities---a **polytope**---onto the remaining variables. This projection
+a hidden variable instead projects the feasible set, a **polytope** (a region
+defined by linear inequalities), onto the remaining variables. This projection
 can multiply constraints.
 
 <details markdown="1">
@@ -203,7 +206,9 @@ projection can generate $256$. Repeated multiplication creates the explosion.
 This pairwise operation is called **Fourier–Motzkin elimination**. Retaining
 all hidden variables avoids the projection explosion but leaves a large global
 linear program. Explicitly eliminating them can generate many pairwise
-inequalities. We now have a reason to keep only selected linear relationships.
+inequalities. The choice is therefore between a large global program and
+potentially explosive projection. A middle strategy keeps a small, selected set
+of linear relationships.
 
 </details>
 
@@ -215,15 +220,7 @@ one affine upper expression for each neuron. For an unstable ReLU, it stores
 exactly one of Triangle's two lower lines, $h\geq0$ or $h\geq z$, together with
 the upper chord.
 
-DeepPoly decides which lower bound to retain with its **min-area heuristic**.
-Both candidates share the same upper chord, so DeepPoly compares the area
-between each candidate and that chord. This area is a geometric proxy for how
-much spurious region the relaxation admits. A point in that region satisfies the
-relaxed inequalities while falling outside the exact ReLU graph. Choosing the
-smaller-area candidate heuristically reduces this spurious region and preserves
-more information.
-
-### Why the constraints do not multiply
+### Why DeepPoly's constraints do not multiply
 
 Suppose DeepPoly has summarized a hidden value $h$ with two affine expressions:
 
@@ -248,13 +245,12 @@ smallest value uses the upper expression. DeepPoly makes one sign-directed
 substitution and avoids pairing every lower constraint with every upper
 constraint.
 
-Crucially, each substitution produces one affine expression, not a family of
-pairwise constraints. DeepPoly keeps a fixed number of summaries per neuron:
-one lower expression, one upper expression, and one interval. An expression
-may involve many earlier neurons, but the number of stored expressions does
-not multiply. DeepPoly never constructs the up to $pq$ pairwise inequalities
-produced by explicit projection. This is how it avoids the projection
-explosion.
+Each substitution produces one affine expression. DeepPoly keeps a fixed number
+of summaries per neuron: one lower expression, one upper expression, and one
+interval. An expression may involve many earlier neurons, but the number of
+stored expressions does not multiply. DeepPoly therefore avoids constructing
+the up to $pq$ pairwise inequalities produced by explicit projection. This
+fixed-size summary prevents the projection explosion.
 
 DeepPoly applies the sign rule to the current margin expression, then repeats
 the substitution backward until only input variables remain. This procedure
@@ -279,11 +275,20 @@ $$
 
 This finishes the certificate.
 
+The fixed-size summary controls the number of stored constraints, yet an
+unstable ReLU still offers two possible lower lines. DeepPoly decides which one
+to retain with its **min-area heuristic**. Both candidates share the same upper
+chord, so it compares the area between each candidate and that chord. This area
+is a geometric proxy for how much spurious region the relaxation admits. A point
+in that region satisfies the relaxed inequalities while falling outside the
+exact ReLU graph. Choosing the smaller-area candidate heuristically reduces
+this spurious region and preserves more information.
+
 ### Optional: How DeepPoly chooses its lower ReLU line
 
 April's certificate needed only the upper bound on $h_2$. Other output
-expressions can depend on its lower bound, so the geometric derivation of
-DeepPoly's min-area switch rule remains available as a deeper step.
+expressions can depend on its lower bound. The following optional derivation
+explains the geometric basis of DeepPoly's min-area switch rule.
 
 <details markdown="1">
 <summary>Derive DeepPoly's min-area switch rule</summary>
@@ -364,7 +369,7 @@ uses only the upper bound on $h_2$.
 
 </details>
 
-DeepPoly avoids multiplying constraints, but it still back-substitutes to
+DeepPoly avoids multiplying constraints, yet it still back-substitutes to
 tighten intervals for many hidden values. [CROWN-IBP](https://arxiv.org/abs/1906.06316)
 reduces this cost by using IBP for hidden intervals and reserving
 back-substitution for the final margins.
@@ -373,17 +378,19 @@ back-substitution for the final margins.
 
 April's certificate required one backward calculation for the final margin.
 DeepPoly must also obtain a numerical interval $[\ell,u]$ for each hidden
-pre-activation before relaxing its ReLU: the interval identifies a stable or
-unstable ReLU and determines the upper chord. To tighten such an intermediate
-interval, DeepPoly treats that hidden value as a temporary output and
-back-substitutes its lower and upper expressions toward the input. The
+pre-activation before relaxing its ReLU. The interval identifies whether the
+ReLU is stable (always active or always inactive) or unstable, and determines
+the upper chord. To tighten such an intermediate interval, DeepPoly treats that
+hidden value as a temporary output and back-substitutes its lower and upper
+expressions toward the input. The
 [GPUPoly analysis of DeepPoly](https://arxiv.org/abs/2007.10868) makes this
 all-layer back-substitution cost explicit.
 
-This work grows with the width of the hidden layers. Bounding every value in a
-layer of width $n_m$ creates $2n_m$ backward targets: one lower and one upper
-bound per value. By comparison, a $C$-class classifier has only $C-1$ margins
-against the true class. A feature map with $64$ channels of size $32\times32$
+The cost of this all-layer back-substitution grows with the width of the hidden
+layers. Bounding every value in a layer of width $n_m$ creates $2n_m$ backward
+targets: one lower and one upper bound per value. By comparison, a $C$-class
+classifier has only $C-1$ margins against the true class. A feature map with
+$64$ channels of size $32\times32$
 contains
 
 $$
@@ -405,8 +412,9 @@ CROWN-IBP uses three steps:
 For April's one-hidden-layer network, the IBP pass already obtains the exact
 pre-activation intervals $z_1\in[0.1,0.9]$ and $z_2\in[-0.4,0.4]$.
 CROWN-IBP therefore builds the same ReLU lines and repeats the margin
-calculation above, giving $m\geq0.1$. This equality is specific to April's
-shallow network, where IBP computes exact intervals for the first affine layer.
+calculation above, giving $m\geq0.1$. This matching bound is specific to
+April's shallow network, where IBP computes exact intervals for the first
+affine layer.
 
 The forward IBP pass is cheap because it carries two numbers per hidden value.
 In a deeper network, its intervals may already combine incompatible hidden
@@ -433,11 +441,15 @@ back-substitution for the final margin.
 | DeepPoly | Selected affine bounds and back-substitution | $0.1$ | Verified |
 | CROWN-IBP | IBP hidden intervals and final-margin back-substitution | $0.1$ | Verified |
 
-## Three abstractions, one safety rule
+The methods agree on April's tiny network despite representing reachable
+values differently. Why can we trust each positive result?
 
-The four rows use three underlying representations: CROWN-IBP combines IBP
+## Why are all three certificates trustworthy?
+
+The table compares four methods built from three representation ideas: boxes,
+joint linear constraints, and selected affine bounds. CROWN-IBP combines IBP
 intervals for hidden bounds with affine relaxations for final margins. The
-comparison above measures how precisely each representation bounded April's
+comparison above measures how tightly each representation bounded April's
 margin. Every certificate also depends on a shared validity condition: it must
 contain every value the exact network can reach.
 
@@ -447,12 +459,13 @@ contain every exact value.
 
 IBP uses boxes. Triangle uses a polytope cut out by linear constraints.
 DeepPoly uses intervals together with selected affine bounds. These are
-different forms of **abstract interpretation**, but they obey the same safety
-rule: never discard a value that the network can actually produce.
+different forms of **abstract interpretation**, a framework for reasoning about
+complicated reachable sets through simpler enclosures. They obey the same
+safety rule: never discard a value that the network can actually produce.
 
-Soundness makes a positive bound trustworthy. Precision determines whether
-the bound becomes positive in the first place. Enlarging April's input region
-once more shows what happens when even DeepPoly remains inconclusive.
+Soundness makes a positive bound trustworthy. Precision determines whether the
+bound becomes positive in the first place. The distinction becomes concrete
+when we enlarge April's input region and see DeepPoly remain inconclusive.
 
 ## What should we do if the bound is inconclusive?
 
@@ -481,13 +494,11 @@ m
 $$
 
 The DeepPoly bound is inconclusive. It has neither proved the property nor
-found an input that violates it.
+found an input that violates it. The next remedy is to divide the input square
+and analyze each smaller region separately, where a ReLU bound can follow its
+graph more closely.
 
-We can now divide the input square into smaller regions and analyze each one
-separately. A ReLU bound fitted to a smaller region can follow its graph more
-closely.
-
-## Takeaway
+## Tighter relaxations preserve relationships without losing soundness
 
 IBP lost the relationship between April's hidden neurons and returned unknown
 at radius $0.2$. Triangle restored that relationship and proved
@@ -497,5 +508,5 @@ back-substitution, without constructing the facets created by explicit
 projection. CROWN-IBP reduced the cost of intermediate bounds by computing them
 with IBP, then spent linear back-substitution only on the final margins.
 
-At radius $0.24$, the new lower bound is $-0.02$. Part 5 asks: **can splitting
-the input region turn this unknown into a proof?**
+At radius $0.24$, the new lower bound is $-0.02$. Part 5 applies this remedy:
+**can splitting the input region turn this unknown into a proof?**

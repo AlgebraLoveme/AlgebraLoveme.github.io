@@ -22,9 +22,9 @@ $-0.02$, so the verifier had to split the input region before the proof became
 clear.
 
 The classifier already made the right prediction throughout the region. Its
-parameters made that fact difficult for a fast bound to establish. This
-suggests a new question: **can training learn a robust classifier whose
-robustness is also easy to prove?**
+parameters made that fact difficult for a fast bound to establish. Training
+therefore has a second goal beyond fitting the data: **can it learn a robust
+classifier whose robustness is also easy to prove?**
 
 ## The target is the worst loss in the allowed region
 
@@ -52,7 +52,8 @@ $$
 
 Computing this maximum exactly for every training example and every parameter
 update would require solving a verification problem inside each training step.
-Training methods therefore replace it with a tractable signal.
+Training methods therefore replace it with a tractable signal that approximates
+the same target.
 
 ## Attacks and certificates bracket the target
 
@@ -67,8 +68,8 @@ $$
 Because $x_{\mathrm{adv}}$ is one candidate in the maximization,
 $L_{\mathrm{attack}}$ is a lower bound on the exact worst-case loss.
 
-A sound bound-propagation method takes the opposite direction. Suppose it
-proves
+A sound bound-propagation method covers the whole region. Suppose it returns a
+sound lower bound
 
 $$
 \underline m_\theta\leq\min_{x'\in S}m_\theta(x').
@@ -98,7 +99,7 @@ of the entire allowed region. The middle quantity is the exact training target.
 At the center $x=(0.5,0.5)$, April's margin is $0.70$, giving
 $L_{\mathrm{clean}}\approx0.403$. An attack can reach $(0.26,0.26)$, where the
 margin is $0.22$ and the loss is approximately $0.589$. Part 5's exact proof
-tells us that this attack happened to find a worst-case point.
+confirms that this point attains the worst-case margin.
 
 The sound DeepPoly lower margin $-0.02$ gives
 $L_{\mathrm{cert}}\approx0.703$. At the same radius, IBP gives
@@ -133,33 +134,34 @@ The bound is recomputed after each parameter update because changing $\theta$
 changes both the network and its certificate. A minimal training step is:
 
 1. Take a batch of labeled examples.
-2. Build the allowed region $S_p(x,\epsilon)$ around each example.
+2. Build the allowed region $S_p(x,\epsilon)$ around each example according to
+   the chosen norm $p$ and radius $\epsilon$.
 3. Propagate sound bounds through the current network.
 4. Convert the resulting margin bounds into $L_{\mathrm{cert}}$.
 5. Differentiate that loss and update $\theta$.
 
-This loop rewards two useful changes at once. It can increase the true margins,
-and it can reshape the network so that bound propagation loses less information.
-[Interval bound propagation (IBP)](https://arxiv.org/abs/1810.12715) carries
-independent intervals through the network. [CROWN-IBP](https://arxiv.org/abs/1906.06316),
-introduced in [Part 4's discussion of back-substitution cost]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/#scaling-back-substitution-with-crown-ibp' | relative_url }}),
-uses IBP for intermediate intervals and spends a linear backward pass on the
-final class margins. Both produce sound robust training signals.
+Optimizing this bound can improve the network's true margins and reshape the
+network so that bound propagation loses less information. Two common sound
+choices are [interval bound propagation (IBP)](https://arxiv.org/abs/1810.12715),
+which carries independent intervals through the network, and
+[CROWN-IBP](https://arxiv.org/abs/1906.06316). As introduced in
+[Part 4's discussion of back-substitution cost]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/#scaling-back-substitution-with-crown-ibp' | relative_url }}),
+CROWN-IBP uses IBP for intermediate intervals and spends a linear backward pass
+on the final class margins. Both produce sound robust training signals.
 
 ## Why train with an unsound surrogate?
 
 April's numbers show the central optimization problem. The exact worst-case
 loss is $0.589$, while the IBP training signal is $0.832$. The extra loss comes
 from spurious behaviors admitted by the relaxation, which the exact network
-cannot produce. During training, losses from the exact network and from these
-spurious behaviors both influence the optimizer.
-This pressure can tighten bounds and impose strong regularization on the
-learned classifier. The relationship between IBP bound tightness and this
-regularization is analyzed in
+cannot produce. The upper bound therefore applies pressure from both reachable
+and spurious behaviors during training. This pressure can tighten bounds and
+impose strong regularization on the learned classifier. The relationship between
+IBP bound tightness and this regularization is analyzed in
 [Understanding Certified Training with Interval Bound Propagation](https://arxiv.org/abs/2306.10426).
 
-An **unsound training surrogate** uses a more targeted approximation
-$L_{\mathrm{proxy}}$. The guarantee
+An **unsound training surrogate** uses a targeted approximation
+$L_{\mathrm{proxy}}$ in place of the full-region upper bound. The guarantee
 
 $$
 L_{\mathrm{proxy}}\geq L_{\mathrm{worst}}
@@ -176,11 +178,11 @@ should a training surrogate replace?**
 ## Four unsound routes toward a useful training signal
 
 The four methods below answer that question at different points in the
-computation. A deep network can be viewed as a **feature extractor** followed by
-a **classifier**.
-The feature extractor turns an input into a hidden representation. The space of
-these representations is called **feature space**. The methods below combine
-IBP with attack-based search, commonly [projected gradient descent
+computation. To describe TAPS, view a deep network as a **feature extractor**
+followed by a **classifier**. The feature extractor turns an input into a
+hidden representation, and the space of these representations is called
+**feature space**. The methods below combine IBP with attack-based search,
+commonly [projected gradient descent
 (PGD)]({{ '/2026-08-21-neural-network-certification-1-what-are-we-proving/' | relative_url }}#an-attack-searches-for-an-allowed-input-that-fails).
 
 | Method | Training signal | Source of unsoundness |
@@ -193,7 +195,7 @@ IBP with attack-based search, commonly [projected gradient descent
 Each method gives up the full-region upper-bound guarantee at a different point
 in the computation and relies on a corresponding working assumption.
 
-**SABR bets that the attack found the hard neighborhood.** SABR, short for
+**SABR assumes that the attack found the hard neighborhood.** SABR, short for
 **Small Adversarial Bounding Regions**, first uses PGD to decide where bounding
 effort should go. For April, it would search the radius-$0.24$ square for a hard
 point, draw a smaller square around that point, and run IBP on the smaller
@@ -203,21 +205,22 @@ exactly. The local box can then cover the most relevant neighborhood while its
 smaller width makes the IBP bound tighter. The bound is sound for that local
 box. The box may omit the true worst-case region of the original square.
 
-**TAPS lets two approximation errors pull in opposite directions.** It splits
-the network into a feature extractor and a classifier. IBP carries the full
-input region through the feature extractor and produces a box containing every
-hidden feature vector that the true network can produce. Because this box can
-also contain spurious feature vectors, its largest classifier loss may be too
-high relative to the true network. PGD then searches inside the box, but may
-miss the box's hardest feature vector and return a loss that is too low for that
-box. TAPS aims for these upward and downward errors to offset partly, yielding
-a useful approximation of the true worst-case loss. Their sizes need not match,
-so the result has no guaranteed side relative to the exact loss.
+**TAPS approximates both the reachable feature set and the search within it.**
+It splits the network into a feature extractor and a classifier. IBP carries the
+full input region through the feature extractor and produces a box containing
+every hidden feature vector that the true network can produce. Because this box
+can also contain spurious feature vectors, its largest classifier loss may be
+too high relative to the true network. PGD then searches inside the box and may
+miss the box's hardest feature vector, returning a loss that is too low for
+that box. TAPS aims for these upward and downward errors to offset partly,
+yielding a useful approximation of the true worst-case loss. The two errors
+need not match, so the result has no guaranteed side relative to the exact loss.
 
-**STAPS combines the two bets.** It first selects SABR's small input box and
-then applies TAPS's feature-space search. The attack chooses a locally hard
-input region, and TAPS's search then aims to keep the resulting training signal
-precise.
+**STAPS combines SABR's local input box with TAPS's feature-space search.** It
+first uses PGD to select a locally hard input region and then applies TAPS's
+feature-space search. The local box can omit the true worst-case region, while
+feature-space PGD can miss the hardest point in its overapproximated feature
+box. The combined signal therefore has no full-region upper-bound guarantee.
 
 Multi-task learning with IBP (MTL-IBP) makes the interpolation explicit:
 
@@ -230,8 +233,8 @@ $$
 **MTL-IBP searches between the two sides of the bracket.** The attack loss lies
 at or below the exact worst-case loss, while the IBP loss lies at or above it.
 The convex combination moves continuously between those two endpoints. A
-well-chosen $\alpha$ may therefore make their opposing errors balance and place
-the training signal closer to the unknown exact loss.
+well-chosen $\alpha$ may therefore balance their opposing errors and place the
+training signal closer to the unknown exact loss.
 
 For $0<\alpha<1$, the blend has no guaranteed order relative to the exact
 worst-case loss. Its useful role is to control the training trade-off: small
@@ -244,7 +247,7 @@ loss need not produce the best trained model.
 
 ## Training soundness and certificate soundness are separate
 
-The distinction becomes operational when training ends: we freeze the network
+The distinction becomes operational when training ends. We freeze the network
 and run a sound verifier over the full allowed region. Every property proved by
 that verifier has a valid certificate, regardless of the objective that
 produced the network.
@@ -258,13 +261,13 @@ The complete workflow has two stages:
 
 An unsound training loss cannot serve as the final certificate. Its purpose is
 to produce a network that a separate sound verifier can certify successfully.
-A sound evaluation verifier can therefore produce valid certified accuracy for
+That evaluation verifier can therefore produce valid certified accuracy for
 SABR-, TAPS-, STAPS-, and MTL-IBP-trained networks.
 
 ## How do the training methods compare under one benchmark?
 
-The mechanisms above explain why each objective might help. We now want to
-compare the networks they produce. A fair benchmark should use the same
+The mechanisms above explain why each objective might help. The next question
+is how the resulting networks compare. A fair benchmark should use the same
 architecture, threat model, and evaluation protocol for every method. It should
 then measure how often each network classifies clean inputs correctly and how
 often a sound verifier proves robustness.
@@ -292,24 +295,24 @@ $1000$ seconds per image, and timed-out cases remain uncertified.
 | STAPS | Unsound | 77.05% | 0.72% | 64.21% |
 | MTL-IBP | Unsound | 78.82% | 0.62% | 64.41% |
 
-All four unsound objectives improve both natural accuracy and MN-BaB-certified
-accuracy over the two sound objectives in this matched setting. CROWN-IBP is
-the strongest sound row on both measures. Relative to CROWN-IBP, the changes in
-natural and MN-BaB-certified accuracy are:
+In this matched setting, all four unsound objectives improve both natural
+accuracy and MN-BaB-certified accuracy over the two sound objectives. CROWN-IBP
+is the strongest sound row on both measures. Relative to CROWN-IBP, the changes
+in natural and MN-BaB-certified accuracy are:
 
 - **SABR:** $+10.26$ and $+6.50$ percentage points.
 - **TAPS:** $+6.84$ and $+4.16$ percentage points.
 - **STAPS:** $+9.45$ and $+7.10$ percentage points.
 - **MTL-IBP:** $+11.22$ and $+7.30$ percentage points.
 
-The IBP-certified column reveals another part of the story. IBP proves
+The IBP-certified column reveals another part of the comparison. IBP proves
 $54.22\%$ of the IBP-trained model robust, while it proves only $0.72\%$ of the
 STAPS model and $0.62\%$ of the MTL-IBP model robust. MN-BaB raises those last
 two certified accuracies to $64.21\%$ and $64.41\%$. The models stay fixed
-across the two certification columns. MN-BaB proves much more of their
-robustness than IBP.
+across the two certification columns, so the change comes from using a
+different verifier. MN-BaB proves much more of their robustness than IBP.
 
-## Takeaway
+## Train with a useful signal, certify with a sound verifier
 
 Robust training ideally minimizes the exact worst-case loss. Attacks supply a
 lower estimate by searching for hard inputs. Sound bound propagation supplies
