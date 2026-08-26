@@ -261,6 +261,28 @@ although the exact network output there is $1$. The envelope is optimal for
 $c$ as a function of $a$ alone. Its spurious value survives because the
 envelope does not record how $c$ and $b=x_2$ depend on the same inputs.
 
+This calculation could still leave an architectural escape route: rewrite
+$\max(x_1,x_2)$ as a different ReLU network whose single-neuron relaxation is
+exact. [Expressivity of ReLU-Networks under Convex
+Relaxations](https://arxiv.org/abs/2311.04015) closes that route. It proves that
+for every finite ReLU network computing the two-dimensional maximum exactly,
+Triangle is inexact on some input box. Triangle already uses the tightest
+convex envelope of each ReLU separately, so no weaker single-neuron convex
+relaxation can avoid the barrier.
+
+The paper calls a network **precisely analyzable** when it computes the target
+function exactly and the relaxation returns its exact output range on every
+input box. This demand does not contradict Frontier 1. There we could choose a
+network that approximates a target within a positive error tolerance. Here the
+network must equal $\max(x_1,x_2)$ and its bounds must have zero error.
+
+The obstruction also depends on having multiple inputs. For functions of one
+variable, the same paper constructs suitable Triangle and DeepPoly networks
+that are precisely analyzable for every convex continuous piecewise-linear
+function. With two inputs, the missing relationship between $c$ and $b$ cannot
+be recovered from separate ReLU envelopes. The next step is therefore to let
+one relaxation see several values together.
+
 ## Joint constraints remove the spurious value
 
 A multi-neuron relaxation derives constraints for a group of values together.
@@ -289,10 +311,10 @@ multi-neuron relaxation recovers the exact range $[0,1]$.
 </figure>
 
 The [expressiveness analysis of multi-neuron convex
-relaxations](https://arxiv.org/abs/2410.06816) proves that this example reflects
-a genuine separation. No single-neuron relaxation can exactly bound every ReLU
-network encoding the two-dimensional maximum, while a suitable multi-neuron
-relaxation bounds the construction above exactly.
+relaxations](https://arxiv.org/abs/2410.06816) develops the other side of this
+separation. The single-neuron barrier persists for the two-dimensional
+maximum, while a suitable multi-neuron relaxation bounds the construction
+above exactly.
 
 Computing the joint convex hull of an entire network can be expensive.
 Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) therefore
