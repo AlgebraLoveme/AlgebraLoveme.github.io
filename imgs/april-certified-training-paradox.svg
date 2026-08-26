@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
   <title id="title">Tight verification and difficult certified training</title>
-  <desc id="desc">At fixed weights a tighter sound bound lies closer to the exact loss. Across changing weights a schematic loose bound changes smoothly while a tighter bound has jumps and high sensitivity.</desc>
+  <desc id="desc">At fixed weights a tighter sound bound lies closer to the exact loss. Across changing weights a loose bound changes smoothly while a tighter bound has jumps and high sensitivity.</desc>
   <rect width="1000" height="540" fill="#fff"/>
   <text x="500" y="38" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="24" font-weight="650" fill="#111827">A bound plays two different roles</text>
   <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
@@ -16,7 +16,7 @@
     <line x1="132" y1="208" x2="370" y2="208" stroke="#59449b" stroke-width="8"/>
     <text x="250" y="195" text-anchor="middle" font-size="16" font-weight="600" fill="#49397f">looser sound bound</text>
     <path d="M384 304 L405 304 L405 356 L384 356" fill="none" stroke="#7a858c" stroke-width="2.5"/>
-    <text x="418" y="330" text-anchor="middle" transform="rotate(-90 418 330)" font-size="14" fill="#5b6470">smaller gap</text>
+    <text x="426" y="330" text-anchor="middle" transform="rotate(-90 426 330)" font-size="14" fill="#5b6470">smaller gap</text>
 
     <rect x="478" y="72" width="486" height="420" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
     <text x="721" y="106" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">Training while weights move</text>
@@ -30,8 +30,7 @@
     <g fill="#3b8587"><circle cx="666" cy="378" r="5"/><circle cx="762" cy="407" r="5"/></g>
     <text x="785" y="182" font-size="15" font-weight="600" fill="#49397f">loose, smooth signal</text>
     <line x1="770" y1="190" x2="700" y2="282" stroke="#49397f" stroke-width="1.8"/>
-    <text x="790" y="248" text-anchor="middle" font-size="15" font-weight="600" fill="#296668"><tspan x="790">tighter, discontinuous</tspan><tspan x="790" dy="18">signal</tspan></text>
-    <line x1="774" y1="271" x2="744" y2="344" stroke="#296668" stroke-width="1.8"/>
-    <text x="842" y="405" text-anchor="middle" font-size="14" fill="#6b7280">schematic</text>
+    <text x="835" y="238" text-anchor="middle" font-size="15" font-weight="600" fill="#296668"><tspan x="835">tighter, discontinuous</tspan><tspan x="835" dy="18">signal</tspan></text>
+    <line x1="800" y1="272" x2="744" y2="344" stroke="#296668" stroke-width="1.8"/>
   </g>
 </svg>

@@ -19,12 +19,12 @@
     <style>
       text { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
       .label { fill: #162d32; font-size: 26px; font-weight: 700; }
-      .small { fill: #52696c; font-size: 19px; }
-      .eyebrow { fill: #38736f; font-size: 15px; font-weight: 800; letter-spacing: 2px; }
+      .small { fill: #40575a; font-size: 19px; }
+      .eyebrow { fill: #285d59; font-size: 15px; font-weight: 800; letter-spacing: 2px; }
       .tool { fill: #204f56; font-size: 22px; font-weight: 750; }
-      .tool-sub { fill: #5c7073; font-size: 17px; }
+      .tool-sub { fill: #435a5d; font-size: 17px; }
       .memory-title { fill: #173b42; font-size: 19px; font-weight: 750; }
-      .memory-sub { fill: #607477; font-size: 16px; }
+      .memory-sub { fill: #435a5d; font-size: 16px; }
     </style>
   </defs>
 
@@ -106,5 +106,5 @@
   <path d="M910 110 C1190 120 1302 270 1300 413 C1298 469 1276 496 1247 520" fill="none" stroke="#39736f" stroke-width="3" stroke-dasharray="8 8" marker-end="url(#arrow)"/>
   <rect x="1128" y="276" width="205" height="60" rx="15" fill="#edf6f3" stroke="#bad0cd"/>
   <text x="1230" y="301" text-anchor="middle" fill="#285d59" font-size="17" font-weight="750">Researcher control</text>
-  <text x="1230" y="323" text-anchor="middle" fill="#5a7071" font-size="15">for important choices</text>
+  <text x="1230" y="323" text-anchor="middle" fill="#40575a" font-size="15">for important choices</text>
 </svg>

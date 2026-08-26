@@ -169,15 +169,44 @@ tightness that help explain the result:
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
-  <img src="{{ '/imgs/april-certified-training-paradox.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="Two panels compare verification and training. At fixed weights a tighter interval sits closer to the exact loss. Across changing weights a schematic loose loss varies smoothly while a tighter loss has abrupt and sensitive changes that make gradient steps harder to follow.">
+  <img src="{{ '/imgs/april-certified-training-paradox.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="Two panels compare verification and training. At fixed weights a tighter interval sits closer to the exact loss. Across changing weights a loose loss varies smoothly while a tighter loss has abrupt and sensitive changes that make gradient steps harder to follow.">
   </div>
   <figcaption>Tightness answers a fixed-network question. Continuity and sensitivity shape the training journey.</figcaption>
 </figure>
 
+This diagnosis suggests a repair: average the certified loss over nearby
+weight settings before optimizing it. [Gaussian Loss
+Smoothing](https://arxiv.org/abs/2403.07095) defines the averaged loss as
+
+$$
+L_\sigma(\theta)
+=\mathbb{E}_{\epsilon\sim\mathcal{N}(0,\sigma^2I)}
+  \left[L_{\mathrm{cert}}(\theta+\epsilon)\right].
+$$
+
+The random vector $\epsilon$ slightly perturbs every trainable weight. A jump
+at one weight setting becomes one contribution to an average over its
+neighborhood, so the smoothed loss changes more regularly as $\theta$ moves.
+
+The paper proves that when the loss does not grow too rapidly as the weights
+become large, $L_\sigma$ is infinitely differentiable. If optimization stays
+in a compact parameter region, $L_\sigma$ is also Lipschitz continuous. Its
+deviation from convexity, a measure of how far the surface bends away from a
+convex landscape, cannot increase under smoothing. These properties directly
+address the discontinuity, non-smoothness, and sensitivity diagnosed above.
+
+Computing the expectation exactly would be expensive, so the paper estimates
+it in two ways. **PGPE** uses only loss evaluations and therefore supports
+non-differentiable relaxations. **RGS** averages gradients and is more
+efficient than PGPE. It requires a differentiable relaxation. Across many
+settings with matched network architectures, these methods enable tight
+relaxations to surpass existing certified-training methods.
+
 At fixed weights, a tighter sound bound remains better for verification.
 During training, the optimizer must also be able to follow the bound as the
-weights change. A useful certified-training objective therefore needs both
-precision and navigable optimization dynamics.
+weights change. Gaussian loss smoothing demonstrates one way to make tight
+losses easier to navigate. A useful certified-training objective therefore
+needs both precision and favorable optimization dynamics.
 
 Training addressed whether we can find good weights. Now freeze the weights
 again and ask what information a verifier can retain.

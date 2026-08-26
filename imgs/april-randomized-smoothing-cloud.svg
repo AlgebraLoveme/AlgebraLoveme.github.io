@@ -14,8 +14,9 @@
       <path d="M48 384 C164 342 215 350 292 385 C382 426 455 394 530 348 C590 311 636 324 684 346" fill="none" stroke="#59449b" stroke-width="3"/>
       <circle cx="362" cy="279" r="168" fill="url(#cloud)"/>
       <circle cx="362" cy="279" r="14" fill="#111827" stroke="#fff" stroke-width="4"/>
-      <rect x="335" y="287" width="70" height="22" rx="5" fill="#fff" fill-opacity="0.88"/>
-      <text x="370" y="303" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">input x</text>
+      <line x1="374" y1="294" x2="392" y2="316" stroke="#111827" stroke-width="1.5"/>
+      <rect x="388" y="313" width="70" height="22" rx="5" fill="#fff"/>
+      <text x="423" y="329" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">input x</text>
       <g fill="#347a45" stroke="#fff" stroke-width="2">
         <circle cx="270" cy="232" r="8"/><circle cx="306" cy="279" r="8"/><circle cx="324" cy="223" r="8"/><circle cx="350" cy="332" r="8"/><circle cx="377" cy="235" r="8"/><circle cx="396" cy="302" r="8"/><circle cx="418" cy="259" r="8"/><circle cx="454" cy="288" r="8"/><circle cx="469" cy="231" r="8"/><circle cx="402" cy="348" r="8"/><circle cx="302" cy="340" r="8"/><circle cx="488" cy="315" r="8"/><circle cx="247" cy="303" r="8"/><circle cx="436" cy="206" r="8"/><circle cx="335" cy="190" r="8"/><circle cx="517" cy="278" r="8"/>
       </g>

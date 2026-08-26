@@ -6,9 +6,9 @@
   <text x="400" y="34" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#111827">Area between the upper chord and a candidate lower line</text>
 
   <g stroke="#d9dee7" stroke-width="1">
-    <line x1="140" y1="80" x2="140" y2="425"/>
-    <line x1="464" y1="80" x2="464" y2="425"/>
-    <line x1="680" y1="80" x2="680" y2="425"/>
+    <line x1="140" y1="80" x2="140" y2="330"/>
+    <line x1="464" y1="80" x2="464" y2="330"/>
+    <line x1="680" y1="80" x2="680" y2="330"/>
   </g>
 
   <polygon points="140,330 680,120 680,280 140,405" fill="#7c6bb3" fill-opacity="0.20"/>

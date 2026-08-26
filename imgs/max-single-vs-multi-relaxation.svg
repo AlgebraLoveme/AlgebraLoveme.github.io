@@ -32,7 +32,7 @@
     <text x="819" y="397" text-anchor="middle" font-size="20" fill="#296668">c ≤ 1 − b</text>
     <text x="632" y="452" font-size="17" fill="#252a34">For every input in [0, 1]²:</text>
     <text x="652" y="484" font-size="18" fill="#252a34">f = c + b ≤ (1 − b) + b</text>
-    <rect x="664" y="510" width="310" height="48" rx="12" fill="#3b8587"/>
+    <rect x="664" y="510" width="310" height="48" rx="12" fill="#2f6f71"/>
     <text x="819" y="541" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">proves the exact f ≤ 1</text>
   </g>
 </svg>
