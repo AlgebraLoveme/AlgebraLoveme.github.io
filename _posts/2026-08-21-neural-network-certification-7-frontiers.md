@@ -82,6 +82,10 @@ For every continuous target $s$ and every desired error tolerance, a ReLU
 network exists that satisfies both requirements. Its predictions approximate
 $s$, and its IBP intervals approximate the exact target ranges.
 
+The network's exact output range on $B$ lies inside the sound interval
+$n^{\sharp}(B)$. The figure separates that exact network range from the
+slightly wider interval computed by IBP.
+
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-interval-universal-approximation.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="A continuous target score and a nearby piecewise-linear network curve. Over each of three input intervals, blue markers identify the network extrema and its exact output range, while a dashed purple IBP-certified range is slightly wider and encloses that network range.">
@@ -89,33 +93,43 @@ $s$, and its IBP intervals approximate the exact target ranges.
   <figcaption>The curves show pointwise approximation. On each interval, the blue band spans the network's exact outputs, and the dashed IBP-certified band encloses that range.</figcaption>
 </figure>
 
-The theorem settles the existence question. It allows us to choose a network
-adapted to the target and the desired tolerance. Frontier 3 will instead keep a
-network fixed and ask whether a relaxation can recover its exact bounds. A
-later [interval universal approximation
-theorem](https://arxiv.org/abs/2007.06093) extends the existence result from
-ReLU to a broad family of activation functions.
+The theorem settles the existence question by allowing us to choose a network
+adapted to the target and the desired tolerance. A later [interval universal
+approximation theorem](https://arxiv.org/abs/2007.06093) extends the existence
+result from ReLU to a broad family of activation functions.
 
 ## Existence leads to a construction question
 
-An existence theorem removes one possible obstacle: the class of
-IBP-certifiable networks is rich enough. A training algorithm still begins
-with an architecture and initial weights, then must reach a useful network with
-finite computation.
+A training algorithm begins with an architecture and initial weights, then
+searches a high-dimensional parameter space under a finite compute budget.
+The existence theorem guarantees a destination for that search. Its
+computational cost is a separate question.
 
 The generalized interval-approximation study makes this gap concrete. Its
 proof constructs a network by dividing the input domain into a grid. As the
-input dimension grows, the number of grid regions grows exponentially. The
-paper also proves, under standard complexity assumptions, that no efficient
-general construction can produce arbitrarily precise interval approximators.
+input dimension grows, the number of grid regions grows exponentially.
+
+The paper then studies a simpler problem. Given a network with outputs in
+$[0,1]$, approximate its minimum and maximum within an error
+$\delta<1/2$. Solving this **range-approximation problem** requires finding
+values near the extrema and ruling out values beyond them. The paper proves
+that both directions are hard: the problem is NP-hard and coNP-hard. Under the
+standard assumption $\mathsf{coNP}\not\subseteq\mathsf{NP}$, the
+[range-approximation theorem](https://arxiv.org/abs/2007.06093) classifies it
+as strictly harder than NP-complete problems. An efficient construction of an
+interval universal approximator would solve this range problem, so the
+hardness transfers to constructing such networks in general.
+
 Universal approximation therefore leaves an algorithmic question:
 
 **How do we reliably find compact, accurate networks that IBP can certify?**
 
-This is where Part 6's training objectives return. During certified training,
-a bound is evaluated after every update. Its value at one finished network
-matters for verification. Its behavior while the weights move matters for
-optimization.
+Certified training provides a practical search strategy. It chooses an
+architecture, adjusts its weights using a tractable relaxation of the
+worst-case loss, and tries to reach a network that IBP can certify. A more
+precise relaxation seems like a better guide because its loss lies closer to
+the exact worst-case loss. Frontier 2 asks whether that additional precision
+actually helps the optimizer find better weights.
 
 ## Frontier 2: Why can a tighter training bound produce a worse model?
 
