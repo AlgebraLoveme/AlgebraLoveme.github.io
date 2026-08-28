@@ -6,23 +6,23 @@
     <text x="500" y="42" text-anchor="middle" font-size="24" font-weight="650" fill="#111827">The same probability gain can receive ten times the ACR weight</text>
     <rect x="70" y="78" width="860" height="336" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
     <text x="104" y="133" font-size="19" font-weight="700" fill="#1f437e">Difficult input</text>
-    <text x="104" y="160" font-size="16" fill="#252a34">p<tspan baseline-shift="sub" font-size="12">A</tspan>: 0.60 → 0.61</text>
+    <text x="104" y="160" font-size="16" fill="#4b5563">p<tspan baseline-shift="sub" font-size="12">A</tspan>: 0.60 → 0.61</text>
     <rect x="300" y="118" width="540" height="40" rx="8" fill="#e5e7eb"/>
     <rect x="300" y="118" width="50" height="40" rx="8" fill="#2f5da8"/>
-    <text x="365" y="145" font-size="18" font-weight="700" fill="#17365d">ΔR = 0.013</text>
+    <text x="365" y="145" font-size="18" font-weight="700" fill="#1f437e">ΔR = 0.013</text>
     <text x="104" y="246" font-size="19" font-weight="700" fill="#49397f">Easy input</text>
-    <text x="104" y="273" font-size="16" fill="#252a34">p<tspan baseline-shift="sub" font-size="12">A</tspan>: 0.98 → 0.99</text>
+    <text x="104" y="273" font-size="16" fill="#4b5563">p<tspan baseline-shift="sub" font-size="12">A</tspan>: 0.98 → 0.99</text>
     <rect x="300" y="231" width="540" height="40" rx="8" fill="#e5e7eb"/>
     <rect x="300" y="231" width="525" height="40" rx="8" fill="#59449b"/>
     <text x="811" y="216" text-anchor="end" font-size="18" font-weight="700" fill="#49397f">ΔR = 0.136</text>
     <line x1="300" y1="328" x2="840" y2="328" stroke="#374151" stroke-width="2"/>
-    <g stroke="#7a858c" stroke-width="1.5" fill="#252a34" font-size="15" text-anchor="middle">
+    <g stroke="#7a858c" stroke-width="1.5" fill="#4b5563" font-size="15" text-anchor="middle">
       <line x1="300" y1="322" x2="300" y2="336"/><text x="300" y="360" stroke="none">0</text>
       <line x1="493" y1="322" x2="493" y2="336"/><text x="493" y="360" stroke="none">0.05</text>
       <line x1="686" y1="322" x2="686" y2="336"/><text x="686" y="360" stroke="none">0.10</text>
       <line x1="840" y1="322" x2="840" y2="336"/><text x="840" y="360" stroke="none">0.14</text>
     </g>
-    <text x="570" y="393" text-anchor="middle" font-size="16" fill="#252a34">certified-radius gain ΔR (shared scale)</text>
-    <text x="500" y="456" text-anchor="middle" font-size="16" fill="#252a34">Illustrative ideal values with σ = 0.5 and R = σΦ⁻¹(p<tspan baseline-shift="sub" font-size="12">A</tspan>)</text>
+    <text x="570" y="393" text-anchor="middle" font-size="16" fill="#5b6470">certified-radius gain ΔR (shared scale)</text>
+    <text x="500" y="456" text-anchor="middle" font-size="16" fill="#5b6470">Illustrative ideal values with σ = 0.5 and R = σΦ⁻¹(p<tspan baseline-shift="sub" font-size="12">A</tspan>)</text>
   </g>
 </svg>

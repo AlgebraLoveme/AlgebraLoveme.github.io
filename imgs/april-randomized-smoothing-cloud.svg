@@ -14,26 +14,25 @@
       <path d="M48 384 C164 342 215 350 292 385 C382 426 455 394 530 348 C590 311 636 324 684 346" fill="none" stroke="#59449b" stroke-width="3"/>
       <circle cx="362" cy="279" r="168" fill="url(#cloud)"/>
       <circle cx="362" cy="279" r="14" fill="#111827" stroke="#fff" stroke-width="4"/>
-      <line x1="374" y1="294" x2="392" y2="316" stroke="#111827" stroke-width="1.5"/>
       <g fill="#347a45" stroke="#fff" stroke-width="2">
         <circle cx="270" cy="232" r="8"/><circle cx="306" cy="279" r="8"/><circle cx="324" cy="223" r="8"/><circle cx="350" cy="332" r="8"/><circle cx="377" cy="235" r="8"/><circle cx="396" cy="302" r="8"/><circle cx="418" cy="259" r="8"/><circle cx="454" cy="288" r="8"/><circle cx="469" cy="231" r="8"/><circle cx="402" cy="348" r="8"/><circle cx="302" cy="340" r="8"/><circle cx="488" cy="315" r="8"/><circle cx="247" cy="303" r="8"/><circle cx="436" cy="206" r="8"/><circle cx="335" cy="190" r="8"/><circle cx="517" cy="278" r="8"/>
       </g>
       <g fill="#b9822f" stroke="#fff" stroke-width="2"><circle cx="248" cy="174" r="8"/><circle cx="423" cy="169" r="8"/></g>
       <g fill="#59449b" stroke="#fff" stroke-width="2"><circle cx="281" cy="404" r="8"/><circle cx="456" cy="390" r="8"/></g>
     </g>
-    <!-- Labels sit above the clipped decision-region artwork and remain fully visible. -->
+    <line x1="374" y1="294" x2="392" y2="316" stroke="#111827" stroke-width="1.5"/>
     <rect x="388" y="313" width="70" height="22" rx="5" fill="#fff"/>
     <text x="423" y="329" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">input x</text>
-    <text x="84" y="112" font-size="17" font-weight="650" fill="#3f2706">tree region</text>
-    <text x="650" y="257" text-anchor="end" font-size="17" font-weight="650" fill="#123d22">Siberian cat region</text>
-    <text x="83" y="454" font-size="17" font-weight="650" fill="#35246f">other animal region</text>
+    <text x="84" y="112" font-size="17" font-weight="650" fill="#76511f">tree region</text>
+    <text x="650" y="257" text-anchor="end" font-size="17" font-weight="650" fill="#286437">Siberian cat region</text>
+    <text x="83" y="454" font-size="17" font-weight="650" fill="#49397f">other animal region</text>
     <rect x="48" y="72" width="636" height="410" rx="16" fill="none" stroke="#cbd5e1" stroke-width="2"/>
     <line x1="700" y1="278" x2="746" y2="278" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
     <rect x="758" y="126" width="210" height="304" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
     <text x="863" y="162" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">Noisy votes</text>
-    <text x="790" y="198" font-size="15" font-weight="650" fill="#123d22">cat</text><text x="946" y="198" text-anchor="end" font-size="15" fill="#123d22">80%</text><rect x="790" y="207" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="207" width="116.8" height="24" rx="6" fill="#b4d7af"/>
-    <text x="790" y="262" font-size="15" font-weight="650" fill="#3f2706">tree</text><text x="946" y="262" text-anchor="end" font-size="15" fill="#3f2706">10%</text><rect x="790" y="271" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="271" width="14.6" height="24" rx="6" fill="#e9c67f"/>
-    <text x="790" y="326" font-size="15" font-weight="650" fill="#35246f">other</text><text x="946" y="326" text-anchor="end" font-size="15" fill="#35246f">10%</text><rect x="790" y="335" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="335" width="14.6" height="24" rx="6" fill="#c5b9dd"/>
-    <text x="863" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#123d22">g(x) = Siberian cat</text>
+    <text x="790" y="198" font-size="15" font-weight="650" fill="#286437">cat</text><text x="946" y="198" text-anchor="end" font-size="15" fill="#286437">80%</text><rect x="790" y="207" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="207" width="116.8" height="24" rx="6" fill="#b4d7af"/>
+    <text x="790" y="262" font-size="15" font-weight="650" fill="#76511f">tree</text><text x="946" y="262" text-anchor="end" font-size="15" fill="#76511f">10%</text><rect x="790" y="271" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="271" width="14.6" height="24" rx="6" fill="#e9c67f"/>
+    <text x="790" y="326" font-size="15" font-weight="650" fill="#49397f">other</text><text x="946" y="326" text-anchor="end" font-size="15" fill="#49397f">10%</text><rect x="790" y="335" width="146" height="24" rx="6" fill="#e5e7eb"/><rect x="790" y="335" width="14.6" height="24" rx="6" fill="#c5b9dd"/>
+    <text x="863" y="392" text-anchor="middle" font-size="17" font-weight="700" fill="#286437">g(x) = Siberian cat</text>
   </g>
 </svg>

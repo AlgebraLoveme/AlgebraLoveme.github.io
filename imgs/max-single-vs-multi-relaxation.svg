@@ -7,32 +7,32 @@
   <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
     <rect x="34" y="68" width="1032" height="172" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
     <text x="72" y="101" font-size="17" font-weight="650" fill="#374151">Exact network</text>
-    <circle cx="117" cy="156" r="25" fill="#cee5ef" stroke="#2f5da8" stroke-width="2"/><text x="117" y="162" text-anchor="middle" font-size="17" fill="#17365d">x₁</text>
-    <circle cx="117" cy="210" r="25" fill="#cee5ef" stroke="#2f5da8" stroke-width="2"/><text x="117" y="216" text-anchor="middle" font-size="17" fill="#17365d">x₂</text>
-    <rect x="214" y="132" width="124" height="48" rx="10" fill="#e5e0ef" stroke="#59449b" stroke-width="2"/><text x="276" y="162" text-anchor="middle" font-size="17" fill="#35246f">a = x₁ − x₂</text>
-    <rect x="214" y="190" width="124" height="40" rx="10" fill="#e4e9ed" stroke="#5b7088" stroke-width="2"/><text x="276" y="216" text-anchor="middle" font-size="17" fill="#252a34">b = x₂</text>
-    <rect x="426" y="132" width="155" height="48" rx="10" fill="#f5e5bf" stroke="#b9822f" stroke-width="2"/><text x="503" y="162" text-anchor="middle" font-size="17" fill="#3f2706">c = ReLU(a)</text>
-    <rect x="682" y="150" width="232" height="62" rx="12" fill="#e1efde" stroke="#347a45" stroke-width="2.5"/><text x="798" y="176" text-anchor="middle" font-size="18" font-weight="650" fill="#123d22">f = c + b</text><text x="798" y="199" text-anchor="middle" font-size="16" fill="#123d22">= max(x₁, x₂) ∈ [0, 1]</text>
+    <circle cx="117" cy="156" r="25" fill="#cee5ef" stroke="#2f5da8" stroke-width="2"/><text x="117" y="162" text-anchor="middle" font-size="17" fill="#1f437e">x₁</text>
+    <circle cx="117" cy="210" r="25" fill="#cee5ef" stroke="#2f5da8" stroke-width="2"/><text x="117" y="216" text-anchor="middle" font-size="17" fill="#1f437e">x₂</text>
+    <rect x="214" y="132" width="124" height="48" rx="10" fill="#e5e0ef" stroke="#59449b" stroke-width="2"/><text x="276" y="162" text-anchor="middle" font-size="17" fill="#49397f">a = x₁ − x₂</text>
+    <rect x="214" y="190" width="124" height="40" rx="10" fill="#e4e9ed" stroke="#5b7088" stroke-width="2"/><text x="276" y="216" text-anchor="middle" font-size="17" fill="#405368">b = x₂</text>
+    <rect x="426" y="132" width="155" height="48" rx="10" fill="#f5e5bf" stroke="#b9822f" stroke-width="2"/><text x="503" y="162" text-anchor="middle" font-size="17" fill="#76511f">c = ReLU(a)</text>
+    <rect x="682" y="150" width="232" height="62" rx="12" fill="#e1efde" stroke="#347a45" stroke-width="2.5"/><text x="798" y="176" text-anchor="middle" font-size="18" font-weight="650" fill="#286437">f = c + b</text><text x="798" y="199" text-anchor="middle" font-size="16" fill="#286437">= max(x₁, x₂) ∈ [0, 1]</text>
     <g stroke="#5b7088" stroke-width="2.5" fill="none" marker-end="url(#arrow)"><line x1="142" y1="156" x2="207" y2="156"/><path d="M142 210 H174 V174 H207"/><line x1="142" y1="210" x2="207" y2="210"/><line x1="338" y1="156" x2="419" y2="156"/><line x1="581" y1="156" x2="675" y2="171"/><line x1="338" y1="210" x2="675" y2="191"/></g>
 
     <rect x="34" y="270" width="494" height="310" rx="16" fill="#f9e0d8" stroke="#b9473e" stroke-width="2.5"/>
-    <text x="281" y="308" text-anchor="middle" font-size="21" font-weight="700" fill="#4f1714">Single-neuron Triangle</text>
+    <text x="281" y="308" text-anchor="middle" font-size="21" font-weight="700" fill="#8e352f">Single-neuron Triangle</text>
     <text x="281" y="338" text-anchor="middle" font-size="16" fill="#5f302d">uses only a ∈ [−1, 1] when bounding c</text>
     <rect x="98" y="365" width="366" height="50" rx="10" fill="#fff" stroke="#e98778" stroke-width="2"/>
     <text x="281" y="397" text-anchor="middle" font-size="20" fill="#7e322c">c ≤ (a + 1) / 2</text>
     <text x="90" y="452" font-size="17" fill="#252a34">At x₁ = x₂ = 1:</text>
     <text x="110" y="484" font-size="17" fill="#252a34">a = 0,  b = 1,  c may be 0.5</text>
-    <rect x="126" y="510" width="310" height="48" rx="12" fill="#7a2722"/>
+    <rect x="126" y="510" width="310" height="48" rx="12" fill="#b9473e"/>
     <text x="281" y="541" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">relaxed f may reach 1.5</text>
 
     <rect x="572" y="270" width="494" height="310" rx="16" fill="#dceeeB" stroke="#3b8587" stroke-width="2.5"/>
-    <text x="819" y="308" text-anchor="middle" font-size="21" font-weight="700" fill="#183f41">Joint relaxation</text>
-    <text x="819" y="338" text-anchor="middle" font-size="16" fill="#183f41">keeps the relationship between c and b</text>
+    <text x="819" y="308" text-anchor="middle" font-size="21" font-weight="700" fill="#296668">Joint relaxation</text>
+    <text x="819" y="338" text-anchor="middle" font-size="16" fill="#315e60">keeps the relationship between c and b</text>
     <rect x="636" y="365" width="366" height="50" rx="10" fill="#fff" stroke="#70bdd6" stroke-width="2"/>
-    <text x="819" y="397" text-anchor="middle" font-size="20" fill="#183f41">c ≤ 1 − b</text>
+    <text x="819" y="397" text-anchor="middle" font-size="20" fill="#296668">c ≤ 1 − b</text>
     <text x="632" y="452" font-size="17" fill="#252a34">For every input in [0, 1]²:</text>
     <text x="652" y="484" font-size="18" fill="#252a34">f = c + b ≤ (1 − b) + b</text>
-    <rect x="664" y="510" width="310" height="48" rx="12" fill="#1d4f51"/>
+    <rect x="664" y="510" width="310" height="48" rx="12" fill="#2f6f71"/>
     <text x="819" y="541" text-anchor="middle" font-size="20" font-weight="700" fill="#fff">proves the exact f ≤ 1</text>
   </g>
 </svg>
