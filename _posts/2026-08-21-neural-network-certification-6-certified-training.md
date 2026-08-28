@@ -324,13 +324,9 @@ verification. SABR selects a smaller input region, TAPS moves attack-based
 search into feature space, STAPS combines those choices, and MTL-IBP blends
 attack and IBP losses.
 
-The final guarantee always comes from sound post-training verification. The
-gap between the IBP and MN-BaB columns shows why a weak certificate does not
-identify which part of the pipeline fell short. The chosen model class may
-contain no network with the behavior and certified bounds we want. Such a
-network may exist, yet training may fail to find it. The trained network may
-be robust, while the verifier loses the relationships needed to prove that
-robustness.
-
-Part 7 turns these possibilities into three research questions about
-existence, training, and proof.
+We now know how to certify a fixed network and how to train with sound bounds
+or useful surrogates. A deeper question remains: **can this pipeline produce a
+model that is both accurate and certifiably robust in principle?** Answering it
+requires us to separate three issues. Does such a network exist? Can training
+find it? Can a verifier prove its bounds once it is found? Part 7 studies these
+questions in order.
