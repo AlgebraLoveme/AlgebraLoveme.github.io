@@ -14,11 +14,11 @@
     <rect x="46" y="115" width="190" height="190" rx="14" fill="none" stroke="#2f5da8" stroke-width="3"/>
     <text x="141" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#1f437e">clean input x</text>
     <line x1="244" y1="210" x2="290" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="267" y="194" text-anchor="middle" font-size="16" fill="#4b5563">+ η</text>
+    <text x="267" y="194" text-anchor="middle" font-size="16" fill="#252a34">+ η</text>
 
     <g clip-path="url(#p2)" filter="url(#noise)"><use href="#april-photo" x="304" y="115"/></g>
     <rect x="304" y="115" width="190" height="190" rx="14" fill="none" stroke="#b9822f" stroke-width="3"/>
-    <text x="399" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#76511f">noisy input x + η</text>
+    <text x="399" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#3f2706">noisy input x + η</text>
     <line x1="502" y1="210" x2="548" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
     <text x="525" y="194" text-anchor="middle" font-size="16" font-weight="650" fill="#49397f">D</text>
 
@@ -26,14 +26,14 @@
     <rect x="562" y="115" width="190" height="190" rx="14" fill="none" stroke="#59449b" stroke-width="3"/>
     <text x="657" y="94" text-anchor="middle" font-size="18" font-weight="650" fill="#49397f">schematic D(x + η)</text>
     <line x1="760" y1="210" x2="806" y2="210" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
-    <text x="783" y="194" text-anchor="middle" font-size="16" font-weight="650" fill="#286437">f</text>
+    <text x="783" y="194" text-anchor="middle" font-size="16" font-weight="650" fill="#123d22">f</text>
 
     <rect x="820" y="137" width="190" height="146" rx="16" fill="#e1efde" stroke="#347a45" stroke-width="3"/>
-    <text x="915" y="181" text-anchor="middle" font-size="18" fill="#286437">classifier vote</text>
-    <text x="915" y="220" text-anchor="middle" font-size="23" font-weight="700" fill="#286437">Siberian cat</text>
-    <text x="915" y="253" text-anchor="middle" font-size="15" fill="#376b50">repeat across noise</text>
+    <text x="915" y="181" text-anchor="middle" font-size="18" fill="#123d22">classifier vote</text>
+    <text x="915" y="220" text-anchor="middle" font-size="23" font-weight="700" fill="#123d22">Siberian cat</text>
+    <text x="915" y="253" text-anchor="middle" font-size="15" fill="#123d22">repeat across noise</text>
 
     <path d="M542 334 V382 H1018 V334" fill="none" stroke="#3b8587" stroke-width="3"/>
-    <text x="780" y="410" text-anchor="middle" font-size="17" font-weight="650" fill="#296668">base classifier h = f ∘ D</text>
+    <text x="780" y="410" text-anchor="middle" font-size="17" font-weight="650" fill="#183f41">base classifier h = f ∘ D</text>
   </g>
 </svg>

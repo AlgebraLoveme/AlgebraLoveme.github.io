@@ -24,24 +24,7 @@
   <!-- Shared minimum edge. -->
   <line x1="230" y1="390" x2="470" y2="390" stroke="#23804d" stroke-width="5"/>
 
-  <!-- Surface labels. -->
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="195" y="248" font-size="19" font-weight="600" fill="#174f7e">Off plane</text>
-    <text x="195" y="274" font-size="16" fill="#174f7e">m = x₁ + x₂ − 0.3</text>
-    <text x="355" y="300" font-size="19" font-weight="600" fill="#8f3e20">On plane</text>
-    <text x="355" y="326" font-size="16" fill="#8f3e20">m = 2x₂ − 0.3</text>
-    <text x="430" y="128" font-size="15" fill="#7c6bb3">join: x₁ = x₂</text>
-    <text x="350" y="421" font-size="16" font-weight="600" fill="#1f7045">minimum m = 0.22</text>
-  </g>
-
-  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#4b5563">
-    <text x="88" y="219">0.70</text>
-    <text x="320" y="132">1.18</text>
-    <text x="214" y="385" text-anchor="end">0.22</text>
-  </g>
-  <line x1="397" y1="132" x2="358" y2="145" stroke="#7c6bb3" stroke-width="1.5"/>
-
-  <!-- Axes. -->
+  <!-- Axes. Drawn before labels so annotation backgrounds remain unobstructed. -->
   <g stroke="#252a34" stroke-width="2.5" fill="none">
     <line x1="230" y1="390" x2="500" y2="390"/>
     <path d="M 490 384 L 500 390 L 490 396"/>
@@ -56,12 +39,32 @@
     <text x="240" y="120">m</text>
   </g>
 
+  <!-- Surface labels. -->
+  <rect x="122" y="224" width="146" height="58" rx="5" fill="#a5c9e9"/>
+  <rect x="290" y="276" width="130" height="58" rx="5" fill="#f2c1aa"/>
+  <rect x="164" y="354" width="56" height="30" rx="5" fill="#a5c9e9"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
+    <text x="195" y="248" font-size="19" font-weight="600" fill="#102b4d">Off plane</text>
+    <text x="195" y="274" font-size="16" fill="#102b4d">m = x₁ + x₂ − 0.3</text>
+    <text x="355" y="300" font-size="19" font-weight="600" fill="#4f1714">On plane</text>
+    <text x="355" y="326" font-size="16" fill="#4f1714">m = 2x₂ − 0.3</text>
+    <text x="430" y="128" font-size="15" fill="#35246f">join: x₁ = x₂</text>
+    <text x="350" y="421" font-size="16" font-weight="600" fill="#123d22">minimum m = 0.22</text>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" fill="#252a34">
+    <text x="88" y="219">0.70</text>
+    <text x="320" y="132">1.18</text>
+    <text x="214" y="376" text-anchor="end">0.22</text>
+  </g>
+  <line x1="397" y1="132" x2="358" y2="145" stroke="#7c6bb3" stroke-width="1.5"/>
+
   <!-- Branch-and-bound tree. -->
   <rect x="625" y="72" width="270" height="102" rx="12" fill="#fff4df" stroke="#c18422" stroke-width="3"/>
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
     <text x="760" y="108" font-size="20" font-weight="600" fill="#111827">Root region R</text>
-    <text x="760" y="139" font-size="18" fill="#9a5b08">bound −0.02</text>
-    <text x="760" y="163" font-size="16" fill="#9a5b08">branch at z₂ = 0</text>
+    <text x="760" y="139" font-size="18" fill="#3f2706">bound −0.02</text>
+    <text x="760" y="163" font-size="16" fill="#3f2706">branch at z₂ = 0</text>
   </g>
 
   <g stroke="#6b7280" stroke-width="3" fill="none">
@@ -73,13 +76,13 @@
   <rect x="765" y="245" width="200" height="132" rx="12" fill="#fff0e8" stroke="#b9473e" stroke-width="3"/>
 
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" text-anchor="middle">
-    <text x="655" y="281" font-size="19" font-weight="600" fill="#2f6fad">Off-plane group</text>
-    <text x="655" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
-    <text x="655" y="350" font-size="16" fill="#376b50">verified</text>
+    <text x="655" y="281" font-size="19" font-weight="600" fill="#17365d">Off-plane group</text>
+    <text x="655" y="317" font-size="21" font-weight="600" fill="#123d22">bound +0.22 ✓</text>
+    <text x="655" y="350" font-size="16" fill="#123d22">verified</text>
 
-    <text x="865" y="281" font-size="19" font-weight="600" fill="#b9473e">On-plane group</text>
-    <text x="865" y="317" font-size="21" font-weight="600" fill="#1f7045">bound +0.22 ✓</text>
-    <text x="865" y="350" font-size="16" fill="#376b50">verified</text>
+    <text x="865" y="281" font-size="19" font-weight="600" fill="#6b241f">On-plane group</text>
+    <text x="865" y="317" font-size="21" font-weight="600" fill="#123d22">bound +0.22 ✓</text>
+    <text x="865" y="350" font-size="16" fill="#123d22">verified</text>
   </g>
 
   <text x="760" y="427" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" fill="#111827">Both groups cover R  ⇒  root verified</text>

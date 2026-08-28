@@ -38,9 +38,9 @@
       <line x1="624" y1="112" x2="671" y2="112" stroke="#b9473e" stroke-width="3.5" stroke-dasharray="9 6"/>
       <text x="682" y="118" fill="#7e322c">ReLU network</text>
       <rect x="158" y="94" width="20" height="14" fill="#8fc3dc" fill-opacity="0.6" stroke="#2f5da8" stroke-width="1.5"/>
-      <text x="188" y="107" fill="#2f5da8">exact network range</text>
+      <text x="188" y="107" fill="#17365d">exact network range</text>
       <rect x="158" y="119" width="20" height="14" fill="#c5b9dd" fill-opacity="0.55" stroke="#59449b" stroke-width="1.5" stroke-dasharray="5 3"/>
-      <text x="188" y="132" fill="#59449b">IBP-certified range</text>
+      <text x="188" y="132" fill="#35246f">IBP-certified range</text>
     </g>
 
     <g stroke="#7a858c" stroke-width="1.5" stroke-dasharray="5 5">
@@ -48,8 +48,8 @@
       <line x1="435" y1="420" x2="435" y2="237"/><line x1="565" y1="420" x2="565" y2="237"/>
       <line x1="690" y1="420" x2="690" y2="155.4"/><line x1="816" y1="420" x2="816" y2="155.4"/>
     </g>
-    <text x="254" y="448" text-anchor="middle" font-size="15" fill="#5b6470">input interval B₁</text>
-    <text x="500" y="448" text-anchor="middle" font-size="15" fill="#5b6470">input interval B₂</text>
-    <text x="753" y="448" text-anchor="middle" font-size="15" fill="#5b6470">input interval B₃</text>
+    <text x="254" y="448" text-anchor="middle" font-size="15" fill="#252a34">input interval B₁</text>
+    <text x="500" y="448" text-anchor="middle" font-size="15" fill="#252a34">input interval B₂</text>
+    <text x="753" y="448" text-anchor="middle" font-size="15" fill="#252a34">input interval B₃</text>
   </g>
 </svg>
