@@ -10,36 +10,43 @@ written_at: 2026-08-22
 tags: [neural networks, certification, theory, abstract interpretation, "Certification Series: 07"]
 mathjax: true
 toc: true
-excerpt: "Three surprising results separate which functions certifiable networks can approximate, which models training can find, and which facts a verifier can prove."
+excerpt: "Four frontiers separate approximate existence, trainability, precise expressivity, and the limits of convex verification."
 ---
 
-## April's classifier leads to three different questions
+## One certification pipeline leads to four frontier questions
 
 The first six posts built a certification pipeline around one small classifier
 for April the Siberian cat. We stated a robustness property, propagated and
 tightened bounds, split inconclusive cases, and trained models whose robustness
 is easier to prove.
 
-That pipeline can encounter three fundamentally different obstacles:
+The question at the end of Part 6 was whether this pipeline can produce a model
+that is both accurate and certifiably robust. Four research questions determine
+the answer:
 
-1. **Existence:** Can we choose a network whose predictions and certified bounds
-   approximate the behavior we want as closely as needed?
-2. **Training:** Can a training algorithm reach accurate and certifiable weights?
-3. **Proof:** For a fixed network, can a verifier recover the relationships
-   needed to prove its exact output bounds?
+1. **Approximate existence:** Can we choose a network whose predictions and
+   certified bounds approximate the behavior we want as closely as needed?
+2. **Trainability:** Can a training algorithm find accurate and certifiable
+   weights?
+3. **Precise expressivity:** Given a target function, does some exact network
+   representation also admit exact bounds under the chosen relaxation?
+4. **Completeness:** Given an arbitrary fixed network, can the verifier always
+   recover its exact output bounds?
 
-Existence and proof are especially easy to conflate. The existence question
-lets us choose a suitable network and an arbitrarily small positive error
-tolerance. The proof question keeps the network fixed and asks for exact
-bounds. Training connects them: a useful network may exist even when
-optimization cannot find it.
+The last two questions sound similar because both ask for exact bounds. Their
+order of choices differs. Precise expressivity gives us a target function first
+and lets us choose a network representation that suits the relaxation.
+Completeness gives the verifier an arbitrary network whose representation is
+already fixed. A relaxation can preserve the full function class under a
+careful choice of representation and still be inexact on some fixed networks.
 
-These questions also challenge plausible intuitions. IBP looks too coarse to
-support both accurate predictions and arbitrarily precise interval bounds. A
-tighter bound seems like it should provide a better training objective. The
-tightest possible relaxation of every ReLU seems like it should be enough to
-bound the whole network exactly. The three frontiers below test these
-intuitions one at a time.
+Each frontier challenges a plausible intuition. IBP looks too coarse to support
+accurate predictions and arbitrarily precise interval bounds. A tighter bound
+seems like it should provide a better training objective. The tightest possible
+relaxation of each ReLU seems like it should preserve the full expressivity of
+ReLU networks. Jointly relaxing more neurons seems like it should eventually
+make a verifier exact for every network. The four frontiers test these
+intuitions in order.
 
 ## Frontier 1: Can an IBP-certified network approximate any continuous function?
 
@@ -211,22 +218,39 @@ weights change. Gaussian loss smoothing demonstrates one way to make tight
 losses easier to navigate. A useful certified-training objective therefore
 needs both precision and favorable optimization dynamics.
 
-Training addressed whether we can find good weights. Now freeze the weights
-again and ask what information a verifier can retain about the fixed network.
+Training addressed whether an optimizer can find good weights. The next
+frontier returns to the existence question and raises the standard from
+approximation to equality: which target functions have an exact network
+representation that the chosen relaxation can also bound exactly?
 
-## Frontier 3: Why can the tightest per-ReLU relaxation still miss the exact bound?
+## Frontier 3: Which functions remain precisely expressible under single- and multi-neuron relaxations?
+
+Fix a target function $f$, a relaxation, and the input regions we want to
+certify. The precise-expressivity question asks whether there exists a finite
+ReLU network that computes $f$ exactly and whose relaxation returns the exact
+output range on every required region. We may choose the architecture and
+weights to suit the relaxation. The single-neuron study below requires one
+network to work on every input box. The multi-neuron result later fixes an
+arbitrary convex region $X$. Both use the same order of choices: specify the
+target and regions, then search over equivalent network representations.
+
+An inexact bound for one familiar representation therefore does not settle the
+question. Every equivalent network representation must fail before the
+function lies outside the precisely expressible class.
+
+This requirement is stronger than Frontier 1. Approximate existence allowed a
+positive error tolerance in both the predictions and the IBP ranges. Precise
+expressivity requires zero prediction error and zero bounding error.
 
 Triangle and DeepPoly from [Part 4]({{ '/2026-08-21-neural-network-certification-4-tighter-relaxations/' | relative_url }})
 use a **convex relaxation**: a tractable convex superset of the network's exact
 behaviors. For every **unstable ReLU**, whose input interval crosses zero, they
-add linear inequalities that enclose the ReLU graph. The tightest possible
-envelope for one ReLU seems like the best local choice. The question is whether
-locally tight choices produce a globally exact bound.
+add linear inequalities that enclose the ReLU graph.
 
-The verifier still retains the shared affine equations between neurons. The
-term **single-neuron relaxation** refers to the nonlinear envelope added at
-each ReLU. That envelope is derived only from the ReLU's scalar input interval
-and adds no new inequality coupling the ReLU output to a neighboring value.
+The verifier still retains the shared affine equations between neurons. A
+**single-neuron relaxation** derives each nonlinear ReLU envelope only from
+that ReLU's scalar input interval. It adds no new inequality coupling the ReLU
+output to a neighboring value.
 
 Consider the network
 
@@ -273,23 +297,22 @@ Triangle is inexact on some input box. Triangle already uses the tightest
 convex envelope of each ReLU separately, so no weaker single-neuron convex
 relaxation can avoid the barrier.
 
-The paper calls a network **precisely analyzable** when it computes the target
-function exactly and the relaxation returns its exact output range on every
-input box. Frontier 1 allowed a network whose prediction and range errors were
-below a positive tolerance. This frontier requires the network to equal
-$\max(x_1,x_2)$ and its bounds to have zero error.
+The precise-expressivity boundary depends on the input dimension. For
+functions of one variable, the same paper constructs suitable Triangle and
+DeepPoly networks for every convex continuous piecewise-linear target. With
+multiple inputs, even the convex, monotone function $\max(x_1,x_2)$ lies beyond
+every single-neuron convex relaxation. This negative result concerns the whole
+class of equivalent network representations rather than one unlucky encoding.
 
-The obstruction also depends on having multiple inputs. For functions of one
-variable, the same paper constructs suitable Triangle and DeepPoly networks
-that are precisely analyzable for every convex continuous piecewise-linear
-function. With two inputs, the missing relationship between $c$ and $b$ cannot
-be recovered from separate ReLU envelopes. The next step is therefore to let
-one relaxation see several values together.
+The natural next question keeps the target function fixed and strengthens the
+relaxation. Can joint constraints make $\max(x_1,x_2)$ precisely expressible?
 
-## Joint constraints remove the spurious value
+### Multi-neuron constraints enlarge the precisely expressible class
 
 A multi-neuron relaxation derives constraints for a group of values together.
-For the same network, joint reasoning supplies two valid inequalities:
+Its ideal form uses their joint **convex hull**, the smallest convex set
+containing every exact feasible point. For the same network, this joint
+reasoning supplies two valid inequalities:
 
 $$
 c\leq 1-b,\qquad c\leq a+b.
@@ -314,34 +337,64 @@ multi-neuron relaxation recovers the exact range $[0,1]$.
 </figure>
 
 The [expressiveness analysis of multi-neuron convex
-relaxations](https://arxiv.org/abs/2410.06816) develops the other side of this
-separation. The single-neuron barrier persists for the two-dimensional
-maximum, while a suitable multi-neuron relaxation bounds the construction
-above exactly.
+relaxations](https://arxiv.org/abs/2410.06816) formalizes this separation. For
+every continuous piecewise-linear function $f$ and specified convex input
+region $X$, it proves that a finite ReLU network exists that equals $f$ on $X$
+and is bounded exactly there by an optimal layerwise multi-neuron relaxation.
+The construction widens the network so that copies of the input survive
+through its hidden layers. The last relaxation then retains enough information
+to recover the exact output range.
 
-Computing the joint convex hull of an entire network can be expensive.
-Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) therefore
-approximate convex hulls over small groups of neurons. The convex hull is the
-smallest convex set containing all exact feasible points. This raises the next
-question: would larger groups eventually make the verifier exact?
+The maximum example needs much less machinery. The two joint inequalities
+above already recover its exact range on $[0,1]^2$, and the paper extends the
+construction to $\max(x_1,\ldots,x_d)$ on $[0,1]^d$. Single-neuron relaxations
+cannot precisely express even the two-input case, while multi-neuron
+relaxations preserve the full continuous piecewise-linear function class on a
+specified convex region.
 
-## Can larger neuron groups make the verifier exact?
+Frontier 3 therefore concerns the existence of a relaxation-friendly network
+representation. It does not imply that the same multi-neuron relaxation
+returns exact bounds for every network representation. To ask that stronger
+question, we must reverse the order of choices: fix an arbitrary network first,
+then ask the verifier to bound it.
 
-The expressiveness analysis proves a universal convex barrier. Even if a
-verifier uses the optimal convex description for every neuron in an entire
-layer, some networks remain inexact. Extending the relaxation across any fixed
-finite number of consecutive layers still cannot guarantee exactness. A larger
-local window preserves more relationships, but spurious points can reappear
-when the verifier convexifies and propagates information through the remaining
-layers.
+## Frontier 4: Can a fixed convex relaxation exactly bound every network?
 
-The expressiveness analysis also identifies two ways multi-neuron reasoning can
-recover exact bounds:
+A verifier is **complete** when it returns exact bounds for every supported
+network and input region. Precise expressivity let us redesign the network for
+the relaxation. Completeness must also handle representations that were chosen
+without the relaxation in mind.
+
+The multi-neuron result above might suggest that sufficiently large joint
+groups eventually make a convex verifier complete. The same
+[multi-neuron expressiveness study](https://arxiv.org/abs/2410.06816) disproves
+that intuition. Even the optimal convex description of each entire layer is
+inexact on some networks. Extending each relaxation across any fixed finite
+number of consecutive layers still leaves networks with spurious behaviors.
+The bounding error can be arbitrarily large.
+
+This is the **universal convex barrier**. It applies to compositional verifiers
+that repeatedly replace part of a network with convex information of bounded
+scope. Taking the exact convex hull of the whole network at once would preserve
+its minimum and maximum, but computing that global object is the original hard
+problem in another form.
+
+Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) approximate
+joint convex hulls over small neuron groups. Larger groups can preserve more
+relationships and tighten many concrete problems. The universal barrier says
+that no fixed finite grouping strategy guarantees exact bounds for every
+network.
+
+### Two ways to recover exact bounds
+
+The universal barrier assumes that one bounded-scope convex relaxation must
+analyze the given network and region directly. The study identifies two ways
+to change that setup:
 
 1. **Transform the network.** Add carefully designed ReLU neurons that preserve
    the original function while carrying important input relationships forward.
-   The paper proves that a polynomial-size transformation exists for which an
-   optimal layerwise multi-neuron relaxation becomes exact.
+   This is the representation change behind Frontier 3's positive
+   expressivity result.
 2. **Partition the input.** Divide the input region into convex pieces whose
    reachable sets remain convex through the network, then bound every piece.
    This reconnects multi-neuron relaxations with the divide-and-conquer method
@@ -353,27 +406,29 @@ needs one subproblem and a number of constraints that grows linearly with $d$.
 An exact DeepPoly branch-and-bound proof must instead separate all
 $2^{d-1}$ activation patterns for this construction.
 
-The frontier is therefore more precise than “larger groups are tighter.” The
-research question is:
+The result leaves a concrete research question:
 
-**Which joint relationships should a verifier preserve, and how can it expose
-them without paying for every possible relationship?**
+**How should a verifier combine joint constraints, representation changes, and
+input partitions to reach exact bounds at manageable cost?**
 
-## Put existence, training, and proof back together
+## Four frontiers, one certification pipeline
 
-The three frontiers describe different stages of the same pipeline.
+The four frontiers differ in both the accuracy they require and which object we
+are allowed to choose.
 
-| Question | What we learned | Research direction |
+| Frontier | What may be chosen? | What we learned |
 | --- | --- | --- |
-| Can a suitable certifiable model **exist**? | For any continuous target and error tolerance, a network exists whose predictions and IBP ranges achieve that tolerance. | Construct compact interval-friendly architectures efficiently. |
-| Can training **find** one? | Bound tightness, continuity, and sensitivity jointly shape the optimization result. | Design precise objectives with navigable loss surfaces. |
-| Can a verifier **prove exact bounds for a fixed model**? | Joint relaxations preserve relationships that single-neuron relaxations lose, while every fixed local convex scope has a general barrier. | Select useful groups, transformations, and partitions at manageable cost. |
+| **Approximate existence** | A network adapted to the target and a positive tolerance | IBP-certified networks can approximate every continuous target and its ranges arbitrarily closely. |
+| **Trainability** | An optimization path through a chosen architecture | Tightness alone does not determine training quality. Continuity and sensitivity also shape the search. |
+| **Precise expressivity** | A network representation adapted to the target and relaxation | Single-neuron relaxations lose some multivariate functions, while layerwise multi-neuron relaxations preserve the full continuous piecewise-linear class on a specified convex region. |
+| **Completeness** | The network is already fixed | No bounded-scope convex relaxation is exact on every network. Exactness requires changing the representation or partitioning the input region. |
 
-Existence permits a carefully chosen network and an approximation tolerance.
-Training asks for an algorithm that reaches useful weights. Exact verification
-fixes those weights and asks whether the abstraction preserves enough
-information. Keeping these quantifiers separate prevents progress at one stage
-from being mistaken for progress at all three.
+Frontiers 1 and 3 both let us choose a network. Frontier 1 permits an
+arbitrarily small positive error, while Frontier 3 requires exact equality.
+Frontier 4 fixes the network before verification. Training connects these
+existence results to practice by asking whether optimization can reach the
+promised representations. Keeping these choices in order prevents a positive
+result at one frontier from answering a different question.
 
 Every certificate so far has propagated deterministic bounds over an allowed
 input region. Part 8 takes a probabilistic route: add random noise, measure how
