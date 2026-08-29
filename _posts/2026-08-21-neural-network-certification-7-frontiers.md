@@ -389,6 +389,15 @@ The strongest possible cross-$r$-layer relaxation computes the exact convex
 hull of each window's input-output graph. If this ideal relaxation fails, every
 cross-$r$-layer convex relaxation also fails.
 
+For example, when $L=5$ and $r=3$, the windows cover layers 1–3, 2–4, and
+3–5. Their overlap carries intermediate variables across neighboring windows.
+
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
+  <img src="{{ '/imgs/april-cross-r-layer-relaxation.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="Five network layers shown under three convex-relaxation scopes. A layerwise relaxation places a separate convex-hull window around each layer. A cross-three-layer relaxation uses overlapping windows over layers one through three, two through four, and three through five. A whole-network relaxation places one window around all five layers.">
+  </div>
+</figure>
+
 Let a network have $L$ layers. The
 [multi-neuron expressiveness study](https://arxiv.org/abs/2410.06816) proves a
 sharp threshold. Choose any fixed fraction $0<\alpha<1$ and let each window
