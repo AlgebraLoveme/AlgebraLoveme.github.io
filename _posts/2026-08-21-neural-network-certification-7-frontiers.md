@@ -378,36 +378,63 @@ network and input region. Precise expressivity let us redesign the network for
 the relaxation. Completeness must also handle representations that were chosen
 without the relaxation in mind.
 
-The multi-neuron result above might suggest that sufficiently large joint
-groups eventually make a convex verifier complete. The same
-[multi-neuron expressiveness study](https://arxiv.org/abs/2410.06816) disproves
-that intuition. Even the optimal convex description of each entire layer is
-inexact on some networks. Extending each relaxation across any fixed finite
-number of consecutive layers still leaves networks with spurious behaviors.
-The bounding error can be arbitrarily large.
+Frontier 3's positive result used a **layerwise multi-neuron relaxation**. At
+its strongest, it can relate every neuron in one layer, yet it replaces that
+layer's reachable set with convex information before moving onward. This leaves
+a natural escape route: analyze several consecutive layers together.
 
-This is the **universal convex barrier**. It applies to compositional verifiers
-that repeatedly replace part of a network with convex information of bounded
-scope. Taking the exact convex hull of the whole network at once would preserve
-its minimum and maximum, but computing that global object is the original hard
-problem in another form.
+A **cross-layer multi-neuron relaxation** opens a window over $r$ consecutive
+layers and can derive constraints that connect variables inside that window.
+The strongest possible cross-$r$-layer relaxation computes the exact convex
+hull of each window's input-output graph. If this ideal relaxation fails, every
+cross-$r$-layer convex relaxation also fails.
 
-The mechanism begins at an intermediate layer. April's allowed inputs may
-reach a non-convex set $S$. Replacing $S$ by its convex hull admits a
-spurious hidden state $c$. Later layers can map $c$ beyond every output produced
-by the exact network, so the final relaxed range becomes inexact.
+Let a network have $L$ layers. The
+[multi-neuron expressiveness study](https://arxiv.org/abs/2410.06816) proves a
+sharp threshold. Choose any fixed fraction $0<\alpha<1$ and let each window
+span
+
+$$
+r=\max(1,\lfloor\alpha L\rfloor)
+$$
+
+layers. Even the strongest cross-$r$-layer relaxation is inexact on some
+networks, and its bounding error can be arbitrarily large. The window may span
+90% or 99% of the network. Exact bounds for every network appear only at
+$\alpha=1$, when one convex hull covers the complete input-output function.
+
+This sharp threshold establishes the **universal convex barrier** across three
+levels of convex reasoning:
+
+1. a separate relaxation for each neuron;
+2. joint constraints over any number of neurons within one layer; and
+3. joint constraints across a fixed number of layers, or even any fixed
+   fraction of the network depth below the complete network.
+
+Cross-layer reasoning moves the point where information is convexified farther
+through the network. For every $\alpha<1$, at least one boundary remains. The
+paper constructs a failure case by inserting function-preserving identity
+layers between two subnetworks. These layers push a critical dependency beyond
+the reach of each cross-layer window.
+
+At that boundary, April's allowed inputs may reach a non-convex set $S$.
+Replacing $S$ by its convex hull admits a spurious hidden state $c$. Later
+layers can map $c$ beyond every output produced by the exact network, so the
+final relaxed range becomes inexact. The same mechanism applies when the
+convexified window contains one layer or many layers.
 
 <figure class="wide-diagram" style="text-align: center;">
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
-  <img src="{{ '/imgs/april-universal-convex-barrier.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="April's allowed inputs reach a curved non-convex set of hidden states. A local convex relaxation fills the gap and admits an unreachable state c. The remaining network maps c outside the exact output range, which makes the relaxed output bound inexact.">
+  <img src="{{ '/imgs/april-universal-convex-barrier.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="April's allowed inputs reach a curved non-convex set of hidden states. Convexifying one layer or a cross-layer window fills the gap and admits an unreachable state c. The remaining network maps c outside the exact output range, which makes the relaxed output bound inexact.">
   </div>
 </figure>
 
 Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) approximate
-joint convex hulls over small neuron groups. Larger groups can preserve more
-relationships and tighten many concrete problems. The universal barrier says
-that no fixed finite grouping strategy guarantees exact bounds for every
-network.
+joint convex hulls over small neuron groups within one layer. Cross-layer
+methods retain relationships through several consecutive layers. Larger groups
+and deeper windows can tighten many concrete problems. The theorem still
+covers their ideal counterparts for every fixed window size and every fixed
+fraction of network depth below 100%.
 
 ### Two ways to recover exact bounds
 
@@ -445,7 +472,7 @@ are allowed to choose.
 | **Approximate existence** | A network adapted to the target and a positive tolerance | IBP-certified networks can approximate every continuous target and its ranges arbitrarily closely. |
 | **Trainability** | An optimization path through a chosen architecture | Tightness alone does not determine training quality. Continuity and sensitivity also shape the search. |
 | **Precise expressivity** | A network representation adapted to the target and relaxation | Single-neuron relaxations lose some multivariate functions, while layerwise multi-neuron relaxations preserve the full continuous piecewise-linear class on a specified convex region. |
-| **Completeness** | The network is already fixed | No bounded-scope convex relaxation is exact on every network. Exactness requires changing the representation or partitioning the input region. |
+| **Completeness** | The network is already fixed | Layerwise and bounded-scope cross-layer convex relaxations are inexact on some networks. Exactness requires changing the representation or partitioning the input region. |
 
 Frontiers 1 and 3 both let us choose a network. Frontier 1 permits an
 arbitrarily small positive error, while Frontier 3 requires exact equality.
