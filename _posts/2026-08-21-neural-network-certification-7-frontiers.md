@@ -40,6 +40,13 @@ Completeness gives the verifier an arbitrary network whose representation is
 already fixed. A relaxation can preserve the full function class under a
 careful choice of representation and still be inexact on some fixed networks.
 
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
+  <img src="{{ '/imgs/april-four-certification-frontiers.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="A shared pipeline runs from desired behavior through network choice and training to a fixed network and certified bounds. Four cards distinguish approximate existence, trainability, precise expressivity, and completeness by showing whether the network may be chosen, searched for, or is already fixed, and whether positive error or exact bounds are required.">
+  </div>
+  <figcaption>Frontiers 1 and 3 may choose a network representation. Frontier 2 asks whether optimization can reach useful weights. Frontier 4 receives an arbitrary fixed network.</figcaption>
+</figure>
+
 Each frontier challenges a plausible intuition. IBP looks too coarse to support
 accurate predictions and arbitrarily precise interval bounds. A tighter bound
 seems like it should provide a better training objective. The tightest possible

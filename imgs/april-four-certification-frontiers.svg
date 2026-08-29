@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="img" aria-labelledby="title desc">
+  <title id="title">Four questions in the neural network certification pipeline</title>
+  <desc id="desc">A pipeline runs from desired behavior through network choice and training to a fixed network and certified bounds. Four cards distinguish approximate existence, trainability, precise expressivity, and verifier completeness by what may be chosen and whether the required result is approximate or exact.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#5b7088"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="620" fill="#ffffff"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="500" y="34" text-anchor="middle" font-size="25" font-weight="650" fill="#111827">Four frontiers ask different questions about one pipeline</text>
+
+    <!-- Shared pipeline. -->
+    <g font-size="16" font-weight="650" text-anchor="middle">
+      <rect x="35" y="62" width="190" height="58" rx="12" fill="#e7f1fb" stroke="#2f5da8" stroke-width="2"/>
+      <text x="130" y="87" fill="#244c89">Desired behavior</text>
+      <text x="130" y="108" font-size="14" font-weight="500" fill="#374151">for April's classifier</text>
+
+      <rect x="285" y="62" width="190" height="58" rx="12" fill="#fff4df" stroke="#b9822f" stroke-width="2"/>
+      <text x="380" y="87" fill="#7a531c">Choose or train</text>
+      <text x="380" y="108" font-size="14" font-weight="500" fill="#374151">a network representation</text>
+
+      <rect x="535" y="62" width="190" height="58" rx="12" fill="#e1efde" stroke="#347a45" stroke-width="2"/>
+      <text x="630" y="87" fill="#286437">Fixed network</text>
+      <text x="630" y="108" font-size="14" font-weight="500" fill="#374151">architecture and weights</text>
+
+      <rect x="785" y="62" width="180" height="58" rx="12" fill="#e5e0ef" stroke="#59449b" stroke-width="2"/>
+      <text x="875" y="87" fill="#49397f">Certified bounds</text>
+      <text x="875" y="108" font-size="14" font-weight="500" fill="#374151">from a relaxation</text>
+    </g>
+    <g stroke="#5b7088" stroke-width="2.5" marker-end="url(#arrow)">
+      <line x1="235" y1="91" x2="273" y2="91"/>
+      <line x1="485" y1="91" x2="523" y2="91"/>
+      <line x1="735" y1="91" x2="773" y2="91"/>
+    </g>
+
+    <!-- Frontier 1. -->
+    <rect x="30" y="150" width="455" height="205" rx="16" fill="#f4f8fd" stroke="#8fc3dc" stroke-width="2"/>
+    <text x="58" y="184" font-size="21" font-weight="650" fill="#244c89">1. Approximate existence</text>
+    <rect x="374" y="163" width="86" height="28" rx="14" fill="#cee5ef"/>
+    <text x="417" y="183" text-anchor="middle" font-size="14" font-weight="650" fill="#244c89">choose h</text>
+
+    <rect x="60" y="214" width="160" height="58" rx="10" fill="#ffffff" stroke="#8fc3dc" stroke-width="2"/>
+    <text x="140" y="238" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">target behavior f</text>
+    <text x="140" y="259" text-anchor="middle" font-size="14" fill="#4b5563">positive tolerance</text>
+    <line x1="231" y1="243" x2="275" y2="243" stroke="#2f5da8" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="253" y="229" text-anchor="middle" font-size="13" fill="#244c89">exists</text>
+    <rect x="286" y="214" width="165" height="58" rx="10" fill="#ffffff" stroke="#8fc3dc" stroke-width="2"/>
+    <text x="368" y="238" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">some network h</text>
+    <text x="368" y="259" text-anchor="middle" font-size="14" fill="#4b5563">chosen for the target</text>
+    <text x="257" y="306" text-anchor="middle" font-size="15" fill="#374151">Positive error is allowed,</text>
+    <text x="257" y="329" text-anchor="middle" font-size="15" font-weight="650" fill="#244c89">but can be made as small as requested.</text>
+
+    <!-- Frontier 2. -->
+    <rect x="515" y="150" width="455" height="205" rx="16" fill="#fffbf2" stroke="#e9c67f" stroke-width="2"/>
+    <text x="543" y="184" font-size="21" font-weight="650" fill="#7a531c">2. Trainability</text>
+    <rect x="870" y="163" width="75" height="28" rx="14" fill="#f5e5bf"/>
+    <text x="907" y="183" text-anchor="middle" font-size="14" font-weight="650" fill="#7a531c">search</text>
+
+    <rect x="545" y="214" width="165" height="58" rx="10" fill="#ffffff" stroke="#e9c67f" stroke-width="2"/>
+    <text x="627" y="238" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">architecture + loss</text>
+    <text x="627" y="259" text-anchor="middle" font-size="14" fill="#4b5563">define the search</text>
+    <line x1="721" y1="243" x2="765" y2="243" stroke="#b9822f" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="743" y="229" text-anchor="middle" font-size="13" fill="#7a531c">optimize</text>
+    <rect x="776" y="214" width="165" height="58" rx="10" fill="#ffffff" stroke="#e9c67f" stroke-width="2"/>
+    <text x="858" y="238" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">trained weights</text>
+    <text x="858" y="259" text-anchor="middle" font-size="14" fill="#4b5563">one reached model</text>
+    <text x="742" y="306" text-anchor="middle" font-size="15" fill="#374151">Can optimization reach a model that is</text>
+    <text x="742" y="329" text-anchor="middle" font-size="15" font-weight="650" fill="#7a531c">both accurate and certifiable?</text>
+
+    <!-- Frontier 3. -->
+    <rect x="30" y="375" width="455" height="215" rx="16" fill="#f2faf8" stroke="#a6d3d0" stroke-width="2"/>
+    <text x="58" y="409" font-size="21" font-weight="650" fill="#286b6d">3. Precise expressivity</text>
+    <rect x="374" y="388" width="86" height="28" rx="14" fill="#dceeed"/>
+    <text x="417" y="408" text-anchor="middle" font-size="14" font-weight="650" fill="#286b6d">choose h</text>
+
+    <rect x="60" y="439" width="160" height="58" rx="10" fill="#ffffff" stroke="#a6d3d0" stroke-width="2"/>
+    <text x="140" y="463" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">target function f</text>
+    <text x="140" y="484" text-anchor="middle" font-size="14" fill="#4b5563">chosen relaxation</text>
+    <line x1="231" y1="468" x2="275" y2="468" stroke="#3b8587" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="253" y="454" text-anchor="middle" font-size="13" fill="#286b6d">exists</text>
+    <rect x="286" y="439" width="165" height="58" rx="10" fill="#ffffff" stroke="#a6d3d0" stroke-width="2"/>
+    <text x="368" y="463" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">some network h</text>
+    <text x="368" y="484" text-anchor="middle" font-size="14" fill="#4b5563">chosen for the target</text>
+    <text x="257" y="531" text-anchor="middle" font-size="15" fill="#374151">The network computes f exactly,</text>
+    <text x="257" y="554" text-anchor="middle" font-size="15" font-weight="650" fill="#286b6d">and the relaxation returns exact bounds.</text>
+
+    <!-- Frontier 4. -->
+    <rect x="515" y="375" width="455" height="215" rx="16" fill="#f8f5fc" stroke="#c5b9dd" stroke-width="2"/>
+    <text x="543" y="409" font-size="21" font-weight="650" fill="#49397f">4. Completeness</text>
+    <rect x="867" y="388" width="78" height="28" rx="14" fill="#e5e0ef"/>
+    <text x="906" y="408" text-anchor="middle" font-size="14" font-weight="650" fill="#49397f">h fixed</text>
+
+    <rect x="545" y="439" width="165" height="58" rx="10" fill="#ffffff" stroke="#c5b9dd" stroke-width="2"/>
+    <text x="627" y="463" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">arbitrary network h</text>
+    <text x="627" y="484" text-anchor="middle" font-size="14" fill="#4b5563">network already fixed</text>
+    <line x1="721" y1="468" x2="765" y2="468" stroke="#59449b" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="743" y="454" text-anchor="middle" font-size="13" fill="#49397f">analyze</text>
+    <rect x="776" y="439" width="165" height="58" rx="10" fill="#ffffff" stroke="#c5b9dd" stroke-width="2"/>
+    <text x="858" y="463" text-anchor="middle" font-size="16" font-weight="650" fill="#111827">the relaxation</text>
+    <text x="858" y="484" text-anchor="middle" font-size="14" fill="#4b5563">applied to the same h</text>
+    <text x="742" y="531" text-anchor="middle" font-size="15" fill="#374151">Does it return exact bounds for</text>
+    <text x="742" y="554" text-anchor="middle" font-size="15" font-weight="650" fill="#49397f">every supported fixed network?</text>
+  </g>
+</svg>
