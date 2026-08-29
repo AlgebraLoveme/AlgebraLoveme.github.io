@@ -44,7 +44,6 @@ careful choice of representation and still be inexact on some fixed networks.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-four-certification-frontiers.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="A shared pipeline runs from desired behavior through network choice and training to a fixed network and certified bounds. Four cards distinguish approximate existence, trainability, precise expressivity, and completeness by showing whether the network may be chosen, searched for, or is already fixed, and whether positive error or exact bounds are required.">
   </div>
-  <figcaption>Frontiers 1 and 3 may choose a network representation. Frontier 2 asks whether optimization can reach useful weights. Frontier 4 receives an arbitrary fixed network.</figcaption>
 </figure>
 
 Each frontier challenges a plausible intuition. IBP looks too coarse to support
@@ -104,7 +103,6 @@ slightly wider interval computed by IBP.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-interval-universal-approximation.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="A continuous target score and a nearby piecewise-linear network curve. Over each of three input intervals, blue markers identify the network extrema and its exact output range, while a dashed purple IBP-certified range is slightly wider and encloses that network range.">
   </div>
-  <figcaption>The curves show pointwise approximation. On each interval, the blue band spans the network's exact outputs, and the dashed IBP-certified band encloses that range.</figcaption>
 </figure>
 
 The theorem settles the existence question by allowing us to choose a network
@@ -187,7 +185,6 @@ tightness that help explain the result:
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-certified-training-paradox.svg' | relative_url }}" width="860" style="display: block; margin: 0 auto;" alt="Two panels compare verification and training. At fixed weights a tighter interval sits closer to the exact loss. Across changing weights a loose loss varies smoothly while a tighter loss has abrupt and sensitive changes that make gradient steps harder to follow.">
   </div>
-  <figcaption>Tightness answers a fixed-network question. Continuity and sensitivity shape the training journey.</figcaption>
 </figure>
 
 This diagnosis suggests a repair: average the certified loss over nearby
@@ -340,7 +337,6 @@ multi-neuron relaxation recovers the exact range $[0,1]$.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/max-single-vs-multi-relaxation.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="The max of two inputs is encoded by a ReLU network. A single-neuron Triangle constraint permits a relaxed output of 1.5 at input 1,1. A joint constraint between the ReLU output and the second input removes that impossible value and proves the exact upper bound 1.">
   </div>
-  <figcaption>The ReLU envelope is locally tight. The joint relationship supplies the missing proof.</figcaption>
 </figure>
 
 The [expressiveness analysis of multi-neuron convex
@@ -395,7 +391,6 @@ by the exact network, so the final relaxed range becomes inexact.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-universal-convex-barrier.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="April's allowed inputs reach a curved non-convex set of hidden states. A local convex relaxation fills the gap and admits an unreachable state c. The remaining network maps c outside the exact output range, which makes the relaxed output bound inexact.">
   </div>
-  <figcaption>Local convexification can create a spurious hidden state that later layers amplify into an inexact output bound.</figcaption>
 </figure>
 
 Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) approximate

@@ -30,7 +30,7 @@ The agent handles routine complexity. The researcher makes the important judgmen
   <a href="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}">
     <img src="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}" alt="PIRA architecture: the researcher sets goals and keeps control. Core rules and task instructions guide the agent. Small tools manage command output, code reading, and decisions. Three memory layers preserve useful information for different lengths of time.">
   </a>
-  <figcaption><a href="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}">Open the full-size diagram.</a> Clear rules guide the work, and small tools handle common tasks.</figcaption>
+  <figcaption><a href="{{ '/assets/files/pira-system-architecture.svg' | relative_url }}">Open the full-size diagram.</a></figcaption>
 </figure>
 
 The core rules define **how I work**. Task instructions adapt those rules to the job. Tools reduce repeated effort and large outputs. Memory keeps information for as long as it stays useful. The researcher keeps control of important choices.
@@ -168,7 +168,7 @@ PIRA can move through:
   <a href="{{ '/assets/files/pira-decision-history-example.html' | relative_url }}">
     <img src="{{ '/assets/files/pira-decision-history-example.png' | relative_url }}" alt="Preview of a PIRA decision-history export showing a selected design choice, alternatives, authority, and timestamp.">
   </a>
-  <figcaption><a href="{{ '/assets/files/pira-decision-history-example.html' | relative_url }}">Open an example decision-history report.</a> The page uses only HTML and CSS.</figcaption>
+  <figcaption><a href="{{ '/assets/files/pira-decision-history-example.html' | relative_url }}">Open an example decision-history report.</a></figcaption>
 </figure>
 
 ## Evaluation on one difficult coding task

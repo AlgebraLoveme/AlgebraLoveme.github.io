@@ -88,7 +88,6 @@ $$
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/relu-linear-relaxation.svg' | relative_url }}" width="640" style="display: block; margin: 0 auto;" alt="The ReLU graph between minus 0.4 and 0.4 enclosed by two lower lines and an upper line, forming a shaded triangular region.">
   </div>
-  <figcaption>Together, the blue upper line and the black ReLU branches form the shaded enclosure.</figcaption>
 </figure>
 
 The upper line joins the ReLU endpoints $(-0.4,0)$ and $(0.4,0.4)$. Convexity
@@ -308,7 +307,6 @@ $-\lambda\ell$ and $(1-\lambda)u$. The distance between them is $u-\ell$.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/deeppoly-min-area.svg' | relative_url }}?v=20260822-2" width="700" style="display: block; margin: 0 auto;" alt="A shaded trapezoid between a DeepPoly lower line and the ReLU upper chord. Its width is u minus ell, and its endpoint gaps are minus lambda ell and one minus lambda times u.">
   </div>
-  <figcaption>The continuous family makes the area calculable. DeepPoly selects between its two endpoint lines.</figcaption>
 </figure>
 
 The area of a trapezoid is its width times the average of its two parallel side

@@ -26,7 +26,6 @@ April gives us a concrete test case for building such a proof.
   <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
     <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="320" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
   </a>
-  <figcaption>We will represent the photograph with two feature values so that every step of the proof fits on the page.</figcaption>
 </figure>
 
 A practical image classifier may receive hundreds of thousands of color-channel

@@ -79,7 +79,6 @@ and apply the same Gaussian radius formula.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-denoised-smoothing.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="April's clean photograph is perturbed by Gaussian noise, passed through a denoiser, and classified. The denoiser and classifier together form the base classifier inside randomized smoothing.">
   </div>
-  <figcaption>Denoised smoothing changes the base classifier while reusing the Gaussian theorem.</figcaption>
 </figure>
 
 [Denoised smoothing](https://arxiv.org/abs/2003.01908) trains $D$ so that noisy
@@ -134,7 +133,6 @@ perturbations.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-global-noise-tradeoff.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="Two schematic certified-radius curves peak at different Gaussian noise scales. A fragile input favors a smaller sigma, while an input stable under stronger perturbations favors a larger sigma. Standard smoothing must choose one global sigma.">
   </div>
-  <figcaption>A global noise level asks every input to accept the same accuracy–radius trade-off.</figcaption>
 </figure>
 
 For each photograph, we would therefore like to select the noise level that
@@ -229,7 +227,6 @@ decision.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-dual-rs.svg' | relative_url }}" width="940" style="display: block; margin: 0 auto;" alt="Dual randomized smoothing first uses a smoothed variance estimator to choose sigma and certify radius R sigma. It then uses a classifier smoothed at that sigma to predict Siberian cat and certify radius R c. The final radius is the smaller of the two.">
   </div>
-  <figcaption>One certificate protects the route. The other protects the class prediction.</figcaption>
 </figure>
 
 The estimator can also route inputs among pretrained randomized-smoothing

@@ -116,7 +116,6 @@ losses safely cover the exact worst-case loss.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-certified-training-bracket.svg' | relative_url }}" width="820" style="display: block; margin: 0 auto;" alt="April's clean loss, attacked loss, exact worst-case loss, and two certified upper losses arranged on a vertical scale. The attacked loss is at or below the exact worst-case loss, while sound certified losses are at or above it. An unsound training proxy has no guaranteed side relative to the exact value.">
   </div>
-  <figcaption>Attacks approach the worst-case loss from below. Sound certificates approach it from above.</figcaption>
 </figure>
 
 ## Sound certified training follows the upper bound

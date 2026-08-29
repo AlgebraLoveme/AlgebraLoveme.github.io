@@ -30,7 +30,6 @@ After 24 hours, record $1$ for each mouse that dies and $0$ for each mouse that 
   <a href="{{ '/assets/files/poison-bottle-binary-v2.png' | relative_url }}">
     <img src="{{ '/assets/files/poison-bottle-binary-v2.png' | relative_url }}" alt="A three-stage infographic. Bottle 10 is encoded as 1010, so mice 1 and 3 receive its sample while mice 2 and 4 do not. The outcome dies, lives, dies, lives produces 1010 and identifies bottle 10.">
   </a>
-  <figcaption>Bottle $10$ has code $1010$. The same four-bit pattern determines which mice sample it and, if it is poisoned, which mice die.</figcaption>
 </figure>
 
 ## Why three mice are not enough

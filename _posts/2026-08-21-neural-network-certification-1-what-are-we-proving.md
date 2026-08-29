@@ -23,7 +23,6 @@ Meet April, my Siberian cat.
   <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
     <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="520" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
   </a>
-  <figcaption>We will use this photograph of April to move from one correct prediction to a mathematical guarantee.</figcaption>
 </figure>
 
 Imagine that an image classifier receives this photo and predicts **cat**. The
@@ -74,7 +73,7 @@ failure.
     <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
       <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" alt="Original photograph of April the Siberian cat beside a tree.">
     </a>
-    <figcaption><strong>Original.</strong> The classifier receives April's photograph.</figcaption>
+    <figcaption><strong>Original.</strong></figcaption>
   </figure>
   <figure style="flex: 1 1 260px; max-width: 360px; margin: 0; text-align: center;">
     <a href="{{ '/imgs/April_the_cat_conceptual_perturbation.jpg' | relative_url }}">

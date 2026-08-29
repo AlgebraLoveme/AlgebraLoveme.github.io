@@ -32,7 +32,6 @@ but suppose “Siberian cat” wins a large majority.
   <a href="{{ '/imgs/April_the_cat.jpg' | relative_url }}">
     <img src="{{ '/imgs/April_the_cat.jpg' | relative_url }}" width="240" style="display: block; margin: 0 auto;" alt="April, a cream-colored Siberian cat with gray ears, sitting beside a tree in sunlight.">
   </a>
-  <figcaption>Randomized smoothing asks how April is classified after Gaussian noise is repeatedly added to this image.</figcaption>
 </figure>
 
 This creates the central question:
@@ -73,7 +72,6 @@ votes.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/april-randomized-smoothing-cloud.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="A point representing April is surrounded by Gaussian noisy samples in three base-classifier decision regions. Most samples fall in the Siberian cat region, so the smoothed classifier predicts Siberian cat.">
   </div>
-  <figcaption>The base classifier may vary across the cloud; the smoothed classifier returns its most probable label.</figcaption>
 </figure>
 
 The vote identifies the smoothed label. Certification must also convert that
@@ -209,7 +207,6 @@ $r<\sigma\Phi^{-1}(p_A)$, recovering $R_A$ above.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/randomized-smoothing-radius.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="A three-stage diagram converts a lower bound p A equals 0.80 and competitor upper bound p B equals 0.10 through Gaussian quantiles into a certified radius of approximately 0.265 around April's input.">
   </div>
-  <figcaption>The probability lead is converted into distance by Gaussian quantiles.</figcaption>
 </figure>
 
 ## Where does probability enter the certificate?
@@ -315,7 +312,6 @@ ten times as much radius gain.
   <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
   <img src="{{ '/imgs/acr-easy-sample-bias.svg' | relative_url }}" width="880" style="display: block; margin: 0 auto;" alt="Two equal increases of 0.01 in the leading-class probability are compared. A hard input's certified radius grows by 0.013, while an easy input's radius grows by 0.136 when sigma is 0.5.">
   </div>
-  <figcaption>Equal probability improvements receive very different weight in average certified radius.</figcaption>
 </figure>
 
 The paper

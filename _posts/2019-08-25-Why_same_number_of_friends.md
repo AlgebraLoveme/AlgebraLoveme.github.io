@@ -39,7 +39,6 @@ If someone has degree $n-1$, they are friends with every other person, so nobody
   <a href="{{ '/assets/files/friends-degree-pigeonhole-v2.png' | relative_url }}">
     <img src="{{ '/assets/files/friends-degree-pigeonhole-v2.png' | relative_url }}" alt="An infographic with two five-vertex graphs. The first has an isolated vertex, which rules out degree four. The second has a vertex connected to all four others, which rules out degree zero. Five vertex symbols then point to four degree-value slots.">
   </a>
-  <figcaption>For five people, degree $0$ rules out degree $4$, while degree $4$ rules out degree $0$. Either way, only four degree values remain.</figcaption>
 </figure>
 
 At least one extreme must therefore be absent. If degree $n-1$ is absent, every degree lies in $\{0,1,\ldots,n-2\}$. If degree $0$ is absent, every degree lies in $\{1,2,\ldots,n-1\}$. Either way, the $n$ people have only $n-1$ possible degree values.

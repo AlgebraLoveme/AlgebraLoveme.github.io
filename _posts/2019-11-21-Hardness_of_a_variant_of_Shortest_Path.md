@@ -43,7 +43,6 @@ The intermediate branch vertices keep the graph simple—there are no parallel e
   <a href="{{ '/imgs/partition-path-reduction.svg' | relative_url }}">
     <img src="{{ '/imgs/partition-path-reduction.svg' | relative_url }}" alt="A chain of diamond-shaped graph gadgets. For each input number, a directed path chooses either a positive-weight branch or a negative-weight branch, followed by a zero-weight edge.">
   </a>
-  <figcaption>The reduction uses one choice gadget per input number. Every $s\text{-}t$ path selects exactly one sign for each $a_i$.</figcaption>
 </figure>
 
 The graph has $3n+1$ vertices and $4n$ edges, so the construction takes polynomial time. Every $s\text{-}t$ path chooses a sign $\sigma_i\in\{+1,-1\}$ for each input number, and its signed weight is $\sum_{i=1}^n\sigma_i a_i$.
