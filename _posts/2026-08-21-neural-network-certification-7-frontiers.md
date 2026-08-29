@@ -379,6 +379,18 @@ scope. Taking the exact convex hull of the whole network at once would preserve
 its minimum and maximum, but computing that global object is the original hard
 problem in another form.
 
+The mechanism begins at an intermediate layer. April's allowed inputs may
+reach a non-convex set $S$. Replacing $S$ by its convex hull admits a
+spurious hidden state $c$. Later layers can map $c$ beyond every output produced
+by the exact network, so the final relaxed range becomes inexact.
+
+<figure class="wide-diagram" style="text-align: center;">
+  <div class="wide-diagram__viewport" tabindex="0" role="group" aria-label="Scrollable diagram">
+  <img src="{{ '/imgs/april-universal-convex-barrier.svg' | relative_url }}" width="900" style="display: block; margin: 0 auto;" alt="April's allowed inputs reach a curved non-convex set of hidden states. A local convex relaxation fills the gap and admits an unreachable state c. The remaining network maps c outside the exact output range, which makes the relaxed output bound inexact.">
+  </div>
+  <figcaption>Local convexification can create a spurious hidden state that later layers amplify into an inexact output bound.</figcaption>
+</figure>
+
 Practical methods such as [PRIMA](https://arxiv.org/abs/2103.03638) approximate
 joint convex hulls over small neuron groups. Larger groups can preserve more
 relationships and tighten many concrete problems. The universal barrier says

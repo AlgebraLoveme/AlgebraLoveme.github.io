@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-labelledby="title desc">
+  <title id="title">How bounded-scope convexification creates a spurious output</title>
+  <desc id="desc">April's allowed inputs reach a curved non-convex set of hidden states. A convex relaxation fills the gap and admits an unreachable state c. The remaining network maps c outside the exact output range, so the relaxed output bound is inexact.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#5b7088"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="500" fill="#ffffff"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="500" y="36" text-anchor="middle" font-size="25" font-weight="650" fill="#111827">A local convex hull can create a global bounding error</text>
+
+    <!-- Stage panels. -->
+    <rect x="30" y="68" width="275" height="350" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+    <rect x="365" y="68" width="285" height="350" rx="16" fill="#fbf8ff" stroke="#c9b8e8" stroke-width="2"/>
+    <rect x="710" y="68" width="260" height="350" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+
+    <text x="167" y="104" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">1. Exact hidden states</text>
+    <text x="507" y="104" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">2. Convexify locally</text>
+    <text x="840" y="104" text-anchor="middle" font-size="20" font-weight="650" fill="#111827">3. Propagate onward</text>
+
+    <text x="167" y="132" text-anchor="middle" font-size="15" fill="#4b5563">from April's allowed inputs</text>
+    <text x="507" y="132" text-anchor="middle" font-size="15" fill="#4b5563">replace the set by its convex hull</text>
+    <text x="840" y="132" text-anchor="middle" font-size="15" fill="#4b5563">through the remaining layers</text>
+
+    <!-- Arrows between stages. -->
+    <line x1="316" y1="242" x2="353" y2="242" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="661" y1="242" x2="698" y2="242" stroke="#5b7088" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <!-- Stage 1: exact non-convex reachable set. -->
+    <g fill="none" stroke="#347a45" stroke-width="7" stroke-linecap="round">
+      <path d="M 67 178 C 96 225 112 330 166 330 C 220 330 239 225 275 178"/>
+    </g>
+    <g fill="#347a45" stroke="#ffffff" stroke-width="2">
+      <circle cx="67" cy="178" r="6"/>
+      <circle cx="107" cy="270" r="6"/>
+      <circle cx="166" cy="330" r="6"/>
+      <circle cx="227" cy="265" r="6"/>
+      <circle cx="275" cy="178" r="6"/>
+    </g>
+    <path d="M 102 370 L 129 337" fill="none" stroke="#347a45" stroke-width="1.8"/>
+    <text x="98" y="386" font-size="16" font-weight="650" fill="#286437">reachable set S</text>
+
+    <!-- Stage 2: convex hull and a spurious state. -->
+    <path d="M 400 178 C 429 225 445 330 507 330 C 565 330 584 225 618 178 L 400 178 Z"
+          fill="#e5e0ef" stroke="#59449b" stroke-width="2.5" stroke-dasharray="7 5"/>
+    <path d="M 400 178 C 429 225 445 330 507 330 C 565 330 584 225 618 178"
+          fill="none" stroke="#347a45" stroke-width="7" stroke-linecap="round"/>
+    <g fill="#347a45" stroke="#ffffff" stroke-width="2">
+      <circle cx="400" cy="178" r="6"/>
+      <circle cx="440" cy="270" r="6"/>
+      <circle cx="507" cy="330" r="6"/>
+      <circle cx="568" cy="265" r="6"/>
+      <circle cx="618" cy="178" r="6"/>
+    </g>
+    <text x="509" y="168" text-anchor="middle" font-size="16" font-weight="650" fill="#49397f">convex hull</text>
+    <circle cx="507" cy="222" r="10" fill="#b9473e" stroke="#ffffff" stroke-width="3"/>
+    <text x="507" y="202" text-anchor="middle" font-size="16" font-weight="650" fill="#97372f">spurious state c</text>
+    <text x="507" y="379" text-anchor="middle" font-size="15" fill="#4b5563">c is inside the hull and outside S</text>
+
+    <!-- Stage 3: exact and relaxed output ranges. -->
+    <line x1="758" y1="350" x2="758" y2="158" stroke="#374151" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="746" y="162" text-anchor="end" font-size="17" font-style="italic" fill="#374151">y</text>
+
+    <line x1="790" y1="190" x2="790" y2="345" stroke="#59449b" stroke-width="3" stroke-dasharray="7 5"/>
+    <line x1="780" y1="190" x2="800" y2="190" stroke="#59449b" stroke-width="3"/>
+    <line x1="780" y1="345" x2="800" y2="345" stroke="#59449b" stroke-width="3"/>
+    <text x="812" y="340" font-size="15" font-weight="650" fill="#49397f">relaxed range</text>
+
+    <line x1="790" y1="245" x2="790" y2="302" stroke="#347a45" stroke-width="11" stroke-linecap="round"/>
+    <text x="812" y="265" font-size="16" font-weight="650" fill="#286437">exact output</text>
+    <text x="812" y="286" font-size="16" font-weight="650" fill="#286437">range</text>
+
+    <circle cx="790" cy="190" r="9" fill="#b9473e" stroke="#ffffff" stroke-width="3"/>
+    <line x1="800" y1="190" x2="821" y2="190" stroke="#b9473e" stroke-width="1.8"/>
+    <text x="830" y="184" font-size="15" font-weight="650" fill="#97372f">output from c</text>
+    <text x="830" y="204" font-size="15" fill="#97372f">spurious extreme</text>
+
+    <text x="500" y="465" text-anchor="middle" font-size="18" font-weight="650" fill="#111827">The relaxed bound includes an output that no allowed input can produce.</text>
+  </g>
+</svg>
