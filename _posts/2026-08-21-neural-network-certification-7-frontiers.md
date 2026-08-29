@@ -168,11 +168,21 @@ gap between this certified loss and the exact worst-case loss at one value of
 $\theta$. Optimization also depends on how the surface changes between nearby
 weight values.
 
-The [paradox of certified training](https://arxiv.org/abs/2102.06700) is the
-observed reversal of the fixed-network intuition: loose interval-based
-training often produces networks with higher certified robustness than
-training with tighter relaxations. The study identifies two properties beyond
-tightness that help explain the result:
+Empirical results often reverse this expectation. Loose interval-based
+training can produce networks with higher certified robustness than training
+with tighter relaxations. This behavior is known as the **paradox of certified
+training**.
+
+[Towards Better Understanding of Training Certifiably Robust Models against
+Adversarial Examples](https://openreview.net/forum?id=b18Az57ioHn) studies the
+paradox through the loss landscape. It identifies smoothness as another factor
+alongside tightness and finds substantial differences among the landscapes
+induced by linear-relaxation methods. The paper also designs a method around
+both criteria and evaluates it across a wide range of perturbation sizes.
+
+[On the Paradox of Certified Training](https://arxiv.org/abs/2102.06700)
+develops this optimization view further by separating two properties beyond
+tightness:
 
 - **Continuity:** nearby weights should produce nearby bound values. A jump
   gives the current gradient no information about the landscape across the
