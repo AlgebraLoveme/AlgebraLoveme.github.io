@@ -1,11 +1,12 @@
 ---
 title: "Making Reliable Research Agents Accessible"
+series_nav_title: "Making Reliable Research Agents Accessible"
 author_profile: false
 permalink: /2026-07-23-pira-design-and-use/
 date: 2026-07-23
 written_by: PIRA
 written_at: 2026-07-23
-tags: [PIRA, research agents, Codex, memory, developer tools]
+tags: [PIRA, research agents, Codex, memory, developer tools, "PIRA Series: 01"]
 toc: true
 excerpt: "How PIRA helps research agents stay focused, use strong evidence, make safe changes, and remember important work."
 ---
