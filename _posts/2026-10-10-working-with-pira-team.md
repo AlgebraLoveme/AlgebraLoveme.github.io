@@ -29,13 +29,28 @@ You do not need to launch workers or manage their IDs. **A single prompt can als
 
 Workers use the same project workspace. PIRA separates their ownership and coordinates dependencies so that they do not independently change the same component. Important decisions about architecture, scope, dependencies, or public behavior come back to you.
 
+## Team organization
+
+**1. Protect your attention by talking with a single agent.** Working on several projects through separate agent sessions makes you the coordinator across them. You have to switch contexts, read each session's updates, remember unfinished work, and keep priorities aligned. Team brings that coordination into one conversation. You can move between projects and add requests as they arise, while the main agent tracks the work across them and handles the internal details. It brings back concise findings and decisions that need your judgment, reducing how much project state you have to carry yourself.
+
+**2. Use each worker's capability without nested delegation.** A capable agent can investigate a problem, carry out a substantial assignment, and check its result. Giving it ownership of that whole task lets it retain the context and reason through the work directly. Splitting small steps among more agents adds handoffs and coordination. Ordinary workers therefore cannot launch other workers: each is expected to finish its own assignment.
+
+**3. Use optional subteams for exceptionally heavy tasks.** Some assignments exceed what one agent can reasonably manage, such as taking responsibility for an independent software project. For these cases, the main agent can explicitly authorize a coordinator to organize a subteam. The coordinator divides the project into substantial assignments, integrates the workers' results, and reports back to the main agent. Child workers cannot delegate further. This provides extra capacity for project-scale work while preserving your single point of contact.
+
+<figure style="max-width: 640px; margin: 1.5em auto;">
+  <a href="{{ '/assets/files/pira-team-organization.svg' | relative_url }}">
+    <img src="{{ '/assets/files/pira-team-organization.svg' | relative_url }}" width="640" height="876" style="display: block; width: 100%; height: auto;" alt="You work with the main agent. It assigns work to a direct worker and an explicitly authorized subteam coordinator. The coordinator assigns two child workers and integrates their results. Assignments travel down the hierarchy, and results and decision requests return through the assigning parent.">
+  </a>
+  <figcaption>One agent protects your attention, individual workers own complete tasks, and optional subteams handle project-scale work.</figcaption>
+</figure>
+
 ## Add work as it comes to mind
 
 Suppose you maintain a research data tool. You ask PIRA to review and repair the dataset loader. Before it finishes, you ask for CSV export too.
 
 <figure style="max-width: 520px; margin: 1.5em auto;">
   <a href="{{ '/assets/files/pira-team-collaboration.svg' | relative_url }}">
-    <img src="{{ '/assets/files/pira-team-collaboration.svg' | relative_url }}" width="520" height="810" style="display: block; width: 100%; height: auto;" alt="Illustrative conversation: the user requests dataset-loader fixes. While the loader worker is running, the user requests CSV export. PIRA keeps the loader assignment active and assigns the independent exporter to another worker. No instruction to continue earlier work is needed.">
+    <img src="{{ '/assets/files/pira-team-collaboration.svg' | relative_url }}" width="520" height="772" style="display: block; width: 100%; height: auto;" alt="Illustrative conversation: the user requests dataset-loader fixes. While the loader worker is running, the user requests CSV export. PIRA keeps the loader assignment active and assigns the independent exporter to another worker. No instruction to continue earlier work is needed.">
   </a>
   <figcaption>An illustrative conversation. The second request adds work without cancelling the first. PIRA handles the independent assignments in parallel; you keep one point of contact.</figcaption>
 </figure>
@@ -44,21 +59,7 @@ Suppose you maintain a research data tool. You ask PIRA to review and repair the
 
 If both assignments require a change to the shared record format, PIRA should ask about that decision and coordinate the dependent work. Other independent work can continue while you answer.
 
-## Give goals, then steer when needed
-
-A useful request says **what you want, what must stay unchanged, and how success can be checked**. You can give this in ordinary language:
-
-> Review the dataset loader and fix confirmed bugs. Preserve supported input formats and check that existing datasets still load.
-
-You can change priorities in the same conversation:
-
-- “Prioritize the loader problem; the export can wait.”
-- “Stop the export work. We no longer need it.”
-- “What is finished, what is still running, and what needs my decision?”
-
-A stop request does not automatically undo edits already made. PIRA should tell you what changed and handle any cleanup within your instructions.
-
-You remain responsible for the goals and important choices. The main agent handles routine task division, worker control, and follow-through. Its standing rule is to continue until every assigned task is complete or blocked, rather than stop after the most recent request.
+You can also change priorities or stop an assignment here; stopping work does not undo changes already made.
 
 ## Choose the default or economical configuration
 

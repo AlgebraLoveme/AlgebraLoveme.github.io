@@ -1,9 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="810" viewBox="0 0 520 810" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="772" viewBox="0 0 520 772" role="img" aria-labelledby="title desc">
 <title id="title">Add another task without waiting</title>
 <desc id="desc">Illustrative conversation. A user requests dataset-loader fixes. While that worker runs, the user asks for CSV export without saying meanwhile or continue. PIRA keeps both assignments active, with independent loader and exporter workers.</desc>
-<rect width="520" height="810" rx="16" fill="#f5faf8"/>
-<g font-family="Arial, sans-serif" fill="#162d32">
-<text x="260" y="37" text-anchor="middle" font-size="25" font-weight="700">Add another task without waiting</text>
+<rect width="520" height="772" rx="16" fill="#f5faf8"/>
+<g transform="translate(0,-38)" font-family="Arial, sans-serif" fill="#162d32">
 <rect x="24" y="62" width="472" height="160" rx="12" fill="#fff" stroke="#b5c9c7"/>
 <text x="46" y="95" font-size="22" font-weight="700">You · first request</text>
 <text x="46" y="130" font-size="23">Review the dataset loader.</text>

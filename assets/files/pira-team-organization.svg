@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="876" viewBox="0 0 640 876" role="img" aria-labelledby="title desc">
+  <title id="title">PIRA Team: one main agent, scoped workers</title>
+  <desc id="desc">The user talks to the main agent, which manages scope and dependencies across branches and brings important choices back to the user. The main assigns a direct ordinary worker or explicitly authorizes a coordinator. Inside the authorized subteam, the coordinator assigns and integrates two ordinary child workers' tasks, then returns one consolidated handoff to the main. The direct worker returns its handoff to the main. Solid downward arrows show requests and assignments; dashed upward arrows show results and decision requests along the same reporting relationships. Child workers report only to their coordinator. Ordinary workers cannot delegate. All agents share the project workspace; the grouping is not a security sandbox.</desc>
+  <defs>
+    <marker id="assignment-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0 0 7 3.5 0 7Z" fill="#235c58"/>
+    </marker>
+    <marker id="return-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0 0 7 3.5 0 7Z" fill="#365e78"/>
+    </marker>
+  </defs>
+  <rect width="640" height="876" rx="16" fill="#f5faf8"/>
+  <g transform="translate(0,-40)">
+  <g font-family="Arial, sans-serif" fill="#162d32" text-anchor="middle">
+
+    <rect x="170" y="64" width="300" height="70" rx="12" fill="#fff" stroke="#b5c9c7"/>
+    <text x="320" y="94" font-size="26" font-weight="700">You</text>
+    <text x="320" y="122" font-size="23">Goals + decisions</text>
+
+    <rect x="60" y="184" width="520" height="132" rx="12" fill="#235c58"/>
+    <g fill="#fff">
+      <text x="320" y="219" font-size="26" font-weight="700">Main agent</text>
+      <text x="320" y="253" font-size="24">Coordinates scope + dependencies</text>
+      <text x="320" y="287" font-size="24">Brings choices back to you</text>
+    </g>
+
+    <rect x="290" y="342" width="326" height="436" rx="12" fill="#fafafb" stroke="#b5c9c7"/>
+    <text x="453" y="377" font-size="24" font-weight="700">Authorized</text>
+    <text x="453" y="407" font-size="24" font-weight="700">subteam</text>
+
+    <rect x="24" y="423" width="240" height="130" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
+    <text x="144" y="461" font-size="26" font-weight="700">Direct worker</text>
+    <text x="144" y="496" font-size="23">Bounded task</text>
+    <text x="144" y="531" font-size="23">Handoff to main</text>
+
+    <rect x="310" y="423" width="286" height="157" rx="12" fill="#dceee8" stroke="#8caeaa"/>
+    <text x="453" y="461" font-size="26" font-weight="700">Coordinator</text>
+    <text x="453" y="496" font-size="23">Assigns child tasks</text>
+    <text x="453" y="527" font-size="23">Integrates results</text>
+    <text x="453" y="558" font-size="23">One handoff to main</text>
+
+    <rect x="310" y="660" width="132" height="96" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
+    <rect x="464" y="660" width="132" height="96" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
+    <text x="376" y="696" font-size="24" font-weight="700">Worker 1</text>
+    <text x="376" y="732" font-size="23">Ordinary</text>
+    <text x="530" y="696" font-size="24" font-weight="700">Worker 2</text>
+    <text x="530" y="732" font-size="23">Ordinary</text>
+
+    <text x="144" y="620" font-size="24">Ordinary workers</text>
+    <text x="144" y="653" font-size="24">do not delegate.</text>
+  </g>
+
+  <g fill="none" stroke-width="2.5">
+    <g stroke="#235c58" marker-end="url(#assignment-arrow)">
+      <path d="M308 136V180"/>
+      <path d="M136 318V419"/>
+      <path d="M338 318V419"/>
+      <path d="M368 582V656"/>
+      <path d="M522 582V656"/>
+      <path d="M82 799V825"/>
+    </g>
+    <g stroke="#365e78" stroke-dasharray="5 4" marker-end="url(#return-arrow)">
+      <path d="M332 182V138"/>
+      <path d="M152 421V320"/>
+      <path d="M354 421V320"/>
+      <path d="M384 658V584"/>
+      <path d="M538 658V584"/>
+      <path d="M82 866V840"/>
+    </g>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="23" fill="#162d32">
+    <text x="106" y="820">Requests / assignments</text>
+    <text x="106" y="861">Results / decision requests</text>
+    <text x="320" y="896" text-anchor="middle">Shared workspace — not a security sandbox</text>
+  </g>
+  </g>
+</svg>
