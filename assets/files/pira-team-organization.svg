@@ -1,77 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="876" viewBox="0 0 640 876" role="img" aria-labelledby="title desc">
-  <title id="title">PIRA Team: one main agent, scoped workers</title>
-  <desc id="desc">The user talks to the main agent, which manages scope and dependencies across branches and brings important choices back to the user. The main assigns a direct ordinary worker or explicitly authorizes a coordinator. Inside the authorized subteam, the coordinator assigns and integrates two ordinary child workers' tasks, then returns one consolidated handoff to the main. The direct worker returns its handoff to the main. Solid downward arrows show requests and assignments; dashed upward arrows show results and decision requests along the same reporting relationships. Child workers report only to their coordinator. Ordinary workers cannot delegate. All agents share the project workspace; the grouping is not a security sandbox.</desc>
-  <defs>
-    <marker id="assignment-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-      <path d="M0 0 7 3.5 0 7Z" fill="#235c58"/>
-    </marker>
-    <marker id="return-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-      <path d="M0 0 7 3.5 0 7Z" fill="#365e78"/>
-    </marker>
-  </defs>
-  <rect width="640" height="876" rx="16" fill="#f5faf8"/>
-  <g transform="translate(0,-40)">
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="964" viewBox="0 0 640 964" role="img" aria-labelledby="title desc">
+  <title id="title">PIRA Team: one main agent, local and remote execution</title>
+  <desc id="desc">You talk only to the main agent. It chooses local or remote execution for each worker or whole authorized subteam. This example shows a local ordinary worker and a remote subteam with one coordinator and two ordinary child workers. The coordinator assigns child tasks, integrates results, and reports to the main. Each subteam stays entirely on its selected machine. Ordinary workers cannot delegate. Solid downward arrows show assignments. Dashed upward arrows show results and decision requests returning through the assigning parent. Machine boundaries show execution location, without implying workspace synchronization.</desc>
+  <rect width="640" height="964" rx="16" fill="#f5faf8"/>
   <g font-family="Arial, sans-serif" fill="#162d32" text-anchor="middle">
+    <rect x="170" y="24" width="300" height="70" rx="12" fill="#fff" stroke="#b5c9c7"/>
+    <text x="320" y="54" font-size="26" font-weight="700">You</text>
+    <text x="320" y="82" font-size="26">Goals + decisions</text>
 
-    <rect x="170" y="64" width="300" height="70" rx="12" fill="#fff" stroke="#b5c9c7"/>
-    <text x="320" y="94" font-size="26" font-weight="700">You</text>
-    <text x="320" y="122" font-size="23">Goals + decisions</text>
-
-    <rect x="60" y="184" width="520" height="132" rx="12" fill="#235c58"/>
+    <rect x="60" y="144" width="520" height="124" rx="12" fill="#235c58"/>
     <g fill="#fff">
-      <text x="320" y="219" font-size="26" font-weight="700">Main agent</text>
-      <text x="320" y="253" font-size="24">Coordinates scope + dependencies</text>
-      <text x="320" y="287" font-size="24">Brings choices back to you</text>
+      <text x="320" y="182" font-size="26" font-weight="700">Main agent</text>
+      <text x="320" y="218" font-size="26">Chooses local or remote execution</text>
+      <text x="320" y="250" font-size="26">Coordinates work + decisions</text>
     </g>
 
-    <rect x="290" y="342" width="326" height="436" rx="12" fill="#fafafb" stroke="#b5c9c7"/>
-    <text x="453" y="377" font-size="24" font-weight="700">Authorized</text>
-    <text x="453" y="407" font-size="24" font-weight="700">subteam</text>
+    <rect x="24" y="320" width="246" height="472" rx="12" fill="#fafafb" stroke="#b5c9c7" stroke-width="2"/>
+    <rect x="286" y="320" width="330" height="472" rx="12" fill="#fafafb" stroke="#b5c9c7" stroke-width="2"/>
+    <text x="44" y="357" text-anchor="start" font-size="26" font-weight="700">Local machine</text>
+    <text x="306" y="357" text-anchor="start" font-size="26" font-weight="700">Remote machine</text>
 
-    <rect x="24" y="423" width="240" height="130" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
-    <text x="144" y="461" font-size="26" font-weight="700">Direct worker</text>
-    <text x="144" y="496" font-size="23">Bounded task</text>
-    <text x="144" y="531" font-size="23">Handoff to main</text>
+    <rect x="40" y="452" width="214" height="122" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
+    <text x="147" y="490" font-size="26">Worker</text>
+    <text x="147" y="526" font-size="26">Bounded task</text>
+    <text x="147" y="558" font-size="26">Handoff to main</text>
 
-    <rect x="310" y="423" width="286" height="157" rx="12" fill="#dceee8" stroke="#8caeaa"/>
-    <text x="453" y="461" font-size="26" font-weight="700">Coordinator</text>
-    <text x="453" y="496" font-size="23">Assigns child tasks</text>
-    <text x="453" y="527" font-size="23">Integrates results</text>
-    <text x="453" y="558" font-size="23">One handoff to main</text>
+    <rect x="300" y="382" width="302" height="392" rx="12" fill="#fff" stroke="#b5c9c7"/>
+    <text x="312" y="408" text-anchor="start" font-size="26" font-weight="700">Authorized</text>
+    <text x="312" y="439" text-anchor="start" font-size="26" font-weight="700">subteam</text>
+    <rect x="308" y="452" width="286" height="122" rx="12" fill="#dceee8" stroke="#8caeaa"/>
+    <text x="451" y="490" font-size="26">Coordinator</text>
+    <text x="451" y="526" font-size="26">Assigns + integrates</text>
+    <text x="451" y="558" font-size="26">Handoff to main</text>
 
-    <rect x="310" y="660" width="132" height="96" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
-    <rect x="464" y="660" width="132" height="96" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
-    <text x="376" y="696" font-size="24" font-weight="700">Worker 1</text>
-    <text x="376" y="732" font-size="23">Ordinary</text>
-    <text x="530" y="696" font-size="24" font-weight="700">Worker 2</text>
-    <text x="530" y="732" font-size="23">Ordinary</text>
+    <rect x="308" y="670" width="132" height="82" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
+    <rect x="462" y="670" width="132" height="82" rx="12" fill="#e4eef4" stroke="#8ba9bb"/>
+    <text x="374" y="704" font-size="26">Worker 1</text>
+    <text x="374" y="736" font-size="26">Ordinary</text>
+    <text x="528" y="704" font-size="26">Worker 2</text>
+    <text x="528" y="736" font-size="26">Ordinary</text>
 
-    <text x="144" y="620" font-size="24">Ordinary workers</text>
-    <text x="144" y="653" font-size="24">do not delegate.</text>
+    <text x="320" y="830" font-size="26">Ordinary workers do not delegate.</text>
+    <text x="320" y="867" font-size="26">Each subteam stays on one machine.</text>
   </g>
-
   <g fill="none" stroke-width="2.5">
-    <g stroke="#235c58" marker-end="url(#assignment-arrow)">
-      <path d="M308 136V180"/>
-      <path d="M136 318V419"/>
-      <path d="M338 318V419"/>
-      <path d="M368 582V656"/>
-      <path d="M522 582V656"/>
-      <path d="M82 799V825"/>
+    <g stroke="#235c58">
+      <path d="M308 96V142"/>
+      <path d="M228 270V450"/>
+      <path d="M548 270V450"/>
+      <path d="M366 576V668"/>
+      <path d="M520 576V668"/>
+      <path d="M82 890V916"/>
     </g>
-    <g stroke="#365e78" stroke-dasharray="5 4" marker-end="url(#return-arrow)">
-      <path d="M332 182V138"/>
-      <path d="M152 421V320"/>
-      <path d="M354 421V320"/>
-      <path d="M384 658V584"/>
-      <path d="M538 658V584"/>
-      <path d="M82 866V840"/>
+    <g stroke="#365e78" stroke-dasharray="5 4">
+      <path d="M332 142V96"/>
+      <path d="M244 450V270"/>
+      <path d="M564 450V270"/>
+      <path d="M382 668V576"/>
+      <path d="M536 668V576"/>
+      <path d="M82 956V930"/>
     </g>
   </g>
-  <g font-family="Arial, sans-serif" font-size="23" fill="#162d32">
-    <text x="106" y="820">Requests / assignments</text>
-    <text x="106" y="861">Results / decision requests</text>
-    <text x="320" y="896" text-anchor="middle">Shared workspace — not a security sandbox</text>
+  <g fill="#235c58">
+    <path d="M299.25 127L308 144.5L316.75 127Z"/>
+    <path d="M219.25 435L228 452.5L236.75 435Z"/>
+    <path d="M539.25 435L548 452.5L556.75 435Z"/>
+    <path d="M357.25 653L366 670.5L374.75 653Z"/>
+    <path d="M511.25 653L520 670.5L528.75 653Z"/>
+    <path d="M73.25 901L82 918.5L90.75 901Z"/>
   </g>
+  <g fill="#365e78">
+    <path d="M323.25 111L332 93.5L340.75 111Z"/>
+    <path d="M235.25 285L244 267.5L252.75 285Z"/>
+    <path d="M555.25 285L564 267.5L572.75 285Z"/>
+    <path d="M373.25 591L382 573.5L390.75 591Z"/>
+    <path d="M527.25 591L536 573.5L544.75 591Z"/>
+    <path d="M73.25 945L82 927.5L90.75 945Z"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="26" fill="#162d32">
+    <text x="106" y="912">Requests / assignments</text>
+    <text x="106" y="952">Results / decision requests</text>
   </g>
 </svg>

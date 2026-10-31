@@ -27,7 +27,7 @@ There are three useful concepts:
 
 You do not need to launch workers or manage their IDs. **A single prompt can also contain several independent jobs.** For example: “Review the loader, add CSV export, and check the installation instructions.” PIRA decides whether to delegate suitable jobs in parallel or work through them sequentially itself. You describe the outcomes; PIRA chooses the execution plan based on task size, independence, and coordination cost.
 
-Workers use the same project workspace. PIRA separates their ownership and coordinates dependencies so that they do not independently change the same component. Important decisions about architecture, scope, dependencies, or public behavior come back to you.
+Workers can share a project workspace. PIRA separates their ownership and coordinates dependencies so that they do not independently change the same component. Important decisions about architecture, scope, dependencies, or public behavior come back to you.
 
 ## Team organization
 
@@ -37,11 +37,13 @@ Workers use the same project workspace. PIRA separates their ownership and coord
 
 **3. Use optional subteams for exceptionally heavy tasks.** Some assignments exceed what one agent can reasonably manage, such as taking responsibility for an independent software project. For these cases, the main agent can explicitly authorize a coordinator to organize a subteam. The coordinator divides the project into substantial assignments, integrates the workers' results, and reports back to the main agent. Child workers cannot delegate further. This provides extra capacity for project-scale work while preserving your single point of contact.
 
+**Team supports both local and remote workers.** The main agent chooses where each assignment runs, and each subteam stays together on its selected machine.
+
 <figure style="max-width: 640px; margin: 1.5em auto;">
   <a href="{{ '/assets/files/pira-team-organization.svg' | relative_url }}">
-    <img src="{{ '/assets/files/pira-team-organization.svg' | relative_url }}" width="640" height="876" style="display: block; width: 100%; height: auto;" alt="You work with the main agent. It assigns work to a direct worker and an explicitly authorized subteam coordinator. The coordinator assigns two child workers and integrates their results. Assignments travel down the hierarchy, and results and decision requests return through the assigning parent.">
+    <img src="{{ '/assets/files/pira-team-organization.svg' | relative_url }}" width="640" height="964" style="display: block; width: 100%; height: auto;" alt="You talk only to the main agent, which chooses local or remote execution. A local worker reports directly to the main. On the remote machine, an authorized coordinator assigns two child workers, integrates their results, and reports to the main. The entire subteam stays on that machine. Ordinary workers do not delegate. Solid arrows show assignments, and dashed arrows return results and decision requests through each worker's parent.">
   </a>
-  <figcaption>One agent protects your attention, individual workers own complete tasks, and optional subteams handle project-scale work.</figcaption>
+  <figcaption>One main agent stays your point of contact and chooses local or remote execution for workers or whole subteams. Each authorized subteam stays together on its selected machine.</figcaption>
 </figure>
 
 ## Add work as it comes to mind
