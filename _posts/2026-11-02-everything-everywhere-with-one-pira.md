@@ -44,7 +44,7 @@ Working with a different AI agent for each project creates a second challenge. P
 
 ## Get started
 
-After installing PIRA, ask your agent to **set up your PIRA communication workspace at `~/pira`**. Setup creates it only if the directory is missing and leaves an existing directory unchanged. After a fresh setup, your agent will ask you to open a new session there and use it across all your projects. Setup commands are available in the [README](https://github.com/AlgebraLoveme/PIRA#one-assistant-across-projects).
+Standard PIRA setup also creates your **communication workspace at `~/pira`** if it is missing and leaves an existing directory unchanged. Open a new session there and use it across all your projects. Installation and update instructions are available in the [README](https://github.com/AlgebraLoveme/PIRA#install-or-update-with-codex).
 
 1. **Open your communicator’s workspace in your preferred interface.** In an IDE such as VS Code, open that directory and use the Codex extension or CLI. In the ChatGPT desktop app, add it as a local project and make it the primary folder, then start a conversation there. Starting in this directory lets PIRA load your communicator’s instructions and memory.
 2. **Tell PIRA what you are working on.** Describe recent developments and current priorities, and help it locate the directories for your active projects.
@@ -54,7 +54,7 @@ After installing PIRA, ask your agent to **set up your PIRA communication worksp
 
 PIRA gives you absolute file paths so you can open the files it discusses directly. In VS Code’s terminal, use **Cmd+click on macOS or Ctrl+click on Windows and Linux** to open a file link.
 
-**Already using PIRA?** After updating and setting up the communicator’s workspace, start a new session there. Your project-specific memory remains in each project’s workbook. Point PIRA to those projects and ask it to pick up from their records.
+**Already using PIRA?** After updating, start a new session in your communicator’s workspace. Your project-specific memory remains in each project’s workbook. Point PIRA to those projects and ask it to pick up from their records.
 
 <aside id="pira-vision" aria-label="Our vision" style="margin: 2em 0; padding: 1.3em 1.5em; border-left: 3px solid #3b8587; border-radius: 0 10px 10px 0; background: #f2f8f6; color: #203d3b;">
   <p style="margin: 0; line-height: 1.75;">Imagine starting each day with a communicator that remembers what matters to you and knows where your work stands. You can explore a question, turn an idea into an experiment, or return to a project you once set aside, while PIRA keeps the rest moving. We want PIRA to become a lasting partner across your science and life, giving you more time and energy to think deeply, explore freely, and pursue the ideas that matter to you.</p>
