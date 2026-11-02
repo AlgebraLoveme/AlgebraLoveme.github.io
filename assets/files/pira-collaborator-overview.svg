@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="454" viewBox="0 0 640 454" role="img" aria-labelledby="title desc">
+  <title id="title">PIRA coordinates local and remote research projects</title>
+  <desc id="desc">You exchange messages with one PIRA collaborator. Separate two-way arrows connect PIRA to Project A and Project B inside a Local boundary, and Project C inside a Remote server boundary. Each project contains the same proof, experiment, and writing icons to show that activities belong within projects, rather than being separate projects themselves. Arrows represent conversation, assignments, and returning updates.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#3b8587"/>
+    </marker>
+    <!-- Original activity icons are shared by every project. -->
+    <g id="proof" transform="translate(-536 -58)">
+      <path d="M518 34H542L554 46V82H518Z M542 34V46H554"/>
+      <path d="M526 50H534 M526 59H544 M526 70L532 76L544 65"/>
+    </g>
+    <g id="experiment" transform="translate(-536 -180)">
+      <path d="M527 155H545 M530 155V171L514 199Q511 205 518 205H554Q561 205 558 199L542 171V155"/>
+      <path d="M522 188H550"/>
+      <circle cx="533" cy="196" r="1.5"/>
+      <circle cx="540" cy="183" r="1.5"/>
+    </g>
+    <g id="writing" transform="translate(-536 -302)">
+      <path d="M540 278H518V326H546V316 M526 290H536 M526 299H532"/>
+      <path d="M535 313L538 302L553 287L561 295L546 310Z M538 302L546 310 M550 290L558 298"/>
+    </g>
+    <g id="activities" fill="none" stroke="#365e78" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#proof" transform="translate(-64 0) scale(.7)"/>
+      <use href="#experiment" transform="scale(.7)"/>
+      <use href="#writing" transform="translate(64 0) scale(.7)"/>
+    </g>
+  </defs>
+
+  <!-- Only PIRA connects to the separate projects; every connection is two-way. -->
+  <g fill="none" stroke="#3b8587" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)">
+    <path d="M114 216H174"/>
+    <path d="M298 194C344 194 340 104 388 104"/>
+    <path d="M298 216H388"/>
+    <path d="M298 238C352 238 332 383 388 383"/>
+  </g>
+
+  <g transform="translate(-18 36)" stroke="#235c58" stroke-width="3.5">
+    <circle cx="88" cy="161" r="19" fill="#dceee8"/>
+    <path d="M50 228V219C50 199 66 190 88 190S126 199 126 219V228Z" fill="#dceee8" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(-50 36)">
+    <path d="M256 140H316Q336 140 336 160V202Q336 222 316 222H274L252 238V222Q236 222 236 202V160Q236 140 256 140Z" fill="#235c58"/>
+    <g fill="#fff">
+      <circle cx="263" cy="181" r="5"/>
+      <circle cx="286" cy="181" r="5"/>
+      <circle cx="309" cy="181" r="5"/>
+    </g>
+  </g>
+
+  <!-- Machine boundaries enclose distinct projects, each with several activities. -->
+  <g fill="#fafafb" stroke="#b5c9c7" stroke-width="1.5">
+    <rect x="400" y="10" width="228" height="262" rx="12"/>
+    <rect x="400" y="290" width="228" height="156" rx="12"/>
+  </g>
+  <g fill="#fff" stroke="#e2e5e9" stroke-width="1.5">
+    <rect x="412" y="54" width="204" height="98" rx="9"/>
+    <rect x="412" y="166" width="204" height="98" rx="9"/>
+    <rect x="412" y="332" width="204" height="102" rx="9"/>
+  </g>
+  <use href="#activities" x="514" y="121"/>
+  <use href="#activities" x="514" y="233"/>
+  <use href="#activities" x="514" y="402"/>
+
+  <!-- Server icon beside the remote boundary label. -->
+  <g fill="none" stroke="#365e78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="413" y="300" width="24" height="22" rx="3"/>
+    <path d="M413 311H437 M418 306H420 M418 316H420 M426 306H432 M426 316H432"/>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#162d32" text-anchor="middle">
+    <g font-size="30">
+      <text x="70" y="314">You</text>
+      <text x="236" y="314" font-weight="700">PIRA</text>
+      <text x="514" y="88">Project A</text>
+      <text x="514" y="200">Project B</text>
+      <text x="514" y="366">Project C</text>
+    </g>
+    <g font-size="26" font-weight="700">
+      <text x="514" y="41">Local</text>
+      <text x="531" y="319">Remote server</text>
+    </g>
+  </g>
+</svg>

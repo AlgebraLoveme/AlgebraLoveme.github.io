@@ -333,6 +333,10 @@ hr {
   text-wrap: balance;
 }
 
+.wide-title .page__title {
+  max-width: none;
+}
+
 .archive > .page__title:empty {
   display: none;
 }
