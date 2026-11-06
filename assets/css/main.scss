@@ -669,6 +669,11 @@ pre {
   max-width: 100%;
   padding: 1rem 1.1rem;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  tab-size: 4;
   color: #d8e4e8;
   background: #17242b;
   font-size: 0.82rem;
@@ -690,6 +695,19 @@ pre code {
 
 .highlight pre {
   margin: 0;
+}
+
+/* Rouge tokens; all colors meet WCAG AA text contrast on the pre background. */
+.highlight {
+  .c, .c1, .ch, .cm, .cp, .cpf, .cs { color: #a0b0b8; }
+  .k, .kc, .kd, .kn, .kp, .kr, .kt, .o, .ow { color: #bfc7ff; }
+  .s, .s1, .s2, .sa, .sb, .sc, .sd, .se, .sh, .si, .sr, .ss, .sx, .dl,
+  .gi { color: #a8dac0; }
+  .m, .mb, .mf, .mh, .mi, .mo, .mx, .il { color: #edc38a; }
+  .na, .nb, .bp, .nc, .nd, .nf, .fm, .nn, .nt { color: #9ed9e5; }
+  .err, .gd, .gr, .gt { color: #ffc1bd; }
+  .ge { font-style: italic; }
+  .gs, .gh, .gu { font-weight: 700; }
 }
 
 .page__content details {
