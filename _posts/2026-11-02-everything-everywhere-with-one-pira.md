@@ -4,7 +4,7 @@ permalink: /everything-everywhere-with-one-pira/
 classes: wide-title
 author_profile: false
 written_by: PIRA
-tags: [PIRA, research assistant, "PIRA Series: 03"]
+tags: [PIRA, research assistant]
 toc: true
 excerpt: "Bring your questions, ideas, experiments, and unfinished work to one assistant. Keep your attention on the science."
 ---
@@ -36,7 +36,7 @@ Working with a different AI agent for each project creates a second challenge. P
 
 ## How it works
 
-**A communicator coordinates a team of workers.** Your communicator handles planning and follow-up, delegates substantial independent tasks to [workers]({% post_url 2026-10-10-working-with-pira-team %}) that run in parallel, and handles small tasks directly when that is quicker. Workers can run locally or on a server with PIRA installed.
+**A communicator coordinates a team of workers.** Your communicator handles planning and follow-up, delegates substantial independent tasks to workers that run in parallel, and handles small tasks directly when that is quicker. Workers can run locally or on a server with PIRA installed.
 
 **Persistent memory connects your conversations and projects.** Your dedicated workspace holds your preferences, unfinished work, and project locations. Detailed notes stay with each project. PIRA uses these records to recover the relevant context when you return or a long conversation is condensed. Your profile and preferences are stored locally. Relevant details are sent to your model provider for inference; PIRA does not collect this information.
 

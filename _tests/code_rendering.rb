@@ -42,7 +42,7 @@ assert(REXML::XPath.first(details.first, "p/strong").text == "the disclosure", "
 assert(REXML::XPath.match(details.first, ".//h2").empty? && REXML::XPath.first(document, "/root/h2").text == "After the disclosure", "following content stays outside disclosure")
 assert(html.include?("**Unparsed HTML stays literal.**"), "HTML parsing is not enabled globally")
 
-post = body(File.join(ROOT, "_posts/2026-10-10-working-with-pira-team.md"))
+post = body(File.join(ROOT, "_tests/fixtures/team-disclosure.md"))
 disclosure = post[/<details[^>]*>.*?<\/details>/m]
 assert(disclosure, "Team disclosure exists")
 rendered = REXML::Document.new("<root>#{converter.convert(disclosure)}</root>")
