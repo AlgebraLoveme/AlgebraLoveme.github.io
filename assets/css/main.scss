@@ -587,6 +587,23 @@ hr {
   margin-bottom: 1rem;
 }
 
+.publication-list {
+  max-height: clamp(0px, 60vh, 28rem);
+  overflow-y: auto;
+}
+
+.publication-list:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media print {
+  .publication-list {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 .page__content li + li {
   margin-top: 0.45rem;
 }

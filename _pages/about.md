@@ -43,10 +43,16 @@ Equal contributions are marked by *. All published works are open-sourced (if ap
 
 ### Preprints
 
+<div class="publication-list" role="region" aria-labelledby="preprints" tabindex="0" markdown="1">
+
 - Shengpu Wang, **Yuhao Mao**, Yani Zhang, Martin Vechev, [Learning Compact Boolean Networks](https://arxiv.org/abs/2602.05830), preprint.
 - Ping He, **Yuhao Mao**, Changjiang Li, Lorenzo Cavallaro, Ting Wang, Shouling Ji, [On the Security Risks of ML-based Malware Detection Systems: A Survey](https://arxiv.org/abs/2505.10903), preprint.
 
+</div>
+
 ### Reliable AI
+
+<div class="publication-list" role="region" aria-labelledby="reliable-ai" tabindex="0" markdown="1">
 
 - **Yuhao Mao**\*, Yani Zhang\*, Martin Vechev, [On the Expressiveness of Multi-Neuron Convex Relaxations](https://arxiv.org/abs/2410.06816), [The Fourteenth International Conference on Learning Representations](https://iclr.cc/Conferences/2026) (ICLR'26).
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
@@ -189,7 +195,19 @@ We examine transfer attacks against real cloud vision services, where an attacke
 </details>
 
 
+</div>
+
 ### AI for Science
+
+<div class="publication-list" role="region" aria-labelledby="ai-for-science" tabindex="0" markdown="1">
+
+- **Yuhao Mao**\*, Chenhao Chu\*, Martin Vechev, Hua Wang, [End-to-End Neural Modeling of EM Response and Design Performance for Free-Form RFIC Passives](https://arxiv.org/abs/2610.34462), Conference on Neural Information Processing Systems (NeurIPS'26).
+<details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
+  <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
+  <div style="margin:0.08em 0 0;padding:0;color:#555;">
+Designing radio-frequency chips requires repeatedly checking how tiny metal structures carry signals and transfer power. Detailed physics simulations make these checks slow. We train a neural model to predict both the electromagnetic response of a layout and how well it performs in a circuit, allowing much faster evaluation of freely shaped designs. A key challenge is that even small errors in the predicted electromagnetic response can become large errors when a conventional circuit solver converts them into performance estimates. Our model learns this conversion together with the response prediction and passes along additional learned information to make the performance estimates more reliable. Across a large collection of layouts and circuit settings, the model provides accurate predictions much faster than traditional simulation, helping designers explore more candidate designs.
+  </div>
+</details>
 
 - Chenhao Chu, **Yuhao Mao**, Hua Wang, [Transfer Learning Assisted Fast Design Migration Over Technology Nodes: A Study on Transformer Matching Network](https://arxiv.org/abs/2502.18636), [IEEE MTT-S International Microwave Symposium 2024](https://ims-ieee.org/welcomeIMS2024) (IMS'24). 
 <span style="display:inline-flex; align-items:center; gap:4px; position:relative; top:-0.1em;">
@@ -203,6 +221,8 @@ We examine transfer attacks against real cloud vision services, where an attacke
 We propose a way to reuse a learned design model to speed up circuit redesign when the same millimeter-wave circuit must be adapted to different chip manufacturing processes, such as changes in fabrication technology, metal stack options, or operating frequency. These changes normally require building a new predictive model from scratch, because the underlying design parameters and simulation grids shift across manufacturing settings. Our approach transfers a neural network trained in one manufacturing setting to a new one and adapts it using only a small amount of new simulation data. Experiments show that this transfer greatly accelerates training and improves prediction quality: using only a small fraction of new data with transfer learning can outperform training from scratch with up to 4x more data. This demonstrates that knowledge learned in one chip manufacturing setting can be effectively reused to reduce simulation cost and speed up design iteration in others.
   </div>
 </details>
+
+</div>
 
 ## Talk
 
