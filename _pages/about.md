@@ -241,7 +241,7 @@ We propose a way to reuse a learned design model to speed up circuit redesign wh
 - [Introduction to Machine Learning](https://las.inf.ethz.ch/teaching/introml-s23) (Bachelor's), Spring 2023, ETH Zürich, TA on exercises.
 
 ## Community Contribution
-Review for NeurIPS (since 2024, acknowledged as [Top Reviewers 2024](https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers) and [Top Reviewers 2025](https://neurips.cc/Conferences/2025/ProgramCommittee#top-reviewers)), ICLR (since 2025), TMLR (since 2025), ICML (since 2025).
+Review for NeurIPS (since 2024, acknowledged as [Top Reviewers 2024](https://neurips.cc/Conferences/2024/ProgramCommittee#top-reviewers), [Top Reviewers 2025](https://neurips.cc/Conferences/2025/ProgramCommittee#top-reviewers), and Top Reviewers 2026), ICLR (since 2025), TMLR (since 2025), ICML (since 2025).
 
 ## Learning
 
