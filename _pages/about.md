@@ -201,7 +201,7 @@ We examine transfer attacks against real cloud vision services, where an attacke
 
 <div class="publication-list" role="region" aria-labelledby="ai-for-science" tabindex="0" markdown="1">
 
-- **Yuhao Mao**\*, Chenhao Chu\*, Martin Vechev, Hua Wang, [End-to-End Neural Modeling of EM Response and Design Performance for Free-Form RFIC Passives](https://arxiv.org/abs/2610.34462), Conference on Neural Information Processing Systems (NeurIPS'26).
+- **Yuhao Mao**\*, Chenhao Chu\*, Martin Vechev, Hua Wang, [End-to-End Neural Modeling of EM Response and Design Performance for Free-Form RFIC Passives](https://arxiv.org/abs/2610.34462), [Conference on Neural Information Processing Systems (NeurIPS'26)](https://neurips.cc/virtual/2026/poster/155932).
 <details style="margin:0.05em 0 0.12em 0;padding-left:2.2em;font-size:0.85em;color:#666;">
   <summary style="cursor:pointer;font-style:italic;margin:0;padding:0;">General audience summary</summary>
   <div style="margin:0.08em 0 0;padding:0;color:#555;">
